@@ -1,6 +1,8 @@
 package gr.aueb.dist.partOne.Utils;
 
+import gr.aueb.dist.partOne.Models.Master;
 import gr.aueb.dist.partOne.Models.Worker;
+import gr.aueb.dist.partOne.Server.Server;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,8 +11,8 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class ParserUtils {
-    public static ArrayList<Worker> GetWorkersFromText(String file){
-        ArrayList<Worker> workers = new ArrayList<Worker>();
+    public static ArrayList<Server> GetServersFromText(String file, boolean isMaster){
+        ArrayList<Server> servers = new ArrayList<Server>();
 
         BufferedReader bufferedReader = null;
         FileReader fileReader = null;
@@ -20,7 +22,7 @@ public class ParserUtils {
 
             String sCurrentLine;
             while ((sCurrentLine = bufferedReader.readLine()) != null) {
-                Worker worker = new Worker();
+                Server server = isMaster ? new Master() : new Worker();
 
                 StringTokenizer st = new StringTokenizer(sCurrentLine);
                 int i = 1;
@@ -28,13 +30,13 @@ public class ParserUtils {
                     String token = st.nextToken();
 
                     switch (i){
-                        case 1: worker.setIp(token); break;
-                        case 2: worker.setPort(Integer.parseInt(token)); break;
-                        case 3: worker.setId(token); break;
+                        case 1: server.setIp(token); break;
+                        case 2: server.setPort(Integer.parseInt(token)); break;
+                        case 3: server.setId(token); break;
                     }
                     i++;
                 }
-                workers.add(worker);
+                servers.add(server);
             }
 
         }
@@ -57,6 +59,6 @@ public class ParserUtils {
             }
         }
 
-        return workers;
+        return servers;
     }
 }

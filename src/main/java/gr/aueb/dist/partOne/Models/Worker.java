@@ -1,44 +1,87 @@
 package gr.aueb.dist.partOne.Models;
 
-public class Worker {
-    private String id;
-    private String ip;
-    private int port;
+import gr.aueb.dist.partOne.Abstractions.IWorker;
+import gr.aueb.dist.partOne.Client.main;
+import gr.aueb.dist.partOne.Server.CommunicationMessage;
+import gr.aueb.dist.partOne.Server.Server;
+import org.apache.commons.math3.linear.RealMatrix;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+public class Worker extends Server implements IWorker, Runnable{
     public Worker() {}
 
-    public Worker(String id, String ip, int port) {
-        this.id = id;
-        this.ip = ip;
-        this.port = port;
+    /**
+     * Runnable Implementation
+     */
+    public void run() {
+
     }
 
-    public String getId() {
-        return id;
+    /**
+     * IMaster Implementation
+     */
+    public void Initialize() {
+
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void CalculateCMatrix(int x, RealMatrix matrix) {
+
     }
 
-    public String getIp() {
-        return ip;
+    public void CalculateCuMatrix(int x, RealMatrix matrix) {
+
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void CalculateCiMatrix(int x, RealMatrix matrix) {
+
     }
 
-    public int getPort() {
-        return port;
+    public RealMatrix PreCalculateYY(RealMatrix matrix) {
+        return null;
     }
 
-    public void setPort(int port) {
-        this.port = port;
+    public RealMatrix PreCalculateXX(RealMatrix matrix) {
+        return null;
     }
 
-    @Override
-    public String toString() {
-        return "Worker: " + id + " IP: " + ip + " Port: " + port;
+    public RealMatrix CalculateXU(int x, RealMatrix matrixX, RealMatrix matrixU) {
+        return null;
+    }
+
+    public RealMatrix CalculateYI(int x, RealMatrix matrixY, RealMatrix matrixI) {
+        return null;
+    }
+
+    public void SendResultsToMaster(CommunicationMessage message) {
+        ObjectInputStream in = null;
+        ObjectOutputStream out = null;
+        Socket socket = null;
+        try{
+            socket = new Socket(main.Master.getIp(), main.Master.getPort());
+
+            out = new ObjectOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
+
+            out.writeObject(message);
+            out.flush();
+        }catch(IOException ignored){}
+        finally {
+            try{
+                if (in != null) {
+                    in.close();
+                }
+                if (out != null){
+                    out.close();
+                }
+                if (socket != null){
+                    socket.close();
+                }
+            }
+            catch(IOException ignored){}
+        }
     }
 }

@@ -1,5 +1,6 @@
 package gr.aueb.dist.partOne.Abstractions;
 
+import gr.aueb.dist.partOne.Server.CommunicationMessage;
 import org.apache.commons.math3.linear.RealMatrix;
 
 public interface IWorker {
@@ -11,5 +12,5 @@ public interface IWorker {
     RealMatrix PreCalculateXX(RealMatrix matrix);
     RealMatrix CalculateXU(int x, RealMatrix matrixX, RealMatrix matrixU);
     RealMatrix CalculateYI(int x, RealMatrix matrixY, RealMatrix matrixI);
-    void SendResultsToMaster();
+    void SendResultsToMaster(CommunicationMessage msg);
 }

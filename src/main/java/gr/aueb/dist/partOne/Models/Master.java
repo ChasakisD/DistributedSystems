@@ -1,11 +1,12 @@
 package gr.aueb.dist.partOne.Models;
 
 import gr.aueb.dist.partOne.Abstractions.IMaster;
+import gr.aueb.dist.partOne.Server.Server;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import java.util.List;
 
-public class Master implements IMaster{
+public class Master extends Server implements IMaster{
     public void Initialize() {
 
     }
