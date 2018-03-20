@@ -1,7 +1,7 @@
 package gr.aueb.dist.partOne.Models;
 
 import gr.aueb.dist.partOne.Abstractions.IWorker;
-import gr.aueb.dist.partOne.Client.main;
+import gr.aueb.dist.partOne.Client.Main;
 import gr.aueb.dist.partOne.Server.CommunicationMessage;
 import gr.aueb.dist.partOne.Server.Server;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -61,7 +61,7 @@ public class Worker extends Server implements IWorker, Runnable{
         ObjectOutputStream out = null;
         Socket socket = null;
         try{
-            socket = new Socket(main.Master.getIp(), main.Master.getPort());
+            socket = new Socket(Main.Master.getIp(), Main.Master.getPort());
 
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());

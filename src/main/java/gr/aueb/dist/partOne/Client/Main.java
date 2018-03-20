@@ -4,10 +4,9 @@ import gr.aueb.dist.partOne.Models.Master;
 import gr.aueb.dist.partOne.Server.Server;
 import gr.aueb.dist.partOne.Utils.ParserUtils;
 
-import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 
-public class main {
+public class Main {
     public static Master Master;
 
     public static void main(String[] args){
