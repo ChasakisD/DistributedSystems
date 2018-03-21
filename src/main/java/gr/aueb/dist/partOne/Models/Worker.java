@@ -4,12 +4,14 @@ import gr.aueb.dist.partOne.Abstractions.IWorker;
 import gr.aueb.dist.partOne.Client.Main;
 import gr.aueb.dist.partOne.Server.CommunicationMessage;
 import gr.aueb.dist.partOne.Server.Server;
+import gr.aueb.dist.partOne.Utils.ParserUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Worker extends Server implements IWorker, Runnable{
     public Worker() {}
@@ -22,10 +24,13 @@ public class Worker extends Server implements IWorker, Runnable{
     }
 
     /**
-     * IMaster Implementation
+     * IWorker Implementation
      */
     public void Initialize() {
-
+        CommunicationMessage msg = new CommunicationMessage();
+        msg.setServerName(getId());
+        SendResultsToMaster(msg);
+        System.out.println("I did what i must do dear Master!");
     }
 
     public void CalculateCMatrix(int x, RealMatrix matrix) {
@@ -61,7 +66,10 @@ public class Worker extends Server implements IWorker, Runnable{
         ObjectOutputStream out = null;
         Socket socket = null;
         try{
-            socket = new Socket(Main.Master.getIp(), Main.Master.getPort());
+            ArrayList<Server> masters = ParserUtils.GetServersFromText("data/master.txt", true);
+            Master master = (Master) masters.get(0);
+
+            socket = new Socket(master.getIp(), master.getPort());
 
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());

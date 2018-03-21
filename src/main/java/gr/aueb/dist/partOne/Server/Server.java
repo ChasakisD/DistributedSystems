@@ -5,15 +5,21 @@ import gr.aueb.dist.partOne.Models.Worker;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.net.ServerSocket;
+import java.net.Socket;
 
-public class Server {
+public class Server implements Runnable{
     private String id;
     private String ip;
     private int port;
+    private boolean cancelReceived = false;
 
-    private ServerSocket socketConn;
+    /* Define the socket that receives requests */
+    private ServerSocket providerSocket;
 
-    public Server() {}
+    /* Define the socket that is used to handle the connection */
+    private Socket socketConn = null;
+
+    protected Server() {}
 
     public Server(String id, String ip, int port) {
         this.id = id;
@@ -21,15 +27,24 @@ public class Server {
         this.port = port;
     }
 
-    public void OpenServer(){
-        try{
-            socketConn = new ServerSocket(getPort());
+    public void run(){}
+
+    protected void OpenServer(){
+        try {
+            providerSocket = new ServerSocket(getPort());
+
             System.out.println(getName() + " " + getId() + " " + getIp() + ":" + getPort() + " server opened!");
+
+            while (!cancelReceived) {
+                socketConn = providerSocket.accept();
+
+                (new Thread(this)).start();
+            }
         }catch(IOException ignored){}
         finally {
-            if(socketConn != null){
+            if(providerSocket != null){
                 try{
-                    socketConn.close();
+                    providerSocket.close();
                     System.out.println(getName() + " " + getId() + " " + getIp() + ":" + getPort() + " server closed!");
                 }catch(IOException ignored){}
             }
@@ -37,9 +52,11 @@ public class Server {
     }
 
     public void CloseServer(){
-        if(socketConn != null){
+        if(providerSocket != null){
+            cancelReceived = true;
+
             try{
-                socketConn.close();
+                providerSocket.close();
                 System.out.println(getName() + " " + getId() + " " + getIp() + ":" + getPort() + " server closed!");
             }catch(IOException ignored){}
         }
@@ -91,11 +108,19 @@ public class Server {
         this.port = port;
     }
 
-    public ServerSocket getSocketConn() {
+    public ServerSocket getProviderSocket() {
+        return providerSocket;
+    }
+
+    public void setProviderSocket(ServerSocket providerSocket) {
+        this.providerSocket = providerSocket;
+    }
+
+    public Socket getSocketConn() {
         return socketConn;
     }
 
-    public void setSocketConn(ServerSocket socketConn) {
+    public void setSocketConn(Socket socketConn) {
         this.socketConn = socketConn;
     }
 

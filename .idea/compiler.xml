@@ -9,8 +9,8 @@
         <module name="DistributedSystems.PartOne" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="DistributedSystems.PartOne" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="DistributedSystems.PartOne" target="" />
     </bytecodeTargetLevel>
   </component>
 </project>
