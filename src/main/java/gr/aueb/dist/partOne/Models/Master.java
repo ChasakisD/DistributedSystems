@@ -14,6 +14,9 @@ import java.util.List;
 
 public class Master extends Server implements IMaster{
 
+    RealMatrix p, c , X , Y;
+    static double a = 40;
+    static  double l = 0.1;
     public static void main(String[] args){
         ArrayList<Server> masters = ParserUtils.GetServersFromText("data/master.txt", true);
 
@@ -44,12 +47,20 @@ public class Master extends Server implements IMaster{
         this.OpenServer();
     }
 
-    public void CalculateCMatrix(int x, RealMatrix matrix) {
-
+    public void CalculateCMatrix(int x, RealMatrix r) {
+        RealMatrix temp = r.copy();
+        // a*R
+        temp.scalarMultiply(a);
+        temp.scalarAdd(1);
+        c.add(temp);
     }
 
-    public void CalculatePMatrix(int x, RealMatrix matrix) {
-
+    public void CalculatePMatrix(int x, RealMatrix r) {
+        for (int u = 0 ; u < r.getRowDimension(); u++){
+            for(int i = 0; i < r.getColumnDimension(); i++){
+                p.setEntry(u, i, r.getEntry(u,i) > 0 ? 1: 0);
+            }
+        }
     }
 
     public void DistributeXMatrixToWorkers(int x, int y, RealMatrix matrix) {
@@ -61,7 +72,44 @@ public class Master extends Server implements IMaster{
     }
 
     public double CalculateError() {
-        return 0;
+        // multiply c
+        // do the inside Σ actions as parallel
+        // as possible
+        c.multiply(
+                // P table
+                (p.subtract (
+                        // X*Y
+                        Y.preMultiply(X.transpose()))
+                        )
+                // increase the result to the power of 2
+                .power(2));
+        double sum = 0;
+
+        // now calculate the Σ
+        for (int u = 0; u < c.getRowDimension(); u++){
+            for (int i = 0; i < c.getColumnDimension(); i++) {
+                sum += c.getEntry(u,i);
+            }
+        }
+
+        // now we calculate the second part of the equation
+
+        // calculate the euclideian distance for each matrix
+        RealMatrix tempX = X.preMultiply(X.transpose());
+        RealMatrix tempY = Y.preMultiply(Y.transpose());
+        double sumX = 0, sumY = 0;
+        for (int u = 0; u < c.getRowDimension(); u++) {
+
+            sumX += tempX.getEntry(u,0);
+        }
+
+        for (int i = 0; i < c.getColumnDimension(); i++) {
+            // calculate the sum for each matrix
+            sumY += tempY.getEntry(0, i);
+        }
+
+
+        return sum - l*(sumX + sumY);
     }
 
     public double CalculateScore(int x, int y) {
