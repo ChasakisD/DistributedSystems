@@ -14,6 +14,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Worker extends Server implements IWorker, Runnable{
+    RealMatrix R, P, C;
+    final  static  int a = 40;
+
     public Worker() {}
 
     /**
@@ -33,15 +36,19 @@ public class Worker extends Server implements IWorker, Runnable{
         System.out.println("I did what i must do dear Master!");
     }
 
-    public void CalculateCMatrix(int x, RealMatrix matrix) {
+    public void CalculateCMatrix(int x, RealMatrix R) {
+        for (int u = 0 ; u < R.getRowDimension(); u++) {
+            for (int i = 0; i < R.getColumnDimension(); i++) {
+                C.setEntry(u, i, 1 + a*R.getEntry(u,i));
+            }
+        }
+    }
+
+    public void CalculateCuMatrix(int x, RealMatrix C) {
 
     }
 
-    public void CalculateCuMatrix(int x, RealMatrix matrix) {
-
-    }
-
-    public void CalculateCiMatrix(int x, RealMatrix matrix) {
+    public void CalculateCiMatrix(int x, RealMatrix C) {
 
     }
 

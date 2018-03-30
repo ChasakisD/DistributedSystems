@@ -3,6 +3,8 @@ package gr.aueb.dist.partOne.Utils;
 import gr.aueb.dist.partOne.Models.Master;
 import gr.aueb.dist.partOne.Models.Worker;
 import gr.aueb.dist.partOne.Server.Server;
+import org.apache.commons.math3.linear.MatrixUtils;
+import org.apache.commons.math3.linear.RealMatrix;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -60,5 +62,48 @@ public class ParserUtils {
         }
 
         return servers;
+    }
+
+    public static RealMatrix loadDataset(String dataset){
+        // the index start from zero to 764. So the dimension will be 765
+        RealMatrix matrix = MatrixUtils.createRealMatrix(765, 1964);
+        System.out.println(matrix.getEntry(0,0));
+        BufferedReader bufferedReader = null;
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(dataset);
+            bufferedReader = new BufferedReader(fileReader);
+
+            String sCurrentLine;
+            while ((sCurrentLine = bufferedReader.readLine()) != null) {
+              // separate the commas
+                sCurrentLine = sCurrentLine.replaceAll("\\s","");
+                StringTokenizer tokenizer = new StringTokenizer(sCurrentLine,",");
+                int row = Integer.parseInt(tokenizer.nextToken());
+                int column = Integer.parseInt(tokenizer.nextToken());
+                int value = Integer.parseInt(tokenizer.nextToken());
+                matrix.setEntry(row,column,value);
+            }
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (bufferedReader != null){
+                    bufferedReader.close();
+                }
+
+                if (fileReader != null){
+                    fileReader.close();
+                }
+            }
+            catch (IOException ex) {
+
+                ex.printStackTrace();
+            }
+        }
+        return matrix;
     }
 }

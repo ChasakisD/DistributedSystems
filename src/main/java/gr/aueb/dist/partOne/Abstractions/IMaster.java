@@ -7,8 +7,10 @@ import java.util.List;
 
 public interface IMaster {
     void Initialize();
-    void CalculateCMatrix(int x, RealMatrix matrix);
-    void CalculatePMatrix(int x, RealMatrix matrix);
+    void CalculateCMatrix(RealMatrix matrix);
+    void CalculatePMatrix(RealMatrix matrix);
+    // Will split the matrix to equal
+    void SplitCMatrix(int partsToSplit);
     void DistributeXMatrixToWorkers(int x, int y, RealMatrix matrix);
     void DistributeYMatrixToWorkers(int x, int y, RealMatrix matrix);
     double CalculateError();
