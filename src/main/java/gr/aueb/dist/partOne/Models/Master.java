@@ -1,11 +1,15 @@
 package gr.aueb.dist.partOne.Models;
 
 import gr.aueb.dist.partOne.Abstractions.IMaster;
+import gr.aueb.dist.partOne.Client.Main;
 import gr.aueb.dist.partOne.Server.CommunicationMessage;
 import gr.aueb.dist.partOne.Server.Server;
 import gr.aueb.dist.partOne.Utils.ParserUtils;
+import javafx.concurrent.Task;
+import org.apache.commons.math3.geometry.spherical.oned.ArcsSet;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
+import sun.awt.image.ImageWatched;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -13,19 +17,33 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 
 public class Master extends Server implements IMaster{
 
     RealMatrix R, P, C , X , Y;
     int numberOfWorkers;
-    LinkedList<RealMatrix> CSplitMatrices = new LinkedList<>();
+
+    // Holding the matrices to be distrubted to the workers
+    // Use it as a FIFO
+    LinkedList<RealMatrix> C_Matrices = new LinkedList<>();
+    LinkedList<RealMatrix> P_Matrices = new LinkedList<>();
+    LinkedList<RealMatrix> X_Matrices = new LinkedList<>();
+    LinkedList<RealMatrix> Y_Matrices = new LinkedList<>();
     final static double a = 40;
     static  double l = 0.1;
+
     public static void main(String[] args){
         ArrayList<Server> masters = ParserUtils.GetServersFromText("data/master.txt", true);
         RealMatrix originalMatrix = ParserUtils.loadDataset("data/inputMatrix.csv");
         Master master = (Master) masters.get(0);
-        master.setR(originalMatrix);
+        master.loadOriginalMatrix(originalMatrix);
+        System.out.println("Number Of Workers: ");
+        System.out.println();
+        master.SetNumberOfWorkers(2);
+        master.StartAlgorithm();
 
     }
 
@@ -33,9 +51,144 @@ public class Master extends Server implements IMaster{
 
     }
 
+    public void SetNumberOfWorkers(int x){
+        numberOfWorkers = x;
+    }
 
-    public void setR(RealMatrix R){
-        this.R = R.copy();
+    public void StartAlgorithm(){
+        // C and P matrices only need to be calculated once and passed once to the workers
+        long startTime = System.nanoTime();
+        CalculatePMatrix();
+        System.out.println("Calculated P Matrix: "+ParserUtils.GetTimeInMs(startTime)+" MilliSecond");
+
+        P_Matrices = SplitMatrix(P,numberOfWorkers);
+
+        // TODO: 31-Mar-18 Make it async
+        TransferPMatrix();
+
+
+
+        startTime = System.nanoTime();
+        CalculateCMatrix();
+        System.out.println("Calculated C Matrix: "+ParserUtils.GetTimeInMs(startTime)+" MilliSecond");
+
+        C_Matrices = SplitMatrix(C, numberOfWorkers);
+
+
+        // TODO: 31-Mar-18 Make it async
+        TransferCMatrix();
+
+        // now the workers have all the necessary tables but the X and Y
+
+        // let's get the K << max{U,I}
+        // meaning a number much smaller than the biggest column or dimension
+        int BiggestDimension = R.getColumnDimension() > R.getRowDimension()?
+                                R.getColumnDimension(): R.getRowDimension();
+        // TODO: 31-Mar-18 Steile gamimeno mail an ειναι κομπλε σαν τιμη ayto που εχω κανει
+        int K = BiggestDimension / 10;
+
+        // now let's generate them
+        GenerateX(K);
+        X_Matrices = SplitMatrix(X,numberOfWorkers);
+        // TODO: 31-Mar-18 Make it Async
+        DistributeXMatrixToWorkers();
+
+        GenerateY(K);
+        Y_Matrices = SplitMatrix(Y,numberOfWorkers);
+        // TODO: 31-Mar-18 Make it async
+        DistributeYMatrixToWorkers();
+        Mainloop();
+    }
+
+    public void Mainloop(){
+        // WaitX = GetXResultsFromWorkers();
+        // Send the new X needed for Y calculation
+        // DistributeXToWorkers()
+        // Wait for Y results
+        // With both X and Y
+        CalculateError();
+    }
+
+    public void getXResults(){}
+
+    public void GenerateX(int K){
+        // Create the matrix
+        X = MatrixUtils.createRealMatrix(R.getRowDimension(), K);
+        Random rand = new Random();
+        // Fill it with random values between zero and 1
+        for (int u = 0; u < X.getRowDimension(); u++) {
+            for (int k = 0; k < X.getColumnDimension(); k++) {
+                // Enter a random value between 0 and 1
+                X.setEntry(u,k,ThreadLocalRandom.current().nextDouble(0, 1));
+            }
+        }
+    }
+
+    public void GenerateY(int K){
+        // Initialize the Y matrix
+        Y = MatrixUtils.createRealMatrix(R.getColumnDimension(), K);
+        Random rand = new Random();
+        // Fill it with random values between zero and 1
+        for (int u = 0; u < X.getRowDimension(); u++) {
+            for (int k = 0; k < X.getColumnDimension(); k++) {
+                // enter a random value between 0 and 1
+                Y.setEntry(u,k,ThreadLocalRandom.current().nextDouble(0, 1));
+            }
+        }
+    }
+
+
+    // Sent the C matrix to all of the workers
+    public void DiS(){
+
+    }
+
+    @Override
+    // Returns a linked list with the matrices
+    public LinkedList<RealMatrix> SplitMatrix(RealMatrix matrix, int numberOfWorkers){
+        int start = 0;
+        int end = matrix.getRowDimension() / numberOfWorkers;
+        LinkedList<RealMatrix> splitted = new LinkedList<>();
+        for (int u = 0; u < numberOfWorkers ; u++) {
+            // if it's the last iteration, we want to make sure we lose no data
+            if (numberOfWorkers - 1 == u) {
+                splitted.addLast(matrix.getSubMatrix(start, matrix.getRowDimension() - 1, 0, matrix.getColumnDimension() -1));
+            }
+            splitted.addLast(matrix.getSubMatrix(start, end, 0, matrix.getColumnDimension() -1));
+        }
+        return splitted;
+    }
+
+
+
+    // Sent the P matrix to all of the workers
+    public void TransferPMatrix(){
+
+    }
+
+
+    public RealMatrix CombineMatrix(LinkedList<RealMatrix> Temp) {
+        // init the matrix
+        RealMatrix newMatrix = MatrixUtils.createRealMatrix(Temp.getFirst().getRowDimension(),Temp.getFirst().getColumnDimension());
+        int start = 0;
+        for (RealMatrix matrix: Temp) {
+            newMatrix.setSubMatrix(matrix.getData(), start,0);
+            start += matrix.getRowDimension();
+        }
+        return newMatrix;
+    }
+
+
+    public void CalculatePMatrix(){
+        for (int u = 0; u < R.getRowDimension(); u++) {
+            for (int i = 0; i < R.getColumnDimension(); i++) {
+                P.setEntry(u,i, R.getEntry(u,i) > 0 ? 1: 0);
+            }
+        }
+    }
+
+    public void loadOriginalMatrix(RealMatrix R){
+        this.R = R;
         initCMatrix();
         initPMatrix();
     }
@@ -45,56 +198,15 @@ public class Master extends Server implements IMaster{
     }
 
     public void initPMatrix(){
-        C = MatrixUtils.createRealMatrix(R.getRowDimension(), R.getColumnDimension());
+        P = MatrixUtils.createRealMatrix(R.getRowDimension(), R.getColumnDimension());
     }
 
     // an δεν σου αρεσει να το σπας με static απλα βαλτο σαν μεθοδο
-    public void DistributeCMatrixToWorkers(RealMatrix r) {
-        SplitCMatrix(numberOfWorkers);
-        // it's sufficient to just pass each split RealMatrix to the workers
-        // TODO: 29/3/2018 perase τα στοιχεια στους workers ενα splitlist einai 
+    public void DistributeCMatrixToWorkers() {
     }
 
-   
-    @Override
-    public void SplitCMatrix(int partsToSplit) {
-        int sizeOfSubArrays = C.getRowDimension() / partsToSplit;
-        int start = 0;
-        int end = sizeOfSubArrays;
-        for(int u = 0; u < partsToSplit; u++){
-            RealMatrix newMatrix;
-            // in case the division is not perfect
-            // we want the last matrix to keep all the data that might not be included
-            if(u == partsToSplit -1){
-                newMatrix = C.getSubMatrix(start,C.getRowDimension(),
-                        // get all submatrices
-                        0,C.getColumnDimension());
-            }else {
-                newMatrix = C.getSubMatrix(start,end,
-                        // get all submatrices
-                        0,C.getColumnDimension());
-            }
-            start += sizeOfSubArrays;
-            end += sizeOfSubArrays;
-            CSplitMatrices.addLast(newMatrix);
-        }
+    public void DistributePMatrixToWorkers(){}
 
-    }
-
-    // TODO: 29/3/2018 Το χρησιμοποιεις για να ενωσεις τα στοιχεια που βρισκονται σοτ CSplitMatrices
-    // TODO: 29/3/2018 Ο καινουριος πινακας θα ειναι static 
-    public void CombineCMatrices(){
-        // the matrices are on the same row
-        // we use FIFO
-        int column = C.getColumnDimension();
-        int start = 0;
-        for (int u = 0; u < CSplitMatrices.size(); u++) {
-            RealMatrix temp = CSplitMatrices.getFirst();
-            C.setSubMatrix(temp.getData(), start, column);
-            start += temp.getRowDimension();
-        }
-
-    }
 
     /**
      * Runnable Implementation
@@ -117,19 +229,22 @@ public class Master extends Server implements IMaster{
         this.OpenServer();
     }
 
-    public void CalculateCMatrix(RealMatrix r) {
+    @Override
+    public void TransferCMatrix() {
 
     }
 
-    public void CalculatePMatrix(RealMatrix r) {
+    public void CalculateCMatrix() {
+        RealMatrix R_Copy = R.copy();
+        C = R_Copy.scalarMultiply(a);
+        C = C.scalarAdd(1);
+    }
+
+    public void DistributeXMatrixToWorkers() {
 
     }
 
-    public void DistributeXMatrixToWorkers(int x, int y, RealMatrix matrix) {
-
-    }
-
-    public void DistributeYMatrixToWorkers(int x, int y, RealMatrix matrix) {
+    public void DistributeYMatrixToWorkers() {
 
     }
 
@@ -137,41 +252,15 @@ public class Master extends Server implements IMaster{
         // multiply c
         // do the inside Σ actions as parallel
         // as possible
-        c.multiply(
-                // P table
-                (p.subtract (
-                        // X*Y
-                        Y.preMultiply(X.transpose()))
-                        )
-                // increase the result to the power of 2
-                .power(2));
-        double sum = 0;
-
-        // now calculate the Σ
-        for (int u = 0; u < c.getRowDimension(); u++){
-            for (int i = 0; i < c.getColumnDimension(); i++) {
-                sum += c.getEntry(u,i);
-            }
-        }
-
-        // now we calculate the second part of the equation
-
-        // calculate the euclideian distance for each matrix
-        RealMatrix tempX = X.preMultiply(X.transpose());
-        RealMatrix tempY = Y.preMultiply(Y.transpose());
-        double sumX = 0, sumY = 0;
-        for (int u = 0; u < c.getRowDimension(); u++) {
-
-            sumX += tempX.getEntry(u,0);
-        }
-
-        for (int i = 0; i < c.getColumnDimension(); i++) {
-            // calculate the sum for each matrix
-            sumY += tempY.getEntry(0, i);
-        }
+        int k =0;
+        long starttime = System.nanoTime();
+        RealMatrix p_copy = P.copy();
+        RealMatrix tempResult = Y.transpose().preMultiply(X);
+        RealMatrix temp = p_copy.subtract(tempResult);
+        System.out.println(temp.getRowDimension()+" " + temp.getColumnDimension());
 
 
-        return sum - l*(sumX + sumY);
+        return 0;
     }
 
     public double CalculateScore(int x, int y) {

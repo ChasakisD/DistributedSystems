@@ -5,6 +5,7 @@ import gr.aueb.dist.partOne.Client.Main;
 import gr.aueb.dist.partOne.Server.CommunicationMessage;
 import gr.aueb.dist.partOne.Server.Server;
 import gr.aueb.dist.partOne.Utils.ParserUtils;
+import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import java.io.IOException;
@@ -26,6 +27,8 @@ public class Worker extends Server implements IWorker, Runnable{
 
     }
 
+
+
     /**
      * IWorker Implementation
      */
@@ -45,7 +48,7 @@ public class Worker extends Server implements IWorker, Runnable{
     }
 
     public void CalculateCuMatrix(int x, RealMatrix C) {
-
+        
     }
 
     public void CalculateCiMatrix(int x, RealMatrix C) {
@@ -53,11 +56,11 @@ public class Worker extends Server implements IWorker, Runnable{
     }
 
     public RealMatrix PreCalculateYY(RealMatrix matrix) {
-        return null;
+        return matrix.transpose().multiply(matrix);
     }
 
     public RealMatrix PreCalculateXX(RealMatrix matrix) {
-        return null;
+        return matrix.transpose().multiply(matrix);
     }
 
     public RealMatrix CalculateXU(int x, RealMatrix matrixX, RealMatrix matrixU) {

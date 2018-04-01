@@ -6,6 +6,7 @@ import gr.aueb.dist.partOne.Server.Server;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 
+import javax.xml.datatype.Duration;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -105,5 +106,12 @@ public class ParserUtils {
             }
         }
         return matrix;
+    }
+
+
+
+    public static long GetTimeInMs(long start){
+        long end = System.nanoTime();
+        return (end-start)/1000000;
     }
 }
