@@ -48,7 +48,7 @@ public class Worker extends Server implements IWorker, Runnable{
     }
 
     public void CalculateCuMatrix(int x, RealMatrix C) {
-        
+
     }
 
     public void CalculateCiMatrix(int x, RealMatrix C) {
