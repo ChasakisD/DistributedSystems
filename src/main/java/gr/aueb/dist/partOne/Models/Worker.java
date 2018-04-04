@@ -1,5 +1,6 @@
 package gr.aueb.dist.partOne.Models;
 
+import gr.aueb.dist.partOne.Abstractions.IMaster;
 import gr.aueb.dist.partOne.Abstractions.IWorker;
 import gr.aueb.dist.partOne.Client.Main;
 import gr.aueb.dist.partOne.Server.CommunicationMessage;
@@ -7,6 +8,8 @@ import gr.aueb.dist.partOne.Server.Server;
 import gr.aueb.dist.partOne.Utils.ParserUtils;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,8 +17,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Worker extends Server implements IWorker, Runnable{
-    RealMatrix R, P, C;
+public class Worker extends Server implements Runnable{
+    INDArray X, Y,  R, P, C;
     final  static  int a = 40;
 
     public Worker() {}
@@ -29,6 +32,8 @@ public class Worker extends Server implements IWorker, Runnable{
 
 
 
+
+
     /**
      * IWorker Implementation
      */
@@ -39,28 +44,37 @@ public class Worker extends Server implements IWorker, Runnable{
         System.out.println("I did what i must do dear Master!");
     }
 
-    public void CalculateCMatrix(int x, RealMatrix R) {
-        for (int u = 0 ; u < R.getRowDimension(); u++) {
-            for (int i = 0; i < R.getColumnDimension(); i++) {
-                C.setEntry(u, i, 1 + a*R.getEntry(u,i));
-            }
+    public INDArray CalculateCuMatrix(int user, INDArray C) {
+        // TODO: 04-Apr-18 Ρωτα αν το γαμημενο dimension που λεει στο paper ειναι αυτο. 
+        return C.getRow(user).mul(Nd4j.eye(C.columns()));
+    }
+
+
+    public void CalculateXDerative(){
+        INDArray YY = PreCalculateYY(Y);
+        // for each user in X
+        for (int u = 0; u < X.rows(); u++) {
+            // Get Cu
+            INDArray Cu = CalculateCuMatrix(u, C);
+            INDArray Pu = P.getRow(u);
+            INDArray temp = Cu.sub(Nd4j.eye(Cu.rows()));
+            Cu.mmul(Pu);
+
         }
     }
 
-    public void CalculateCuMatrix(int x, RealMatrix C) {
+    public void CalculateCiMatrix(int x, RealMatrix matrix) {
 
     }
 
-    public void CalculateCiMatrix(int x, RealMatrix C) {
 
+    public INDArray PreCalculateYY(INDArray Y) {
+        return Y.transpose().mmul(Y);
     }
 
-    public RealMatrix PreCalculateYY(RealMatrix matrix) {
-        return matrix.transpose().multiply(matrix);
-    }
 
-    public RealMatrix PreCalculateXX(RealMatrix matrix) {
-        return matrix.transpose().multiply(matrix);
+    public INDArray PreCalculateXX(INDArray X) {
+        return X.transpose().mmul(X);
     }
 
     public RealMatrix CalculateXU(int x, RealMatrix matrixX, RealMatrix matrixU) {
@@ -70,6 +84,11 @@ public class Worker extends Server implements IWorker, Runnable{
     public RealMatrix CalculateYI(int x, RealMatrix matrixY, RealMatrix matrixI) {
         return null;
     }
+
+    public void calculateXDerative(){
+
+    }
+
 
     public void SendResultsToMaster(CommunicationMessage message) {
         ObjectInputStream in = null;

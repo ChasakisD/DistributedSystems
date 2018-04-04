@@ -9,6 +9,15 @@ import javafx.concurrent.Task;
 import org.apache.commons.math3.geometry.spherical.oned.ArcsSet;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.api.ops.Op;
+import org.nd4j.linalg.api.ops.impl.transforms.Sigmoid;
+import org.nd4j.linalg.factory.Nd4j;
+import org.nd4j.linalg.indexing.INDArrayIndex;
+import org.nd4j.linalg.indexing.NDArrayIndex;
+import org.nd4j.linalg.util.NDArrayMath;
+import org.nd4j.linalg.util.NDArrayUtil;
+import org.nd4j.nativeblas.NativeOps;
 import sun.awt.image.ImageWatched;
 
 import java.io.IOException;
@@ -20,25 +29,32 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.nd4j.linalg.ops.transforms.Transforms;
 
-public class Master extends Server implements IMaster{
+import static org.nd4j.linalg.factory.Nd4j.cumsum;
+import static org.nd4j.linalg.factory.Nd4j.sum;
+import static org.nd4j.linalg.ops.transforms.Transforms.*;
 
-    RealMatrix R, P, C , X , Y;
+
+public class Master extends Server{
+
+    INDArray R, P, C , X , Y;
     int numberOfWorkers;
 
     // Holding the matrices to be distrubted to the workers
     // Use it as a FIFO
-    LinkedList<RealMatrix> C_Matrices = new LinkedList<>();
-    LinkedList<RealMatrix> P_Matrices = new LinkedList<>();
-    LinkedList<RealMatrix> X_Matrices = new LinkedList<>();
-    LinkedList<RealMatrix> Y_Matrices = new LinkedList<>();
+    LinkedList<INDArray> C_Matrices = new LinkedList<>();
+    LinkedList<INDArray> P_Matrices = new LinkedList<>();
+    LinkedList<INDArray> X_Matrices = new LinkedList<>();
+    LinkedList<INDArray> Y_Matrices = new LinkedList<>();
     final static double a = 40;
     static  double l = 0.1;
 
     public static void main(String[] args){
         ArrayList<Server> masters = ParserUtils.GetServersFromText("data/master.txt", true);
-        RealMatrix originalMatrix = ParserUtils.loadDataset("data/inputMatrix.csv");
+        INDArray originalMatrix = ParserUtils.loadDataset("data/inputMatrix.csv");
         Master master = (Master) masters.get(0);
+        ParserUtils.loadDataset("data/inputMatrix.csv");
         master.loadOriginalMatrix(originalMatrix);
         System.out.println("Number Of Workers: ");
         System.out.println();
@@ -54,6 +70,9 @@ public class Master extends Server implements IMaster{
     public void SetNumberOfWorkers(int x){
         numberOfWorkers = x;
     }
+
+    public void TransferCMatrix(){}
+
 
     public void StartAlgorithm(){
         // C and P matrices only need to be calculated once and passed once to the workers
@@ -82,8 +101,8 @@ public class Master extends Server implements IMaster{
 
         // let's get the K << max{U,I}
         // meaning a number much smaller than the biggest column or dimension
-        int BiggestDimension = R.getColumnDimension() > R.getRowDimension()?
-                                R.getColumnDimension(): R.getRowDimension();
+        int BiggestDimension = R.columns() > R.rows()?
+                                R.columns(): R.rows();
         // TODO: 31-Mar-18 Steile gamimeno mail an ειναι κομπλε σαν τιμη ayto που εχω κανει
         int K = BiggestDimension / 10;
 
@@ -100,39 +119,75 @@ public class Master extends Server implements IMaster{
         Mainloop();
     }
 
+    public INDArray PreCalculateYY(INDArray Y) {
+        return Y.transpose().mmul(Y);
+    }
+
+    // TODO: 04-Apr-18 Η μεθοδος πρεπει να ειναι στον worker to εβαλα εδω για testing
+    public INDArray CalculateCuMatrix(int user, INDArray C) {
+        return Nd4j.diag(C.getRow(user));
+    }
+
     public void Mainloop(){
-        // WaitX = GetXResultsFromWorkers();
-        // Send the new X needed for Y calculation
-        // DistributeXToWorkers()
-        // Wait for Y results
-        // With both X and Y
-        CalculateError();
+        int iter = 0;
+        int epoch = 200;
+        while (iter<epoch){
+            // WaitX = GetXResultsFromWorkers();
+            // Send the new X needed for Y calculation
+            // DistributeXToWorkers()
+            // Wait for Y results
+            // With both X and Y
+
+            INDArray YY = PreCalculateYY(Y);
+            System.out.println("Rows: "+YY.rows()+" Columns: "+YY.columns());
+
+            // for each user in X
+            for (int u = 0; u < X.rows(); u++) {
+                // Get Cu
+                INDArray Cu = CalculateCuMatrix(u, C);
+                System.out.println("Rows: "+Cu.rows()+" Columns: "+Cu.columns());
+                // θα το κανω αυριο λογικα
+                INDArray Pu = P.getRow(u);
+                INDArray temp = Cu.sub(Nd4j.eye(Cu.rows()));
+            }
+
+
+
+            double error = CalculateError();
+            System.out.println(error);
+            System.out.println("Iter: "+iter);
+            // genika mia apisteyta mikri timi allagis metajy dyo iteration
+            if(error< 0.0000001){
+
+            }
+            iter++;
+        }
     }
 
     public void getXResults(){}
 
     public void GenerateX(int K){
         // Create the matrix
-        X = MatrixUtils.createRealMatrix(R.getRowDimension(), K);
+        X = Nd4j.zeros(R.rows(), K);
         Random rand = new Random();
         // Fill it with random values between zero and 1
-        for (int u = 0; u < X.getRowDimension(); u++) {
-            for (int k = 0; k < X.getColumnDimension(); k++) {
+        for (int u = 0; u < X.rows(); u++) {
+            for (int k = 0; k < X.columns(); k++) {
                 // Enter a random value between 0 and 1
-                X.setEntry(u,k,ThreadLocalRandom.current().nextDouble(0, 1));
+                X.putScalar(u,k,ThreadLocalRandom.current().nextDouble(0, 1));
             }
         }
     }
 
     public void GenerateY(int K){
         // Initialize the Y matrix
-        Y = MatrixUtils.createRealMatrix(R.getColumnDimension(), K);
+        Y = Nd4j.zeros(R.columns(), K);
         Random rand = new Random();
         // Fill it with random values between zero and 1
-        for (int u = 0; u < X.getRowDimension(); u++) {
-            for (int k = 0; k < X.getColumnDimension(); k++) {
+        for (int u = 0; u < Y.rows(); u++) {
+            for (int k = 0; k < Y.columns(); k++) {
                 // enter a random value between 0 and 1
-                Y.setEntry(u,k,ThreadLocalRandom.current().nextDouble(0, 1));
+                Y.putScalar(u,k,ThreadLocalRandom.current().nextDouble(0, 1));
             }
         }
     }
@@ -143,18 +198,17 @@ public class Master extends Server implements IMaster{
 
     }
 
-    @Override
     // Returns a linked list with the matrices
-    public LinkedList<RealMatrix> SplitMatrix(RealMatrix matrix, int numberOfWorkers){
+    public LinkedList<INDArray> SplitMatrix(INDArray matrix, int numberOfWorkers){
         int start = 0;
-        int end = matrix.getRowDimension() / numberOfWorkers;
-        LinkedList<RealMatrix> splitted = new LinkedList<>();
+        int end = matrix.rows() / numberOfWorkers;
+        LinkedList<INDArray> splitted = new LinkedList<>();
         for (int u = 0; u < numberOfWorkers ; u++) {
             // if it's the last iteration, we want to make sure we lose no data
             if (numberOfWorkers - 1 == u) {
-                splitted.addLast(matrix.getSubMatrix(start, matrix.getRowDimension() - 1, 0, matrix.getColumnDimension() -1));
+                splitted.addLast(matrix.get(NDArrayIndex.interval(start,matrix.rows()-1), NDArrayIndex.all()));
             }
-            splitted.addLast(matrix.getSubMatrix(start, end, 0, matrix.getColumnDimension() -1));
+            splitted.addLast(matrix.get(NDArrayIndex.interval(start,end), NDArrayIndex.all()));
         }
         return splitted;
     }
@@ -167,38 +221,30 @@ public class Master extends Server implements IMaster{
     }
 
 
-    public RealMatrix CombineMatrix(LinkedList<RealMatrix> Temp) {
+    public INDArray CombineMatrix(LinkedList<INDArray> Temp) {
         // init the matrix
-        RealMatrix newMatrix = MatrixUtils.createRealMatrix(Temp.getFirst().getRowDimension(),Temp.getFirst().getColumnDimension());
+        INDArray newMatrix = Nd4j.zeros(0,0);
         int start = 0;
-        for (RealMatrix matrix: Temp) {
-            newMatrix.setSubMatrix(matrix.getData(), start,0);
-            start += matrix.getRowDimension();
+        for (INDArray matrix: Temp) {
+            // concat them one on top of the other
+            // ORDER MATTERS
+            newMatrix = Nd4j.vstack(newMatrix,matrix);
         }
         return newMatrix;
     }
 
 
     public void CalculatePMatrix(){
-        for (int u = 0; u < R.getRowDimension(); u++) {
-            for (int i = 0; i < R.getColumnDimension(); i++) {
-                P.setEntry(u,i, R.getEntry(u,i) > 0 ? 1: 0);
-            }
-        }
+        System.out.println(R.getDouble(0,149));
+        P = greaterThanOrEqual(R, Nd4j.zeros(R.rows(),R.columns()));
+        System.out.println(P.getDouble(0,148));
+
     }
 
-    public void loadOriginalMatrix(RealMatrix R){
+    public void loadOriginalMatrix(INDArray R){
         this.R = R;
-        initCMatrix();
-        initPMatrix();
-    }
-
-    public void initCMatrix(){
-        C = MatrixUtils.createRealMatrix(R.getRowDimension(), R.getColumnDimension());
-    }
-
-    public void initPMatrix(){
-        P = MatrixUtils.createRealMatrix(R.getRowDimension(), R.getColumnDimension());
+        C = Nd4j.zeros(R.rows(), R.columns());
+        P = Nd4j.zeros(R.rows(),R.columns());
     }
 
     // an δεν σου αρεσει να το σπας με static απλα βαλτο σαν μεθοδο
@@ -229,15 +275,12 @@ public class Master extends Server implements IMaster{
         this.OpenServer();
     }
 
-    @Override
-    public void TransferCMatrix() {
 
-    }
 
     public void CalculateCMatrix() {
-        RealMatrix R_Copy = R.copy();
-        C = R_Copy.scalarMultiply(a);
-        C = C.scalarAdd(1);
+       C = (R.mul(a)).add(1);
+
+
     }
 
     public void DistributeXMatrixToWorkers() {
@@ -254,13 +297,12 @@ public class Master extends Server implements IMaster{
         // as possible
         int k =0;
         long starttime = System.nanoTime();
-        RealMatrix p_copy = P.copy();
-        RealMatrix tempResult = Y.transpose().preMultiply(X);
-        RealMatrix temp = p_copy.subtract(tempResult);
-        System.out.println(temp.getRowDimension()+" " + temp.getColumnDimension());
+
+        double result = ((pow(P.sub(X.mmul(Y.transpose())), 2)).mul(C)).sumNumber().doubleValue();
 
 
-        return 0;
+        System.out.println("Calculated Score Time: "+ParserUtils.GetTimeInMs(starttime));
+        return result;
     }
 
     public double CalculateScore(int x, int y) {

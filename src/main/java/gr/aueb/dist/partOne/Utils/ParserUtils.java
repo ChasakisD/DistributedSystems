@@ -5,6 +5,8 @@ import gr.aueb.dist.partOne.Models.Worker;
 import gr.aueb.dist.partOne.Server.Server;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
 import javax.xml.datatype.Duration;
 import java.io.BufferedReader;
@@ -65,10 +67,12 @@ public class ParserUtils {
         return servers;
     }
 
-    public static RealMatrix loadDataset(String dataset){
+    public static INDArray loadDataset(String dataset){
         // the index start from zero to 764. So the dimension will be 765
-        RealMatrix matrix = MatrixUtils.createRealMatrix(765, 1964);
-        System.out.println(matrix.getEntry(0,0));
+        INDArray matrix = Nd4j.zeros(765, 1964);
+
+
+        System.out.println(matrix.getDouble(0,149));
         BufferedReader bufferedReader = null;
         FileReader fileReader = null;
         try {
@@ -83,7 +87,8 @@ public class ParserUtils {
                 int row = Integer.parseInt(tokenizer.nextToken());
                 int column = Integer.parseInt(tokenizer.nextToken());
                 int value = Integer.parseInt(tokenizer.nextToken());
-                matrix.setEntry(row,column,value);
+                matrix.put(row,column,value);
+
             }
 
         }
@@ -105,6 +110,8 @@ public class ParserUtils {
                 ex.printStackTrace();
             }
         }
+        System.out.println(matrix.getDouble(0,149));
+
         return matrix;
     }
 
