@@ -115,7 +115,9 @@ public class ParserUtils {
         return matrix;
     }
 
-
+    public static void PrintShape(INDArray array){
+        System.out.println("Rows: "+array.rows()+ " Columns: "+array.columns());
+    }
 
     public static long GetTimeInMs(long start){
         long end = System.nanoTime();

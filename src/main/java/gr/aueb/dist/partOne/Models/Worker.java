@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 public class Worker extends Server implements Runnable{
     INDArray X, Y,  R, P, C;
+    double l;
     final  static  int a = 40;
 
     public Worker() {}
@@ -46,24 +47,61 @@ public class Worker extends Server implements Runnable{
 
     public INDArray CalculateCuMatrix(int user, INDArray C) {
         // TODO: 04-Apr-18 Ρωτα αν το γαμημενο dimension που λεει στο paper ειναι αυτο. 
-        return C.getRow(user).mul(Nd4j.eye(C.columns()));
+        return Nd4j.diag(C.getRow(user));
     }
 
 
+    public INDArray CalculateDerivative(INDArray matrix,  INDArray Pu, INDArray Cu, INDArray YY, double l) {
+    // (Cu - I)
+        INDArray result = (Cu.sub(Nd4j.eye(Cu.rows())));
+        // Y.T(Cu - I)Y
+        result = matrix.transpose().mmul(result).mmul(matrix);
+
+        // Y.TY + Y.T(Cu - I)Y
+        result.addi(YY);
+        // Y.TY + Y.T(Cu - I)Y +λI
+        result.addi(Nd4j.eye(result.rows()).mul(l));
+        //invert the matrix
+        result = Nd4j.reverse(result);
+        ParserUtils.PrintShape(result);
+        INDArray secondPart = Pu.mmul(Cu    );
+        secondPart = secondPart.mmul(matrix);
+
+        INDArray finalPart = secondPart.mmul(result);
+        return finalPart;
+    }
+
+    // Ειναι ετοιμη αλλαζει το X. Φροντισε απλα να είναι στην class
+    // Δεν γυρναει τιποτα
     public void CalculateXDerative(){
-        INDArray YY = PreCalculateYY(Y);
-        // for each user in X
         for (int u = 0; u < X.rows(); u++) {
+            INDArray YY = PreCalculateYY(Y);
             // Get Cu
             INDArray Cu = CalculateCuMatrix(u, C);
+            // Get the row
             INDArray Pu = P.getRow(u);
-            INDArray temp = Cu.sub(Nd4j.eye(Cu.rows()));
-            Cu.mmul(Pu);
+
+            X.putRow(u,CalculateDerivative(Y,Pu,Cu,YY,l));
+        }
+    }
+
+
+    public void CalculateYDerative(){
+        for (int i = 0; i < Y.rows(); i++) {
+            INDArray XX = PreCalculateXX(X);
+            // Get Cu
+            INDArray Cu = CalculateCiMatrix(i, C);
+            // Get the row
+            INDArray Pu = P.getRow(i);
+
+            X.putRow(i,CalculateDerivative(X,Pu,Cu,YY,l));
 
         }
     }
 
-    public void CalculateCiMatrix(int x, RealMatrix matrix) {
+
+    public INDArray CalculateCiMatrix(int item, INDArray matrix) {
+        return Nd4j.diag(C.getColumn(item));
 
     }
 

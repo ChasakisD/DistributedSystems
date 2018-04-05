@@ -128,6 +128,41 @@ public class Master extends Server{
         return Nd4j.diag(C.getRow(user));
     }
 
+    public INDArray CalculateDerivative(INDArray matrix,  INDArray Pu, INDArray Cu, INDArray YY, double l) {
+// (Cu - I)
+        INDArray result = (Cu.sub(Nd4j.eye(Cu.rows())));
+        // Y.T(Cu - I)Y
+        ParserUtils.PrintShape(matrix);
+        result = matrix.transpose().mmul(result).mmul(matrix);
+
+        // Y.TY + Y.T(Cu - I)Y
+        result.addi(YY);
+        // Y.TY + Y.T(Cu - I)Y +λI
+        result.addi(Nd4j.eye(result.rows()).mul(l));
+        //invert the matrix
+        result = Nd4j.reverse(result);
+        ParserUtils.PrintShape(result);
+        INDArray secondPart = Pu.mmul(Cu);
+        secondPart = secondPart.mmul(matrix);
+
+        INDArray finalPart = secondPart.mmul(result);
+        return finalPart;
+    }
+
+    // Ειναι ετοιμη αλλαζει το X. Φροντισε απλα να είναι στην class
+    // Δεν γυρναει τιποτα
+    public void CalculateXDerative(int user){
+        INDArray YY = PreCalculateYY(Y);
+        // Get Cu
+        INDArray Cu = CalculateCuMatrix(user, C);
+        // Get the row
+        INDArray Pu = P.getRow(user);
+
+        X.putRow(user,CalculateDerivative(Y,Pu,Cu,YY,l));
+
+    }
+
+
     public void Mainloop(){
         int iter = 0;
         int epoch = 200;
@@ -138,19 +173,16 @@ public class Master extends Server{
             // Wait for Y results
             // With both X and Y
 
-            INDArray YY = PreCalculateYY(Y);
-            System.out.println("Rows: "+YY.rows()+" Columns: "+YY.columns());
-
-            // for each user in X
-            for (int u = 0; u < X.rows(); u++) {
+            for (int i = 0; i < Y.rows(); i++) {
+                INDArray YY = PreCalculateYY(X);
                 // Get Cu
-                INDArray Cu = CalculateCuMatrix(u, C);
-                System.out.println("Rows: "+Cu.rows()+" Columns: "+Cu.columns());
-                // θα το κανω αυριο λογικα
-                INDArray Pu = P.getRow(u);
-                INDArray temp = Cu.sub(Nd4j.eye(Cu.rows()));
-            }
+                INDArray Cu = CalculateCuMatrix(i,C);
+                // Get the row
+                INDArray Pu = P.getColumn(i);
 
+                X.putRow(i,CalculateDerivative(Y,Pu,Cu,YY,l));
+
+            }
 
 
             double error = CalculateError();
