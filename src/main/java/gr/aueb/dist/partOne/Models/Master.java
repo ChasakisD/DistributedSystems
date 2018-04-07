@@ -1,78 +1,46 @@
 package gr.aueb.dist.partOne.Models;
 
-import gr.aueb.dist.partOne.Abstractions.IMaster;
-import gr.aueb.dist.partOne.Client.Main;
 import gr.aueb.dist.partOne.Server.CommunicationMessage;
+import gr.aueb.dist.partOne.Server.MessageType;
 import gr.aueb.dist.partOne.Server.Server;
 import gr.aueb.dist.partOne.Utils.ParserUtils;
-import javafx.concurrent.Task;
-import org.apache.commons.math3.geometry.spherical.oned.ArcsSet;
-import org.apache.commons.math3.linear.MatrixUtils;
-import org.apache.commons.math3.linear.RealMatrix;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.api.ops.Op;
-import org.nd4j.linalg.api.ops.impl.transforms.Sigmoid;
 import org.nd4j.linalg.factory.Nd4j;
-import org.nd4j.linalg.indexing.INDArrayIndex;
 import org.nd4j.linalg.indexing.NDArrayIndex;
-import org.nd4j.linalg.util.NDArrayMath;
-import org.nd4j.linalg.util.NDArrayUtil;
-import org.nd4j.nativeblas.NativeOps;
-import sun.awt.image.ImageWatched;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.nd4j.linalg.ops.transforms.Transforms;
-
-import static org.nd4j.linalg.factory.Nd4j.cumsum;
-import static org.nd4j.linalg.factory.Nd4j.sum;
 import static org.nd4j.linalg.ops.transforms.Transforms.*;
 
 
 public class Master extends Server{
+    private ArrayList<Worker> availableWorkers;
 
-    INDArray R, P, C , X , Y;
-    int numberOfWorkers;
+    private INDArray R, P, C ,X ,Y;
 
     // Holding the matrices to be distrubted to the workers
     // Use it as a FIFO
-    LinkedList<INDArray> C_Matrices = new LinkedList<>();
-    LinkedList<INDArray> P_Matrices = new LinkedList<>();
-    LinkedList<INDArray> X_Matrices = new LinkedList<>();
-    LinkedList<INDArray> Y_Matrices = new LinkedList<>();
-    final static double a = 40;
-    static  double l = 0.1;
+    private LinkedList<INDArray> C_Matrices = new LinkedList<>();
+    private LinkedList<INDArray> P_Matrices = new LinkedList<>();
+    private LinkedList<INDArray> X_Matrices = new LinkedList<>();
+    private LinkedList<INDArray> Y_Matrices = new LinkedList<>();
+    private final static double a = 40;
+    private static double l = 0.1;
 
     public static void main(String[] args){
         ArrayList<Server> masters = ParserUtils.GetServersFromText("data/master.txt", true);
-        INDArray originalMatrix = ParserUtils.loadDataset("data/inputMatrix.csv");
         Master master = (Master) masters.get(0);
-        ParserUtils.loadDataset("data/inputMatrix.csv");
-        master.loadOriginalMatrix(originalMatrix);
-        System.out.println("Number Of Workers: ");
-        System.out.println();
-        master.SetNumberOfWorkers(2);
-        master.StartAlgorithm();
-
+        master.Initialize();
     }
 
-    public Master(){
-
-    }
-
-    public void SetNumberOfWorkers(int x){
-        numberOfWorkers = x;
-    }
-
-    public void TransferCMatrix(){}
-
+    public Master(){}
 
     public void StartAlgorithm(){
         // C and P matrices only need to be calculated once and passed once to the workers
@@ -80,25 +48,16 @@ public class Master extends Server{
         CalculatePMatrix();
         System.out.println("Calculated P Matrix: "+ParserUtils.GetTimeInMs(startTime)+" MilliSecond");
 
-        P_Matrices = SplitMatrix(P,numberOfWorkers);
-
-        // TODO: 31-Mar-18 Make it async
-        TransferPMatrix();
-
-
+        P_Matrices = SplitMatrix(P, availableWorkers.size());
 
         startTime = System.nanoTime();
         CalculateCMatrix();
         System.out.println("Calculated C Matrix: "+ParserUtils.GetTimeInMs(startTime)+" MilliSecond");
 
-        C_Matrices = SplitMatrix(C, numberOfWorkers);
+        C_Matrices = SplitMatrix(C, availableWorkers.size());
 
-
-        // TODO: 31-Mar-18 Make it async
-        TransferCMatrix();
-
-        // now the workers have all the necessary tables but the X and Y
-
+        DistributeCPMatricesToWorkers();
+    /*
         // let's get the K << max{U,I}
         // meaning a number much smaller than the biggest column or dimension
         int BiggestDimension = R.columns() > R.rows()?
@@ -108,15 +67,15 @@ public class Master extends Server{
 
         // now let's generate them
         GenerateX(K);
-        X_Matrices = SplitMatrix(X,numberOfWorkers);
+        X_Matrices = SplitMatrix(X, availableWorkers.size());
         // TODO: 31-Mar-18 Make it Async
         DistributeXMatrixToWorkers();
 
         GenerateY(K);
-        Y_Matrices = SplitMatrix(Y,numberOfWorkers);
+        Y_Matrices = SplitMatrix(Y, availableWorkers.size());
         // TODO: 31-Mar-18 Make it async
         DistributeYMatrixToWorkers();
-        Mainloop();
+        Mainloop();*/
     }
 
     public INDArray PreCalculateYY(INDArray Y) {
@@ -246,14 +205,6 @@ public class Master extends Server{
         return splitted;
     }
 
-
-
-    // Sent the P matrix to all of the workers
-    public void TransferPMatrix(){
-
-    }
-
-
     public INDArray CombineMatrix(LinkedList<INDArray> Temp) {
         // init the matrix
         INDArray newMatrix = Nd4j.zeros(0,0);
@@ -296,6 +247,28 @@ public class Master extends Server{
             ObjectInputStream in = new ObjectInputStream(getSocketConn().getInputStream());
 
             CommunicationMessage message = (CommunicationMessage) in.readObject();
+
+            switch(message.getType()){
+                case HELLO_WORLD:{
+                    Worker worker = new Worker();
+                    worker.setId(message.getServerName());
+                    worker.setIp(message.getIp());
+                    worker.setPort(message.getPort());
+                    worker.setInstanceCpuCores(message.getCpuCores());
+                    worker.setInstanceRamSize(message.getRamGBSize());
+                    availableWorkers.add(worker);
+
+                    System.out.println("Received: " + worker.toString());
+
+                    System.out.println("Number Of Workers: ");
+                    System.out.println();
+                    StartAlgorithm();
+                }
+                default:{
+                    break;
+                }
+            }
+
             System.out.println("Received Message From: " + message.getServerName());
         }
         catch (ClassNotFoundException | IOException ignored) {}
@@ -305,15 +278,17 @@ public class Master extends Server{
      * IMaster Implementation
      */
     public void Initialize() {
+        availableWorkers = new ArrayList<>();
+
+        INDArray originalMatrix = ParserUtils.loadDataset("data/inputMatrix.csv");
+        ParserUtils.loadDataset("data/inputMatrix.csv");
+        loadOriginalMatrix(originalMatrix);
         this.OpenServer();
     }
 
 
-
     public void CalculateCMatrix() {
        C = (R.mul(a)).add(1);
-
-
     }
 
     public void DistributeXMatrixToWorkers() {
@@ -322,6 +297,15 @@ public class Master extends Server{
 
     public void DistributeYMatrixToWorkers() {
 
+    }
+
+    public void DistributeCPMatricesToWorkers(){
+        CommunicationMessage msg = new CommunicationMessage();
+        msg.setType(MessageType.TRANSFER_CP);
+        msg.setcArray(C);
+        msg.setpArray(P);
+
+        SendBroadcastMessageToWorkers(msg);
     }
 
     public double CalculateError() {
@@ -344,5 +328,36 @@ public class Master extends Server{
 
     public List<Poi> CalculateBestLocalPoisForUser(int x, double xBound, double yBound, int y) {
         return null;
+    }
+
+    public void SendBroadcastMessageToWorkers(CommunicationMessage message) {
+        ObjectInputStream in = null;
+        ObjectOutputStream out = null;
+        Socket socket = null;
+
+        for(Worker worker : availableWorkers){
+            try{
+                socket = new Socket(worker.getIp(), worker.getPort());
+
+                out = new ObjectOutputStream(socket.getOutputStream());
+                in = new ObjectInputStream(socket.getInputStream());
+
+                out.writeObject(message);
+                out.flush();
+            }catch(IOException ignored){ break; }
+        }
+
+        try{
+            if (in != null) {
+                in.close();
+            }
+            if (out != null){
+                out.close();
+            }
+            if (socket != null){
+                socket.close();
+            }
+        }
+        catch(IOException ignored){}
     }
 }

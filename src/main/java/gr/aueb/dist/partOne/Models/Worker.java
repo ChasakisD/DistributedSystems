@@ -1,12 +1,9 @@
 package gr.aueb.dist.partOne.Models;
 
-import gr.aueb.dist.partOne.Abstractions.IMaster;
-import gr.aueb.dist.partOne.Abstractions.IWorker;
-import gr.aueb.dist.partOne.Client.Main;
 import gr.aueb.dist.partOne.Server.CommunicationMessage;
+import gr.aueb.dist.partOne.Server.MessageType;
 import gr.aueb.dist.partOne.Server.Server;
 import gr.aueb.dist.partOne.Utils.ParserUtils;
-import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
@@ -17,23 +14,60 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Worker extends Server implements Runnable{
-    INDArray X, Y,  R, P, C;
-    double l;
-    final  static  int a = 40;
+public class Worker extends Server{
+    private int cpuCores;
+    private int ramSize;
+
+    private INDArray X, Y, P, C;
+    private double l;
+    private final static int a = 40;
 
     public Worker() {}
 
     /**
      * Runnable Implementation
      */
-    public void run() {
+    public synchronized void run() {
+        try{
+            ObjectOutputStream out = new ObjectOutputStream(getSocketConn().getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(getSocketConn().getInputStream());
 
+            CommunicationMessage message = (CommunicationMessage) in.readObject();
+
+            CommunicationMessage result = new CommunicationMessage();
+            result.setServerName(getName());
+            result.setRamGBSize((int)getAvailableRamSizeInGB());
+            switch (message.getType()){
+                case TRANSFER_CP:{
+                    C = message.getcArray();
+                    P = message.getpArray();
+                    System.out.println("C Array: " + C.rows() + " " + C.columns());
+                    System.out.println("P Array: " + P.rows() + " " + P.columns());
+                    return;
+                }
+                case CALCULATE_X:{
+                    int fromUser = message.getFromUser();
+                    int toUser = message.getToUser();
+
+                    for(int i = fromUser; i <= toUser; i++){
+
+                    }
+                    break;
+                }
+                case CALCULATE_Y:{
+                    break;
+                }
+                default:{
+                    break;
+                }
+            }
+
+
+
+            System.out.println("Received Message From: " + message.getServerName());
+        }
+        catch (ClassNotFoundException | IOException ignored) {}
     }
-
-
-
-
 
     /**
      * IWorker Implementation
@@ -41,7 +75,16 @@ public class Worker extends Server implements Runnable{
     public void Initialize() {
         CommunicationMessage msg = new CommunicationMessage();
         msg.setServerName(getId());
+        msg.setIp(getIp());
+        msg.setPort(getPort());
+        msg.setCpuCores(getCpuCores());
+        msg.setRamGBSize((int)getAvailableRamSizeInGB());
+        msg.setType(MessageType.HELLO_WORLD);
+
         SendResultsToMaster(msg);
+
+        this.OpenServer();
+
         System.out.println("I did what i must do dear Master!");
     }
 
@@ -52,7 +95,7 @@ public class Worker extends Server implements Runnable{
 
 
     public INDArray CalculateDerivative(INDArray matrix,  INDArray Pu, INDArray Cu, INDArray YY, double l) {
-    // (Cu - I)
+        // (Cu - I)
         INDArray result = (Cu.sub(Nd4j.eye(Cu.rows())));
         // Y.T(Cu - I)Y
         result = matrix.transpose().mmul(result).mmul(matrix);
@@ -146,5 +189,21 @@ public class Worker extends Server implements Runnable{
             }
             catch(IOException ignored){}
         }
+    }
+
+    public int getInstanceCpuCores() {
+        return cpuCores;
+    }
+
+    public void setInstanceCpuCores(int cpuCores) {
+        this.cpuCores = cpuCores;
+    }
+
+    public int getInstanceRamSize() {
+        return ramSize;
+    }
+
+    public void setInstanceRamSize(int ramSize) {
+        this.ramSize = ramSize;
     }
 }

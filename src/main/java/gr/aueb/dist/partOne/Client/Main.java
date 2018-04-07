@@ -10,8 +10,6 @@ public class Main {
 
     public static void main(String[] args){
         ArrayList<Server> workers = ParserUtils.GetServersFromText("data/workers.txt", false);
-        for(Server worker : workers){
-            ((Worker) worker).Initialize();
-        }
+        ((Worker)workers.get(0)).Initialize();
     }
 }
