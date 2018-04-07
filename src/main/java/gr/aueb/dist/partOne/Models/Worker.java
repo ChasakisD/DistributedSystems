@@ -114,23 +114,6 @@ public class Worker extends Server{
         return finalPart;
     }
 
-    // Ειναι ετοιμη αλλαζει το X. Φροντισε απλα να είναι στην class
-    // Δεν γυρναει τιποτα
-    public void CalculateXDerative(){
-        for (int u = 0; u < X.rows(); u++) {
-            INDArray YY = PreCalculateYY(Y);
-            // Get Cu
-            INDArray Cu = CalculateCuMatrix(u, C);
-            // Get the row
-            INDArray Pu = P.getRow(u);
-
-            X.putRow(u,CalculateDerivative(Y,Pu,Cu,YY,l));
-        }
-    }
-
-
-
-
     public INDArray CalculateCiMatrix(int item, INDArray matrix) {
         return Nd4j.diag(C.getColumn(item));
 
@@ -154,8 +137,19 @@ public class Worker extends Server{
         return null;
     }
 
-    public void calculateXDerative(){
 
+    // Ειναι ετοιμη αλλαζει το X. Φροντισε απλα να είναι στην class
+    // Δεν γυρναει τιποτα
+    public void CalculateXDerative(){
+        for (int user = 0; user < X.rows() ; user++) {
+            INDArray YY = PreCalculateYY(Y);
+            // Get Cu
+            INDArray Cu = CalculateCuMatrix(user, C);
+            // Get the row
+            INDArray Pu = P.getRow(user);
+
+            X.putRow(user,CalculateDerivative(Y,Pu,Cu,YY,l));
+        }
     }
 
 
@@ -164,8 +158,9 @@ public class Worker extends Server{
         ObjectOutputStream out = null;
         Socket socket = null;
         try{
-            ArrayList<Server> masters = ParserUtils.GetServersFromText("data/master.txt", true);
-            Master master = (Master) masters.get(0);
+            Master master = ParserUtils.GetServersFromText("data/master.txt");
+
+            if(master == null) return;
 
             socket = new Socket(master.getIp(), master.getPort());
 

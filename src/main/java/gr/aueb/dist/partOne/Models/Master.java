@@ -11,17 +11,18 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.nd4j.linalg.ops.transforms.Transforms.*;
 
 
 public class Master extends Server{
+    private int howManyWorkersToWait;
     private ArrayList<Worker> availableWorkers;
+
+    private ArrayList<CommunicationMessage> XMessages;
+    private ArrayList<CommunicationMessage> YMessages;
 
     private INDArray R, P, C ,X ,Y;
 
@@ -33,12 +34,6 @@ public class Master extends Server{
     private LinkedList<INDArray> Y_Matrices = new LinkedList<>();
     private final static double a = 40;
     private static double l = 0.1;
-
-    public static void main(String[] args){
-        ArrayList<Server> masters = ParserUtils.GetServersFromText("data/master.txt", true);
-        Master master = (Master) masters.get(0);
-        master.Initialize();
-    }
 
     public Master(){}
 
@@ -57,7 +52,7 @@ public class Master extends Server{
         C_Matrices = SplitMatrix(C, availableWorkers.size());
 
         DistributeCPMatricesToWorkers();
-    /*
+
         // let's get the K << max{U,I}
         // meaning a number much smaller than the biggest column or dimension
         int BiggestDimension = R.columns() > R.rows()?
@@ -68,14 +63,13 @@ public class Master extends Server{
         // now let's generate them
         GenerateX(K);
         X_Matrices = SplitMatrix(X, availableWorkers.size());
-        // TODO: 31-Mar-18 Make it Async
+
         DistributeXMatrixToWorkers();
 
         GenerateY(K);
         Y_Matrices = SplitMatrix(Y, availableWorkers.size());
         // TODO: 31-Mar-18 Make it async
         DistributeYMatrixToWorkers();
-        Mainloop();*/
     }
 
     public INDArray PreCalculateYY(INDArray Y) {
@@ -118,44 +112,6 @@ public class Master extends Server{
         return finalPart;
     }
 
-    // Ειναι ετοιμη αλλαζει το X. Φροντισε απλα να είναι στην class
-    // Δεν γυρναει τιποτα
-    public void CalculateXDerative(){
-        for (int user = 0; user < X.rows() ; user++) {
-            INDArray YY = PreCalculateYY(Y);
-            // Get Cu
-            INDArray Cu = CalculateCuMatrix(user, C);
-            // Get the row
-            INDArray Pu = P.getRow(user);
-
-            X.putRow(user,CalculateDerivative(Y,Pu,Cu,YY,l));
-        }
-    }
-
-
-    public void Mainloop(){
-        int iter = 0;
-        int epoch = 200;
-        while (iter<epoch){
-            // WaitX = GetXResultsFromWorkers();
-            // Send the new X needed for Y calculation
-            // DistributeXToWorkers()
-            // Wait for Y results
-            // With both X and Y
-
-            CalculateXDerative();
-
-            double error = CalculateError();
-            System.out.println(error);
-            System.out.println("Iter: "+iter);
-            // genika mia apisteyta mikri timi allagis metajy dyo iteration
-            if(error< 0.001){
-
-            }
-            iter++;
-        }
-    }
-
     public void getXResults(){}
 
     public void GenerateX(int K){
@@ -183,7 +139,6 @@ public class Master extends Server{
             }
         }
     }
-
 
     // Sent the C matrix to all of the workers
     public void DiS(){
@@ -231,13 +186,6 @@ public class Master extends Server{
         P = Nd4j.zeros(R.rows(),R.columns());
     }
 
-    // an δεν σου αρεσει να το σπας με static απλα βαλτο σαν μεθοδο
-    public void DistributeCMatrixToWorkers() {
-    }
-
-    public void DistributePMatrixToWorkers(){}
-
-
     /**
      * Runnable Implementation
      */
@@ -260,9 +208,56 @@ public class Master extends Server{
 
                     System.out.println("Received: " + worker.toString());
 
-                    System.out.println("Number Of Workers: ");
-                    System.out.println();
-                    StartAlgorithm();
+                    if(availableWorkers.size() >= howManyWorkersToWait){
+                        System.out.println("Number Of Workers: " + howManyWorkersToWait);
+                        StartAlgorithm();
+                    }
+                }
+                case X_CALCULATED:{
+                    XMessages.add(message);
+                    if(XMessages.size() >= howManyWorkersToWait){
+                        int iter = 0;
+                        int epoch = 200;
+
+                        LinkedList<INDArray> XDist = new LinkedList<>();
+
+                        //Ascending sort of fromUser
+                        XMessages.sort(Comparator.comparingInt(CommunicationMessage::getFromUser));
+                        XMessages.forEach((msg) -> XDist.add(msg.getxArray()));
+
+                        //TODO Den exw idea pws na kanw to linked list se 1 array, des an yparxei
+                        //TODO Ready mathodos alliws tha to dw egw manually
+                        //TODO De kserw pou tha ginei to calculateerror, an otan erthei to y h to x
+
+                        //TODO 7/4/2018 this work will be done in workers
+                        //CalculateXDerative();
+
+                        double error = CalculateError();
+                        System.out.println(error);
+                        System.out.println("Iter: "+iter);
+                        // genika mia apisteyta mikri timi allagis metajy dyo iteration
+                        if(error< 0.001){
+
+                        }
+
+                        //When finished, clear it for the next loop
+                        XMessages.clear();
+                    }
+                }
+                case Y_CALCULATED:{
+                    YMessages.add(message);
+                    if(YMessages.size() >= howManyWorkersToWait){
+                        LinkedList<INDArray> YDist = new LinkedList<>();
+
+                        //Ascending sort of fromUser
+                        YMessages.sort(Comparator.comparingInt(CommunicationMessage::getFromUser));
+                        YMessages.forEach((msg) -> YDist.add(msg.getxArray()));
+
+                        //TODO IDIA DOULEIA OPWS PRIN
+
+                        //When finished, clear it for the next loop
+                        YMessages.clear();
+                    }
                 }
                 default:{
                     break;
@@ -279,10 +274,15 @@ public class Master extends Server{
      */
     public void Initialize() {
         availableWorkers = new ArrayList<>();
+        XMessages = new ArrayList<>();
+        YMessages = new ArrayList<>();
 
         INDArray originalMatrix = ParserUtils.loadDataset("data/inputMatrix.csv");
         ParserUtils.loadDataset("data/inputMatrix.csv");
         loadOriginalMatrix(originalMatrix);
+
+        SendBroadcastMessageToWorkers(new CommunicationMessage());
+
         this.OpenServer();
     }
 
@@ -291,12 +291,64 @@ public class Master extends Server{
        C = (R.mul(a)).add(1);
     }
 
-    public void DistributeXMatrixToWorkers() {
+    public  void DistributeXMatrixToWorkers() {
+        int totalCores = availableWorkers
+                .stream()
+                .map(Server::getCpuCores)
+                .reduce(0, (a, b) -> a+b);
 
+        int currentIndex = 0;
+        int rowsPerCore = X.rows() / totalCores;
+        for(int i = 0; i < availableWorkers.size(); i++){
+            Worker worker = availableWorkers.get(i);
+            int workerRows = rowsPerCore * worker.getCpuCores();
+
+            CommunicationMessage xMessage = new CommunicationMessage();
+            xMessage.setType(MessageType.CALCULATE_X);
+            xMessage.setyArray(Y);
+            xMessage.setFromUser(0);
+            xMessage.setToUser(workerRows);
+
+            currentIndex += workerRows;
+
+            if(i == availableWorkers.size() - 1){
+                if(currentIndex != X.rows()){
+                    xMessage.setToUser(X.rows()-1);
+                }
+            }
+
+            SendMessageToWorker(xMessage, worker);
+        }
     }
 
     public void DistributeYMatrixToWorkers() {
+        int totalCores = availableWorkers
+                .stream()
+                .map(Server::getCpuCores)
+                .reduce(0, (a, b) -> a+b);
 
+        int currentIndex = 0;
+        int rowsPerCore = Y.rows() / totalCores;
+        for(int i = 0; i < availableWorkers.size(); i++){
+            Worker worker = availableWorkers.get(i);
+            int workerRows = rowsPerCore * worker.getCpuCores();
+
+            CommunicationMessage xMessage = new CommunicationMessage();
+            xMessage.setType(MessageType.CALCULATE_Y);
+            xMessage.setxArray(X);
+            xMessage.setFromUser(0);
+            xMessage.setToUser(workerRows);
+
+            currentIndex += workerRows;
+
+            if(i == availableWorkers.size() - 1){
+                if(currentIndex != Y.rows()){
+                    xMessage.setToUser(Y.rows()-1);
+                }
+            }
+
+            SendMessageToWorker(xMessage, worker);
+        }
     }
 
     public void DistributeCPMatricesToWorkers(){
@@ -331,21 +383,25 @@ public class Master extends Server{
     }
 
     public void SendBroadcastMessageToWorkers(CommunicationMessage message) {
+        for(Worker worker : availableWorkers){
+            SendMessageToWorker(message, worker);
+        }
+    }
+
+    public void SendMessageToWorker(CommunicationMessage message, Worker worker) {
         ObjectInputStream in = null;
         ObjectOutputStream out = null;
         Socket socket = null;
 
-        for(Worker worker : availableWorkers){
-            try{
-                socket = new Socket(worker.getIp(), worker.getPort());
+        try{
+            socket = new Socket(worker.getIp(), worker.getPort());
 
-                out = new ObjectOutputStream(socket.getOutputStream());
-                in = new ObjectInputStream(socket.getInputStream());
+            out = new ObjectOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
 
-                out.writeObject(message);
-                out.flush();
-            }catch(IOException ignored){ break; }
-        }
+            out.writeObject(message);
+            out.flush();
+        }catch(IOException ignored){}
 
         try{
             if (in != null) {
@@ -359,5 +415,13 @@ public class Master extends Server{
             }
         }
         catch(IOException ignored){}
+    }
+
+    public int getHowManyWorkersToWait() {
+        return howManyWorkersToWait;
+    }
+
+    public void setHowManyWorkersToWait(int howManyWorkersToWait) {
+        this.howManyWorkersToWait = howManyWorkersToWait;
     }
 }

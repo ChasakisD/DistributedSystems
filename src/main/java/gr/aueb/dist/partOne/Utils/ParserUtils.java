@@ -1,23 +1,17 @@
 package gr.aueb.dist.partOne.Utils;
 
 import gr.aueb.dist.partOne.Models.Master;
-import gr.aueb.dist.partOne.Models.Worker;
-import gr.aueb.dist.partOne.Server.Server;
-import org.apache.commons.math3.linear.MatrixUtils;
-import org.apache.commons.math3.linear.RealMatrix;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
-import javax.xml.datatype.Duration;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class ParserUtils {
-    public static ArrayList<Server> GetServersFromText(String file, boolean isMaster){
-        ArrayList<Server> servers = new ArrayList<Server>();
+    public static Master GetServersFromText(String file){
+        Master master = new Master();
 
         BufferedReader bufferedReader = null;
         FileReader fileReader = null;
@@ -27,23 +21,22 @@ public class ParserUtils {
 
             String sCurrentLine;
             while ((sCurrentLine = bufferedReader.readLine()) != null) {
-                Server server = isMaster ? new Master() : new Worker();
-
                 StringTokenizer st = new StringTokenizer(sCurrentLine);
                 int i = 1;
                 while (st.hasMoreTokens()){
                     String token = st.nextToken();
 
                     switch (i){
-                        case 1: server.setIp(token); break;
-                        case 2: server.setPort(Integer.parseInt(token)); break;
-                        case 3: server.setId(token); break;
+                        case 1: master.setIp(token); break;
+                        case 2: master.setPort(Integer.parseInt(token)); break;
+                        case 3: master.setId(token); break;
+                        case 4: master.setHowManyWorkersToWait(Integer.parseInt(token)); break;
                     }
                     i++;
                 }
-                servers.add(server);
             }
 
+            return master;
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -53,18 +46,16 @@ public class ParserUtils {
                 if (bufferedReader != null){
                     bufferedReader.close();
                 }
-
                 if (fileReader != null){
                     fileReader.close();
                 }
             }
             catch (IOException ex) {
-
                 ex.printStackTrace();
             }
         }
 
-        return servers;
+        return null;
     }
 
     public static INDArray loadDataset(String dataset){
@@ -100,13 +91,11 @@ public class ParserUtils {
                 if (bufferedReader != null){
                     bufferedReader.close();
                 }
-
                 if (fileReader != null){
                     fileReader.close();
                 }
             }
             catch (IOException ex) {
-
                 ex.printStackTrace();
             }
         }

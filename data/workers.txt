@@ -1,4 +1,0 @@
-localhost 16520 Worker1
-localhost 16521 Worker2
-localhost 16522 Worker3
-localhost 16523 Worker4
