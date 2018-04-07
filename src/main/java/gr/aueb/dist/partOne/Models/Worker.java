@@ -86,18 +86,6 @@ public class Worker extends Server implements Runnable{
     }
 
 
-    public void CalculateYDerative(){
-        for (int i = 0; i < Y.rows(); i++) {
-            INDArray XX = PreCalculateXX(X);
-            // Get Cu
-            INDArray Cu = CalculateCiMatrix(i, C);
-            // Get the row
-            INDArray Pu = P.getRow(i);
-
-            X.putRow(i,CalculateDerivative(X,Pu,Cu,YY,l));
-
-        }
-    }
 
 
     public INDArray CalculateCiMatrix(int item, INDArray matrix) {
