@@ -128,8 +128,18 @@ public class Master extends Server{
         return Nd4j.diag(C.getRow(user));
     }
 
+    public INDArray PreCalculateXX(INDArray X) {
+        return X.transpose().mmul(X);
+    }
+
+
+    public INDArray CalculateCiMatrix(int item, INDArray matrix) {
+        return Nd4j.diag(C.getColumn(item));
+    }
+
+
     public INDArray CalculateDerivative(INDArray matrix,  INDArray Pu, INDArray Cu, INDArray YY, double l) {
-// (Cu - I)
+        // (Cu - I)
         INDArray result = (Cu.sub(Nd4j.eye(Cu.rows())));
         // Y.T(Cu - I)Y
         ParserUtils.PrintShape(matrix);
@@ -151,15 +161,16 @@ public class Master extends Server{
 
     // Ειναι ετοιμη αλλαζει το X. Φροντισε απλα να είναι στην class
     // Δεν γυρναει τιποτα
-    public void CalculateXDerative(int user){
-        INDArray YY = PreCalculateYY(Y);
-        // Get Cu
-        INDArray Cu = CalculateCuMatrix(user, C);
-        // Get the row
-        INDArray Pu = P.getRow(user);
+    public void CalculateXDerative(){
+        for (int user = 0; user < X.rows() ; user++) {
+            INDArray YY = PreCalculateYY(Y);
+            // Get Cu
+            INDArray Cu = CalculateCuMatrix(user, C);
+            // Get the row
+            INDArray Pu = P.getRow(user);
 
-        X.putRow(user,CalculateDerivative(Y,Pu,Cu,YY,l));
-
+            X.putRow(user,CalculateDerivative(Y,Pu,Cu,YY,l));
+        }
     }
 
 
@@ -173,23 +184,13 @@ public class Master extends Server{
             // Wait for Y results
             // With both X and Y
 
-            for (int i = 0; i < Y.rows(); i++) {
-                INDArray YY = PreCalculateYY(X);
-                // Get Cu
-                INDArray Cu = CalculateCuMatrix(i,C);
-                // Get the row
-                INDArray Pu = P.getColumn(i);
-
-                X.putRow(i,CalculateDerivative(Y,Pu,Cu,YY,l));
-
-            }
-
+            CalculateXDerative();
 
             double error = CalculateError();
             System.out.println(error);
             System.out.println("Iter: "+iter);
             // genika mia apisteyta mikri timi allagis metajy dyo iteration
-            if(error< 0.0000001){
+            if(error< 0.001){
 
             }
             iter++;
