@@ -1,5 +1,6 @@
 package gr.aueb.dist.partOne.Models;
 
+import com.sun.org.apache.bcel.internal.generic.GOTO;
 import gr.aueb.dist.partOne.Server.CommunicationMessage;
 import gr.aueb.dist.partOne.Server.MessageType;
 import gr.aueb.dist.partOne.Server.Server;
@@ -7,6 +8,9 @@ import gr.aueb.dist.partOne.Utils.ParserUtils;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.indexing.NDArrayIndex;
+import org.nd4j.linalg.inverse.InvertMatrix;
+import sun.applet.Main;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -38,6 +42,7 @@ public class Master extends Server{
     public Master(){}
 
     public void StartAlgorithm(){
+        availableWorkers.add(new Worker());
         // C and P matrices only need to be calculated once and passed once to the workers
         long startTime = System.nanoTime();
         CalculatePMatrix();
@@ -70,9 +75,63 @@ public class Master extends Server{
         Y_Matrices = SplitMatrix(Y, availableWorkers.size());
         // TODO: 31-Mar-18 Make it async
         DistributeYMatrixToWorkers();
+        MainLoop();
     }
 
+
+    public void MainLoop(){
+        // got here
+      int iter = 0;
+      double previousError = Double.MAX_VALUE -1;
+      while (iter<500){
+          long startime = System.nanoTime();
+          long starttimeX = System.nanoTime();
+          System.out.println("Calculating X....");
+          CalculateXDerative();
+
+          System.out.println("Calculated X in: "+ParserUtils.GetTimeInMs(starttimeX));
+
+          long starttimeY = System.nanoTime();
+          System.out.println("Calculating Y....");
+          CalculateYDerative();
+          System.out.println("Calculated Y in: "+ParserUtils.GetTimeInMs(starttimeY));
+
+          double error = CalculateError();
+          System.out.println("Error is: "+error);
+
+
+          System.out.println("Time for "+iter+" iter: "+ ParserUtils.GetTimeInMs(startime));
+          // genika mia apisteyta mikri timi allagis metajy dyo iteration
+          if(error< 0.001){
+              System.out.println("Inside Margin");
+            break;
+          }
+          // we want our error to be min in each iter
+          if(previousError < error){
+              System.out.println("Previous Error: "+ previousError);
+              System.out.println("Current Error: "+error);
+              System.out.println("False fucking iter");
+          }
+          previousError = error;
+          iter++;
+      }
+
+    }
+
+    public void CalculateYDerative(){
+        INDArray XX = PreCalculateXX(X);
+        for (int poi = 0; poi < Y.rows(); poi++) {
+            INDArray Ci = CalculateCiMatrix(poi, C);
+            INDArray Pi = P.getColumn(poi).transpose();
+            Y.putRow(poi,CalculateDerivative(X,Pi,Ci,XX,l));
+        }
+    }
+
+
+
+
     public INDArray PreCalculateYY(INDArray Y) {
+        ParserUtils.PrintShape(Y);
         return Y.transpose().mmul(Y);
     }
 
@@ -95,7 +154,6 @@ public class Master extends Server{
         // (Cu - I)
         INDArray result = (Cu.sub(Nd4j.eye(Cu.rows())));
         // Y.T(Cu - I)Y
-        ParserUtils.PrintShape(matrix);
         result = matrix.transpose().mmul(result).mmul(matrix);
 
         // Y.TY + Y.T(Cu - I)Y
@@ -103,13 +161,24 @@ public class Master extends Server{
         // Y.TY + Y.T(Cu - I)Y +λI
         result.addi(Nd4j.eye(result.rows()).mul(l));
         //invert the matrix
-        result = Nd4j.reverse(result);
-        ParserUtils.PrintShape(result);
+        result = InvertMatrix.invert(result,true);
         INDArray secondPart = Pu.mmul(Cu);
         secondPart = secondPart.mmul(matrix);
 
         INDArray finalPart = secondPart.mmul(result);
         return finalPart;
+    }
+
+    public void CalculateXDerative(){
+        INDArray YY = PreCalculateYY(Y);
+        for (int user = 0; user < X.rows() ; user++) {
+            // Get Cu
+            INDArray Cu = CalculateCuMatrix(user, C);
+            // Get the row
+            INDArray Pu = P.getRow(user);
+
+            X.putRow(user,CalculateDerivative(Y,Pu,Cu,YY,l));
+        }
     }
 
     public void getXResults(){}
@@ -254,6 +323,12 @@ public class Master extends Server{
                         YMessages.forEach((msg) -> YDist.add(msg.getxArray()));
 
                         //TODO IDIA DOULEIA OPWS PRIN
+                        // TODO: 09-Apr-18 Εδω περα θα γινει το calculate error μετα τον υπολογισμο του Υ
+                        // Ψευδοκωδικας
+                        // CalculateX();
+                        // CalculateY(X);
+                        // CalculateError;
+                        // GOTO CalculateX;
 
                         //When finished, clear it for the next loop
                         YMessages.clear();
@@ -280,6 +355,8 @@ public class Master extends Server{
         INDArray originalMatrix = ParserUtils.loadDataset("data/inputMatrix.csv");
         ParserUtils.loadDataset("data/inputMatrix.csv");
         loadOriginalMatrix(originalMatrix);
+
+        StartAlgorithm();
 
         SendBroadcastMessageToWorkers(new CommunicationMessage());
 
@@ -366,12 +443,23 @@ public class Master extends Server{
         // as possible
         int k =0;
         long starttime = System.nanoTime();
+        INDArray temp = X.mmul(Y.transpose());
+        temp.subi(P);
+        temp.muli(temp);
+        temp.muli(C);
 
-        double result = ((pow(P.sub(X.mmul(Y.transpose())), 2)).mul(C)).sumNumber().doubleValue();
+        INDArray normX = Nd4j.sum(X.mul(X),0);
+        INDArray normY = Nd4j.sum(Y.mul(Y), 0);
+        INDArray norma = normX.add(normY);
+        norma.muli(l);
 
+
+        double regu = norma.sumNumber().doubleValue();
+
+        System.out.println(regu);
 
         System.out.println("Calculated Score Time: "+ParserUtils.GetTimeInMs(starttime));
-        return result;
+        return temp.sumNumber().doubleValue() + regu;
     }
 
     public double CalculateScore(int x, int y) {

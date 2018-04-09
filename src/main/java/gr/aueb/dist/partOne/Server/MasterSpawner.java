@@ -8,5 +8,6 @@ public class MasterSpawner {
         Master master = ParserUtils.GetServersFromText("data/master.txt");
         if(master == null) return;
         master.Initialize();
+        master.StartAlgorithm();
     }
 }
