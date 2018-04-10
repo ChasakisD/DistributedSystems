@@ -3,6 +3,8 @@ package gr.aueb.dist.partOne.Server;
 import gr.aueb.dist.partOne.Models.Worker;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.management.ManagementFactory;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -20,12 +22,6 @@ public class Server implements Runnable{
     private Socket socketConn = null;
 
     protected Server() {}
-
-    public Server(String id, String ip, int port) {
-        this.id = id;
-        this.ip = ip;
-        this.port = port;
-    }
 
     public void run(){}
 
@@ -60,6 +56,28 @@ public class Server implements Runnable{
                 System.out.println(getName() + " " + getId() + " " + getIp() + ":" + getPort() + " server closed!");
             }catch(IOException ignored){}
         }
+    }
+
+    public void CloseConnections(ObjectInputStream in, ObjectOutputStream out){
+        try{
+            if (in != null) {
+                in.close();
+            }
+            if (out != null){
+                out.close();
+            }
+        }
+        catch(IOException ignored){}
+    }
+
+    public void CloseConnections(Socket socket, ObjectInputStream in, ObjectOutputStream out){
+        try{
+            if (socket != null){
+                socket.close();
+            }
+            CloseConnections(in, out);
+        }
+        catch(IOException ignored){}
     }
 
     /* System Information */

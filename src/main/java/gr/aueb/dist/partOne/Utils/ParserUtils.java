@@ -7,6 +7,7 @@ import org.nd4j.linalg.factory.Nd4j;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class ParserUtils {
@@ -42,17 +43,7 @@ public class ParserUtils {
             e.printStackTrace();
         }
         finally {
-            try {
-                if (bufferedReader != null){
-                    bufferedReader.close();
-                }
-                if (fileReader != null){
-                    fileReader.close();
-                }
-            }
-            catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            CloseReaders(bufferedReader, fileReader);
         }
 
         return null;
@@ -87,21 +78,44 @@ public class ParserUtils {
             e.printStackTrace();
         }
         finally {
-            try {
-                if (bufferedReader != null){
-                    bufferedReader.close();
-                }
-                if (fileReader != null){
-                    fileReader.close();
-                }
-            }
-            catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            CloseReaders(bufferedReader, fileReader);
         }
         System.out.println(matrix.getDouble(0,149));
 
         return matrix;
+    }
+
+    private static void CloseReaders(BufferedReader bufferedReader, FileReader fileReader) {
+        try {
+            if (bufferedReader != null){
+                bufferedReader.close();
+            }
+            if (fileReader != null){
+                fileReader.close();
+            }
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void DistributeNumberOfCores(int totalWorkers, int coresPerWorker, int totalCores, int totalRows){
+        int currentIndex = -1;
+        int rowsPerCore = totalRows / totalCores;
+        System.out.println(rowsPerCore + " Rows per Core");
+        for(int i = 0; i < totalWorkers; i++){
+            int workerRows = rowsPerCore * coresPerWorker;
+
+            if(i == totalWorkers - 1){
+                if(currentIndex != totalRows){
+                    System.out.println("Last Loop From User: " + (currentIndex + 1) + " to user: " + (totalRows-1));
+                }
+            }else{
+                int prevIndex = currentIndex + 1;
+                currentIndex += workerRows;
+                System.out.println("From User: " + prevIndex + " to user: " + currentIndex);
+            }
+        }
     }
 
     public static void PrintShape(INDArray array){

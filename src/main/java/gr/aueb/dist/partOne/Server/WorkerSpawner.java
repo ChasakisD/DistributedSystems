@@ -14,10 +14,10 @@ public class WorkerSpawner {
             currentIp = InetAddress.getLocalHost().getHostAddress();
         }catch(Exception e) { return; }
 
-        System.out.println("Set the name of the worker (Current IP: " + currentIp + "):");
+        System.out.println("Set the name of the worker");
         String name = in.nextLine();
 
-        System.out.println("Set the ip the worker should listen to:");
+        System.out.println("Set the ip the worker should listen to (Current IP: " + currentIp + " ):");
         String ip = in.nextLine();
 
         System.out.println("Set the port the worker should listen to:");

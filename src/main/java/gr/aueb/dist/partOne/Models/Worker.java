@@ -6,21 +6,22 @@ import gr.aueb.dist.partOne.Server.Server;
 import gr.aueb.dist.partOne.Utils.ParserUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.cpu.nativecpu.NDArray;
 import org.nd4j.linalg.factory.Nd4j;
+import org.nd4j.linalg.inverse.InvertMatrix;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class Worker extends Server{
     private int cpuCores;
     private int ramSize;
 
     private INDArray X, Y, P, C;
-    private double l;
-    private final static int a = 40;
+
+    private final static double L = 0.1;
 
     public Worker() {}
 
@@ -28,9 +29,11 @@ public class Worker extends Server{
      * Runnable Implementation
      */
     public synchronized void run() {
+        ObjectInputStream in = null;
+        ObjectOutputStream out = null;
         try{
-            ObjectOutputStream out = new ObjectOutputStream(getSocketConn().getOutputStream());
-            ObjectInputStream in = new ObjectInputStream(getSocketConn().getInputStream());
+            out = new ObjectOutputStream(getSocketConn().getOutputStream());
+            in = new ObjectInputStream(getSocketConn().getInputStream());
 
             CommunicationMessage message = (CommunicationMessage) in.readObject();
 
@@ -41,20 +44,35 @@ public class Worker extends Server{
                 case TRANSFER_CP:{
                     C = message.getcArray();
                     P = message.getpArray();
+                    X = message.getxArray();
+                    Y = message.getyArray();
                     System.out.println("C Array: " + C.rows() + " " + C.columns());
                     System.out.println("P Array: " + P.rows() + " " + P.columns());
+                    System.out.println("X Array: " + X.rows() + " " + X.columns());
+                    System.out.println("Y Array: " + Y.rows() + " " + Y.columns());
                     return;
                 }
                 case CALCULATE_X:{
-                    int fromUser = message.getFromUser();
-                    int toUser = message.getToUser();
+                    Y = message.getyArray();
+                    System.out.println("Got Y From Master: " + Y.rows());
 
-                    for(int i = fromUser; i <= toUser; i++){
-
-                    }
+                    System.out.println("Going to calculate from :" + message.getFromUser() + " to " + message.getToUser() + " From X");
+                    CalculateXDerivative(message.getFromUser(), message.getToUser());
+                    result.setType(MessageType.X_CALCULATED);
+                    result.setFromUser(message.getFromUser());
+                    result.setToUser(message.getToUser());
+                    result.setxArray(X);
                     break;
                 }
                 case CALCULATE_Y:{
+                    X = message.getxArray();
+                    System.out.println("Got X From Master: " + X.rows());
+
+                    CalculateYDerivative(message.getFromUser(), message.getToUser());
+                    result.setType(MessageType.Y_CALCULATED);
+                    result.setFromUser(message.getFromUser());
+                    result.setToUser(message.getToUser());
+                    result.setyArray(Y);
                     break;
                 }
                 default:{
@@ -62,11 +80,12 @@ public class Worker extends Server{
                 }
             }
 
-
-
-            System.out.println("Received Message From: " + message.getServerName());
+            SendResultsToMaster(result);
         }
         catch (ClassNotFoundException | IOException ignored) {}
+        finally {
+            this.CloseConnections(in, out);
+        }
     }
 
     /**
@@ -88,13 +107,55 @@ public class Worker extends Server{
         System.out.println("I did what i must do dear Master!");
     }
 
-    public INDArray CalculateCuMatrix(int user, INDArray C) {
-        // TODO: 04-Apr-18 Ρωτα αν το γαμημενο dimension που λεει στο paper ειναι αυτο. 
+    private INDArray CalculateCuMatrix(int user, INDArray C) {
         return Nd4j.diag(C.getRow(user));
     }
 
+    private INDArray CalculateCiMatrix(int item, INDArray C) {
+        return Nd4j.diag(C.getColumn(item));
+    }
 
-    public INDArray CalculateDerivative(INDArray matrix,  INDArray Pu, INDArray Cu, INDArray YY, double l) {
+    private INDArray PreCalculateXX(INDArray X) {
+        return X.transpose().mmul(X);
+    }
+
+    private INDArray PreCalculateYY(INDArray Y) {
+        ParserUtils.PrintShape(Y);
+        return Y.transpose().mmul(Y);
+    }
+    public RealMatrix CalculateXU(int x, RealMatrix matrixX, RealMatrix matrixU) {
+        return null;
+    }
+
+    public RealMatrix CalculateYI(int x, RealMatrix matrixY, RealMatrix matrixI) {
+        return null;
+    }
+
+    private void CalculateXDerivative(int start, int end){
+        X = Nd4j.zeros((end-start+1), X.columns());
+        int startingIndex = 0;
+        INDArray YY = PreCalculateYY(Y);
+        for (int user = start; user <= end; user++) {
+            INDArray Cu = CalculateCuMatrix(user, C);
+            INDArray Pu = P.getRow(user);
+            X.putRow(startingIndex,CalculateDerivative(Y, Pu, Cu, YY, L));
+            startingIndex++;
+        }
+    }
+
+    private void CalculateYDerivative(int start, int end){
+        Y = Nd4j.zeros((end-start+1), Y.columns());
+        int startingIndex = 0;
+        INDArray XX = PreCalculateXX(X);
+        for (int poi = start; poi <= end; poi++) {
+            INDArray Ci = CalculateCiMatrix(poi, C);
+            INDArray Pi = P.getColumn(poi).transpose();
+            Y.putRow(startingIndex, CalculateDerivative(X, Pi, Ci, XX, L));
+            startingIndex++;
+        }
+    }
+
+    private INDArray CalculateDerivative(INDArray matrix,  INDArray Pu, INDArray Cu, INDArray YY, double l) {
         // (Cu - I)
         INDArray result = (Cu.sub(Nd4j.eye(Cu.rows())));
         // Y.T(Cu - I)Y
@@ -105,55 +166,14 @@ public class Worker extends Server{
         // Y.TY + Y.T(Cu - I)Y +λI
         result.addi(Nd4j.eye(result.rows()).mul(l));
         //invert the matrix
-        result = Nd4j.reverse(result);
-        ParserUtils.PrintShape(result);
-        INDArray secondPart = Pu.mmul(Cu    );
+        result = InvertMatrix.invert(result,true);
+        INDArray secondPart = Pu.mmul(Cu);
         secondPart = secondPart.mmul(matrix);
 
-        INDArray finalPart = secondPart.mmul(result);
-        return finalPart;
+        return secondPart.mmul(result);
     }
 
-    public INDArray CalculateCiMatrix(int item, INDArray matrix) {
-        return Nd4j.diag(C.getColumn(item));
-
-    }
-
-
-    public INDArray PreCalculateYY(INDArray Y) {
-        return Y.transpose().mmul(Y);
-    }
-
-
-    public INDArray PreCalculateXX(INDArray X) {
-        return X.transpose().mmul(X);
-    }
-
-    public RealMatrix CalculateXU(int x, RealMatrix matrixX, RealMatrix matrixU) {
-        return null;
-    }
-
-    public RealMatrix CalculateYI(int x, RealMatrix matrixY, RealMatrix matrixI) {
-        return null;
-    }
-
-
-    // Ειναι ετοιμη αλλαζει το X. Φροντισε απλα να είναι στην class
-    // Δεν γυρναει τιποτα
-    public void CalculateXDerative(){
-        for (int user = 0; user < X.rows() ; user++) {
-            INDArray YY = PreCalculateYY(Y);
-            // Get Cu
-            INDArray Cu = CalculateCuMatrix(user, C);
-            // Get the row
-            INDArray Pu = P.getRow(user);
-
-            X.putRow(user,CalculateDerivative(Y,Pu,Cu,YY,l));
-        }
-    }
-
-
-    public void SendResultsToMaster(CommunicationMessage message) {
+    private void SendResultsToMaster(CommunicationMessage message) {
         ObjectInputStream in = null;
         ObjectOutputStream out = null;
         Socket socket = null;
@@ -171,18 +191,7 @@ public class Worker extends Server{
             out.flush();
         }catch(IOException ignored){}
         finally {
-            try{
-                if (in != null) {
-                    in.close();
-                }
-                if (out != null){
-                    out.close();
-                }
-                if (socket != null){
-                    socket.close();
-                }
-            }
-            catch(IOException ignored){}
+            this.CloseConnections(socket, in, out);
         }
     }
 
