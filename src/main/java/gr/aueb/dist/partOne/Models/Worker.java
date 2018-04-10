@@ -213,4 +213,14 @@ public class Worker extends Server implements IWorker{
     public void setInstanceRamSize(int ramSize) {
         this.ramSize = ramSize;
     }
+
+    @Override
+    public String toString() {
+        return "**************************************" +
+                "\n" + getName() + ": " + getId() +
+                "\n" + "IP: " + getIp() + ":" + getPort() +
+                "\n" + "Available CPU Cores: " + getInstanceCpuCores() +
+                "\n" + "Available Ram Size " + getInstanceRamSize() + "GB" +
+                "\n" + "**************************************";
+    }
 }

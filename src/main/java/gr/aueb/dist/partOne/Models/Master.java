@@ -143,7 +143,7 @@ public class Master extends Server implements IMaster{
     private void StartMatrixFactorization(){
         totalCores = availableWorkers
                 .stream()
-                .map(Server::getCpuCores)
+                .map(Worker::getInstanceCpuCores)
                 .reduce(0, (a, b) -> a+b);
 
         System.out.println("Number Of Workers: " + howManyWorkersToWait + " Workers");
@@ -204,9 +204,11 @@ public class Master extends Server implements IMaster{
 
         System.out.println("***********************************************");
 
+        HashMap<Worker, CommunicationMessage> messages = new HashMap<>();
+
         for(int i = 0; i < availableWorkers.size(); i++){
             Worker worker = availableWorkers.get(i);
-            int workerRows = rowsPerCore * worker.getCpuCores();
+            int workerRows = rowsPerCore * worker.getInstanceCpuCores();
 
             CommunicationMessage xMessage = new CommunicationMessage();
             xMessage.setType(MessageType.CALCULATE_Y);
@@ -225,8 +227,10 @@ public class Master extends Server implements IMaster{
                 System.out.println("Distributing X to " + worker.getId() + " from " + (startIndex + 1) + " to " + currentIndex);
             }
 
-            SendMessageToWorker(xMessage, worker);
+            messages.put(worker, xMessage);
         }
+
+        availableWorkers.parallelStream().forEach(worker -> SendMessageToWorker(messages.get(worker), worker));
 
         System.out.println("***********************************************");
     }
@@ -237,9 +241,11 @@ public class Master extends Server implements IMaster{
 
         System.out.println("***********************************************");
 
+        HashMap<Worker, CommunicationMessage> messages = new HashMap<>();
+
         for(int i = 0; i < availableWorkers.size(); i++){
             Worker worker = availableWorkers.get(i);
-            int workerRows = rowsPerCore * worker.getCpuCores();
+            int workerRows = rowsPerCore * worker.getInstanceCpuCores();
 
             CommunicationMessage xMessage = new CommunicationMessage();
             xMessage.setType(MessageType.CALCULATE_X);
@@ -258,16 +264,16 @@ public class Master extends Server implements IMaster{
                 System.out.println("Distributing Y to " + worker.getId() + " from " + (startIndex + 1) + " to " + currentIndex);
             }
 
-            SendMessageToWorker(xMessage, worker);
+            messages.put(worker, xMessage);
         }
+
+        availableWorkers.parallelStream().forEach(worker -> SendMessageToWorker(messages.get(worker), worker));
 
         System.out.println("***********************************************");
     }
 
     public void SendBroadcastMessageToWorkers(CommunicationMessage message) {
-        for(Worker worker : availableWorkers){
-            SendMessageToWorker(message, worker);
-        }
+        availableWorkers.parallelStream().forEach(worker -> SendMessageToWorker(message, worker));
     }
 
     public void SendMessageToWorker(CommunicationMessage message, Worker worker) {
