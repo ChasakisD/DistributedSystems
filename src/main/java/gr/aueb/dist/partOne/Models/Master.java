@@ -104,7 +104,7 @@ public class Master extends Server implements IMaster{
                         }
 
                         System.out.println("***********************************************");
-                        System.out.println("Loop No. : " + currentIteration);
+                        System.out.println("Loop No.: " + currentIteration);
                         System.out.println("Error: " + error);
                         System.out.println("Loop Elapsed Time: " +
                                 ParserUtils.GetTimeInMs(LoopCalculationStartTime));
@@ -245,8 +245,6 @@ public class Master extends Server implements IMaster{
             xMessage.setType(MessageType.CALCULATE_X);
             xMessage.setYArray(Y);
             xMessage.setFromUser(currentIndex + 1);
-
-            System.out.println(worker.getName() + " starts on " + (currentIndex + 1) + " user!");
 
             if(i == availableWorkers.size() - 1){
                 if(currentIndex != X.rows()){
