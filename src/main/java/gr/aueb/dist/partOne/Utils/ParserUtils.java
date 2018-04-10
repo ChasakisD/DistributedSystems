@@ -49,16 +49,14 @@ public class ParserUtils {
         return null;
     }
 
-    public static INDArray loadDataset(String dataset){
+    public static INDArray loadDataSet(String dataSet){
         // the index start from zero to 764. So the dimension will be 765
         INDArray matrix = Nd4j.zeros(765, 1964);
 
-
-        System.out.println(matrix.getDouble(0,149));
         BufferedReader bufferedReader = null;
         FileReader fileReader = null;
         try {
-            fileReader = new FileReader(dataset);
+            fileReader = new FileReader(dataSet);
             bufferedReader = new BufferedReader(fileReader);
 
             String sCurrentLine;
@@ -70,7 +68,6 @@ public class ParserUtils {
                 int column = Integer.parseInt(tokenizer.nextToken());
                 int value = Integer.parseInt(tokenizer.nextToken());
                 matrix.put(row,column,value);
-
             }
 
         }
@@ -80,7 +77,6 @@ public class ParserUtils {
         finally {
             CloseReaders(bufferedReader, fileReader);
         }
-        System.out.println(matrix.getDouble(0,149));
 
         return matrix;
     }

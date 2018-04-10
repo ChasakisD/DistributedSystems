@@ -1,12 +1,11 @@
 package gr.aueb.dist.partOne.Models;
 
+import gr.aueb.dist.partOne.Abstractions.IWorker;
 import gr.aueb.dist.partOne.Server.CommunicationMessage;
 import gr.aueb.dist.partOne.Server.MessageType;
 import gr.aueb.dist.partOne.Server.Server;
 import gr.aueb.dist.partOne.Utils.ParserUtils;
-import org.apache.commons.math3.linear.RealMatrix;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.cpu.nativecpu.NDArray;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.inverse.InvertMatrix;
 
@@ -15,7 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class Worker extends Server{
+public class Worker extends Server implements IWorker{
     private int cpuCores;
     private int ramSize;
 
@@ -38,41 +37,38 @@ public class Worker extends Server{
             CommunicationMessage message = (CommunicationMessage) in.readObject();
 
             CommunicationMessage result = new CommunicationMessage();
-            result.setServerName(getName());
+            result.setServerName(getId());
             result.setRamGBSize((int)getAvailableRamSizeInGB());
             switch (message.getType()){
-                case TRANSFER_CP:{
-                    C = message.getcArray();
-                    P = message.getpArray();
-                    X = message.getxArray();
-                    Y = message.getyArray();
-                    System.out.println("C Array: " + C.rows() + " " + C.columns());
-                    System.out.println("P Array: " + P.rows() + " " + P.columns());
-                    System.out.println("X Array: " + X.rows() + " " + X.columns());
-                    System.out.println("Y Array: " + Y.rows() + " " + Y.columns());
+                case TRANSFER_MATRICES:{
+                    C = message.getCArray();
+                    P = message.getPArray();
+                    X = message.getXArray();
+                    Y = message.getYArray();
+
+                    System.out.println("Got the matrices from master!");
                     return;
                 }
                 case CALCULATE_X:{
-                    Y = message.getyArray();
-                    System.out.println("Got Y From Master: " + Y.rows());
-
-                    System.out.println("Going to calculate from :" + message.getFromUser() + " to " + message.getToUser() + " From X");
+                    Y = message.getYArray();
                     CalculateXDerivative(message.getFromUser(), message.getToUser());
                     result.setType(MessageType.X_CALCULATED);
                     result.setFromUser(message.getFromUser());
                     result.setToUser(message.getToUser());
-                    result.setxArray(X);
+                    result.setXArray(X);
+
+                    System.out.println("Finished X Calculation from :" + message.getFromUser() + " to " + message.getToUser());
                     break;
                 }
                 case CALCULATE_Y:{
-                    X = message.getxArray();
-                    System.out.println("Got X From Master: " + X.rows());
-
+                    X = message.getXArray();
                     CalculateYDerivative(message.getFromUser(), message.getToUser());
                     result.setType(MessageType.Y_CALCULATED);
                     result.setFromUser(message.getFromUser());
                     result.setToUser(message.getToUser());
-                    result.setyArray(Y);
+                    result.setYArray(Y);
+
+                    System.out.println("Finished Y Calculation from :" + message.getFromUser() + " to " + message.getToUser());
                     break;
                 }
                 default:{
@@ -107,73 +103,24 @@ public class Worker extends Server{
         System.out.println("I did what i must do dear Master!");
     }
 
-    private INDArray CalculateCuMatrix(int user, INDArray C) {
+    public INDArray CalculateCuMatrix(int user, INDArray C) {
         return Nd4j.diag(C.getRow(user));
     }
 
-    private INDArray CalculateCiMatrix(int item, INDArray C) {
+    public INDArray CalculateCiMatrix(int item, INDArray C) {
         return Nd4j.diag(C.getColumn(item));
     }
 
-    private INDArray PreCalculateXX(INDArray X) {
+    public INDArray PreCalculateXX(INDArray X) {
         return X.transpose().mmul(X);
     }
 
-    private INDArray PreCalculateYY(INDArray Y) {
+    public INDArray PreCalculateYY(INDArray Y) {
         ParserUtils.PrintShape(Y);
         return Y.transpose().mmul(Y);
     }
-    public RealMatrix CalculateXU(int x, RealMatrix matrixX, RealMatrix matrixU) {
-        return null;
-    }
 
-    public RealMatrix CalculateYI(int x, RealMatrix matrixY, RealMatrix matrixI) {
-        return null;
-    }
-
-    private void CalculateXDerivative(int start, int end){
-        X = Nd4j.zeros((end-start+1), X.columns());
-        int startingIndex = 0;
-        INDArray YY = PreCalculateYY(Y);
-        for (int user = start; user <= end; user++) {
-            INDArray Cu = CalculateCuMatrix(user, C);
-            INDArray Pu = P.getRow(user);
-            X.putRow(startingIndex,CalculateDerivative(Y, Pu, Cu, YY, L));
-            startingIndex++;
-        }
-    }
-
-    private void CalculateYDerivative(int start, int end){
-        Y = Nd4j.zeros((end-start+1), Y.columns());
-        int startingIndex = 0;
-        INDArray XX = PreCalculateXX(X);
-        for (int poi = start; poi <= end; poi++) {
-            INDArray Ci = CalculateCiMatrix(poi, C);
-            INDArray Pi = P.getColumn(poi).transpose();
-            Y.putRow(startingIndex, CalculateDerivative(X, Pi, Ci, XX, L));
-            startingIndex++;
-        }
-    }
-
-    private INDArray CalculateDerivative(INDArray matrix,  INDArray Pu, INDArray Cu, INDArray YY, double l) {
-        // (Cu - I)
-        INDArray result = (Cu.sub(Nd4j.eye(Cu.rows())));
-        // Y.T(Cu - I)Y
-        result = matrix.transpose().mmul(result).mmul(matrix);
-
-        // Y.TY + Y.T(Cu - I)Y
-        result.addi(YY);
-        // Y.TY + Y.T(Cu - I)Y +λI
-        result.addi(Nd4j.eye(result.rows()).mul(l));
-        //invert the matrix
-        result = InvertMatrix.invert(result,true);
-        INDArray secondPart = Pu.mmul(Cu);
-        secondPart = secondPart.mmul(matrix);
-
-        return secondPart.mmul(result);
-    }
-
-    private void SendResultsToMaster(CommunicationMessage message) {
+    public void SendResultsToMaster(CommunicationMessage message) {
         ObjectInputStream in = null;
         ObjectOutputStream out = null;
         Socket socket = null;
@@ -195,6 +142,62 @@ public class Worker extends Server{
         }
     }
 
+    /**
+     * Helper Methods
+     */
+    public void CalculateXDerivative(int startIndex, int endIndex){
+        int startingIndex = 0;
+        int length = endIndex - startIndex + 1;
+
+        X = Nd4j.zeros(length, X.columns());
+
+        INDArray YY = PreCalculateYY(Y);
+
+        for (int user = startIndex; user <= endIndex; user++) {
+            INDArray Cu = CalculateCuMatrix(user, C);
+            INDArray Pu = P.getRow(user);
+            X.putRow(startingIndex,CalculateDerivative(Y, Pu, Cu, YY));
+            startingIndex++;
+        }
+    }
+
+    public void CalculateYDerivative(int startIndex, int endIndex){
+        int startingIndex = 0;
+        int length = endIndex - startIndex + 1;
+
+        Y = Nd4j.zeros(length, Y.columns());
+
+        INDArray XX = PreCalculateXX(X);
+
+        for (int poi = startIndex; poi <= endIndex; poi++) {
+            INDArray Ci = CalculateCiMatrix(poi, C);
+            INDArray Pi = P.getColumn(poi).transpose();
+            Y.putRow(startingIndex, CalculateDerivative(X, Pi, Ci, XX));
+            startingIndex++;
+        }
+    }
+
+    public INDArray CalculateDerivative(INDArray matrix, INDArray Pu, INDArray Cu, INDArray YY) {
+        // (Cu - I)
+        INDArray result = (Cu.sub(Nd4j.eye(Cu.rows())));
+        // Y.T(Cu - I)Y
+        result = matrix.transpose().mmul(result).mmul(matrix);
+        // Y.TY + Y.T(Cu - I)Y
+        result.addi(YY);
+        // Y.TY + Y.T(Cu - I)Y +λI
+        result.addi(Nd4j.eye(result.rows()).mul(L));
+        //invert the matrix
+        result = InvertMatrix.invert(result,true);
+
+        return Pu
+                .mmul(Cu)
+                .mmul(matrix)
+                .mmul(result);
+    }
+
+    /**
+     * Getters and Setters
+     */
     public int getInstanceCpuCores() {
         return cpuCores;
     }

@@ -1,6 +1,7 @@
 package gr.aueb.dist.partOne.Server;
 
 import gr.aueb.dist.partOne.Models.Worker;
+import gr.aueb.dist.partOne.Utils.NetworkUtils;
 
 import java.net.InetAddress;
 import java.util.Scanner;
@@ -13,14 +14,15 @@ public class WorkerSpawner {
         try{
             currentIp = InetAddress.getLocalHost().getHostAddress();
         }catch(Exception e) { return; }
+        int availPort = NetworkUtils.GetNextAvailablePort();
 
         System.out.println("Set the name of the worker");
         String name = in.nextLine();
 
-        System.out.println("Set the ip the worker should listen to (Current IP: " + currentIp + " ):");
+        System.out.println("Set the ip the worker should listen to (Current IP: " + currentIp + "):");
         String ip = in.nextLine();
 
-        System.out.println("Set the port the worker should listen to:");
+        System.out.println("Set the port the worker should listen to (Available Port: " + availPort + "):");
         int port = in.nextInt();
 
         Worker worker = new Worker();

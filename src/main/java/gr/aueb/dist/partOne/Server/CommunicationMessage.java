@@ -21,6 +21,8 @@ public class CommunicationMessage implements Serializable {
     private int cpuCores;
     private int ramGBSize;
 
+    private long executionTime;
+
     public CommunicationMessage() {}
 
     public MessageType getType() {
@@ -31,35 +33,35 @@ public class CommunicationMessage implements Serializable {
         this.type = type;
     }
 
-    public INDArray getcArray() {
+    public INDArray getCArray() {
         return cArray;
     }
 
-    public void setcArray(INDArray cArray) {
+    public void setCArray(INDArray cArray) {
         this.cArray = cArray;
     }
 
-    public INDArray getpArray() {
+    public INDArray getPArray() {
         return pArray;
     }
 
-    public void setpArray(INDArray pArray) {
+    public void setPArray(INDArray pArray) {
         this.pArray = pArray;
     }
 
-    public INDArray getxArray() {
+    public INDArray getXArray() {
         return xArray;
     }
 
-    public void setxArray(INDArray xArray) {
+    public void setXArray(INDArray xArray) {
         this.xArray = xArray;
     }
 
-    public INDArray getyArray() {
+    public INDArray getYArray() {
         return yArray;
     }
 
-    public void setyArray(INDArray yArray) {
+    public void setYArray(INDArray yArray) {
         this.yArray = yArray;
     }
 
@@ -117,5 +119,13 @@ public class CommunicationMessage implements Serializable {
 
     public void setRamGBSize(int ramGBSize) {
         this.ramGBSize = ramGBSize;
+    }
+
+    public long getExecutionTime() {
+        return executionTime;
+    }
+
+    public void setExecutionTime(long executionTime) {
+        this.executionTime = executionTime;
     }
 }

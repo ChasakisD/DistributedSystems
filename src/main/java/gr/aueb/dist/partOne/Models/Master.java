@@ -1,111 +1,40 @@
 package gr.aueb.dist.partOne.Models;
 
+import gr.aueb.dist.partOne.Abstractions.IMaster;
 import gr.aueb.dist.partOne.Server.CommunicationMessage;
 import gr.aueb.dist.partOne.Server.MessageType;
 import gr.aueb.dist.partOne.Server.Server;
+import gr.aueb.dist.partOne.Utils.MatrixHelpers;
 import gr.aueb.dist.partOne.Utils.ParserUtils;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
+import org.nd4j.linalg.ops.transforms.Transforms;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
-import static org.nd4j.linalg.ops.transforms.Transforms.*;
-
-public class Master extends Server{
+public class Master extends Server implements IMaster{
+    private int totalCores;
     private int currentIteration;
-    private double latestError;
-
     private int howManyWorkersToWait;
-    private ArrayList<Worker> availableWorkers;
 
+    private double latestError;
+    private long LoopCalculationStartTime;
+
+    private ArrayList<Worker> availableWorkers;
     private ArrayList<CommunicationMessage> XMessages;
     private ArrayList<CommunicationMessage> YMessages;
 
     private INDArray R, P, C ,X ,Y;
-
-    private long LoopCalculationStartTime;
-    private long XArrayCalculationStartTime;
-    private long YArrayCalculationStartTime;
 
     private final static int MAX_ITERATIONS = 200;
     private final static double L = 0.1;
     private final static double A = 40;
 
     public Master(){}
-
-    public void StartAlgorithm(){
-        // C and P matrices only need to be calculated once and passed once to the workers
-        long startTime = System.nanoTime();
-        CalculatePMatrix();
-        System.out.println("Calculated P Matrix: "+ParserUtils.GetTimeInMs(startTime)+" MilliSecond");
-
-        startTime = System.nanoTime();
-        CalculateCMatrix();
-        System.out.println("Calculated C Matrix: "+ParserUtils.GetTimeInMs(startTime)+" MilliSecond");
-
-        // let's get the K << max{U,I}
-        // meaning a number much smaller than the biggest column or dimension
-        int BiggestDimension = R.columns() > R.rows()?
-                                R.columns(): R.rows();
-
-        int K = BiggestDimension / 10;
-
-        GenerateX(K);
-        GenerateY(K);
-
-        DistributeCPMatricesToWorkers();
-
-        DistributeYMatrixToWorkers();
-
-        LoopCalculationStartTime = System.nanoTime();
-        XArrayCalculationStartTime = System.nanoTime();
-    }
-
-    private void GenerateX(int K){
-        // Create the matrix
-        X = Nd4j.zeros(R.rows(), K);
-        Random rand = new Random();
-        // Fill it with random values between zero and 1
-        for (int u = 0; u < X.rows(); u++) {
-            for (int k = 0; k < X.columns(); k++) {
-                // Enter a random value between 0 and 1
-                X.putScalar(u,k,ThreadLocalRandom.current().nextDouble(0, 1));
-            }
-        }
-    }
-
-    private void GenerateY(int K){
-        // Initialize the Y matrix
-        Y = Nd4j.zeros(R.columns(), K);
-        Random rand = new Random();
-        // Fill it with random values between zero and 1
-        for (int u = 0; u < Y.rows(); u++) {
-            for (int k = 0; k < Y.columns(); k++) {
-                // enter a random value between 0 and 1
-                Y.putScalar(u,k,ThreadLocalRandom.current().nextDouble(0, 1));
-            }
-        }
-    }
-
-    private void LoadOriginalMatrix(INDArray R){
-        this.R = R;
-        C = Nd4j.zeros(R.rows(), R.columns());
-        P = Nd4j.zeros(R.rows(),R.columns());
-    }
-
-    private INDArray CombineMatrix(LinkedList<INDArray> Temp) {
-        /* Initialize the matrix */
-        INDArray newMatrix = Nd4j.zeros(0,0);
-        for (INDArray matrix: Temp) {
-            // concat them one on top of the other
-            newMatrix = Nd4j.vstack(newMatrix,matrix);
-        }
-        return newMatrix;
-    }
 
     /**
      * Runnable Implementation
@@ -127,11 +56,10 @@ public class Master extends Server{
                     worker.setInstanceRamSize(message.getRamGBSize());
                     availableWorkers.add(worker);
 
-                    System.out.println("Received: " + worker.toString());
+                    System.out.println(worker.toString());
 
                     if(availableWorkers.size() >= howManyWorkersToWait){
-                        System.out.println("Number Of Workers: " + howManyWorkersToWait);
-                        StartAlgorithm();
+                        StartMatrixFactorization();
                     }
 
                     break;
@@ -139,22 +67,15 @@ public class Master extends Server{
                 case X_CALCULATED:{
                     XMessages.add(message);
                     if(XMessages.size() >= howManyWorkersToWait){
-                        System.out.println("Calculated X in: " +
-                                ParserUtils.GetTimeInMs(XArrayCalculationStartTime));
-
                         LinkedList<INDArray> XDist = new LinkedList<>();
 
                         //Ascending sort of fromUser
                         XMessages.sort(Comparator.comparingInt(CommunicationMessage::getFromUser));
-                        XMessages.forEach((msg) -> XDist.add(msg.getxArray()));
+                        XMessages.forEach((msg) -> XDist.add(msg.getXArray()));
 
-                        X = CombineMatrix(XDist);
-
-                        System.out.println("New X rows: " + X.rows());
+                        X = Nd4j.vstack(XDist);
 
                         DistributeXMatrixToWorkers();
-
-                        YArrayCalculationStartTime = System.nanoTime();
 
                         //When finished, clear it for the next loop
                         XMessages.clear();
@@ -165,33 +86,33 @@ public class Master extends Server{
                 case Y_CALCULATED:{
                     YMessages.add(message);
                     if(YMessages.size() >= howManyWorkersToWait){
-                        System.out.println("Calculated Y in: " +
-                                ParserUtils.GetTimeInMs(YArrayCalculationStartTime));
-                        System.out.println("Calculated X and Y in: " +
-                                ParserUtils.GetTimeInMs(LoopCalculationStartTime));
-
                         LinkedList<INDArray> YDist = new LinkedList<>();
 
                         //Ascending sort of fromUser
                         YMessages.sort(Comparator.comparingInt(CommunicationMessage::getFromUser));
-                        YMessages.forEach((msg) -> YDist.add(msg.getxArray()));
+                        YMessages.forEach((msg) -> YDist.add(msg.getYArray()));
 
-                        Y = CombineMatrix(YDist);
-
-                        System.out.println("New Y rows: " + Y.rows());
+                        Y = Nd4j.vstack(YDist);
 
                         double error = CalculateError();
-                        System.out.println("Error is: "+error);
 
-                        if(error< 0.001){
-                            System.out.println("Inside Margin");
-                            return;
-                        }
                         // we want our error to be min in each iteration
                         if(latestError < error){
                             System.out.println("Previous Error: " + latestError);
                             System.out.println("Current Error: " + error);
                             System.out.println("False Iteration");
+                        }
+
+                        System.out.println("***********************************************");
+                        System.out.println("Loop No. : " + currentIteration);
+                        System.out.println("Error: " + error);
+                        System.out.println("Loop Elapsed Time: " +
+                                ParserUtils.GetTimeInMs(LoopCalculationStartTime));
+                        System.out.println("***********************************************");
+
+                        if(error< 0.001){
+                            System.out.println("Error is less than 0.001. Time to finish!");
+                            return;
                         }
 
                         latestError = error;
@@ -203,9 +124,7 @@ public class Master extends Server{
                         }
 
                         DistributeYMatrixToWorkers();
-
                         LoopCalculationStartTime = System.nanoTime();
-                        XArrayCalculationStartTime = System.nanoTime();
 
                         //When finished, clear it for the next loop
                         YMessages.clear();
@@ -221,6 +140,35 @@ public class Master extends Server{
         catch (ClassNotFoundException | IOException ignored) {}
     }
 
+    private void StartMatrixFactorization(){
+        totalCores = availableWorkers
+                .stream()
+                .map(Server::getCpuCores)
+                .reduce(0, (a, b) -> a+b);
+
+        System.out.println("Number Of Workers: " + howManyWorkersToWait + " Workers");
+        System.out.println("Total Cores: " + totalCores + " Cores");
+
+        // C and P matrices only need to be calculated once and passed once to the workers
+        C = (R.mul(A)).add(1);
+        P = Transforms.greaterThanOrEqual(R, Nd4j.zeros(R.rows(),R.columns()));
+
+        // let's get the K << max{U,I}
+        // meaning a number much smaller than the biggest column or dimension
+        int BiggestDimension = R.columns() > R.rows()?
+                R.columns() : R.rows();
+
+        int K = BiggestDimension / 10;
+
+        X = MatrixHelpers.GenerateRandomMatrix(R, K, false);
+        Y = MatrixHelpers.GenerateRandomMatrix(R, K, true);
+
+        TransferMatricesToWorkers();
+        DistributeYMatrixToWorkers();
+
+        LoopCalculationStartTime = System.nanoTime();
+    }
+
     /**
      * IMaster Implementation
      */
@@ -232,77 +180,70 @@ public class Master extends Server{
         YMessages = new ArrayList<>();
         availableWorkers = new ArrayList<>();
 
-        INDArray originalMatrix = ParserUtils.loadDataset("data/inputMatrix.csv");
-        ParserUtils.loadDataset("data/inputMatrix.csv");
-        LoadOriginalMatrix(originalMatrix);
+        R = ParserUtils.loadDataSet("data/inputMatrix.csv");
+        C = Nd4j.zeros(R.rows(), R.columns());
+        P = Nd4j.zeros(R.rows(), R.columns());
 
         this.OpenServer();
     }
 
+    public void TransferMatricesToWorkers(){
+        CommunicationMessage msg = new CommunicationMessage();
+        msg.setType(MessageType.TRANSFER_MATRICES);
+        msg.setCArray(C);
+        msg.setPArray(P);
+        msg.setXArray(X);
+        msg.setYArray(Y);
 
-    private void CalculateCMatrix() {
-       C = (R.mul(A)).add(1);
+        SendBroadcastMessageToWorkers(msg);
     }
 
-    private void CalculatePMatrix(){
-        System.out.println(R.getDouble(0,149));
-        P = greaterThanOrEqual(R, Nd4j.zeros(R.rows(),R.columns()));
-        System.out.println(P.getDouble(0,148));
-    }
-
-    private  void DistributeXMatrixToWorkers() {
-        int totalCores = availableWorkers
-                .stream()
-                .map(Server::getCpuCores)
-                .reduce(0, (a, b) -> a+b);
-
-        System.out.println("Total Cores: " + totalCores);
-
+    public void DistributeXMatrixToWorkers() {
         int currentIndex = -1;
         int rowsPerCore = Y.rows() / totalCores;
+
+        System.out.println("***********************************************");
+
         for(int i = 0; i < availableWorkers.size(); i++){
             Worker worker = availableWorkers.get(i);
             int workerRows = rowsPerCore * worker.getCpuCores();
 
             CommunicationMessage xMessage = new CommunicationMessage();
             xMessage.setType(MessageType.CALCULATE_Y);
-            xMessage.setxArray(X);
+            xMessage.setXArray(X);
             xMessage.setFromUser(currentIndex + 1);
-
-            System.out.println(worker.getName() + " starts on " + (currentIndex + 1) + " user!");
 
             if(i == availableWorkers.size() - 1){
                 if(currentIndex != Y.rows()){
                     xMessage.setToUser(Y.rows() - 1);
-                    System.out.println(worker.getName() + " ends on " + (Y.rows() - 1) + " user!");
+                    System.out.println("Distributing X to " + worker.getId() + " from " + (currentIndex + 1) + " to " + (Y.rows() - 1));
                 }
             }else{
+                int startIndex = currentIndex;
                 currentIndex += workerRows;
                 xMessage.setToUser(currentIndex);
-                System.out.println(worker.getName() + " ends on " + currentIndex + " user!");
+                System.out.println("Distributing X to " + worker.getId() + " from " + (startIndex + 1) + " to " + currentIndex);
             }
 
             SendMessageToWorker(xMessage, worker);
         }
+
+        System.out.println("***********************************************");
     }
 
-    private void DistributeYMatrixToWorkers() {
-        int totalCores = availableWorkers
-                .stream()
-                .map(Server::getCpuCores)
-                .reduce(0, (a, b) -> a+b);
-
-        System.out.println("Total Cores: " + totalCores);
-
+    public void DistributeYMatrixToWorkers() {
         int currentIndex = -1;
         int rowsPerCore = X.rows() / totalCores;
+
+        System.out.println("***********************************************");
+
         for(int i = 0; i < availableWorkers.size(); i++){
             Worker worker = availableWorkers.get(i);
             int workerRows = rowsPerCore * worker.getCpuCores();
 
             CommunicationMessage xMessage = new CommunicationMessage();
             xMessage.setType(MessageType.CALCULATE_X);
-            xMessage.setyArray(Y);
+            xMessage.setYArray(Y);
             xMessage.setFromUser(currentIndex + 1);
 
             System.out.println(worker.getName() + " starts on " + (currentIndex + 1) + " user!");
@@ -310,59 +251,28 @@ public class Master extends Server{
             if(i == availableWorkers.size() - 1){
                 if(currentIndex != X.rows()){
                     xMessage.setToUser(X.rows() - 1);
-                    System.out.println(worker.getName() + " ends on " + (X.rows() - 1) + " user!");
+                    System.out.println("Distributing Y to " + worker.getId() + " from " + (currentIndex + 1) + " to " + (X.rows() - 1));
                 }
             }else{
+                int startIndex = currentIndex;
                 currentIndex += workerRows;
                 xMessage.setToUser(currentIndex);
-                System.out.println(worker.getName() + " ends on " + currentIndex + " user!");
+                System.out.println("Distributing Y to " + worker.getId() + " from " + (startIndex + 1) + " to " + currentIndex);
             }
 
             SendMessageToWorker(xMessage, worker);
         }
+
+        System.out.println("***********************************************");
     }
 
-    private void DistributeCPMatricesToWorkers(){
-        CommunicationMessage msg = new CommunicationMessage();
-        msg.setType(MessageType.TRANSFER_CP);
-        msg.setcArray(C);
-        msg.setpArray(P);
-        msg.setxArray(X);
-        msg.setyArray(Y);
-
-        SendBroadcastMessageToWorkers(msg);
-    }
-
-    private double CalculateError() {
-        // multiply c
-        // do the inside Σ actions as parallel
-        // as possible
-        long starttime = System.nanoTime();
-        INDArray temp = X.mmul(Y.transpose());
-        temp.subi(P);
-        temp.muli(temp);
-        temp.muli(C);
-
-        INDArray normX = Nd4j.sum(X.mul(X),0);
-        INDArray normY = Nd4j.sum(Y.mul(Y), 0);
-        INDArray norma = normX.add(normY);
-        norma.muli(L);
-
-        double regu = norma.sumNumber().doubleValue();
-
-        System.out.println(regu);
-
-        System.out.println("Calculated Score Time: "+ParserUtils.GetTimeInMs(starttime));
-        return temp.sumNumber().doubleValue() + regu;
-    }
-
-    private void SendBroadcastMessageToWorkers(CommunicationMessage message) {
+    public void SendBroadcastMessageToWorkers(CommunicationMessage message) {
         for(Worker worker : availableWorkers){
             SendMessageToWorker(message, worker);
         }
     }
 
-    private void SendMessageToWorker(CommunicationMessage message, Worker worker) {
+    public void SendMessageToWorker(CommunicationMessage message, Worker worker) {
         ObjectInputStream in = null;
         ObjectOutputStream out = null;
         Socket socket = null;
@@ -381,6 +291,36 @@ public class Master extends Server{
         }
     }
 
+    public double CalculateError() {
+        // multiply c
+        // do the inside Σ actions as parallel
+        // as possible
+        INDArray temp = X.mmul(Y.transpose());
+        temp.subi(P);
+        temp.muli(temp);
+        temp.muli(C);
+
+        INDArray normX = Nd4j.sum(X.mul(X),0);
+        INDArray normY = Nd4j.sum(Y.mul(Y), 0);
+        INDArray norma = normX.add(normY);
+        norma.muli(L);
+
+        double regu = norma.sumNumber().doubleValue();
+
+        return temp.sumNumber().doubleValue() + regu;
+    }
+
+    public double CalculateScore(int x, int y) {
+        return 0;
+    }
+
+    public List<Poi> CalculateBestLocalPoisForUser(int x, double xBound, double yBound, int y) {
+        return null;
+    }
+
+    /**
+     *   Getters and Setters
+     */
     public int getHowManyWorkersToWait() {
         return howManyWorkersToWait;
     }
