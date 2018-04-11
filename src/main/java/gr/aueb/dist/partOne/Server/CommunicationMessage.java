@@ -1,16 +1,16 @@
 package gr.aueb.dist.partOne.Server;
 
-import org.nd4j.linalg.api.ndarray.INDArray;
+import org.apache.commons.math3.linear.RealMatrix;
 
 import java.io.Serializable;
 
 public class CommunicationMessage implements Serializable {
     private MessageType type;
 
-    private INDArray cArray;
-    private INDArray pArray;
-    private INDArray xArray;
-    private INDArray yArray;
+    private RealMatrix cArray;
+    private RealMatrix pArray;
+    private RealMatrix xArray;
+    private RealMatrix yArray;
 
     private int fromUser;
     private int toUser;
@@ -33,35 +33,35 @@ public class CommunicationMessage implements Serializable {
         this.type = type;
     }
 
-    public INDArray getCArray() {
+    public RealMatrix getCArray() {
         return cArray;
     }
 
-    public void setCArray(INDArray cArray) {
+    public void setCArray(RealMatrix cArray) {
         this.cArray = cArray;
     }
 
-    public INDArray getPArray() {
+    public RealMatrix getPArray() {
         return pArray;
     }
 
-    public void setPArray(INDArray pArray) {
+    public void setPArray(RealMatrix pArray) {
         this.pArray = pArray;
     }
 
-    public INDArray getXArray() {
+    public RealMatrix getXArray() {
         return xArray;
     }
 
-    public void setXArray(INDArray xArray) {
+    public void setXArray(RealMatrix xArray) {
         this.xArray = xArray;
     }
 
-    public INDArray getYArray() {
+    public RealMatrix getYArray() {
         return yArray;
     }
 
-    public void setYArray(INDArray yArray) {
+    public void setYArray(RealMatrix yArray) {
         this.yArray = yArray;
     }
 

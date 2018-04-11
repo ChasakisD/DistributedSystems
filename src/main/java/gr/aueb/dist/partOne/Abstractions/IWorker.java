@@ -1,15 +1,15 @@
 package gr.aueb.dist.partOne.Abstractions;
 
 import gr.aueb.dist.partOne.Server.CommunicationMessage;
-import org.nd4j.linalg.api.ndarray.INDArray;
+import org.apache.commons.math3.linear.RealMatrix;
 
 public interface IWorker {
     void Initialize();
-    INDArray CalculateCuMatrix(int x, INDArray matrix);
-    INDArray CalculateCiMatrix(int x, INDArray matrix);
-    INDArray PreCalculateYY(INDArray matrix);
-    INDArray PreCalculateXX(INDArray matrix);
-    INDArray CalculateDerivative(INDArray matrix, INDArray Pu, INDArray Cu, INDArray YY);
+    RealMatrix CalculateCuMatrix(int x, RealMatrix matrix);
+    RealMatrix CalculateCiMatrix(int x, RealMatrix matrix);
+    RealMatrix PreCalculateYY(RealMatrix matrix);
+    RealMatrix PreCalculateXX(RealMatrix matrix);
+    RealMatrix CalculateDerivative(RealMatrix matrix, RealMatrix Pu, RealMatrix Cu, RealMatrix YY);
     void CalculateXDerivative(int startIndex, int endIndex);
     void CalculateYDerivative(int startIndex, int endIndex);
     void SendResultsToMaster(CommunicationMessage msg);

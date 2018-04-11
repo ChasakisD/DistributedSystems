@@ -5,9 +5,10 @@ import gr.aueb.dist.partOne.Server.CommunicationMessage;
 import gr.aueb.dist.partOne.Server.MessageType;
 import gr.aueb.dist.partOne.Server.Server;
 import gr.aueb.dist.partOne.Utils.ParserUtils;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
-import org.nd4j.linalg.inverse.InvertMatrix;
+import org.apache.commons.math3.linear.DiagonalMatrix;
+import org.apache.commons.math3.linear.MatrixUtils;
+import org.apache.commons.math3.linear.QRDecomposition;
+import org.apache.commons.math3.linear.RealMatrix;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,7 +19,7 @@ public class Worker extends Server implements IWorker{
     private int cpuCores;
     private int ramSize;
 
-    private INDArray X, Y, P, C;
+    private RealMatrix X, Y, P, C;
 
     private final static double L = 0.1;
 
@@ -103,21 +104,20 @@ public class Worker extends Server implements IWorker{
         System.out.println("I did what i must do dear Master!");
     }
 
-    public INDArray CalculateCuMatrix(int user, INDArray C) {
-        return Nd4j.diag(C.getRow(user));
+    public RealMatrix CalculateCuMatrix(int user, RealMatrix C) {
+        return MatrixUtils.createRealDiagonalMatrix(C.getRow(user));
     }
 
-    public INDArray CalculateCiMatrix(int item, INDArray C) {
-        return Nd4j.diag(C.getColumn(item));
+    public RealMatrix CalculateCiMatrix(int item, RealMatrix C) {
+        return MatrixUtils.createRealDiagonalMatrix(C.getColumn(item));
     }
 
-    public INDArray PreCalculateXX(INDArray X) {
-        return X.transpose().mmul(X);
+    public RealMatrix PreCalculateXX(RealMatrix X) {
+        return X.transpose().multiply(X);
     }
 
-    public INDArray PreCalculateYY(INDArray Y) {
-        ParserUtils.PrintShape(Y);
-        return Y.transpose().mmul(Y);
+    public RealMatrix PreCalculateYY(RealMatrix Y) {
+        return Y.transpose().multiply(Y);
     }
 
     public void SendResultsToMaster(CommunicationMessage message) {
@@ -136,7 +136,9 @@ public class Worker extends Server implements IWorker{
 
             out.writeObject(message);
             out.flush();
-        }catch(IOException ignored){}
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
         finally {
             this.CloseConnections(socket, in, out);
         }
@@ -149,14 +151,14 @@ public class Worker extends Server implements IWorker{
         int startingIndex = 0;
         int length = endIndex - startIndex + 1;
 
-        X = Nd4j.zeros(length, X.columns());
+        X = MatrixUtils.createRealMatrix(length, X.getColumnDimension());
 
-        INDArray YY = PreCalculateYY(Y);
+        RealMatrix YY = PreCalculateYY(Y);
 
         for (int user = startIndex; user <= endIndex; user++) {
-            INDArray Cu = CalculateCuMatrix(user, C);
-            INDArray Pu = P.getRow(user);
-            X.putRow(startingIndex,CalculateDerivative(Y, Pu, Cu, YY));
+            RealMatrix Cu = CalculateCuMatrix(user, C);
+            RealMatrix Pu = P.getRowMatrix(user);
+            X.setRowMatrix(startingIndex, CalculateDerivative(Y, Pu, Cu, YY));
             startingIndex++;
         }
     }
@@ -165,34 +167,34 @@ public class Worker extends Server implements IWorker{
         int startingIndex = 0;
         int length = endIndex - startIndex + 1;
 
-        Y = Nd4j.zeros(length, Y.columns());
+        Y = MatrixUtils.createRealMatrix(length, Y.getColumnDimension());
 
-        INDArray XX = PreCalculateXX(X);
+        RealMatrix XX = PreCalculateXX(X);
 
         for (int poi = startIndex; poi <= endIndex; poi++) {
-            INDArray Ci = CalculateCiMatrix(poi, C);
-            INDArray Pi = P.getColumn(poi).transpose();
-            Y.putRow(startingIndex, CalculateDerivative(X, Pi, Ci, XX));
+            RealMatrix Ci = CalculateCiMatrix(poi, C);
+            RealMatrix Pi = P.getColumnMatrix(poi).transpose();
+            Y.setRowMatrix(startingIndex, CalculateDerivative(X, Pi, Ci, XX));
             startingIndex++;
         }
     }
 
-    public INDArray CalculateDerivative(INDArray matrix, INDArray Pu, INDArray Cu, INDArray YY) {
+    public RealMatrix CalculateDerivative(RealMatrix matrix, RealMatrix Pu, RealMatrix Cu, RealMatrix YY) {
         // (Cu - I)
-        INDArray result = (Cu.sub(Nd4j.eye(Cu.rows())));
+        RealMatrix result = (Cu.subtract(MatrixUtils.createRealIdentityMatrix(Cu.getRowDimension())));
         // Y.T(Cu - I)Y
-        result = matrix.transpose().mmul(result).mmul(matrix);
+        result = matrix.transpose().multiply(result).multiply(matrix);
         // Y.TY + Y.T(Cu - I)Y
-        result.addi(YY);
+        result.add(YY);
         // Y.TY + Y.T(Cu - I)Y +λI
-        result.addi(Nd4j.eye(result.rows()).mul(L));
+        result.add(MatrixUtils.createRealIdentityMatrix(result.getRowDimension()).scalarMultiply(L));
         //invert the matrix
-        result = InvertMatrix.invert(result,true);
+        result = new QRDecomposition(result).getSolver().getInverse();
 
         return Pu
-                .mmul(Cu)
-                .mmul(matrix)
-                .mmul(result);
+                .multiply(Cu)
+                .multiply(matrix)
+                .multiply(result);
     }
 
     /**

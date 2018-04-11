@@ -6,7 +6,10 @@ import gr.aueb.dist.partOne.Server.MessageType;
 import gr.aueb.dist.partOne.Server.Server;
 import gr.aueb.dist.partOne.Utils.MatrixHelpers;
 import gr.aueb.dist.partOne.Utils.ParserUtils;
+import org.apache.commons.math3.linear.MatrixUtils;
+import org.apache.commons.math3.linear.RealMatrix;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.checkutil.CheckUtil;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.ops.transforms.Transforms;
 
@@ -28,7 +31,7 @@ public class Master extends Server implements IMaster{
     private ArrayList<CommunicationMessage> XMessages;
     private ArrayList<CommunicationMessage> YMessages;
 
-    private INDArray R, P, C ,X ,Y;
+    private RealMatrix R, P, C ,X ,Y;
 
     private final static int MAX_ITERATIONS = 200;
     private final static double L = 0.1;
@@ -67,13 +70,11 @@ public class Master extends Server implements IMaster{
                 case X_CALCULATED:{
                     XMessages.add(message);
                     if(XMessages.size() >= howManyWorkersToWait){
-                        LinkedList<INDArray> XDist = new LinkedList<>();
-
                         //Ascending sort of fromUser
                         XMessages.sort(Comparator.comparingInt(CommunicationMessage::getFromUser));
-                        XMessages.forEach((msg) -> XDist.add(msg.getXArray()));
-
-                        X = Nd4j.vstack(XDist);
+                        XMessages.forEach((msg) ->
+                           X.setSubMatrix(msg.getXArray().getData(), msg.getFromUser(), 0)
+                        );
 
                         DistributeXMatrixToWorkers();
 
@@ -86,13 +87,11 @@ public class Master extends Server implements IMaster{
                 case Y_CALCULATED:{
                     YMessages.add(message);
                     if(YMessages.size() >= howManyWorkersToWait){
-                        LinkedList<INDArray> YDist = new LinkedList<>();
-
                         //Ascending sort of fromUser
                         YMessages.sort(Comparator.comparingInt(CommunicationMessage::getFromUser));
-                        YMessages.forEach((msg) -> YDist.add(msg.getYArray()));
-
-                        Y = Nd4j.vstack(YDist);
+                        YMessages.forEach((msg) ->
+                            Y.setSubMatrix(msg.getYArray().getData(), msg.getFromUser(), 0)
+                        );
 
                         double error = CalculateError();
 
@@ -150,13 +149,14 @@ public class Master extends Server implements IMaster{
         System.out.println("Total Cores: " + totalCores + " Cores");
 
         // C and P matrices only need to be calculated once and passed once to the workers
-        C = (R.mul(A)).add(1);
-        P = Transforms.greaterThanOrEqual(R, Nd4j.zeros(R.rows(),R.columns()));
-
+        C = (R.scalarMultiply(A)).scalarAdd(1);
+        P = CheckUtil.convertToApacheMatrix(
+                Transforms.greaterThanOrEqual(CheckUtil.convertFromApacheMatrix(R),
+                        Nd4j.zeros(R.getRowDimension(), R.getColumnDimension())));
         // let's get the K << max{U,I}
         // meaning a number much smaller than the biggest column or dimension
-        int BiggestDimension = R.columns() > R.rows()?
-                R.columns() : R.rows();
+        int BiggestDimension = R.getColumnDimension() > R.getRowDimension()?
+                R.getColumnDimension() : R.getRowDimension();
 
         int K = BiggestDimension / 10;
 
@@ -181,8 +181,8 @@ public class Master extends Server implements IMaster{
         availableWorkers = new ArrayList<>();
 
         R = ParserUtils.loadDataSet("data/inputMatrix.csv");
-        C = Nd4j.zeros(R.rows(), R.columns());
-        P = Nd4j.zeros(R.rows(), R.columns());
+        C = MatrixUtils.createRealMatrix(R.getRowDimension(), R.getColumnDimension());
+        P = MatrixUtils.createRealMatrix(R.getRowDimension(), R.getColumnDimension());
 
         this.OpenServer();
     }
@@ -200,7 +200,7 @@ public class Master extends Server implements IMaster{
 
     public void DistributeXMatrixToWorkers() {
         int currentIndex = -1;
-        int rowsPerCore = Y.rows() / totalCores;
+        int rowsPerCore = Y.getRowDimension() / totalCores;
 
         System.out.println("***********************************************");
 
@@ -216,9 +216,10 @@ public class Master extends Server implements IMaster{
             xMessage.setFromUser(currentIndex + 1);
 
             if(i == availableWorkers.size() - 1){
-                if(currentIndex != Y.rows()){
-                    xMessage.setToUser(Y.rows() - 1);
-                    System.out.println("Distributing X to " + worker.getId() + " from " + (currentIndex + 1) + " to " + (Y.rows() - 1));
+                if(currentIndex != Y.getRowDimension()){
+                    xMessage.setToUser(Y.getRowDimension() - 1);
+                    System.out.println("Distributing X to " + worker.getId() +
+                            " from " + (currentIndex + 1) + " to " + (Y.getRowDimension() - 1));
                 }
             }else{
                 int startIndex = currentIndex;
@@ -237,7 +238,7 @@ public class Master extends Server implements IMaster{
 
     public void DistributeYMatrixToWorkers() {
         int currentIndex = -1;
-        int rowsPerCore = X.rows() / totalCores;
+        int rowsPerCore = X.getRowDimension() / totalCores;
 
         System.out.println("***********************************************");
 
@@ -253,9 +254,10 @@ public class Master extends Server implements IMaster{
             xMessage.setFromUser(currentIndex + 1);
 
             if(i == availableWorkers.size() - 1){
-                if(currentIndex != X.rows()){
-                    xMessage.setToUser(X.rows() - 1);
-                    System.out.println("Distributing Y to " + worker.getId() + " from " + (currentIndex + 1) + " to " + (X.rows() - 1));
+                if(currentIndex != X.getRowDimension()){
+                    xMessage.setToUser(X.getRowDimension() - 1);
+                    System.out.println("Distributing Y to " + worker.getId() +
+                            " from " + (currentIndex + 1) + " to " + (X.getRowDimension() - 1));
                 }
             }else{
                 int startIndex = currentIndex;
@@ -299,19 +301,20 @@ public class Master extends Server implements IMaster{
         // multiply c
         // do the inside Σ actions as parallel
         // as possible
-        INDArray temp = X.mmul(Y.transpose());
-        temp.subi(P);
-        temp.muli(temp);
-        temp.muli(C);
+        RealMatrix temp = P.subtract(X.transpose().multiply(Y));
+        temp.multiply(temp).multiply(C);
 
-        INDArray normX = Nd4j.sum(X.mul(X),0);
-        INDArray normY = Nd4j.sum(Y.mul(Y), 0);
+        INDArray preX = CheckUtil.convertFromApacheMatrix(X.transpose().multiply(X));
+        INDArray preY = CheckUtil.convertFromApacheMatrix(Y.transpose().multiply(Y));
+
+        INDArray normX = Nd4j.sum(preX, 0);
+        INDArray normY = Nd4j.sum(preY, 0);
         INDArray norma = normX.add(normY);
-        norma.muli(L);
+        norma.mul(L);
 
         double regu = norma.sumNumber().doubleValue();
 
-        return temp.sumNumber().doubleValue() + regu;
+        return CheckUtil.convertFromApacheMatrix(temp).sumNumber().doubleValue() + regu;
     }
 
     public double CalculateScore(int x, int y) {

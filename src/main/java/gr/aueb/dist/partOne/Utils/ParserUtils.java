@@ -1,13 +1,12 @@
 package gr.aueb.dist.partOne.Utils;
 
 import gr.aueb.dist.partOne.Models.Master;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
+import org.apache.commons.math3.linear.MatrixUtils;
+import org.apache.commons.math3.linear.RealMatrix;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class ParserUtils {
@@ -49,9 +48,9 @@ public class ParserUtils {
         return null;
     }
 
-    public static INDArray loadDataSet(String dataSet){
+    public static RealMatrix loadDataSet(String dataSet){
         // the index start from zero to 764. So the dimension will be 765
-        INDArray matrix = Nd4j.zeros(765, 1964);
+        RealMatrix matrix = MatrixUtils.createRealMatrix(765, 1964);
 
         BufferedReader bufferedReader = null;
         FileReader fileReader = null;
@@ -67,7 +66,7 @@ public class ParserUtils {
                 int row = Integer.parseInt(tokenizer.nextToken());
                 int column = Integer.parseInt(tokenizer.nextToken());
                 int value = Integer.parseInt(tokenizer.nextToken());
-                matrix.put(row,column,value);
+                matrix.setEntry(row,column,value);
             }
 
         }
@@ -114,8 +113,8 @@ public class ParserUtils {
         }
     }
 
-    public static void PrintShape(INDArray array){
-        System.out.println("Rows: "+array.rows()+ " Columns: "+array.columns());
+    public static void PrintShape(RealMatrix array){
+        System.out.println("Rows: "+array.getRowDimension()+ " Columns: "+array.getColumnDimension());
     }
 
     public static long GetTimeInMs(long start){
