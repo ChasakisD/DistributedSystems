@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.IntStream;
 
 public class Worker extends Server implements IWorker{
     private int cpuCores;
@@ -51,7 +54,12 @@ public class Worker extends Server implements IWorker{
                 }
                 case CALCULATE_X:{
                     Y = message.getYArray();
+
+                    long startTime = System.nanoTime();
                     CalculateXDerivative(message.getFromUser(), message.getToUser());
+                    double executionTime = ParserUtils.GetTimeInSec(startTime);
+
+                    result.setExecutionTime(executionTime);
                     result.setType(MessageType.X_CALCULATED);
                     result.setFromUser(message.getFromUser());
                     result.setToUser(message.getToUser());
@@ -62,7 +70,12 @@ public class Worker extends Server implements IWorker{
                 }
                 case CALCULATE_Y:{
                     X = message.getXArray();
+
+                    long startTime = System.nanoTime();
                     CalculateYDerivative(message.getFromUser(), message.getToUser());
+                    double executionTime = ParserUtils.GetTimeInSec(startTime);
+
+                    result.setExecutionTime(executionTime);
                     result.setType(MessageType.Y_CALCULATED);
                     result.setFromUser(message.getFromUser());
                     result.setToUser(message.getToUser());
@@ -116,7 +129,6 @@ public class Worker extends Server implements IWorker{
     }
 
     public INDArray PreCalculateYY(INDArray Y) {
-        ParserUtils.PrintShape(Y);
         return Y.transpose().mmul(Y);
     }
 
@@ -146,35 +158,27 @@ public class Worker extends Server implements IWorker{
      * Helper Methods
      */
     public void CalculateXDerivative(int startIndex, int endIndex){
-        int startingIndex = 0;
-        int length = endIndex - startIndex + 1;
-
-        X = Nd4j.zeros(length, X.columns());
+        X = Nd4j.zeros(endIndex - startIndex + 1, X.columns());
 
         INDArray YY = PreCalculateYY(Y);
 
-        for (int user = startIndex; user <= endIndex; user++) {
+        IntStream.range(startIndex, endIndex + 1).parallel().forEach((user) -> {
             INDArray Cu = CalculateCuMatrix(user, C);
             INDArray Pu = P.getRow(user);
-            X.putRow(startingIndex,CalculateDerivative(Y, Pu, Cu, YY));
-            startingIndex++;
-        }
+            X.putRow(user - startIndex, CalculateDerivative(Y, Pu, Cu, YY));
+        });
     }
 
     public void CalculateYDerivative(int startIndex, int endIndex){
-        int startingIndex = 0;
-        int length = endIndex - startIndex + 1;
-
-        Y = Nd4j.zeros(length, Y.columns());
+        Y = Nd4j.zeros(endIndex - startIndex + 1, Y.columns());
 
         INDArray XX = PreCalculateXX(X);
 
-        for (int poi = startIndex; poi <= endIndex; poi++) {
+        IntStream.range(startIndex, endIndex + 1).parallel().forEach((poi) -> {
             INDArray Ci = CalculateCiMatrix(poi, C);
             INDArray Pi = P.getColumn(poi).transpose();
-            Y.putRow(startingIndex, CalculateDerivative(X, Pi, Ci, XX));
-            startingIndex++;
-        }
+            Y.putRow(poi - startIndex, CalculateDerivative(X, Pi, Ci, XX));
+        });
     }
 
     public INDArray CalculateDerivative(INDArray matrix, INDArray Pu, INDArray Cu, INDArray YY) {

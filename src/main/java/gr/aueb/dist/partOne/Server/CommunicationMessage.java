@@ -21,10 +21,13 @@ public class CommunicationMessage implements Serializable {
     private int cpuCores;
     private int ramGBSize;
 
-    private long executionTime;
+    private double executionTime;
 
     public CommunicationMessage() {}
 
+    /**
+     *   Getters and Setters
+     */
     public MessageType getType() {
         return type;
     }
@@ -121,11 +124,11 @@ public class CommunicationMessage implements Serializable {
         this.ramGBSize = ramGBSize;
     }
 
-    public long getExecutionTime() {
+    public double getExecutionTime() {
         return executionTime;
     }
 
-    public void setExecutionTime(long executionTime) {
+    public void setExecutionTime(double executionTime) {
         this.executionTime = executionTime;
     }
 }

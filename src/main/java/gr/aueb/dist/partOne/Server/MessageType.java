@@ -1,10 +1,12 @@
 package gr.aueb.dist.partOne.Server;
 
 public enum MessageType {
+    HELLO_WORLD,
     TRANSFER_MATRICES,
     CALCULATE_X,
     CALCULATE_Y,
     X_CALCULATED,
     Y_CALCULATED,
-    HELLO_WORLD
+    ASK_RECOMMENDATION,
+    REPLY_RECOMMENDATION
 }

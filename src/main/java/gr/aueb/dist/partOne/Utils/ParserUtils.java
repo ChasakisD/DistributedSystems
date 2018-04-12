@@ -7,7 +7,6 @@ import org.nd4j.linalg.factory.Nd4j;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class ParserUtils {
@@ -49,9 +48,9 @@ public class ParserUtils {
         return null;
     }
 
-    public static INDArray loadDataSet(String dataSet){
-        // the index start from zero to 764. So the dimension will be 765
-        INDArray matrix = Nd4j.zeros(765, 1964);
+    public static INDArray LoadDataSet(String dataSet){
+        int[] dimensions = GetArrayDimensions(dataSet);
+        INDArray matrix = Nd4j.zeros(dimensions);
 
         BufferedReader bufferedReader = null;
         FileReader fileReader = null;
@@ -61,12 +60,14 @@ public class ParserUtils {
 
             String sCurrentLine;
             while ((sCurrentLine = bufferedReader.readLine()) != null) {
-              // separate the commas
                 sCurrentLine = sCurrentLine.replaceAll("\\s","");
+
                 StringTokenizer tokenizer = new StringTokenizer(sCurrentLine,",");
+
                 int row = Integer.parseInt(tokenizer.nextToken());
                 int column = Integer.parseInt(tokenizer.nextToken());
                 int value = Integer.parseInt(tokenizer.nextToken());
+
                 matrix.put(row,column,value);
             }
 
@@ -95,31 +96,51 @@ public class ParserUtils {
         }
     }
 
-    public static void DistributeNumberOfCores(int totalWorkers, int coresPerWorker, int totalCores, int totalRows){
-        int currentIndex = -1;
-        int rowsPerCore = totalRows / totalCores;
-        System.out.println(rowsPerCore + " Rows per Core");
-        for(int i = 0; i < totalWorkers; i++){
-            int workerRows = rowsPerCore * coresPerWorker;
+    private static int[] GetArrayDimensions(String dataSet){
+        int[] dimensions = new int[2];
+        dimensions[0] = 0;
+        dimensions[1] = 0;
 
-            if(i == totalWorkers - 1){
-                if(currentIndex != totalRows){
-                    System.out.println("Last Loop From User: " + (currentIndex + 1) + " to user: " + (totalRows-1));
+        BufferedReader bufferedReader = null;
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(dataSet);
+            bufferedReader = new BufferedReader(fileReader);
+
+            String sCurrentLine;
+            while ((sCurrentLine = bufferedReader.readLine()) != null) {
+                sCurrentLine = sCurrentLine.replaceAll("\\s","");
+
+                StringTokenizer tokenizer = new StringTokenizer(sCurrentLine,",");
+
+                int userNumber = Integer.parseInt(tokenizer.nextToken());
+                int poiNumber = Integer.parseInt(tokenizer.nextToken());
+
+                if(userNumber > dimensions[0]){
+                    dimensions[0] = userNumber;
                 }
-            }else{
-                int prevIndex = currentIndex + 1;
-                currentIndex += workerRows;
-                System.out.println("From User: " + prevIndex + " to user: " + currentIndex);
+
+                if(poiNumber > dimensions[1]){
+                    dimensions[1] = poiNumber;
+                }
             }
         }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        finally {
+            CloseReaders(bufferedReader, fileReader);
+        }
+
+        dimensions[0]++;
+        dimensions[1]++;
+
+        return dimensions;
     }
 
-    public static void PrintShape(INDArray array){
-        System.out.println("Rows: "+array.rows()+ " Columns: "+array.columns());
-    }
-
-    public static long GetTimeInMs(long start){
+    public static double GetTimeInSec(long start){
         long end = System.nanoTime();
-        return (end-start)/1000000;
+
+        return (end-start) / 1000000 / 1000d;
     }
 }
