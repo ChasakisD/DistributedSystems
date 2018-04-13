@@ -20,18 +20,20 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Master extends Server implements IMaster{
-    private int currentIteration;
-    private int howManyWorkersToWait;
+    private int CurrentIteration;
+    private int HowManyWorkersToWait;
 
-    private double latestError;
+    private double LatestError;
     private long LoopCalculationStartTime;
 
-    private ArrayList<Worker> availableWorkers;
+    private ArrayList<Worker> AvailableWorkers;
     private ArrayList<CommunicationMessage> XMessages;
     private ArrayList<CommunicationMessage> YMessages;
 
     private HashMap<String, Double> XExecutionTimes;
     private HashMap<String, Double> YExecutionTimes;
+    private HashMap<String, Integer> LatestWorkersXDistribution;
+    private HashMap<String, Integer> LatestWorkersYDistribution;
 
     private INDArray RUpdated;
     private INDArray R, P, C ,X ,Y;
@@ -63,11 +65,11 @@ public class Master extends Server implements IMaster{
                     worker.setPort(message.getPort());
                     worker.setInstanceCpuCores(message.getCpuCores());
                     worker.setInstanceRamSize(message.getRamGBSize());
-                    availableWorkers.add(worker);
+                    AvailableWorkers.add(worker);
 
                     System.out.println(worker.toString());
 
-                    if(availableWorkers.size() >= howManyWorkersToWait){
+                    if(AvailableWorkers.size() >= HowManyWorkersToWait){
                         StartMatrixFactorization();
                     }
 
@@ -76,7 +78,7 @@ public class Master extends Server implements IMaster{
                 case X_CALCULATED:{
                     XMessages.add(message);
                     XExecutionTimes.put(message.getServerName(), message.getExecutionTime());
-                    if(XMessages.size() >= howManyWorkersToWait){
+                    if(XMessages.size() >= HowManyWorkersToWait){
                         LinkedList<INDArray> XDist = new LinkedList<>();
 
                         //Ascending sort of fromUser
@@ -96,7 +98,7 @@ public class Master extends Server implements IMaster{
                 case Y_CALCULATED:{
                     YMessages.add(message);
                     YExecutionTimes.put(message.getServerName(), message.getExecutionTime());
-                    if(YMessages.size() >= howManyWorkersToWait){
+                    if(YMessages.size() >= HowManyWorkersToWait){
                         LinkedList<INDArray> YDist = new LinkedList<>();
 
                         //Ascending sort of fromUser
@@ -108,23 +110,23 @@ public class Master extends Server implements IMaster{
                         double error = CalculateError();
 
                         // we want our error to be min in each iteration
-                        if(latestError < error){
-                            System.out.println("Previous Error: " + latestError);
+                        if(LatestError < error){
+                            System.out.println("Previous Error: " + LatestError);
                             System.out.println("Current Error: " + error);
                             System.out.println("False Iteration");
                         }
 
                         System.out.println("***********************************************");
-                        System.out.println("Loop No.: " + currentIteration);
+                        System.out.println("Loop No.: " + CurrentIteration);
                         System.out.println("Error: " + error);
                         System.out.println("Loop Elapsed Time: " +
                                 ParserUtils.GetTimeInSec(LoopCalculationStartTime) + "sec");
                         System.out.println("***********************************************");
 
-                        latestError = error;
-                        currentIteration++;
+                        LatestError = error;
+                        CurrentIteration++;
 
-                        if(latestError < 0.001 || currentIteration >= MAX_ITERATIONS){
+                        if(LatestError < 0.001 || CurrentIteration >= MAX_ITERATIONS){
                             FinishMatrixFactorization();
                             return;
                         }
@@ -147,12 +149,12 @@ public class Master extends Server implements IMaster{
     }
 
     private void StartMatrixFactorization(){
-        int totalCores = availableWorkers
+        int totalCores = AvailableWorkers
                 .stream()
                 .map(Worker::getInstanceCpuCores)
                 .reduce(0, (a, b) -> a + b);
 
-        System.out.println("Number Of Workers: " + howManyWorkersToWait + " Workers");
+        System.out.println("Number Of Workers: " + HowManyWorkersToWait + " Workers");
         System.out.println("Total Cores: " + totalCores + " Cores");
 
         // C and P matrices only need to be calculated once and passed once to the workers
@@ -193,16 +195,18 @@ public class Master extends Server implements IMaster{
      * IMaster Implementation
      */
     public void Initialize() {
-        currentIteration = 0;
-        latestError = Double.MAX_VALUE - 1;
+        CurrentIteration = 0;
+        LatestError = Double.MAX_VALUE - 1;
 
-        availableWorkers = new ArrayList<>();
+        AvailableWorkers = new ArrayList<>();
 
         XMessages = new ArrayList<>();
         YMessages = new ArrayList<>();
 
         XExecutionTimes = new HashMap<>();
         YExecutionTimes = new HashMap<>();
+        LatestWorkersXDistribution = new HashMap<>();
+        LatestWorkersYDistribution = new HashMap<>();
 
         R = ParserUtils.LoadDataSet("data/inputMatrix.csv");
         if(R == null){
@@ -242,7 +246,7 @@ public class Master extends Server implements IMaster{
     public void DistributeXMatrixToWorkers() {
         HashMap<String, Integer[]> workerIndexes = SplitMatrix(Y, "Y");
 
-        availableWorkers.parallelStream().forEach(worker -> {
+        AvailableWorkers.parallelStream().forEach(worker -> {
             CommunicationMessage xMessage = new CommunicationMessage();
             xMessage.setType(MessageType.CALCULATE_Y);
             xMessage.setXArray(X);
@@ -255,7 +259,7 @@ public class Master extends Server implements IMaster{
     public void DistributeYMatrixToWorkers() {
         HashMap<String, Integer[]> workerIndexes = SplitMatrix(X, "X");
 
-        availableWorkers.parallelStream().forEach(worker -> {
+        AvailableWorkers.parallelStream().forEach(worker -> {
             CommunicationMessage xMessage = new CommunicationMessage();
             xMessage.setType(MessageType.CALCULATE_X);
             xMessage.setYArray(Y);
@@ -266,7 +270,7 @@ public class Master extends Server implements IMaster{
     }
 
     public void SendBroadcastMessageToWorkers(CommunicationMessage message) {
-        availableWorkers.parallelStream().forEach(worker -> SendMessageToWorker(message, worker));
+        AvailableWorkers.parallelStream().forEach(worker -> SendMessageToWorker(message, worker));
     }
 
     public void SendMessageToWorker(CommunicationMessage message, Worker worker) {
@@ -329,10 +333,8 @@ public class Master extends Server implements IMaster{
     /**
      * Helper Methods
      */
-    boolean first = true;
-    HashMap<String, Integer> latestWorkersDistribution = new HashMap<>();
     public HashMap<String, Integer[]> SplitMatrix(INDArray matrix, String matrixName){
-        int totalCores = availableWorkers
+        int totalCores = AvailableWorkers
                 .stream()
                 .map(Worker::getInstanceCpuCores)
                 .reduce(0, (a, b) -> a + b);
@@ -343,27 +345,32 @@ public class Master extends Server implements IMaster{
         LinkedHashMap<String, Double> sortedMap =
                 new LinkedHashMap<>();
 
+        HashMap<String, Double> matrixExecutionTimes =
+                new HashMap<>(matrixName.equals("X") ?
+                        XExecutionTimes :
+                        YExecutionTimes);
 
-        if(first) {
+        HashMap<String, Integer> latestWorkersDistribution =
+                matrixName.equals("X") ?
+                        LatestWorkersXDistribution :
+                        LatestWorkersYDistribution;
+
+        if(CurrentIteration == 0) {
             rowsPerCore = matrix.rows() / totalCores;
         }
-        else{
-            ArrayList<String> mapKeys = new ArrayList<>(XExecutionTimes.keySet());
-            ArrayList<Double> mapValues = new ArrayList<>(XExecutionTimes.values());
+        else {
+            ArrayList<String> mapKeys = new ArrayList<>(matrixExecutionTimes.keySet());
+            ArrayList<Double> mapValues = new ArrayList<>(matrixExecutionTimes.values());
             Collections.sort(mapValues);
             Collections.sort(mapKeys);
 
-            Iterator<Double> valueIt = mapValues.iterator();
-            while (valueIt.hasNext()) {
-                Double val = valueIt.next();
+            for (Double val : mapValues) {
                 Iterator<String> keyIt = mapKeys.iterator();
 
                 while (keyIt.hasNext()) {
                     String key = keyIt.next();
-                    Double comp1 = XExecutionTimes.get(key);
-                    Double comp2 = val;
 
-                    if (comp1.equals(comp2)) {
+                    if (matrixExecutionTimes.get(key).equals(val)) {
                         keyIt.remove();
                         sortedMap.put(key, val);
                         break;
@@ -374,75 +381,41 @@ public class Master extends Server implements IMaster{
 
         HashMap<String, Integer[]> workerIndexes = new HashMap<>();
 
-        double totalExTime = XExecutionTimes.values()
+        double totalExTime = matrixExecutionTimes.values()
                 .stream()
                 .reduce(0.0, (a, b) -> a + b);
 
-        double meanExTime = totalExTime / howManyWorkersToWait;
+        double meanExTime = totalExTime / HowManyWorkersToWait;
 
         Iterator<Double> valueIt = sortedMap.values().iterator();
         Double lastValue = 0.0;
         while (valueIt.hasNext()) {
             lastValue = valueIt.next();
         }
-        boolean needToRedistribute = false;
-        if(lastValue - meanExTime > 1.0) {
-            needToRedistribute = true;
-        }
 
         System.out.println("***********************************************");
 
-        if(first || !needToRedistribute) {
+        boolean needRedistribution = CurrentIteration != 0 && (lastValue - meanExTime) > 0;
 
-            for (int i = 0; i < availableWorkers.size(); i++) {
-                Worker worker = availableWorkers.get(i);
-
-                int workerRows = rowsPerCore * worker.getInstanceCpuCores();
-
-                Integer[] indexes = new Integer[2];
-                indexes[0] = currentIndex + 1;
-
-                if (i == availableWorkers.size() - 1) {
-                    if (currentIndex != matrix.rows()) {
-                        indexes[1] = matrix.rows() - 1;
-                        System.out.println("Distributing " + matrixName +
-                                " to " + worker.getId() +
-                                " from " + indexes[0] +
-                                " to " + indexes[1] +
-                                ". Total: " + (indexes[1] - indexes[0] + 1));
-                    }
-                } else {
-                    currentIndex += workerRows;
-                    indexes[1] = currentIndex;
-                    System.out.println("Distributing " + matrixName +
-                            " to " + worker.getId() +
-                            " from " + indexes[0] +
-                            " to " + indexes[1] +
-                            ". Total: " + (indexes[1] - indexes[0] + 1));
-                }
-                latestWorkersDistribution.put(worker.getId(), indexes[1] - indexes[0] + 1);
-                workerIndexes.put(worker.getId(), indexes);
-            }
-        }
-        else {
+        if(!needRedistribution) {
             Iterator<String> keyIt = sortedMap.keySet().iterator();
             String lastKey = "";
             while (keyIt.hasNext()) {
                 lastKey = keyIt.next();
             }
+
             int slowestWorkerIndices = latestWorkersDistribution.get(lastKey);
             int percentMoved = slowestWorkerIndices / 10;
             latestWorkersDistribution.put(lastKey, slowestWorkerIndices - percentMoved);
-            int rowsToBeAddedToRest = percentMoved / (howManyWorkersToWait - 1);
+            int rowsToBeAddedToRest = percentMoved / (HowManyWorkersToWait - 1);
 
-            Iterator<String> keyIt2 = sortedMap.keySet().iterator();
-            while (keyIt2.hasNext()) {
-                String currentKey = keyIt2.next();
-                if(currentKey.equals(lastKey)) break;
+            for (String currentKey : sortedMap.keySet()) {
+                if (currentKey.equals(lastKey)) break;
                 int currentIndices = latestWorkersDistribution.get(currentKey);
                 latestWorkersDistribution.put(currentKey, currentIndices + rowsToBeAddedToRest);
                 percentMoved -= rowsToBeAddedToRest;
             }
+
             if(percentMoved > 0) {
                 Iterator<String> keyIt3 = sortedMap.keySet().iterator();
                 if (keyIt3.hasNext()) {
@@ -451,41 +424,41 @@ public class Master extends Server implements IMaster{
                     latestWorkersDistribution.put(currentKey, currentIndices + percentMoved);
                 }
             }
+        }
 
-            for (int i = 0; i < availableWorkers.size(); i++) {
-                Worker worker = availableWorkers.get(i);
+        for (int i = 0; i < AvailableWorkers.size(); i++) {
+            Worker worker = AvailableWorkers.get(i);
 
-                int workerRows = latestWorkersDistribution.get(worker.getId());
+            int workerRows = needRedistribution ?
+                    latestWorkersDistribution.get(worker.getId()) :
+                    (rowsPerCore * worker.getInstanceCpuCores());
 
-                Integer[] indexes = new Integer[2];
-                indexes[0] = currentIndex + 1;
+            Integer[] indexes = new Integer[2];
+            indexes[0] = currentIndex + 1;
 
-                if (i == availableWorkers.size() - 1) {
-                    if (currentIndex != matrix.rows()) {
-                        indexes[1] = matrix.rows() - 1;
-                        System.out.println("Distributing " + matrixName +
-                                " to " + worker.getId() +
-                                " from " + indexes[0] +
-                                " to " + indexes[1] +
-                                ". Total: " + (indexes[1] - indexes[0] + 1));
-                    }
-                } else {
-                    currentIndex += workerRows;
-                    indexes[1] = currentIndex;
+            if (i == AvailableWorkers.size() - 1) {
+                if (currentIndex != matrix.rows()) {
+                    indexes[1] = matrix.rows() - 1;
                     System.out.println("Distributing " + matrixName +
                             " to " + worker.getId() +
                             " from " + indexes[0] +
                             " to " + indexes[1] +
                             ". Total: " + (indexes[1] - indexes[0] + 1));
                 }
-                latestWorkersDistribution.put(worker.getId(), indexes[1] - indexes[0] + 1);
-                workerIndexes.put(worker.getId(), indexes);
+            } else {
+                currentIndex += workerRows;
+                indexes[1] = currentIndex;
+                System.out.println("Distributing " + matrixName +
+                        " to " + worker.getId() +
+                        " from " + indexes[0] +
+                        " to " + indexes[1] +
+                        ". Total: " + (indexes[1] - indexes[0] + 1));
             }
+            latestWorkersDistribution.put(worker.getId(), indexes[1] - indexes[0] + 1);
+            workerIndexes.put(worker.getId(), indexes);
         }
 
         System.out.println("***********************************************");
-
-        first = false;
 
         return workerIndexes;
     }
@@ -510,10 +483,10 @@ public class Master extends Server implements IMaster{
      *   Getters and Setters
      */
     public int getHowManyWorkersToWait() {
-        return howManyWorkersToWait;
+        return HowManyWorkersToWait;
     }
 
     public void setHowManyWorkersToWait(int howManyWorkersToWait) {
-        this.howManyWorkersToWait = howManyWorkersToWait;
+        this.HowManyWorkersToWait = howManyWorkersToWait;
     }
 }
