@@ -38,7 +38,7 @@ public class Master extends Server implements IMaster{
     private INDArray RUpdated;
     private INDArray R, P, C ,X ,Y;
 
-    private final static int MAX_ITERATIONS = 200;
+    private final static int MAX_ITERATIONS = 800;
     private final static double L = 0.1;
     private final static double A = 40;
 
@@ -123,13 +123,13 @@ public class Master extends Server implements IMaster{
                                 ParserUtils.GetTimeInSec(LoopCalculationStartTime) + "sec");
                         System.out.println("***********************************************");
 
-                        LatestError = error;
-                        CurrentIteration++;
-
-                        if(LatestError < 0.001 || CurrentIteration >= MAX_ITERATIONS){
+                        if((error - LatestError) < 0.001 || CurrentIteration >= MAX_ITERATIONS){
                             FinishMatrixFactorization();
                             return;
                         }
+
+                        LatestError = error;
+                        CurrentIteration++;
 
                         DistributeYMatrixToWorkers();
                         LoopCalculationStartTime = System.nanoTime();
