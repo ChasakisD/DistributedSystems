@@ -219,7 +219,7 @@ public class Master extends Server implements IMaster{
 
         Path newXFile = Paths.get(NEW_X_PATH);
         Path newYFile = Paths.get(NEW_Y_PATH);
-        if(Files.exists(newXFile) && !Files.exists(newYFile)){
+        if(Files.exists(newXFile) && Files.exists(newYFile)){
             X = Nd4j.readTxt(NEW_X_PATH);
             Y = Nd4j.readTxt(NEW_Y_PATH);
             System.out.println("**************************************");
@@ -395,7 +395,7 @@ public class Master extends Server implements IMaster{
 
         System.out.println("***********************************************");
 
-        boolean needRedistribution = CurrentIteration != 0 && (lastValue - meanExTime) > 0;
+        boolean needRedistribution = CurrentIteration == 0 || (lastValue - meanExTime) <= 0;
 
         if(!needRedistribution) {
             Iterator<String> keyIt = sortedMap.keySet().iterator();
@@ -430,8 +430,8 @@ public class Master extends Server implements IMaster{
             Worker worker = AvailableWorkers.get(i);
 
             int workerRows = needRedistribution ?
-                    latestWorkersDistribution.get(worker.getId()) :
-                    (rowsPerCore * worker.getInstanceCpuCores());
+                    (rowsPerCore * worker.getInstanceCpuCores()) :
+                    latestWorkersDistribution.get(worker.getId());
 
             Integer[] indexes = new Integer[2];
             indexes[0] = currentIndex + 1;
