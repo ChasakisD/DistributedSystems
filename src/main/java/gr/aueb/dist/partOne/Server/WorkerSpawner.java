@@ -16,7 +16,7 @@ public class WorkerSpawner {
         }catch(Exception e) { return; }
         int availPort = NetworkUtils.GetNextAvailablePort();
 
-        System.out.println("Set the name of the worker");
+        System.out.println("Set the name of the worker:");
         String name = in.nextLine();
 
         System.out.println("Set the ip the worker should listen to (Current IP: " + currentIp + "):");
@@ -25,10 +25,18 @@ public class WorkerSpawner {
         System.out.println("Set the port the worker should listen to (Available Port: " + availPort + "):");
         int port = in.nextInt();
 
+        System.out.println("Set the IP of the Master:");
+        String masterIp = in.nextLine();
+
+        System.out.println("Set the Port of the Master:");
+        int masterPort = in.nextInt();
+
         Worker worker = new Worker();
         worker.setId(name);
         worker.setIp(ip);
         worker.setPort(port);
+        worker.setMasterIp(masterIp);
+        worker.setMasterPort(masterPort);
         worker.Initialize();
     }
 }

@@ -21,6 +21,9 @@ public class Worker extends Server implements IWorker{
     private int cpuCores;
     private int ramSize;
 
+    private String masterIp;
+    private int masterPort;
+
     private INDArray X, Y, P, C;
 
     private final static double L = 0.1;
@@ -137,17 +140,15 @@ public class Worker extends Server implements IWorker{
         ObjectOutputStream out = null;
         Socket socket = null;
         try{
-            Master master = ParserUtils.GetServersFromText("data/master.txt");
-
-            if(master == null) return;
-
-            socket = new Socket(master.getIp(), master.getPort());
+            socket = new Socket(masterIp, masterPort);
 
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
 
             out.writeObject(message);
             out.flush();
+
+            System.out.println("Sent results to master!");
         }catch(IOException ignored){}
         finally {
             this.CloseConnections(socket, in, out);
@@ -216,6 +217,22 @@ public class Worker extends Server implements IWorker{
 
     public void setInstanceRamSize(int ramSize) {
         this.ramSize = ramSize;
+    }
+
+    public String getMasterIp() {
+        return masterIp;
+    }
+
+    public void setMasterIp(String masterIp) {
+        this.masterIp = masterIp;
+    }
+
+    public int getMasterPort() {
+        return masterPort;
+    }
+
+    public void setMasterPort(int masterPort) {
+        this.masterPort = masterPort;
     }
 
     @Override

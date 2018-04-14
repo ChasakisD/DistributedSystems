@@ -108,6 +108,7 @@ public class Master extends Server implements IMaster{
                         Y = Nd4j.vstack(YDist);
 
                         double error = CalculateError();
+                        double difference = Math.abs(error - LatestError);
 
                         // we want our error to be min in each iteration
                         if(LatestError < error){
@@ -119,11 +120,13 @@ public class Master extends Server implements IMaster{
                         System.out.println("***********************************************");
                         System.out.println("Loop No.: " + CurrentIteration);
                         System.out.println("Error: " + error);
+                        System.out.println("Previous Error: " + LatestError);
+                        System.out.println("Difference: " + difference);
                         System.out.println("Loop Elapsed Time: " +
                                 ParserUtils.GetTimeInSec(LoopCalculationStartTime) + "sec");
                         System.out.println("***********************************************");
 
-                        if((error - LatestError) < 0.001 || CurrentIteration >= MAX_ITERATIONS){
+                        if(difference < 0.001 || CurrentIteration >= MAX_ITERATIONS){
                             FinishMatrixFactorization();
                             return;
                         }
