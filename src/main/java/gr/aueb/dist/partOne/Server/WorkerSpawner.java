@@ -3,40 +3,55 @@ package gr.aueb.dist.partOne.Server;
 import gr.aueb.dist.partOne.Models.Worker;
 import gr.aueb.dist.partOne.Utils.NetworkUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.util.Scanner;
 
 public class WorkerSpawner {
     public static void main(String[] args){
-        Scanner in = new Scanner(System.in);
+        BufferedReader in = null;
 
-        String currentIp;
-        try{
-            currentIp = InetAddress.getLocalHost().getHostAddress();
-        }catch(Exception e) { return; }
-        int availPort = NetworkUtils.GetNextAvailablePort();
+        try {
+            in = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Set the name of the worker:");
-        String name = in.nextLine();
+            String currentIp = InetAddress.getLocalHost().getHostAddress();
+            int availPort = NetworkUtils.GetNextAvailablePort();
 
-        System.out.println("Set the ip the worker should listen to (Current IP: " + currentIp + "):");
-        String ip = in.nextLine();
+            System.out.println("Set the name of the worker:");
+            String name = in.readLine();
 
-        System.out.println("Set the port the worker should listen to (Available Port: " + availPort + "):");
-        int port = in.nextInt();
+            System.out.println("Set the ip the worker should listen to (Current IP: " + currentIp + "):");
+            String ip = in.readLine();
 
-        System.out.println("Set the IP of the Master:");
-        String masterIp = in.nextLine();
+            System.out.println("Set the port the worker should listen to (Available Port: " + availPort + "):");
+            int port = Integer.parseInt(in.readLine());
 
-        System.out.println("Set the Port of the Master:");
-        int masterPort = in.nextInt();
+            System.out.println("Set the IP of the Master:");
+            String masterIP = in.readLine();
 
-        Worker worker = new Worker();
-        worker.setId(name);
-        worker.setIp(ip);
-        worker.setPort(port);
-        worker.setMasterIp(masterIp);
-        worker.setMasterPort(masterPort);
-        worker.Initialize();
+            System.out.println("Set the Port of the Master:");
+            int masterPort = Integer.parseInt(in.readLine());
+
+            Worker worker = new Worker();
+            worker.setId(name);
+            worker.setIp(ip);
+            worker.setPort(port);
+            worker.setMasterIp(masterIP);
+            worker.setMasterPort(masterPort);
+            worker.Initialize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            if(in != null){
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
