@@ -12,5 +12,4 @@ public interface IWorker {
     INDArray CalculateDerivative(INDArray matrix, INDArray Pu, INDArray Cu, INDArray YY);
     void CalculateXDerivative(int startIndex, int endIndex);
     void CalculateYDerivative(int startIndex, int endIndex);
-    void SendResultsToMaster(CommunicationMessage msg);
 }

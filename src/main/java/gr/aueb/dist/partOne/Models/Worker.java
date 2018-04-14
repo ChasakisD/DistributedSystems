@@ -12,9 +12,6 @@ import org.nd4j.linalg.inverse.InvertMatrix;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.stream.IntStream;
 
 public class Worker extends Server implements IWorker{
@@ -92,7 +89,7 @@ public class Worker extends Server implements IWorker{
                 }
             }
 
-            SendResultsToMaster(result);
+            this.SendCommunicationMessage(result, masterIp, masterPort);
         }
         catch (ClassNotFoundException | IOException ignored) {}
         finally {
@@ -112,7 +109,7 @@ public class Worker extends Server implements IWorker{
         msg.setRamGBSize((int)getAvailableRamSizeInGB());
         msg.setType(MessageType.HELLO_WORLD);
 
-        SendResultsToMaster(msg);
+        this.SendCommunicationMessage(msg, masterIp, masterPort);
 
         this.OpenServer();
 
@@ -133,26 +130,6 @@ public class Worker extends Server implements IWorker{
 
     public INDArray PreCalculateYY(INDArray Y) {
         return Y.transpose().mmul(Y);
-    }
-
-    public void SendResultsToMaster(CommunicationMessage message) {
-        ObjectInputStream in = null;
-        ObjectOutputStream out = null;
-        Socket socket = null;
-        try{
-            socket = new Socket(masterIp, masterPort);
-
-            out = new ObjectOutputStream(socket.getOutputStream());
-            in = new ObjectInputStream(socket.getInputStream());
-
-            out.writeObject(message);
-            out.flush();
-
-            System.out.println("Sent results to master!");
-        }catch(IOException ignored){}
-        finally {
-            this.CloseConnections(socket, in, out);
-        }
     }
 
     /**
@@ -203,19 +180,19 @@ public class Worker extends Server implements IWorker{
     /**
      * Getters and Setters
      */
-    public int getInstanceCpuCores() {
+    protected int getInstanceCpuCores() {
         return cpuCores;
     }
 
-    public void setInstanceCpuCores(int cpuCores) {
+    protected void setInstanceCpuCores(int cpuCores) {
         this.cpuCores = cpuCores;
     }
 
-    public int getInstanceRamSize() {
+    protected int getInstanceRamSize() {
         return ramSize;
     }
 
-    public void setInstanceRamSize(int ramSize) {
+    protected void setInstanceRamSize(int ramSize) {
         this.ramSize = ramSize;
     }
 

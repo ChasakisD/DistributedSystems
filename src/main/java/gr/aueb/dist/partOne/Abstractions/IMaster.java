@@ -15,7 +15,6 @@ public interface IMaster {
     void DistributeYMatrixToWorkers();
     HashMap<String, Integer[]> SplitMatrix(INDArray matrix, String matrixName);
     void SendBroadcastMessageToWorkers(CommunicationMessage message);
-    void SendMessageToWorker(CommunicationMessage message, Worker worker);
     double CalculateError();
     double CalculateScore(int x, int y);
     List<Poi> CalculateBestLocalPOIsForUser(int user, int numberOfResults);

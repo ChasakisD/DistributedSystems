@@ -58,7 +58,39 @@ public class Server implements Runnable{
         }
     }
 
-    public void CloseConnections(ObjectInputStream in, ObjectOutputStream out){
+    protected void SendCommunicationMessage(CommunicationMessage message, String ip, int port) {
+        ObjectInputStream in = null;
+        ObjectOutputStream out = null;
+        Socket socket = null;
+
+        boolean messageSent = false;
+
+        try{
+            socket = new Socket(ip, port);
+
+            out = new ObjectOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
+
+            out.writeObject(message);
+            out.flush();
+
+            messageSent = true;
+            System.out.println("Sent results to master!");
+        }catch(IOException ex){
+            System.out.println("Got exception while sending results to master...");
+            ex.printStackTrace();
+        }
+        finally {
+            CloseConnections(socket, in, out);
+        }
+
+        if(!messageSent){
+            System.out.println("I am trying again!");
+            SendCommunicationMessage(message, ip, port);
+        }
+    }
+
+    protected void CloseConnections(ObjectInputStream in, ObjectOutputStream out){
         try{
             if (in != null) {
                 in.close();
@@ -70,7 +102,7 @@ public class Server implements Runnable{
         catch(IOException ignored){}
     }
 
-    public void CloseConnections(Socket socket, ObjectInputStream in, ObjectOutputStream out){
+    private void CloseConnections(Socket socket, ObjectInputStream in, ObjectOutputStream out){
         try{
             if (socket != null){
                 socket.close();
@@ -82,16 +114,16 @@ public class Server implements Runnable{
 
     /* System Information */
 
-    public String getName(){
+    protected String getName(){
         if(this instanceof Worker){ return "Worker"; }
         else { return "Master"; }
     }
 
-    public int getCpuCores(){
+    protected int getCpuCores(){
         return Runtime.getRuntime().availableProcessors();
     }
 
-    public long getAvailableRamSizeInGB(){
+    protected long getAvailableRamSizeInGB(){
         com.sun.management.OperatingSystemMXBean fragment =
                 (com.sun.management.OperatingSystemMXBean)
                         ManagementFactory.getOperatingSystemMXBean();
@@ -134,7 +166,7 @@ public class Server implements Runnable{
         this.providerSocket = providerSocket;
     }
 
-    public Socket getSocketConn() {
+    protected Socket getSocketConn() {
         return socketConn;
     }
 

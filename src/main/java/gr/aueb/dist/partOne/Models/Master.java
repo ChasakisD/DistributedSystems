@@ -13,7 +13,6 @@ import org.nd4j.linalg.ops.transforms.Transforms;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -255,7 +254,7 @@ public class Master extends Server implements IMaster{
             xMessage.setXArray(X);
             xMessage.setFromUser(workerIndexes.get(worker.getId())[0]);
             xMessage.setToUser(workerIndexes.get(worker.getId())[1]);
-            SendMessageToWorker(xMessage, worker);
+            this.SendCommunicationMessage(xMessage, worker.getIp(), worker.getPort());
         });
     }
 
@@ -268,31 +267,13 @@ public class Master extends Server implements IMaster{
             xMessage.setYArray(Y);
             xMessage.setFromUser(workerIndexes.get(worker.getId())[0]);
             xMessage.setToUser(workerIndexes.get(worker.getId())[1]);
-            SendMessageToWorker(xMessage, worker);
+            this.SendCommunicationMessage(xMessage, worker.getIp(), worker.getPort());
         });
     }
 
     public void SendBroadcastMessageToWorkers(CommunicationMessage message) {
-        AvailableWorkers.parallelStream().forEach(worker -> SendMessageToWorker(message, worker));
-    }
-
-    public void SendMessageToWorker(CommunicationMessage message, Worker worker) {
-        ObjectInputStream in = null;
-        ObjectOutputStream out = null;
-        Socket socket = null;
-
-        try{
-            socket = new Socket(worker.getIp(), worker.getPort());
-
-            out = new ObjectOutputStream(socket.getOutputStream());
-            in = new ObjectInputStream(socket.getInputStream());
-
-            out.writeObject(message);
-            out.flush();
-        }catch(IOException ignored){}
-        finally {
-            this.CloseConnections(socket, in, out);
-        }
+        AvailableWorkers.parallelStream().forEach(worker ->
+                this.SendCommunicationMessage(message, worker.getIp(), worker.getPort()));
     }
 
     public double CalculateError() {
