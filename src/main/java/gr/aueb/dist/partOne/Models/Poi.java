@@ -10,6 +10,10 @@ public class Poi {
     public Poi() {
     }
 
+    public Poi(int id){
+
+    }
+
     public Poi(int id, String name, double latitude, double longitude, String category) {
         this.id = id;
         this.name = name;

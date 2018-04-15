@@ -227,6 +227,9 @@ public class Master extends Server implements IMaster{
             System.out.println("**************************************");
             System.out.println("Loading to " + NEW_X_PATH + ", " + NEW_Y_PATH + "newY.txt");
             System.out.println("**************************************");
+            // Create the updated R
+            FinishMatrixFactorization();
+            CalculateBestLocalPOIsForUser(1,1);
         }else{
             System.out.println("No trained data found to load!. Waiting for master connections...");
         }
@@ -277,19 +280,25 @@ public class Master extends Server implements IMaster{
     }
 
     public double CalculateError() {
+        // Compute the least square distance for every element
         INDArray temp = X.mmul(Y.transpose());
         temp.subi(P);
         temp.muli(temp);
         temp.muli(C);
 
+        // compute the normalization
         INDArray normX = Nd4j.sum(X.mul(X),0);
         INDArray normY = Nd4j.sum(Y.mul(Y), 0);
         INDArray norma = normX.add(normY);
         norma.muli(L);
 
+        // Sum all the elements of the least squares
         double sumPartOne = temp.sumNumber().doubleValue();
+
+        // Compute the normalization for every element
         double sumPartTwo = norma.sumNumber().doubleValue();
 
+        // Return Error + norma
         return sumPartOne + sumPartTwo;
     }
 
@@ -305,10 +314,11 @@ public class Master extends Server implements IMaster{
         double previousMax = Double.MAX_VALUE;
         for (int poi = 0; poi < numberOfResults; poi++) {
             int currentMaxIndex = getMax(pois, previousMax, user);
-            previousMax = pois.getDouble(1, currentMaxIndex);
+            previousMax = pois.getDouble(0, currentMaxIndex);
 
-            //TODO Create the poi based on the currentMaxIndex
-            recommendedPOIs.add(new Poi());
+            // Creates a new poi with that id
+            recommendedPOIs.add(new Poi(currentMaxIndex));
+            System.out.println("Found "+(poi+1)+" poi, index: "+currentMaxIndex);
         }
 
         return recommendedPOIs;
@@ -450,9 +460,10 @@ public class Master extends Server implements IMaster{
     private int getMax(INDArray pois, double previousMax, int user){
         double max = -1;
         int maxIndex = -1;
-
+        System.out.println(pois.rows());
+        System.out.println(pois.columns());
         for (int i = 0; i < pois.columns(); i++) {
-            double element = pois.getDouble(1, i);
+            double element = pois.getDouble(0, i);
             if (previousMax > element &&
                     element > max &&
                     P.getDouble(user, i) != 1){
