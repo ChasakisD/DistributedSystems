@@ -1,11 +1,11 @@
-package gr.aueb.dist.partOne.Client;
+package gr.aueb.dist.Client;
 
-import gr.aueb.dist.partOne.Abstractions.IShowResults;
-import gr.aueb.dist.partOne.Models.CommunicationMessage;
-import gr.aueb.dist.partOne.Models.MessageType;
-import gr.aueb.dist.partOne.Models.Poi;
-import gr.aueb.dist.partOne.Server.Server;
-import gr.aueb.dist.partOne.Utils.NetworkUtils;
+import gr.aueb.dist.Models.CommunicationMessage;
+import gr.aueb.dist.Models.MessageType;
+import gr.aueb.dist.Utils.NetworkUtils;
+import gr.aueb.dist.Abstractions.IShowResults;
+import gr.aueb.dist.Models.Poi;
+import gr.aueb.dist.Server.Server;
 
 import java.io.*;
 import java.util.List;

@@ -1,4 +1,4 @@
-package gr.aueb.dist.partOne.Utils;
+package gr.aueb.dist.Utils;
 
 import java.io.IOException;
 import java.net.InetAddress;

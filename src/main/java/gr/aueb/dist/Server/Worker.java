@@ -1,9 +1,9 @@
-package gr.aueb.dist.partOne.Server;
+package gr.aueb.dist.Server;
 
-import gr.aueb.dist.partOne.Abstractions.IWorker;
-import gr.aueb.dist.partOne.Models.CommunicationMessage;
-import gr.aueb.dist.partOne.Models.MessageType;
-import gr.aueb.dist.partOne.Utils.ParserUtils;
+import gr.aueb.dist.Abstractions.IWorker;
+import gr.aueb.dist.Models.CommunicationMessage;
+import gr.aueb.dist.Models.MessageType;
+import gr.aueb.dist.Utils.ParserUtils;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.inverse.InvertMatrix;
@@ -13,7 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.stream.IntStream;
 
-public class Worker extends Server implements IWorker{
+public class Worker extends Server implements IWorker {
     private String masterIp;
     private int masterPort;
 

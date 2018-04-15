@@ -1,4 +1,4 @@
-package gr.aueb.dist.partOne.Abstractions;
+package gr.aueb.dist.Abstractions;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 

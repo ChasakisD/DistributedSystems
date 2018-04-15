@@ -1,6 +1,6 @@
-package gr.aueb.dist.partOne.Abstractions;
+package gr.aueb.dist.Abstractions;
 
-import gr.aueb.dist.partOne.Models.CommunicationMessage;
+import gr.aueb.dist.Models.CommunicationMessage;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

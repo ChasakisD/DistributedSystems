@@ -1,7 +1,7 @@
-package gr.aueb.dist.partOne.Server;
+package gr.aueb.dist.Server;
 
-import gr.aueb.dist.partOne.Abstractions.IServer;
-import gr.aueb.dist.partOne.Models.CommunicationMessage;
+import gr.aueb.dist.Abstractions.IServer;
+import gr.aueb.dist.Models.CommunicationMessage;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

@@ -1,11 +1,11 @@
-package gr.aueb.dist.partOne.Server;
+package gr.aueb.dist.Server;
 
-import gr.aueb.dist.partOne.Abstractions.IMaster;
-import gr.aueb.dist.partOne.Models.CommunicationMessage;
-import gr.aueb.dist.partOne.Models.MessageType;
-import gr.aueb.dist.partOne.Models.Poi;
-import gr.aueb.dist.partOne.Utils.MatrixHelpers;
-import gr.aueb.dist.partOne.Utils.ParserUtils;
+import gr.aueb.dist.Abstractions.IMaster;
+import gr.aueb.dist.Models.CommunicationMessage;
+import gr.aueb.dist.Models.MessageType;
+import gr.aueb.dist.Models.Poi;
+import gr.aueb.dist.Utils.MatrixHelpers;
+import gr.aueb.dist.Utils.ParserUtils;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.ops.transforms.Transforms;
@@ -18,7 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class Master extends Server implements IMaster{
+public class Master extends Server implements IMaster {
     private int currentIteration;
     private int howManyWorkersToWait;
 

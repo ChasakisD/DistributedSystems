@@ -1,6 +1,6 @@
-package gr.aueb.dist.partOne.Abstractions;
+package gr.aueb.dist.Abstractions;
 
-import gr.aueb.dist.partOne.Models.Poi;
+import gr.aueb.dist.Models.Poi;
 
 import java.util.List;
 

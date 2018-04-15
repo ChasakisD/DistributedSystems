@@ -1,7 +1,7 @@
-package gr.aueb.dist.partOne.Abstractions;
+package gr.aueb.dist.Abstractions;
 
-import gr.aueb.dist.partOne.Models.Poi;
-import gr.aueb.dist.partOne.Models.CommunicationMessage;
+import gr.aueb.dist.Models.CommunicationMessage;
+import gr.aueb.dist.Models.Poi;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 import java.util.HashMap;

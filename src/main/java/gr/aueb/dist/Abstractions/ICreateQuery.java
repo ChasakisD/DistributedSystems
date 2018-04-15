@@ -1,4 +1,4 @@
-package gr.aueb.dist.partOne.Abstractions;
+package gr.aueb.dist.Abstractions;
 
 public interface ICreateQuery {
     void GetLocation();

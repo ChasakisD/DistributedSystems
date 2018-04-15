@@ -1,4 +1,4 @@
-package gr.aueb.dist.partOne.Utils;
+package gr.aueb.dist.Utils;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
