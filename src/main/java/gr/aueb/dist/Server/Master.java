@@ -381,20 +381,36 @@ public class Master extends Server implements IMaster {
         LinkedHashMap<String, Double> sortedMap =
                 new LinkedHashMap<>();
 
+        /*
+          Execution times HashMap. Keys: Worker's name,
+          Values: latest execution time of the worker's duty
+         */
         HashMap<String, Double> matrixExecutionTimes =
                 new HashMap<>(matrixName.equals("X") ?
                         xExecutionTimes :
                         yExecutionTimes);
 
+        /*
+          Workers Distribution HashMap. Keys: Worker's name,
+          Values: latest number of matrix's rows given to create
+         */
         HashMap<String, Integer> latestWorkersDistribution =
                 matrixName.equals("X") ?
                         latestWorkersXDistribution :
                         latestWorkersYDistribution;
 
+        /*
+         * During the first iteration we distribute only depending on the
+         * cores of each worker, so we divide the rows to the cores evenly
+         */
         if(currentIteration == 0) {
             rowsPerCore = matrix.rows() / totalCores;
         }
+        /*
+         * Otherwise we distribute depending the previous execution times
+         */
         else {
+            /* Create a sorted version HashMap of the matrixExecutionTimes HashMap */
             ArrayList<String> mapKeys = new ArrayList<>(matrixExecutionTimes.keySet());
             ArrayList<Double> mapValues = new ArrayList<>(matrixExecutionTimes.values());
             Collections.sort(mapValues);
@@ -417,12 +433,17 @@ public class Master extends Server implements IMaster {
 
         HashMap<String, Integer[]> workerIndexes = new HashMap<>();
 
+        /*
+           Calculate min execution time in order to decide later
+           if we need to redistribute
+         */
         double totalExTime = matrixExecutionTimes.values()
                 .stream()
                 .reduce(0.0, (a, b) -> a + b);
 
         double meanExTime = totalExTime / availableWorkers.size();
 
+        /* Find the last value(ex time), meaning the slowest worker's time */
         Iterator<Double> valueIt = sortedMap.values().iterator();
         Double lastValue = 0.0;
         while (valueIt.hasNext()) {
@@ -431,9 +452,18 @@ public class Master extends Server implements IMaster {
 
         System.out.println("***********************************************");
 
-        boolean needRedistribution = currentIteration == 0 || (lastValue - meanExTime) <= 0;
+        /*
+           No need to distribute if we are in the first loop
+           or the difference between the slowest time and the
+           min is lower than 1 sec
+         */
+        boolean NoNeedRedistribution = currentIteration == 0 || (lastValue - meanExTime) <= 0;
 
-        if(!needRedistribution) {
+        /*
+         * If we do need to distribute, we remove 10% of the rows
+         * given to the slowest worker, and share it among the rest workers
+         */
+        if(!NoNeedRedistribution) {
             Iterator<String> keyIt = sortedMap.keySet().iterator();
             String lastKey = "";
             while (keyIt.hasNext()) {
@@ -452,6 +482,7 @@ public class Master extends Server implements IMaster {
                 percentMoved -= rowsToBeAddedToRest;
             }
 
+            /* In case there are rows left, we add them to the first worker */
             if(percentMoved > 0) {
                 Iterator<String> keyIt3 = sortedMap.keySet().iterator();
                 if (keyIt3.hasNext()) {
@@ -462,10 +493,17 @@ public class Master extends Server implements IMaster {
             }
         }
 
+        /* For each worker, we set the number of rows
+           depending on the need or not for distribution */
         for (int i = 0; i < availableWorkers.size(); i++) {
             Worker worker = availableWorkers.get(i);
 
-            int workerRows = needRedistribution ?
+            /*
+               If we don't need to redistribute, we distribute the
+               rows equally to the number of the cores it has.
+               Otherwise, we do the redistribution
+             */
+            int workerRows = NoNeedRedistribution ?
                     (rowsPerCore * worker.getInstanceCpuCores()) :
                     latestWorkersDistribution.get(worker.getName());
 
