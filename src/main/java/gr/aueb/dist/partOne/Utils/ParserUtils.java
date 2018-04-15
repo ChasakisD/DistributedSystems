@@ -1,6 +1,5 @@
 package gr.aueb.dist.partOne.Utils;
 
-import gr.aueb.dist.partOne.Models.Master;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
@@ -10,44 +9,23 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class ParserUtils {
-    public static Master GetServersFromText(String file){
-        Master master = new Master();
 
-        BufferedReader bufferedReader = null;
-        FileReader fileReader = null;
-        try {
-            fileReader = new FileReader(file);
-            bufferedReader = new BufferedReader(fileReader);
+    /**
+     * Calculates the elapsed time from a start time
+     * @param start the start time
+     * @return the elapsed time
+     */
+    public static double GetTimeInSec(long start){
+        long end = System.nanoTime();
 
-            String sCurrentLine;
-            while ((sCurrentLine = bufferedReader.readLine()) != null) {
-                StringTokenizer st = new StringTokenizer(sCurrentLine);
-                int i = 1;
-                while (st.hasMoreTokens()){
-                    String token = st.nextToken();
-
-                    switch (i){
-                        case 1: master.setIp(token); break;
-                        case 2: master.setPort(Integer.parseInt(token)); break;
-                        case 3: master.setId(token); break;
-                        case 4: master.setHowManyWorkersToWait(Integer.parseInt(token)); break;
-                    }
-                    i++;
-                }
-            }
-
-            return master;
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        finally {
-            CloseReaders(bufferedReader, fileReader);
-        }
-
-        return null;
+        return (end-start) / 1000000 / 1000d;
     }
 
+    /**
+     * Loads and returns the dataSet
+     * @param dataSet the path to the dataSet
+     * @return the dataSet matrix
+     */
     public static INDArray LoadDataSet(String dataSet){
         int[] dimensions = GetArrayDimensions(dataSet);
         INDArray matrix = Nd4j.zeros(dimensions);
@@ -136,11 +114,5 @@ public class ParserUtils {
         dimensions[1]++;
 
         return dimensions;
-    }
-
-    public static double GetTimeInSec(long start){
-        long end = System.nanoTime();
-
-        return (end-start) / 1000000 / 1000d;
     }
 }

@@ -1,8 +1,9 @@
-package gr.aueb.dist.partOne.Server;
+package gr.aueb.dist.partOne.Models;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CommunicationMessage implements Serializable {
     private MessageType type;
@@ -12,8 +13,8 @@ public class CommunicationMessage implements Serializable {
     private INDArray xArray;
     private INDArray yArray;
 
-    private int fromUser;
-    private int toUser;
+    private int startIndex;
+    private int endIndex;
 
     private String serverName;
     private String ip;
@@ -22,6 +23,11 @@ public class CommunicationMessage implements Serializable {
     private int ramGBSize;
 
     private double executionTime;
+
+    private int userToAsk;
+    private int howManyPoisToRecommend;
+    private List<Poi> poisToReturn;
+
 
     public CommunicationMessage() {}
 
@@ -68,20 +74,20 @@ public class CommunicationMessage implements Serializable {
         this.yArray = yArray;
     }
 
-    public int getFromUser() {
-        return fromUser;
+    public int getStartIndex() {
+        return startIndex;
     }
 
-    public void setFromUser(int fromUser) {
-        this.fromUser = fromUser;
+    public void setStartIndex(int startIndex) {
+        this.startIndex = startIndex;
     }
 
-    public int getToUser() {
-        return toUser;
+    public int getEndIndex() {
+        return endIndex;
     }
 
-    public void setToUser(int toUser) {
-        this.toUser = toUser;
+    public void setEndIndex(int endIndex) {
+        this.endIndex = endIndex;
     }
 
     public String getServerName() {
@@ -130,5 +136,29 @@ public class CommunicationMessage implements Serializable {
 
     public void setExecutionTime(double executionTime) {
         this.executionTime = executionTime;
+    }
+
+    public int getUserToAsk() {
+        return userToAsk;
+    }
+
+    public void setUserToAsk(int userToAsk) {
+        this.userToAsk = userToAsk;
+    }
+
+    public int getHowManyPoisToRecommend() {
+        return howManyPoisToRecommend;
+    }
+
+    public void setHowManyPoisToRecommend(int howManyPoisToRecommend) {
+        this.howManyPoisToRecommend = howManyPoisToRecommend;
+    }
+
+    public List<Poi> getPoisToReturn() {
+        return poisToReturn;
+    }
+
+    public void setPoisToReturn(List<Poi> poisToReturn) {
+        this.poisToReturn = poisToReturn;
     }
 }

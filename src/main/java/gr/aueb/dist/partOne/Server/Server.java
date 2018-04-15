@@ -1,6 +1,7 @@
 package gr.aueb.dist.partOne.Server;
 
-import gr.aueb.dist.partOne.Models.Worker;
+import gr.aueb.dist.partOne.Abstractions.IServer;
+import gr.aueb.dist.partOne.Models.CommunicationMessage;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,11 +10,12 @@ import java.lang.management.ManagementFactory;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server implements Runnable{
-    private String id;
+public class Server implements IServer, Runnable{
+    private String name;
     private String ip;
     private int port;
-    private boolean cancelReceived = false;
+    private int cpuCores;
+    private int ramSize;
 
     /* Define the socket that receives requests */
     private ServerSocket providerSocket;
@@ -23,17 +25,29 @@ public class Server implements Runnable{
 
     protected Server() {}
 
+    /**
+     * Runnable Implementation
+     */
     public void run(){}
 
-    protected void OpenServer(){
+    /**
+     * IServer Implementation
+     */
+    public void OpenServer(){
         try {
             providerSocket = new ServerSocket(getPort());
 
-            System.out.println(getName() + " " + getId() + " " + getIp() + ":" + getPort() + " server opened!");
+            System.out.println(getInstanceName() + " " + getName() + " " + getIp() + ":" + getPort() + " server opened!");
 
-            while (!cancelReceived) {
+            //noinspection InfiniteLoopStatement
+            while (true) {
                 socketConn = providerSocket.accept();
 
+                /*
+                    Creates a new thread from the runnable implementation
+                    instance and start it. Remember this will call the
+                    override method of Worker/Master/Client respectively
+                 */
                 (new Thread(this)).start();
             }
         }catch(IOException ignored){}
@@ -41,7 +55,7 @@ public class Server implements Runnable{
             if(providerSocket != null){
                 try{
                     providerSocket.close();
-                    System.out.println(getName() + " " + getId() + " " + getIp() + ":" + getPort() + " server closed!");
+                    System.out.println(getInstanceName() + " " + getName() + " " + getIp() + ":" + getPort() + " server closed!");
                 }catch(IOException ignored){}
             }
         }
@@ -49,16 +63,13 @@ public class Server implements Runnable{
 
     public void CloseServer(){
         if(providerSocket != null){
-            cancelReceived = true;
-
             try{
                 providerSocket.close();
-                System.out.println(getName() + " " + getId() + " " + getIp() + ":" + getPort() + " server closed!");
             }catch(IOException ignored){}
         }
     }
 
-    protected void SendCommunicationMessage(CommunicationMessage message, String ip, int port) {
+    public void SendCommunicationMessage(CommunicationMessage message, String ip, int port) {
         ObjectInputStream in = null;
         ObjectOutputStream out = null;
         Socket socket = null;
@@ -75,7 +86,6 @@ public class Server implements Runnable{
             out.flush();
 
             messageSent = true;
-            System.out.println("Sent results to master!");
         }catch(IOException ex){
             System.out.println("Got exception while sending results to master...");
             ex.printStackTrace();
@@ -90,7 +100,7 @@ public class Server implements Runnable{
         }
     }
 
-    protected void CloseConnections(ObjectInputStream in, ObjectOutputStream out){
+    public void CloseConnections(ObjectInputStream in, ObjectOutputStream out){
         try{
             if (in != null) {
                 in.close();
@@ -102,7 +112,7 @@ public class Server implements Runnable{
         catch(IOException ignored){}
     }
 
-    private void CloseConnections(Socket socket, ObjectInputStream in, ObjectOutputStream out){
+    public void CloseConnections(Socket socket, ObjectInputStream in, ObjectOutputStream out){
         try{
             if (socket != null){
                 socket.close();
@@ -112,11 +122,14 @@ public class Server implements Runnable{
         catch(IOException ignored){}
     }
 
-    /* System Information */
+    /**
+     * System Information
+     */
 
-    protected String getName(){
+    protected String getInstanceName(){
         if(this instanceof Worker){ return "Worker"; }
-        else { return "Master"; }
+        else if(this instanceof Master){ return "Master"; }
+        else {return "Client"; }
     }
 
     protected int getCpuCores(){
@@ -132,14 +145,16 @@ public class Server implements Runnable{
         return availRamInBytes / 1024 / 1024 / 1024;
     }
 
-    /* Getters and Setters */
+    /**
+     * Getters and Setters
+     */
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getIp() {
@@ -156,6 +171,22 @@ public class Server implements Runnable{
 
     public void setPort(int port) {
         this.port = port;
+    }
+
+    protected int getInstanceCpuCores() {
+        return cpuCores;
+    }
+
+    protected void setInstanceCpuCores(int cpuCores) {
+        this.cpuCores = cpuCores;
+    }
+
+    protected int getInstanceRamSize() {
+        return ramSize;
+    }
+
+    protected void setInstanceRamSize(int ramSize) {
+        this.ramSize = ramSize;
     }
 
     public ServerSocket getProviderSocket() {
@@ -177,7 +208,7 @@ public class Server implements Runnable{
     @Override
     public String toString() {
         return "**************************************" +
-                "\n" + getName() + ": " + id +
+                "\n" + getInstanceName() + ": " + name +
                 "\n" + "IP: " + ip + ":" + port +
                 "\n" + "Available CPU Cores: " + getCpuCores() +
                 "\n" + "Available Ram Size " + getAvailableRamSizeInGB() + "GB" +

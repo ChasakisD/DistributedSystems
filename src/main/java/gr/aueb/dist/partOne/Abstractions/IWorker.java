@@ -1,6 +1,5 @@
 package gr.aueb.dist.partOne.Abstractions;
 
-import gr.aueb.dist.partOne.Server.CommunicationMessage;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 public interface IWorker {

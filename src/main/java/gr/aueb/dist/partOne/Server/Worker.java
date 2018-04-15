@@ -1,9 +1,8 @@
-package gr.aueb.dist.partOne.Models;
+package gr.aueb.dist.partOne.Server;
 
 import gr.aueb.dist.partOne.Abstractions.IWorker;
-import gr.aueb.dist.partOne.Server.CommunicationMessage;
-import gr.aueb.dist.partOne.Server.MessageType;
-import gr.aueb.dist.partOne.Server.Server;
+import gr.aueb.dist.partOne.Models.CommunicationMessage;
+import gr.aueb.dist.partOne.Models.MessageType;
 import gr.aueb.dist.partOne.Utils.ParserUtils;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
@@ -15,9 +14,6 @@ import java.io.ObjectOutputStream;
 import java.util.stream.IntStream;
 
 public class Worker extends Server implements IWorker{
-    private int cpuCores;
-    private int ramSize;
-
     private String masterIp;
     private int masterPort;
 
@@ -25,7 +21,17 @@ public class Worker extends Server implements IWorker{
 
     private final static double L = 0.1;
 
-    public Worker() {}
+    Worker(String name, String ip, int port){
+        this.setName(name);
+        this.setIp(ip);
+        this.setPort(port);
+    }
+
+    public Worker(String name, String ip, int port, String masterIp, int masterPort){
+        this(name, ip, port);
+        this.masterIp = masterIp;
+        this.masterPort = masterPort;
+    }
 
     /**
      * Runnable Implementation
@@ -40,7 +46,7 @@ public class Worker extends Server implements IWorker{
             CommunicationMessage message = (CommunicationMessage) in.readObject();
 
             CommunicationMessage result = new CommunicationMessage();
-            result.setServerName(getId());
+            result.setServerName(getName());
             result.setRamGBSize((int)getAvailableRamSizeInGB());
             switch (message.getType()){
                 case TRANSFER_MATRICES:{
@@ -56,32 +62,32 @@ public class Worker extends Server implements IWorker{
                     Y = message.getYArray();
 
                     long startTime = System.nanoTime();
-                    CalculateXDerivative(message.getFromUser(), message.getToUser());
+                    CalculateXDerivative(message.getStartIndex(), message.getEndIndex());
                     double executionTime = ParserUtils.GetTimeInSec(startTime);
 
                     result.setExecutionTime(executionTime);
                     result.setType(MessageType.X_CALCULATED);
-                    result.setFromUser(message.getFromUser());
-                    result.setToUser(message.getToUser());
+                    result.setStartIndex(message.getStartIndex());
+                    result.setEndIndex(message.getEndIndex());
                     result.setXArray(X);
 
-                    System.out.println("Finished X Calculation from :" + message.getFromUser() + " to " + message.getToUser());
+                    System.out.println("Finished X Calculation from :" + message.getStartIndex() + " to " + message.getEndIndex());
                     break;
                 }
                 case CALCULATE_Y:{
                     X = message.getXArray();
 
                     long startTime = System.nanoTime();
-                    CalculateYDerivative(message.getFromUser(), message.getToUser());
+                    CalculateYDerivative(message.getStartIndex(), message.getEndIndex());
                     double executionTime = ParserUtils.GetTimeInSec(startTime);
 
                     result.setExecutionTime(executionTime);
                     result.setType(MessageType.Y_CALCULATED);
-                    result.setFromUser(message.getFromUser());
-                    result.setToUser(message.getToUser());
+                    result.setStartIndex(message.getStartIndex());
+                    result.setEndIndex(message.getEndIndex());
                     result.setYArray(Y);
 
-                    System.out.println("Finished Y Calculation from :" + message.getFromUser() + " to " + message.getToUser());
+                    System.out.println("Finished Y Calculation from :" + message.getStartIndex() + " to " + message.getEndIndex());
                     break;
                 }
                 default:{
@@ -102,7 +108,7 @@ public class Worker extends Server implements IWorker{
      */
     public void Initialize() {
         CommunicationMessage msg = new CommunicationMessage();
-        msg.setServerName(getId());
+        msg.setServerName(getName());
         msg.setIp(getIp());
         msg.setPort(getPort());
         msg.setCpuCores(getCpuCores());
@@ -112,8 +118,6 @@ public class Worker extends Server implements IWorker{
         this.SendCommunicationMessage(msg, masterIp, masterPort);
 
         this.OpenServer();
-
-        System.out.println("I did what i must do dear Master!");
     }
 
     public INDArray CalculateCuMatrix(int user, INDArray C) {
@@ -136,10 +140,12 @@ public class Worker extends Server implements IWorker{
      * Helper Methods
      */
     public void CalculateXDerivative(int startIndex, int endIndex){
+        /* Initialize the X with length rows */
         X = Nd4j.zeros(endIndex - startIndex + 1, X.columns());
 
         INDArray YY = PreCalculateYY(Y);
 
+        /* Run the calculation for each user in parallel */
         IntStream.range(startIndex, endIndex + 1).parallel().forEach((user) -> {
             INDArray Cu = CalculateCuMatrix(user, C);
             INDArray Pu = P.getRow(user);
@@ -148,10 +154,12 @@ public class Worker extends Server implements IWorker{
     }
 
     public void CalculateYDerivative(int startIndex, int endIndex){
+        /* Initialize the Y with length rows */
         Y = Nd4j.zeros(endIndex - startIndex + 1, Y.columns());
 
         INDArray XX = PreCalculateXX(X);
 
+        /* Run the calculation for each poi in parallel */
         IntStream.range(startIndex, endIndex + 1).parallel().forEach((poi) -> {
             INDArray Ci = CalculateCiMatrix(poi, C);
             INDArray Pi = P.getColumn(poi).transpose();
@@ -160,15 +168,19 @@ public class Worker extends Server implements IWorker{
     }
 
     public INDArray CalculateDerivative(INDArray matrix, INDArray Pu, INDArray Cu, INDArray YY) {
-        // (Cu - I)
+        /* (Cu - I) */
         INDArray result = (Cu.sub(Nd4j.eye(Cu.rows())));
-        // Y.T(Cu - I)Y
+
+        /* Y.T(Cu - I)Y */
         result = matrix.transpose().mmul(result).mmul(matrix);
-        // Y.TY + Y.T(Cu - I)Y
+
+        /* Y.TY + Y.T(Cu - I)Y */
         result.addi(YY);
-        // Y.TY + Y.T(Cu - I)Y +λI
+
+        /* Y.TY + Y.T(Cu - I)Y + λI */
         result.addi(Nd4j.eye(result.rows()).mul(L));
-        //invert the matrix
+
+        /* invert the matrix */
         result = InvertMatrix.invert(result,true);
 
         return Pu
@@ -177,45 +189,10 @@ public class Worker extends Server implements IWorker{
                 .mmul(result);
     }
 
-    /**
-     * Getters and Setters
-     */
-    protected int getInstanceCpuCores() {
-        return cpuCores;
-    }
-
-    protected void setInstanceCpuCores(int cpuCores) {
-        this.cpuCores = cpuCores;
-    }
-
-    protected int getInstanceRamSize() {
-        return ramSize;
-    }
-
-    protected void setInstanceRamSize(int ramSize) {
-        this.ramSize = ramSize;
-    }
-
-    public String getMasterIp() {
-        return masterIp;
-    }
-
-    public void setMasterIp(String masterIp) {
-        this.masterIp = masterIp;
-    }
-
-    public int getMasterPort() {
-        return masterPort;
-    }
-
-    public void setMasterPort(int masterPort) {
-        this.masterPort = masterPort;
-    }
-
     @Override
     public String toString() {
         return "**************************************" +
-                "\n" + getName() + ": " + getId() +
+                "\n" + getInstanceName() + ": " + getName() +
                 "\n" + "IP: " + getIp() + ":" + getPort() +
                 "\n" + "Available CPU Cores: " + getInstanceCpuCores() +
                 "\n" + "Available Ram Size " + getInstanceRamSize() + "GB" +

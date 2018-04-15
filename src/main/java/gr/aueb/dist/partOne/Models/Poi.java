@@ -1,6 +1,8 @@
 package gr.aueb.dist.partOne.Models;
 
-public class Poi {
+import java.io.Serializable;
+
+public class Poi implements Serializable {
     private int id;
     private String name;
     private double latitude;
@@ -11,7 +13,7 @@ public class Poi {
     }
 
     public Poi(int id){
-
+        this.id = id;
     }
 
     public Poi(int id, String name, double latitude, double longitude, String category) {
@@ -60,5 +62,10 @@ public class Poi {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "POI Id: " + getId();
     }
 }

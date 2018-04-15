@@ -1,4 +1,4 @@
-package gr.aueb.dist.partOne.Server;
+package gr.aueb.dist.partOne.Models;
 
 public enum MessageType {
     HELLO_WORLD,
