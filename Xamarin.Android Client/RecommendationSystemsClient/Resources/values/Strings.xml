@@ -1,0 +1,11 @@
+<resources>
+  <string name="app_name">ClientApplication</string>
+  <string name="openDrawer">Drawer Opened</string>
+  <string name="closeDrawer">Drawer Closed</string>
+
+  <string name="ds2011">Distributed Systems\n2017-2018</string>
+  <string name="button_enter">Enter</string>
+
+  <string name="click_android">Click on the android</string>
+  <string name="changed_text">Text to be changed</string>
+</resources>

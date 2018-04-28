@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="MainTheme" parent="MainTheme.Base"/>
+
+  <style name="MainTheme.Base" parent="Theme.AppCompat.NoActionBar">
+    <item name="windowNoTitle">true</item>
+    <item name="windowActionBar">false</item>
+    <item name="colorPrimary">#2196F3</item>
+    <item name="colorPrimaryDark">#1976D2</item>
+    <item name="colorAccent">#FF4081</item>
+    <item name="windowActionModeOverlay">true</item>
+    <item name="drawerArrowStyle">@style/AppDrawerArrowStyle</item>
+
+    <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+  </style>
+  
+  <style name="AppDrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+    <item name="color">#F5F5F5</item>
+    <item name="spinBars">true</item>
+  </style>
+
+  <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Dialog">
+    <item name="colorAccent">#FF4081</item>
+  </style>
+</resources>
