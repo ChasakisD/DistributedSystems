@@ -2579,6 +2579,9 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f080058
 			public const int forever = 2131230808;
 			
+			// aapt resource value: 0x7f0800b2
+			public const int get_pois = 2131230898;
+			
 			// aapt resource value: 0x7f08000a
 			public const int ghost_view = 2131230730;
 			
@@ -2627,14 +2630,14 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f080061
 			public const int list_item = 2131230817;
 			
-			// aapt resource value: 0x7f0800b5
-			public const int masked = 2131230901;
+			// aapt resource value: 0x7f0800b6
+			public const int masked = 2131230902;
 			
 			// aapt resource value: 0x7f0800a2
 			public const int media_actions = 2131230882;
 			
-			// aapt resource value: 0x7f0800b3
-			public const int message = 2131230899;
+			// aapt resource value: 0x7f0800b4
+			public const int message = 2131230900;
 			
 			// aapt resource value: 0x7f080031
 			public const int middle = 2131230769;
@@ -2645,11 +2648,11 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f080028
 			public const int multiply = 2131230760;
 			
-			// aapt resource value: 0x7f0800b6
-			public const int nav_popular = 2131230902;
-			
 			// aapt resource value: 0x7f0800b7
-			public const int nav_top_rated = 2131230903;
+			public const int nav_popular = 2131230903;
+			
+			// aapt resource value: 0x7f0800b8
+			public const int nav_top_rated = 2131230904;
 			
 			// aapt resource value: 0x7f08009b
 			public const int nav_view = 2131230875;
@@ -2867,8 +2870,8 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f08006f
 			public const int title_template = 2131230831;
 			
-			// aapt resource value: 0x7f0800b2
-			public const int toolbar = 2131230898;
+			// aapt resource value: 0x7f0800b3
+			public const int toolbar = 2131230899;
 			
 			// aapt resource value: 0x7f08003e
 			public const int top = 2131230782;
@@ -2906,8 +2909,8 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800b4
-			public const int visible = 2131230900;
+			// aapt resource value: 0x7f0800b5
+			public const int visible = 2131230901;
 			
 			// aapt resource value: 0x7f08003c
 			public const int withText = 2131230780;

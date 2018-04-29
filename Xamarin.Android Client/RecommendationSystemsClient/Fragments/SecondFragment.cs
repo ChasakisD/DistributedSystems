@@ -1,7 +1,9 @@
-﻿using Android.App;
+﻿using System.Linq;
+using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using RecommendationSystemsClient.Services;
 
 namespace RecommendationSystemsClient.Fragments
 {
@@ -36,6 +38,24 @@ namespace RecommendationSystemsClient.Fragments
                 });
 
                 alert.Show();
+            };
+
+            var getPoisImageView = root.FindViewById<ImageView>(Resource.Id.get_pois);
+            getPoisImageView.Click += async (o, e) =>
+            {
+                //Progressbar run here
+                
+                //TODO Get ip, port, userToAsk, numberOfPois from UI
+                var pois = await new NetworkService("192.168.2.2", 20912).GetPois(1, 5);
+
+                if (pois == null) return;
+
+                pois.ForEach(poi =>
+                {
+                    System.Diagnostics.Debug.WriteLine($"Poi Recieved: {poi.Id}");
+                });
+                
+                //Progressbar stop here
             };
 
             return root;

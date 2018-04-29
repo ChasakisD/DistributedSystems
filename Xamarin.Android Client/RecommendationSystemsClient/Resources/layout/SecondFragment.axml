@@ -7,8 +7,8 @@
     android:orientation="vertical">
     <ImageView
         android:id="@+id/talking_android"
-        android:layout_width="180sp"
-        android:layout_height="80sp"
+        android:layout_width="180dp"
+        android:layout_height="107dp"
         android:layout_marginBottom="50sp"
         android:src="@mipmap/ic_launcher" />
     <TextView
@@ -28,4 +28,9 @@
         android:textColor="#ffcc00"
         android:typeface="monospace"
         android:text="@string/changed_text" />
+    <ImageView
+        android:id="@+id/get_pois"
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+        android:src="@mipmap/ic_launcher" />
 </LinearLayout>
