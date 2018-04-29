@@ -1,5 +1,6 @@
 package gr.aueb.dist.Server;
 
+import com.google.gson.Gson;
 import gr.aueb.dist.Abstractions.IMaster;
 import gr.aueb.dist.Models.CommunicationMessage;
 import gr.aueb.dist.Models.MessageType;
@@ -10,13 +11,13 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.ops.transforms.Transforms;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class Master extends Server implements IMaster {
     private int currentIteration;
@@ -70,14 +71,52 @@ public class Master extends Server implements IMaster {
      * Runnable Implementation
      */
     public synchronized void run() {
+        /* Connection between Java Clients */
         ObjectOutputStream out = null;
         ObjectInputStream in = null;
 
-        try{
-            out = new ObjectOutputStream(getSocketConn().getOutputStream());
-            in = new ObjectInputStream(getSocketConn().getInputStream());
+        /* Connection Between Xamarin.Android Clients */
+        DataInputStream dataIn = null;
+        PrintWriter printOut = null;
 
-            CommunicationMessage message = (CommunicationMessage) in.readObject();
+        try{
+            boolean isJavaConnection;
+            CommunicationMessage message;
+
+            /*
+             * ************************************
+             * ************ Warning!! *************
+             * ******** Hacking The Kernel ********
+             * ************************************
+             * First try creating a Java Connection.
+             * Remember, if it is not a Java Connection,
+             * ObjectInputStream will cut the 4 first bytes because
+             * it will think that this is the header of the message.
+             * So The C# Client must send an empty header of 4 bytes!!!
+             * By doing this way, the DataInputStream will read the message
+             * PERFECTLY!!!
+             */
+            try{
+                isJavaConnection = true;
+                out = new ObjectOutputStream(getSocketConn().getOutputStream());
+                in = new ObjectInputStream(getSocketConn().getInputStream());
+            }catch (Exception e){
+                isJavaConnection = false;
+                printOut = new PrintWriter(getSocketConn().getOutputStream());
+                dataIn = new DataInputStream(getSocketConn().getInputStream());
+            }
+
+            if(isJavaConnection){
+                message = (CommunicationMessage) in.readObject();
+            }else{
+                byte[] receivedBytes = new byte[dataIn.available()];
+                for(int i = 0; i < receivedBytes.length; i++){
+                    receivedBytes[i] = dataIn.readByte();
+                }
+
+                String rec = new String(receivedBytes);
+                message = new Gson().fromJson(rec, CommunicationMessage.class);
+            }
 
             switch(message.getType()){
                 case HELLO_WORLD:{
@@ -169,16 +208,24 @@ public class Master extends Server implements IMaster {
                     result.setType(MessageType.REPLY_RECOMMENDATION);
                     result.setPoisToReturn(CalculateBestLocalPOIsForUser(message.getUserToAsk(), message.getHowManyPoisToRecommend()));
 
-                    SendCommunicationMessage(result, message.getIp(), message.getPort());
+                    if(isJavaConnection){
+                        SendCommunicationMessage(result, message.getIp(), message.getPort());
+                    }else{
+                        String json = new Gson().toJson(result);
+                        printOut.print(json);
+                        printOut.flush();
+                    }
                 }
                 default:{
                     break;
                 }
             }
         }
-        catch (ClassNotFoundException | IOException ignored) {}
+        catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
         finally {
-            CloseConnections(in, out);
+            CloseConnections(in, out, dataIn, printOut);
         }
     }
 

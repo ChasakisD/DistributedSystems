@@ -3,9 +3,7 @@ package gr.aueb.dist.Server;
 import gr.aueb.dist.Abstractions.IServer;
 import gr.aueb.dist.Models.CommunicationMessage;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -118,6 +116,19 @@ public class Server implements IServer, Runnable{
                 socket.close();
             }
             CloseConnections(in, out);
+        }
+        catch(IOException ignored){}
+    }
+
+    public void CloseConnections(ObjectInputStream in, ObjectOutputStream out, DataInputStream dataIn, PrintWriter printOut){
+        try{
+            CloseConnections(in, out);
+            if (dataIn != null) {
+                dataIn.close();
+            }
+            if (printOut != null){
+                printOut.close();
+            }
         }
         catch(IOException ignored){}
     }
