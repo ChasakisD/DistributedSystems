@@ -6,6 +6,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V7.App;
 using Android.Views;
+using CheeseBind;
 using Plugin.Iconize;
 using Plugin.Iconize.Droid.Controls;
 using Plugin.Iconize.Fonts;
@@ -27,7 +28,10 @@ namespace RecommendationSystemsClient.Activities
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Main);
-            
+
+            /* Bind The CheeseKnife */
+            Cheeseknife.Bind(this);
+
             /* Needs to be registered only on the MainLauncher */
             Iconize.With(new MaterialModule());
 
@@ -53,21 +57,41 @@ namespace RecommendationSystemsClient.Activities
 
             _navigationView.NavigationItemSelected += (sender, item) =>
             {
-                /*
                 // Open Fragments Here
+                Android.Support.V4.App.Fragment selectedFragment;
                 switch (item.MenuItem.ItemId)
                 {
-                        
+                    case Resource.Id.recommendations:
+                        selectedFragment = new SearchUserFragment();
+                        break;
+                    default:
+                        selectedFragment = new SecondFragment();
+                        break;
                 }
-                */
+
+                try
+                {
+                    SupportFragmentManager
+                        .BeginTransaction()
+                        .Replace(Resource.Id.selected_fragment, selectedFragment)
+                        .Commit();
+
+                    item.MenuItem.SetChecked(true);
+
+                    _drawerLayout.CloseDrawers();
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                }
             };
 
-            _navigationView.SetCheckedItem(Resource.Id.nav_popular);
+            _navigationView.SetCheckedItem(Resource.Id.recommendations);
             try
             {
                 SupportFragmentManager
                     .BeginTransaction()
-                    .Replace(Resource.Id.selected_fragment, new SecondFragment())
+                    .Replace(Resource.Id.selected_fragment, new SearchUserFragment())
                     .Commit();
             }
             catch (Exception e)

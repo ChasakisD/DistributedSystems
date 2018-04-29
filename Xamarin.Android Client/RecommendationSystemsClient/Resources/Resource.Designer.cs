@@ -2266,89 +2266,104 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f02006a
-			public const int avd_hide_password_1 = 2130837610;
+			// aapt resource value: 0x7f02006f
+			public const int avd_hide_password_1 = 2130837615;
 			
-			// aapt resource value: 0x7f02006b
-			public const int avd_hide_password_2 = 2130837611;
+			// aapt resource value: 0x7f020070
+			public const int avd_hide_password_2 = 2130837616;
 			
-			// aapt resource value: 0x7f02006c
-			public const int avd_hide_password_3 = 2130837612;
+			// aapt resource value: 0x7f020071
+			public const int avd_hide_password_3 = 2130837617;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f02006d
-			public const int avd_show_password_1 = 2130837613;
+			// aapt resource value: 0x7f020072
+			public const int avd_show_password_1 = 2130837618;
 			
-			// aapt resource value: 0x7f02006e
-			public const int avd_show_password_2 = 2130837614;
+			// aapt resource value: 0x7f020073
+			public const int avd_show_password_2 = 2130837619;
 			
-			// aapt resource value: 0x7f02006f
-			public const int avd_show_password_3 = 2130837615;
+			// aapt resource value: 0x7f020074
+			public const int avd_show_password_3 = 2130837620;
 			
 			// aapt resource value: 0x7f020055
-			public const int design_bottom_navigation_item_background = 2130837589;
+			public const int buttonBackground = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int design_fab_background = 2130837590;
+			public const int design_bottom_navigation_item_background = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int design_ic_visibility = 2130837591;
+			public const int design_fab_background = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int design_ic_visibility_off = 2130837592;
+			public const int design_ic_visibility = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int design_password_eye = 2130837593;
+			public const int design_ic_visibility_off = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int design_snackbar_background = 2130837594;
+			public const int design_password_eye = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int navigation_empty_icon = 2130837595;
+			public const int design_snackbar_background = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int notification_action_background = 2130837596;
+			public const int ic_account_circle = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int notification_bg = 2130837597;
+			public const int ic_playlist_play = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int notification_bg_low = 2130837598;
+			public const int ic_vpn_key = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int notification_bg_low_normal = 2130837599;
+			public const int ic_wifi_tethering = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int notification_bg_low_pressed = 2130837600;
+			public const int navigation_empty_icon = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int notification_bg_normal = 2130837601;
+			public const int notification_action_background = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int notification_bg_normal_pressed = 2130837602;
+			public const int notification_bg = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int notification_icon_background = 2130837603;
-			
-			// aapt resource value: 0x7f020068
-			public const int notification_template_icon_bg = 2130837608;
-			
-			// aapt resource value: 0x7f020069
-			public const int notification_template_icon_low_bg = 2130837609;
+			public const int notification_bg_low = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int notification_tile_bg = 2130837604;
+			public const int notification_bg_low_normal = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int notify_panel_notification_icon_bg = 2130837605;
+			public const int notification_bg_low_pressed = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int tooltip_frame_dark = 2130837606;
+			public const int notification_bg_normal = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int tooltip_frame_light = 2130837607;
+			public const int notification_bg_normal_pressed = 2130837607;
+			
+			// aapt resource value: 0x7f020068
+			public const int notification_icon_background = 2130837608;
+			
+			// aapt resource value: 0x7f02006d
+			public const int notification_template_icon_bg = 2130837613;
+			
+			// aapt resource value: 0x7f02006e
+			public const int notification_template_icon_low_bg = 2130837614;
+			
+			// aapt resource value: 0x7f020069
+			public const int notification_tile_bg = 2130837609;
+			
+			// aapt resource value: 0x7f02006a
+			public const int notify_panel_notification_icon_bg = 2130837610;
+			
+			// aapt resource value: 0x7f02006b
+			public const int tooltip_frame_dark = 2130837611;
+			
+			// aapt resource value: 0x7f02006c
+			public const int tooltip_frame_light = 2130837612;
 			
 			static Drawable()
 			{
@@ -2579,8 +2594,8 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f080058
 			public const int forever = 2131230808;
 			
-			// aapt resource value: 0x7f0800b2
-			public const int get_pois = 2131230898;
+			// aapt resource value: 0x7f0800b8
+			public const int get_pois = 2131230904;
 			
 			// aapt resource value: 0x7f08000a
 			public const int ghost_view = 2131230730;
@@ -2630,14 +2645,20 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f080061
 			public const int list_item = 2131230817;
 			
-			// aapt resource value: 0x7f0800b6
-			public const int masked = 2131230902;
+			// aapt resource value: 0x7f0800bc
+			public const int masked = 2131230908;
+			
+			// aapt resource value: 0x7f0800af
+			public const int masterIp = 2131230895;
+			
+			// aapt resource value: 0x7f0800b0
+			public const int masterPort = 2131230896;
 			
 			// aapt resource value: 0x7f0800a2
 			public const int media_actions = 2131230882;
 			
-			// aapt resource value: 0x7f0800b4
-			public const int message = 2131230900;
+			// aapt resource value: 0x7f0800ba
+			public const int message = 2131230906;
 			
 			// aapt resource value: 0x7f080031
 			public const int middle = 2131230769;
@@ -2647,12 +2668,6 @@ namespace RecommendationSystemsClient
 			
 			// aapt resource value: 0x7f080028
 			public const int multiply = 2131230760;
-			
-			// aapt resource value: 0x7f0800b7
-			public const int nav_popular = 2131230903;
-			
-			// aapt resource value: 0x7f0800b8
-			public const int nav_top_rated = 2131230904;
 			
 			// aapt resource value: 0x7f08009b
 			public const int nav_view = 2131230875;
@@ -2678,6 +2693,9 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f0800a4
 			public const int notification_main_column_container = 2131230884;
 			
+			// aapt resource value: 0x7f0800b2
+			public const int numberOfPois = 2131230898;
+			
 			// aapt resource value: 0x7f08004c
 			public const int parallax = 2131230796;
 			
@@ -2690,6 +2708,9 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f08004d
 			public const int pin = 2131230797;
 			
+			// aapt resource value: 0x7f0800b4
+			public const int progressBarLayout = 2131230900;
+			
 			// aapt resource value: 0x7f080006
 			public const int progress_circular = 2131230726;
 			
@@ -2698,6 +2719,9 @@ namespace RecommendationSystemsClient
 			
 			// aapt resource value: 0x7f080075
 			public const int radio = 2131230837;
+			
+			// aapt resource value: 0x7f0800bd
+			public const int recommendations = 2131230909;
 			
 			// aapt resource value: 0x7f08004a
 			public const int right = 2131230794;
@@ -2735,6 +2759,9 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f080055
 			public const int scrollable = 2131230805;
 			
+			// aapt resource value: 0x7f0800b3
+			public const int searchUserButton = 2131230899;
+			
 			// aapt resource value: 0x7f080080
 			public const int search_badge = 2131230848;
 			
@@ -2764,6 +2791,9 @@ namespace RecommendationSystemsClient
 			
 			// aapt resource value: 0x7f080089
 			public const int search_voice_btn = 2131230857;
+			
+			// aapt resource value: 0x7f0800be
+			public const int secondItem = 2131230910;
 			
 			// aapt resource value: 0x7f08008a
 			public const int select_dialog_listview = 2131230858;
@@ -2828,8 +2858,8 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f080019
 			public const int tag_transition_group = 2131230745;
 			
-			// aapt resource value: 0x7f0800af
-			public const int talking_android = 2131230895;
+			// aapt resource value: 0x7f0800b5
+			public const int talking_android = 2131230901;
 			
 			// aapt resource value: 0x7f08001a
 			public const int text = 2131230746;
@@ -2843,8 +2873,8 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f080069
 			public const int textSpacerNoTitle = 2131230825;
 			
-			// aapt resource value: 0x7f0800b1
-			public const int textView1 = 2131230897;
+			// aapt resource value: 0x7f0800b7
+			public const int textView1 = 2131230903;
 			
 			// aapt resource value: 0x7f080098
 			public const int text_input_password_toggle = 2131230872;
@@ -2855,8 +2885,8 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f080015
 			public const int textinput_error = 2131230741;
 			
-			// aapt resource value: 0x7f0800b0
-			public const int textview = 2131230896;
+			// aapt resource value: 0x7f0800b6
+			public const int textview = 2131230902;
 			
 			// aapt resource value: 0x7f0800a7
 			public const int time = 2131230887;
@@ -2870,8 +2900,8 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f08006f
 			public const int title_template = 2131230831;
 			
-			// aapt resource value: 0x7f0800b3
-			public const int toolbar = 2131230899;
+			// aapt resource value: 0x7f0800b9
+			public const int toolbar = 2131230905;
 			
 			// aapt resource value: 0x7f08003e
 			public const int top = 2131230782;
@@ -2906,11 +2936,14 @@ namespace RecommendationSystemsClient
 			// aapt resource value: 0x7f080026
 			public const int useLogo = 2131230758;
 			
+			// aapt resource value: 0x7f0800b1
+			public const int userId = 2131230897;
+			
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800b5
-			public const int visible = 2131230901;
+			// aapt resource value: 0x7f0800bb
+			public const int visible = 2131230907;
 			
 			// aapt resource value: 0x7f08003c
 			public const int withText = 2131230780;
@@ -3143,25 +3176,28 @@ namespace RecommendationSystemsClient
 			public const int notification_template_part_time = 2130968631;
 			
 			// aapt resource value: 0x7f040038
-			public const int SecondFragment = 2130968632;
+			public const int SearchUserFragment = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int select_dialog_item_material = 2130968633;
+			public const int SecondFragment = 2130968633;
 			
 			// aapt resource value: 0x7f04003a
-			public const int select_dialog_multichoice_material = 2130968634;
+			public const int select_dialog_item_material = 2130968634;
 			
 			// aapt resource value: 0x7f04003b
-			public const int select_dialog_singlechoice_material = 2130968635;
+			public const int select_dialog_multichoice_material = 2130968635;
 			
 			// aapt resource value: 0x7f04003c
-			public const int support_simple_spinner_dropdown_item = 2130968636;
+			public const int select_dialog_singlechoice_material = 2130968636;
 			
 			// aapt resource value: 0x7f04003d
-			public const int Toolbar = 2130968637;
+			public const int support_simple_spinner_dropdown_item = 2130968637;
 			
 			// aapt resource value: 0x7f04003e
-			public const int tooltip = 2130968638;
+			public const int Toolbar = 2130968638;
+			
+			// aapt resource value: 0x7f04003f
+			public const int tooltip = 2130968639;
 			
 			static Layout()
 			{

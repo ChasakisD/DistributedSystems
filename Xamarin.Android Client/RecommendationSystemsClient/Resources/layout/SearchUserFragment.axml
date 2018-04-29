@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="36dp"
+        android:background="@color/primary_dark">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textColor="#FFFFFF"
+            android:text="Recommendations System" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#FFFFFF"
+            android:text="Welcome to Omada 21 Recommendation System Client Xamarin.Android Application!"
+            android:layout_marginTop="24dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <EditText
+            android:id="@+id/masterIp"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="Master Ip..."
+            android:text="192.168.2.2"
+            android:drawableLeft="@drawable/ic_wifi_tethering"
+            android:drawablePadding="8dp" />
+        <EditText
+            android:id="@+id/masterPort"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Master Port..."
+            android:text="21633"
+            android:drawableLeft="@drawable/ic_vpn_key"
+            android:drawablePadding="8dp" />
+        <EditText
+            android:id="@+id/userId"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="User id..."
+            android:text="1"
+            android:drawableLeft="@drawable/ic_account_circle"
+            android:drawablePadding="8dp" />
+        <EditText
+            android:id="@+id/numberOfPois"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Number of POIs..."
+            android:text="5"
+            android:drawableLeft="@drawable/ic_playlist_play"
+            android:drawablePadding="8dp" />
+        <Button
+            android:id="@+id/searchUserButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/buttonbackground"
+            android:text="Search"
+            android:textColor="#FFFFFF" />
+        <LinearLayout
+            android:id="@+id/progressBarLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:textColor="#FFFFFF"
+                android:text="Please wait..."
+                android:layout_marginLeft="16dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
