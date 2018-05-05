@@ -161,9 +161,6 @@
     <AndroidResource Include="Resources\layout\ResultsTabFragment.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\MaterialEditText.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -287,9 +284,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Dimens.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\textEditCard.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\background.jpg" />
