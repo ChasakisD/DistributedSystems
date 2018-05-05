@@ -19,6 +19,4 @@
   <color name="unpressed_button_dark">#757575</color>
   <color name="unpressed_button_light">#9E9E9E</color>
   <color name="pressed_button_light">#F50057</color>
-
-  <color name="background_tab_pressed">#1AFFFFFF</color>
 </resources>

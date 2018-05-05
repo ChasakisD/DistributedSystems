@@ -1,5 +1,4 @@
 ﻿using Android.OS;
-using Android.Util;
 using Android.Views;
 using CheeseBind;
 using RecommendationSystemClient.Activities;

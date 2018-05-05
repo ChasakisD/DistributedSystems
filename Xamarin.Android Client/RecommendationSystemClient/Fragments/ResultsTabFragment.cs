@@ -1,11 +1,9 @@
 ﻿using Android.OS;
-using Android.Support.V4.App;
+using Android.Support.Design.Widget;
 using Android.Support.V4.View;
-using Android.Util;
 using Android.Views;
 using CheeseBind;
-using Java.Lang;
-using RecommendationSystemClient.Layouts.Pager;
+using RecommendationSystemClient.Adapters;
 
 #pragma warning disable 649
 
@@ -17,7 +15,7 @@ namespace RecommendationSystemClient.Fragments
         private ViewPager _pager;
 
         [BindView(Resource.Id.tabs)]
-        private PagerSlidingTabStrip _tabs;
+        private TabLayout _tabs;
 
         protected override int LayoutResource => Resource.Layout.ResultsTabFragment;
         protected override string Title => "Search User";
@@ -27,40 +25,10 @@ namespace RecommendationSystemClient.Fragments
             var root = base.OnCreateView(inflater, container, savedInstanceState);
 
             /* Add the Tabs */
-            _pager.Adapter = new ResultsPagerAdapter(Activity.SupportFragmentManager);
-            _pager.PageMargin = (int)TypedValue.ApplyDimension(ComplexUnitType.Dip, 4, Resources.DisplayMetrics);
-
-            _tabs.SetViewPager(_pager);
-
+            _pager.Adapter = new ResultsViewPagerAdapter(ChildFragmentManager);
+            _tabs.SetupWithViewPager(_pager);
+            
             return root;
-        }
-    }
-
-    public class ResultsPagerAdapter : FragmentPagerAdapter
-    {
-        private readonly string[] _titles =
-        {
-            "Poi Results", "Pois in Map"
-        };
-
-        public override int Count => _titles.Length;
-
-        public ResultsPagerAdapter(FragmentManager fm) : base(fm) { }
-
-        public override ICharSequence GetPageTitleFormatted(int position)
-        {
-            return new String(_titles[position]);
-        }
-
-        public override Android.Support.V4.App.Fragment GetItem(int position)
-        {
-            switch (position)
-            {
-                case 0:
-                    return new SearchUserFragment();
-                default:
-                    return new Android.Support.V4.App.Fragment();
-            }
         }
     }
 }

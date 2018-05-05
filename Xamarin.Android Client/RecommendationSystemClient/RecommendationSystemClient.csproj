@@ -128,16 +128,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
+    <Compile Include="Adapters\ResultsViewPagerAdapter.cs" />
     <Compile Include="Fragments\BaseFragment.cs" />
+    <Compile Include="Fragments\DummyFragment.cs" />
     <Compile Include="Fragments\SearchUserFragment.cs" />
     <Compile Include="Layouts\ArcLayout\ArcLayout.cs" />
     <Compile Include="Layouts\ArcLayout\ArcLayoutPosition.cs" />
     <Compile Include="Layouts\ArcLayout\ArcLayoutSettings.cs" />
-    <Compile Include="Layouts\Pager\ICustomTabProvider.cs" />
-    <Compile Include="Layouts\Pager\IOnTabReselectedListener.cs" />
-    <Compile Include="Layouts\Pager\PagerSlidingTabStrip.cs" />
     <Compile Include="Models\CommunicationMessage.cs" />
     <Compile Include="Models\Poi.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -162,6 +162,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Tab.axml" />
+    <AndroidResource Include="Resources\layout\DummyFragment.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CoordinatorLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -288,9 +294,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tabBackground.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets')" />

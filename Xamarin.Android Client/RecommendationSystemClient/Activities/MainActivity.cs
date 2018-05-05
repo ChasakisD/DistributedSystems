@@ -3,7 +3,6 @@ using Android.Graphics;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
-using Android.Support.V7.App;
 using Android.Views;
 using CheeseBind;
 using Plugin.Iconize;
@@ -18,7 +17,7 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 namespace RecommendationSystemClient.Activities
 {
     [Activity(MainLauncher = false)]
-    public class MainActivity : AppCompatActivity
+    public class MainActivity : BaseActivity
     {
         [BindView(Resource.Id.toolbar)]
         private Toolbar _toolbar;
@@ -31,14 +30,12 @@ namespace RecommendationSystemClient.Activities
 
         [BindView(Resource.Id.collapsingToolBar)]
         public CollapsingToolbarLayout CollapsingToolbar;
-        
+
+        protected override int LayoutResource => Resource.Layout.Main;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Main);
-
-            /* Bind The CheeseKnife */
-            Cheeseknife.Bind(this);
 
             /* Needs to be registered only on the MainLauncher */
             Iconize.With(new MaterialModule());
@@ -73,9 +70,10 @@ namespace RecommendationSystemClient.Activities
                         selectedFragment = new ResultsTabFragment();
                         break;
                 }
-
+                
                 try
                 {
+
                     SupportFragmentManager
                         .BeginTransaction()
                         .Replace(Resource.Id.fragmentContainer, selectedFragment)

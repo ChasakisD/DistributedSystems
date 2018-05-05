@@ -5,69 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/coordinatorLayout"
+    <include
+        layout="@layout/CoordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appbar"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:theme="@style/MainTheme"
-            android:fitsSystemWindows="true"
-            app:elevation="0dp">
-            <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapsingToolBar"
-                android:layout_width="match_parent"
-                android:layout_height="260dp"
-                android:minHeight="?attr/actionBarSize"
-                android:fitsSystemWindows="true"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:expandedTitleMarginTop="72dp"
-                app:expandedTitleGravity="top"
-                app:expandedTitleMarginStart="48dp"
-                app:contentScrim="?attr/colorPrimary">
-                <Com.FlavioFaria.KenBurnsView.KenBurnsView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:fitsSystemWindows="true"
-                    android:src="@drawable/background"
-                    app:layout_collapseMode="parallax" />
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="#FFFFFF"
-                        android:text="Welcome to Omada 21 Recommendation System Client Xamarin.Android Application!"
-                        android:layout_gravity="bottom"
-                        android:paddingBottom="72dp"
-                        android:paddingRight="48dp"
-                        android:paddingLeft="48dp" />
-                </FrameLayout>
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:theme="@style/MainTheme"
-                    app:layout_collapseMode="pin"/>
-            </android.support.design.widget.CollapsingToolbarLayout>
-        </android.support.design.widget.AppBarLayout>
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <FrameLayout
-                android:id="@+id/fragmentContainer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </android.support.v4.widget.NestedScrollView>
-    </android.support.design.widget.CoordinatorLayout>
+        android:layout_height="match_parent" />
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

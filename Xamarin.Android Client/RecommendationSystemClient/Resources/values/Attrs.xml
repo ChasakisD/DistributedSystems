@@ -13,31 +13,4 @@
       <enum name="cropOutside" value="1"/>
     </attr>
   </declare-styleable>
-  <declare-styleable name="MaterialPager">
-    <attr name="pIndicatorColor" format="color" />
-    <attr name="pUnderlineColor" format="color" />
-    <attr name="pDividerColor" format="color" />
-    <attr name="pDividerWidth" format="dimension" />
-    <attr name="pIndicatorHeight" format="dimension" />
-    <attr name="pUnderlineHeight" format="dimension" />
-    <attr name="pDividerPadding" format="dimension" />
-    <attr name="pTabPaddingLeftRight" format="dimension" />
-    <attr name="pScrollOffset" format="dimension" />
-    <attr name="pTabBackground" format="reference" />
-    <attr name="pShouldExpand" format="boolean" />
-    <attr name="pTextAllCaps" format="boolean" />
-    <attr name="pPaddingMiddle" format="boolean" />
-    <attr name="pTextColorSelected" format="color" />
-    <attr name="pTextAlpha" format="integer" />
-    <attr name="pTextStyle">
-      <flag name="normal" value="0x0" />
-      <flag name="bold" value="0x1" />
-      <flag name="italic" value="0x2" />
-    </attr>
-    <attr name="pTextSelectedStyle">
-      <flag name="normal" value="0x0" />
-      <flag name="bold" value="0x1" />
-      <flag name="italic" value="0x2" />
-    </attr>
-  </declare-styleable>
 </resources>
