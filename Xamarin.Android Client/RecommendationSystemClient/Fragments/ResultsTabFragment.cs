@@ -3,9 +3,9 @@ using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Util;
 using Android.Views;
-using com.refractored;
 using CheeseBind;
 using Java.Lang;
+using RecommendationSystemClient.Layouts.Pager;
 
 #pragma warning disable 649
 

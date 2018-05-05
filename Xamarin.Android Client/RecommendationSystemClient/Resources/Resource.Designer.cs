@@ -26,1266 +26,6 @@ namespace RecommendationSystemClient
 		
 		public static void UpdateIdValues()
 		{
-			global::com.refractored.Resource.Animation.abc_fade_in = global::RecommendationSystemClient.Resource.Animation.abc_fade_in;
-			global::com.refractored.Resource.Animation.abc_fade_out = global::RecommendationSystemClient.Resource.Animation.abc_fade_out;
-			global::com.refractored.Resource.Animation.abc_grow_fade_in_from_bottom = global::RecommendationSystemClient.Resource.Animation.abc_grow_fade_in_from_bottom;
-			global::com.refractored.Resource.Animation.abc_popup_enter = global::RecommendationSystemClient.Resource.Animation.abc_popup_enter;
-			global::com.refractored.Resource.Animation.abc_popup_exit = global::RecommendationSystemClient.Resource.Animation.abc_popup_exit;
-			global::com.refractored.Resource.Animation.abc_shrink_fade_out_from_bottom = global::RecommendationSystemClient.Resource.Animation.abc_shrink_fade_out_from_bottom;
-			global::com.refractored.Resource.Animation.abc_slide_in_bottom = global::RecommendationSystemClient.Resource.Animation.abc_slide_in_bottom;
-			global::com.refractored.Resource.Animation.abc_slide_in_top = global::RecommendationSystemClient.Resource.Animation.abc_slide_in_top;
-			global::com.refractored.Resource.Animation.abc_slide_out_bottom = global::RecommendationSystemClient.Resource.Animation.abc_slide_out_bottom;
-			global::com.refractored.Resource.Animation.abc_slide_out_top = global::RecommendationSystemClient.Resource.Animation.abc_slide_out_top;
-			global::com.refractored.Resource.Attribute.actionBarDivider = global::RecommendationSystemClient.Resource.Attribute.actionBarDivider;
-			global::com.refractored.Resource.Attribute.actionBarItemBackground = global::RecommendationSystemClient.Resource.Attribute.actionBarItemBackground;
-			global::com.refractored.Resource.Attribute.actionBarPopupTheme = global::RecommendationSystemClient.Resource.Attribute.actionBarPopupTheme;
-			global::com.refractored.Resource.Attribute.actionBarSize = global::RecommendationSystemClient.Resource.Attribute.actionBarSize;
-			global::com.refractored.Resource.Attribute.actionBarSplitStyle = global::RecommendationSystemClient.Resource.Attribute.actionBarSplitStyle;
-			global::com.refractored.Resource.Attribute.actionBarStyle = global::RecommendationSystemClient.Resource.Attribute.actionBarStyle;
-			global::com.refractored.Resource.Attribute.actionBarTabBarStyle = global::RecommendationSystemClient.Resource.Attribute.actionBarTabBarStyle;
-			global::com.refractored.Resource.Attribute.actionBarTabStyle = global::RecommendationSystemClient.Resource.Attribute.actionBarTabStyle;
-			global::com.refractored.Resource.Attribute.actionBarTabTextStyle = global::RecommendationSystemClient.Resource.Attribute.actionBarTabTextStyle;
-			global::com.refractored.Resource.Attribute.actionBarTheme = global::RecommendationSystemClient.Resource.Attribute.actionBarTheme;
-			global::com.refractored.Resource.Attribute.actionBarWidgetTheme = global::RecommendationSystemClient.Resource.Attribute.actionBarWidgetTheme;
-			global::com.refractored.Resource.Attribute.actionButtonStyle = global::RecommendationSystemClient.Resource.Attribute.actionButtonStyle;
-			global::com.refractored.Resource.Attribute.actionDropDownStyle = global::RecommendationSystemClient.Resource.Attribute.actionDropDownStyle;
-			global::com.refractored.Resource.Attribute.actionLayout = global::RecommendationSystemClient.Resource.Attribute.actionLayout;
-			global::com.refractored.Resource.Attribute.actionMenuTextAppearance = global::RecommendationSystemClient.Resource.Attribute.actionMenuTextAppearance;
-			global::com.refractored.Resource.Attribute.actionMenuTextColor = global::RecommendationSystemClient.Resource.Attribute.actionMenuTextColor;
-			global::com.refractored.Resource.Attribute.actionModeBackground = global::RecommendationSystemClient.Resource.Attribute.actionModeBackground;
-			global::com.refractored.Resource.Attribute.actionModeCloseButtonStyle = global::RecommendationSystemClient.Resource.Attribute.actionModeCloseButtonStyle;
-			global::com.refractored.Resource.Attribute.actionModeCloseDrawable = global::RecommendationSystemClient.Resource.Attribute.actionModeCloseDrawable;
-			global::com.refractored.Resource.Attribute.actionModeCopyDrawable = global::RecommendationSystemClient.Resource.Attribute.actionModeCopyDrawable;
-			global::com.refractored.Resource.Attribute.actionModeCutDrawable = global::RecommendationSystemClient.Resource.Attribute.actionModeCutDrawable;
-			global::com.refractored.Resource.Attribute.actionModeFindDrawable = global::RecommendationSystemClient.Resource.Attribute.actionModeFindDrawable;
-			global::com.refractored.Resource.Attribute.actionModePasteDrawable = global::RecommendationSystemClient.Resource.Attribute.actionModePasteDrawable;
-			global::com.refractored.Resource.Attribute.actionModePopupWindowStyle = global::RecommendationSystemClient.Resource.Attribute.actionModePopupWindowStyle;
-			global::com.refractored.Resource.Attribute.actionModeSelectAllDrawable = global::RecommendationSystemClient.Resource.Attribute.actionModeSelectAllDrawable;
-			global::com.refractored.Resource.Attribute.actionModeShareDrawable = global::RecommendationSystemClient.Resource.Attribute.actionModeShareDrawable;
-			global::com.refractored.Resource.Attribute.actionModeSplitBackground = global::RecommendationSystemClient.Resource.Attribute.actionModeSplitBackground;
-			global::com.refractored.Resource.Attribute.actionModeStyle = global::RecommendationSystemClient.Resource.Attribute.actionModeStyle;
-			global::com.refractored.Resource.Attribute.actionModeWebSearchDrawable = global::RecommendationSystemClient.Resource.Attribute.actionModeWebSearchDrawable;
-			global::com.refractored.Resource.Attribute.actionOverflowButtonStyle = global::RecommendationSystemClient.Resource.Attribute.actionOverflowButtonStyle;
-			global::com.refractored.Resource.Attribute.actionOverflowMenuStyle = global::RecommendationSystemClient.Resource.Attribute.actionOverflowMenuStyle;
-			global::com.refractored.Resource.Attribute.actionProviderClass = global::RecommendationSystemClient.Resource.Attribute.actionProviderClass;
-			global::com.refractored.Resource.Attribute.actionViewClass = global::RecommendationSystemClient.Resource.Attribute.actionViewClass;
-			global::com.refractored.Resource.Attribute.activityChooserViewStyle = global::RecommendationSystemClient.Resource.Attribute.activityChooserViewStyle;
-			global::com.refractored.Resource.Attribute.alertDialogButtonGroupStyle = global::RecommendationSystemClient.Resource.Attribute.alertDialogButtonGroupStyle;
-			global::com.refractored.Resource.Attribute.alertDialogCenterButtons = global::RecommendationSystemClient.Resource.Attribute.alertDialogCenterButtons;
-			global::com.refractored.Resource.Attribute.alertDialogStyle = global::RecommendationSystemClient.Resource.Attribute.alertDialogStyle;
-			global::com.refractored.Resource.Attribute.alertDialogTheme = global::RecommendationSystemClient.Resource.Attribute.alertDialogTheme;
-			global::com.refractored.Resource.Attribute.allowStacking = global::RecommendationSystemClient.Resource.Attribute.allowStacking;
-			global::com.refractored.Resource.Attribute.arrowHeadLength = global::RecommendationSystemClient.Resource.Attribute.arrowHeadLength;
-			global::com.refractored.Resource.Attribute.arrowShaftLength = global::RecommendationSystemClient.Resource.Attribute.arrowShaftLength;
-			global::com.refractored.Resource.Attribute.autoCompleteTextViewStyle = global::RecommendationSystemClient.Resource.Attribute.autoCompleteTextViewStyle;
-			global::com.refractored.Resource.Attribute.background = global::RecommendationSystemClient.Resource.Attribute.background;
-			global::com.refractored.Resource.Attribute.backgroundSplit = global::RecommendationSystemClient.Resource.Attribute.backgroundSplit;
-			global::com.refractored.Resource.Attribute.backgroundStacked = global::RecommendationSystemClient.Resource.Attribute.backgroundStacked;
-			global::com.refractored.Resource.Attribute.backgroundTint = global::RecommendationSystemClient.Resource.Attribute.backgroundTint;
-			global::com.refractored.Resource.Attribute.backgroundTintMode = global::RecommendationSystemClient.Resource.Attribute.backgroundTintMode;
-			global::com.refractored.Resource.Attribute.barLength = global::RecommendationSystemClient.Resource.Attribute.barLength;
-			global::com.refractored.Resource.Attribute.borderlessButtonStyle = global::RecommendationSystemClient.Resource.Attribute.borderlessButtonStyle;
-			global::com.refractored.Resource.Attribute.buttonBarButtonStyle = global::RecommendationSystemClient.Resource.Attribute.buttonBarButtonStyle;
-			global::com.refractored.Resource.Attribute.buttonBarNegativeButtonStyle = global::RecommendationSystemClient.Resource.Attribute.buttonBarNegativeButtonStyle;
-			global::com.refractored.Resource.Attribute.buttonBarNeutralButtonStyle = global::RecommendationSystemClient.Resource.Attribute.buttonBarNeutralButtonStyle;
-			global::com.refractored.Resource.Attribute.buttonBarPositiveButtonStyle = global::RecommendationSystemClient.Resource.Attribute.buttonBarPositiveButtonStyle;
-			global::com.refractored.Resource.Attribute.buttonBarStyle = global::RecommendationSystemClient.Resource.Attribute.buttonBarStyle;
-			global::com.refractored.Resource.Attribute.buttonPanelSideLayout = global::RecommendationSystemClient.Resource.Attribute.buttonPanelSideLayout;
-			global::com.refractored.Resource.Attribute.buttonStyle = global::RecommendationSystemClient.Resource.Attribute.buttonStyle;
-			global::com.refractored.Resource.Attribute.buttonStyleSmall = global::RecommendationSystemClient.Resource.Attribute.buttonStyleSmall;
-			global::com.refractored.Resource.Attribute.buttonTint = global::RecommendationSystemClient.Resource.Attribute.buttonTint;
-			global::com.refractored.Resource.Attribute.buttonTintMode = global::RecommendationSystemClient.Resource.Attribute.buttonTintMode;
-			global::com.refractored.Resource.Attribute.checkboxStyle = global::RecommendationSystemClient.Resource.Attribute.checkboxStyle;
-			global::com.refractored.Resource.Attribute.checkedTextViewStyle = global::RecommendationSystemClient.Resource.Attribute.checkedTextViewStyle;
-			global::com.refractored.Resource.Attribute.closeIcon = global::RecommendationSystemClient.Resource.Attribute.closeIcon;
-			global::com.refractored.Resource.Attribute.closeItemLayout = global::RecommendationSystemClient.Resource.Attribute.closeItemLayout;
-			global::com.refractored.Resource.Attribute.collapseContentDescription = global::RecommendationSystemClient.Resource.Attribute.collapseContentDescription;
-			global::com.refractored.Resource.Attribute.collapseIcon = global::RecommendationSystemClient.Resource.Attribute.collapseIcon;
-			global::com.refractored.Resource.Attribute.color = global::RecommendationSystemClient.Resource.Attribute.color;
-			global::com.refractored.Resource.Attribute.colorAccent = global::RecommendationSystemClient.Resource.Attribute.colorAccent;
-			global::com.refractored.Resource.Attribute.colorButtonNormal = global::RecommendationSystemClient.Resource.Attribute.colorButtonNormal;
-			global::com.refractored.Resource.Attribute.colorControlActivated = global::RecommendationSystemClient.Resource.Attribute.colorControlActivated;
-			global::com.refractored.Resource.Attribute.colorControlHighlight = global::RecommendationSystemClient.Resource.Attribute.colorControlHighlight;
-			global::com.refractored.Resource.Attribute.colorControlNormal = global::RecommendationSystemClient.Resource.Attribute.colorControlNormal;
-			global::com.refractored.Resource.Attribute.colorPrimary = global::RecommendationSystemClient.Resource.Attribute.colorPrimary;
-			global::com.refractored.Resource.Attribute.colorPrimaryDark = global::RecommendationSystemClient.Resource.Attribute.colorPrimaryDark;
-			global::com.refractored.Resource.Attribute.colorSwitchThumbNormal = global::RecommendationSystemClient.Resource.Attribute.colorSwitchThumbNormal;
-			global::com.refractored.Resource.Attribute.commitIcon = global::RecommendationSystemClient.Resource.Attribute.commitIcon;
-			global::com.refractored.Resource.Attribute.contentInsetEnd = global::RecommendationSystemClient.Resource.Attribute.contentInsetEnd;
-			global::com.refractored.Resource.Attribute.contentInsetLeft = global::RecommendationSystemClient.Resource.Attribute.contentInsetLeft;
-			global::com.refractored.Resource.Attribute.contentInsetRight = global::RecommendationSystemClient.Resource.Attribute.contentInsetRight;
-			global::com.refractored.Resource.Attribute.contentInsetStart = global::RecommendationSystemClient.Resource.Attribute.contentInsetStart;
-			global::com.refractored.Resource.Attribute.controlBackground = global::RecommendationSystemClient.Resource.Attribute.controlBackground;
-			global::com.refractored.Resource.Attribute.customNavigationLayout = global::RecommendationSystemClient.Resource.Attribute.customNavigationLayout;
-			global::com.refractored.Resource.Attribute.defaultQueryHint = global::RecommendationSystemClient.Resource.Attribute.defaultQueryHint;
-			global::com.refractored.Resource.Attribute.dialogPreferredPadding = global::RecommendationSystemClient.Resource.Attribute.dialogPreferredPadding;
-			global::com.refractored.Resource.Attribute.dialogTheme = global::RecommendationSystemClient.Resource.Attribute.dialogTheme;
-			global::com.refractored.Resource.Attribute.displayOptions = global::RecommendationSystemClient.Resource.Attribute.displayOptions;
-			global::com.refractored.Resource.Attribute.divider = global::RecommendationSystemClient.Resource.Attribute.divider;
-			global::com.refractored.Resource.Attribute.dividerHorizontal = global::RecommendationSystemClient.Resource.Attribute.dividerHorizontal;
-			global::com.refractored.Resource.Attribute.dividerPadding = global::RecommendationSystemClient.Resource.Attribute.dividerPadding;
-			global::com.refractored.Resource.Attribute.dividerVertical = global::RecommendationSystemClient.Resource.Attribute.dividerVertical;
-			global::com.refractored.Resource.Attribute.drawableSize = global::RecommendationSystemClient.Resource.Attribute.drawableSize;
-			global::com.refractored.Resource.Attribute.drawerArrowStyle = global::RecommendationSystemClient.Resource.Attribute.drawerArrowStyle;
-			global::com.refractored.Resource.Attribute.dropDownListViewStyle = global::RecommendationSystemClient.Resource.Attribute.dropDownListViewStyle;
-			global::com.refractored.Resource.Attribute.dropdownListPreferredItemHeight = global::RecommendationSystemClient.Resource.Attribute.dropdownListPreferredItemHeight;
-			global::com.refractored.Resource.Attribute.editTextBackground = global::RecommendationSystemClient.Resource.Attribute.editTextBackground;
-			global::com.refractored.Resource.Attribute.editTextColor = global::RecommendationSystemClient.Resource.Attribute.editTextColor;
-			global::com.refractored.Resource.Attribute.editTextStyle = global::RecommendationSystemClient.Resource.Attribute.editTextStyle;
-			global::com.refractored.Resource.Attribute.elevation = global::RecommendationSystemClient.Resource.Attribute.elevation;
-			global::com.refractored.Resource.Attribute.expandActivityOverflowButtonDrawable = global::RecommendationSystemClient.Resource.Attribute.expandActivityOverflowButtonDrawable;
-			global::com.refractored.Resource.Attribute.gapBetweenBars = global::RecommendationSystemClient.Resource.Attribute.gapBetweenBars;
-			global::com.refractored.Resource.Attribute.goIcon = global::RecommendationSystemClient.Resource.Attribute.goIcon;
-			global::com.refractored.Resource.Attribute.height = global::RecommendationSystemClient.Resource.Attribute.height;
-			global::com.refractored.Resource.Attribute.hideOnContentScroll = global::RecommendationSystemClient.Resource.Attribute.hideOnContentScroll;
-			global::com.refractored.Resource.Attribute.homeAsUpIndicator = global::RecommendationSystemClient.Resource.Attribute.homeAsUpIndicator;
-			global::com.refractored.Resource.Attribute.homeLayout = global::RecommendationSystemClient.Resource.Attribute.homeLayout;
-			global::com.refractored.Resource.Attribute.icon = global::RecommendationSystemClient.Resource.Attribute.icon;
-			global::com.refractored.Resource.Attribute.iconifiedByDefault = global::RecommendationSystemClient.Resource.Attribute.iconifiedByDefault;
-			global::com.refractored.Resource.Attribute.imageButtonStyle = global::RecommendationSystemClient.Resource.Attribute.imageButtonStyle;
-			global::com.refractored.Resource.Attribute.indeterminateProgressStyle = global::RecommendationSystemClient.Resource.Attribute.indeterminateProgressStyle;
-			global::com.refractored.Resource.Attribute.initialActivityCount = global::RecommendationSystemClient.Resource.Attribute.initialActivityCount;
-			global::com.refractored.Resource.Attribute.isLightTheme = global::RecommendationSystemClient.Resource.Attribute.isLightTheme;
-			global::com.refractored.Resource.Attribute.itemPadding = global::RecommendationSystemClient.Resource.Attribute.itemPadding;
-			global::com.refractored.Resource.Attribute.layout = global::RecommendationSystemClient.Resource.Attribute.layout;
-			global::com.refractored.Resource.Attribute.listChoiceBackgroundIndicator = global::RecommendationSystemClient.Resource.Attribute.listChoiceBackgroundIndicator;
-			global::com.refractored.Resource.Attribute.listDividerAlertDialog = global::RecommendationSystemClient.Resource.Attribute.listDividerAlertDialog;
-			global::com.refractored.Resource.Attribute.listItemLayout = global::RecommendationSystemClient.Resource.Attribute.listItemLayout;
-			global::com.refractored.Resource.Attribute.listLayout = global::RecommendationSystemClient.Resource.Attribute.listLayout;
-			global::com.refractored.Resource.Attribute.listPopupWindowStyle = global::RecommendationSystemClient.Resource.Attribute.listPopupWindowStyle;
-			global::com.refractored.Resource.Attribute.listPreferredItemHeight = global::RecommendationSystemClient.Resource.Attribute.listPreferredItemHeight;
-			global::com.refractored.Resource.Attribute.listPreferredItemHeightLarge = global::RecommendationSystemClient.Resource.Attribute.listPreferredItemHeightLarge;
-			global::com.refractored.Resource.Attribute.listPreferredItemHeightSmall = global::RecommendationSystemClient.Resource.Attribute.listPreferredItemHeightSmall;
-			global::com.refractored.Resource.Attribute.listPreferredItemPaddingLeft = global::RecommendationSystemClient.Resource.Attribute.listPreferredItemPaddingLeft;
-			global::com.refractored.Resource.Attribute.listPreferredItemPaddingRight = global::RecommendationSystemClient.Resource.Attribute.listPreferredItemPaddingRight;
-			global::com.refractored.Resource.Attribute.logo = global::RecommendationSystemClient.Resource.Attribute.logo;
-			global::com.refractored.Resource.Attribute.logoDescription = global::RecommendationSystemClient.Resource.Attribute.logoDescription;
-			global::com.refractored.Resource.Attribute.maxButtonHeight = global::RecommendationSystemClient.Resource.Attribute.maxButtonHeight;
-			global::com.refractored.Resource.Attribute.measureWithLargestChild = global::RecommendationSystemClient.Resource.Attribute.measureWithLargestChild;
-			global::com.refractored.Resource.Attribute.multiChoiceItemLayout = global::RecommendationSystemClient.Resource.Attribute.multiChoiceItemLayout;
-			global::com.refractored.Resource.Attribute.navigationContentDescription = global::RecommendationSystemClient.Resource.Attribute.navigationContentDescription;
-			global::com.refractored.Resource.Attribute.navigationIcon = global::RecommendationSystemClient.Resource.Attribute.navigationIcon;
-			global::com.refractored.Resource.Attribute.navigationMode = global::RecommendationSystemClient.Resource.Attribute.navigationMode;
-			global::com.refractored.Resource.Attribute.overlapAnchor = global::RecommendationSystemClient.Resource.Attribute.overlapAnchor;
-			global::com.refractored.Resource.Attribute.paddingEnd = global::RecommendationSystemClient.Resource.Attribute.paddingEnd;
-			global::com.refractored.Resource.Attribute.paddingStart = global::RecommendationSystemClient.Resource.Attribute.paddingStart;
-			global::com.refractored.Resource.Attribute.panelBackground = global::RecommendationSystemClient.Resource.Attribute.panelBackground;
-			global::com.refractored.Resource.Attribute.panelMenuListTheme = global::RecommendationSystemClient.Resource.Attribute.panelMenuListTheme;
-			global::com.refractored.Resource.Attribute.panelMenuListWidth = global::RecommendationSystemClient.Resource.Attribute.panelMenuListWidth;
-			global::com.refractored.Resource.Attribute.popupMenuStyle = global::RecommendationSystemClient.Resource.Attribute.popupMenuStyle;
-			global::com.refractored.Resource.Attribute.popupTheme = global::RecommendationSystemClient.Resource.Attribute.popupTheme;
-			global::com.refractored.Resource.Attribute.popupWindowStyle = global::RecommendationSystemClient.Resource.Attribute.popupWindowStyle;
-			global::com.refractored.Resource.Attribute.preserveIconSpacing = global::RecommendationSystemClient.Resource.Attribute.preserveIconSpacing;
-			global::com.refractored.Resource.Attribute.progressBarPadding = global::RecommendationSystemClient.Resource.Attribute.progressBarPadding;
-			global::com.refractored.Resource.Attribute.progressBarStyle = global::RecommendationSystemClient.Resource.Attribute.progressBarStyle;
-			global::com.refractored.Resource.Attribute.pstsDividerColor = global::RecommendationSystemClient.Resource.Attribute.pstsDividerColor;
-			global::com.refractored.Resource.Attribute.pstsDividerPadding = global::RecommendationSystemClient.Resource.Attribute.pstsDividerPadding;
-			global::com.refractored.Resource.Attribute.pstsDividerWidth = global::RecommendationSystemClient.Resource.Attribute.pstsDividerWidth;
-			global::com.refractored.Resource.Attribute.pstsIndicatorColor = global::RecommendationSystemClient.Resource.Attribute.pstsIndicatorColor;
-			global::com.refractored.Resource.Attribute.pstsIndicatorHeight = global::RecommendationSystemClient.Resource.Attribute.pstsIndicatorHeight;
-			global::com.refractored.Resource.Attribute.pstsPaddingMiddle = global::RecommendationSystemClient.Resource.Attribute.pstsPaddingMiddle;
-			global::com.refractored.Resource.Attribute.pstsScrollOffset = global::RecommendationSystemClient.Resource.Attribute.pstsScrollOffset;
-			global::com.refractored.Resource.Attribute.pstsShouldExpand = global::RecommendationSystemClient.Resource.Attribute.pstsShouldExpand;
-			global::com.refractored.Resource.Attribute.pstsTabBackground = global::RecommendationSystemClient.Resource.Attribute.pstsTabBackground;
-			global::com.refractored.Resource.Attribute.pstsTabPaddingLeftRight = global::RecommendationSystemClient.Resource.Attribute.pstsTabPaddingLeftRight;
-			global::com.refractored.Resource.Attribute.pstsTextAllCaps = global::RecommendationSystemClient.Resource.Attribute.pstsTextAllCaps;
-			global::com.refractored.Resource.Attribute.pstsTextAlpha = global::RecommendationSystemClient.Resource.Attribute.pstsTextAlpha;
-			global::com.refractored.Resource.Attribute.pstsTextColorSelected = global::RecommendationSystemClient.Resource.Attribute.pstsTextColorSelected;
-			global::com.refractored.Resource.Attribute.pstsTextSelectedStyle = global::RecommendationSystemClient.Resource.Attribute.pstsTextSelectedStyle;
-			global::com.refractored.Resource.Attribute.pstsTextStyle = global::RecommendationSystemClient.Resource.Attribute.pstsTextStyle;
-			global::com.refractored.Resource.Attribute.pstsUnderlineColor = global::RecommendationSystemClient.Resource.Attribute.pstsUnderlineColor;
-			global::com.refractored.Resource.Attribute.pstsUnderlineHeight = global::RecommendationSystemClient.Resource.Attribute.pstsUnderlineHeight;
-			global::com.refractored.Resource.Attribute.queryBackground = global::RecommendationSystemClient.Resource.Attribute.queryBackground;
-			global::com.refractored.Resource.Attribute.queryHint = global::RecommendationSystemClient.Resource.Attribute.queryHint;
-			global::com.refractored.Resource.Attribute.radioButtonStyle = global::RecommendationSystemClient.Resource.Attribute.radioButtonStyle;
-			global::com.refractored.Resource.Attribute.ratingBarStyle = global::RecommendationSystemClient.Resource.Attribute.ratingBarStyle;
-			global::com.refractored.Resource.Attribute.ratingBarStyleIndicator = global::RecommendationSystemClient.Resource.Attribute.ratingBarStyleIndicator;
-			global::com.refractored.Resource.Attribute.ratingBarStyleSmall = global::RecommendationSystemClient.Resource.Attribute.ratingBarStyleSmall;
-			global::com.refractored.Resource.Attribute.searchHintIcon = global::RecommendationSystemClient.Resource.Attribute.searchHintIcon;
-			global::com.refractored.Resource.Attribute.searchIcon = global::RecommendationSystemClient.Resource.Attribute.searchIcon;
-			global::com.refractored.Resource.Attribute.searchViewStyle = global::RecommendationSystemClient.Resource.Attribute.searchViewStyle;
-			global::com.refractored.Resource.Attribute.seekBarStyle = global::RecommendationSystemClient.Resource.Attribute.seekBarStyle;
-			global::com.refractored.Resource.Attribute.selectableItemBackground = global::RecommendationSystemClient.Resource.Attribute.selectableItemBackground;
-			global::com.refractored.Resource.Attribute.selectableItemBackgroundBorderless = global::RecommendationSystemClient.Resource.Attribute.selectableItemBackgroundBorderless;
-			global::com.refractored.Resource.Attribute.showAsAction = global::RecommendationSystemClient.Resource.Attribute.showAsAction;
-			global::com.refractored.Resource.Attribute.showDividers = global::RecommendationSystemClient.Resource.Attribute.showDividers;
-			global::com.refractored.Resource.Attribute.showText = global::RecommendationSystemClient.Resource.Attribute.showText;
-			global::com.refractored.Resource.Attribute.singleChoiceItemLayout = global::RecommendationSystemClient.Resource.Attribute.singleChoiceItemLayout;
-			global::com.refractored.Resource.Attribute.spinBars = global::RecommendationSystemClient.Resource.Attribute.spinBars;
-			global::com.refractored.Resource.Attribute.spinnerDropDownItemStyle = global::RecommendationSystemClient.Resource.Attribute.spinnerDropDownItemStyle;
-			global::com.refractored.Resource.Attribute.spinnerStyle = global::RecommendationSystemClient.Resource.Attribute.spinnerStyle;
-			global::com.refractored.Resource.Attribute.splitTrack = global::RecommendationSystemClient.Resource.Attribute.splitTrack;
-			global::com.refractored.Resource.Attribute.srcCompat = global::RecommendationSystemClient.Resource.Attribute.srcCompat;
-			global::com.refractored.Resource.Attribute.state_above_anchor = global::RecommendationSystemClient.Resource.Attribute.state_above_anchor;
-			global::com.refractored.Resource.Attribute.submitBackground = global::RecommendationSystemClient.Resource.Attribute.submitBackground;
-			global::com.refractored.Resource.Attribute.subtitle = global::RecommendationSystemClient.Resource.Attribute.subtitle;
-			global::com.refractored.Resource.Attribute.subtitleTextAppearance = global::RecommendationSystemClient.Resource.Attribute.subtitleTextAppearance;
-			global::com.refractored.Resource.Attribute.subtitleTextColor = global::RecommendationSystemClient.Resource.Attribute.subtitleTextColor;
-			global::com.refractored.Resource.Attribute.subtitleTextStyle = global::RecommendationSystemClient.Resource.Attribute.subtitleTextStyle;
-			global::com.refractored.Resource.Attribute.suggestionRowLayout = global::RecommendationSystemClient.Resource.Attribute.suggestionRowLayout;
-			global::com.refractored.Resource.Attribute.switchMinWidth = global::RecommendationSystemClient.Resource.Attribute.switchMinWidth;
-			global::com.refractored.Resource.Attribute.switchPadding = global::RecommendationSystemClient.Resource.Attribute.switchPadding;
-			global::com.refractored.Resource.Attribute.switchStyle = global::RecommendationSystemClient.Resource.Attribute.switchStyle;
-			global::com.refractored.Resource.Attribute.switchTextAppearance = global::RecommendationSystemClient.Resource.Attribute.switchTextAppearance;
-			global::com.refractored.Resource.Attribute.textAllCaps = global::RecommendationSystemClient.Resource.Attribute.textAllCaps;
-			global::com.refractored.Resource.Attribute.textAppearanceLargePopupMenu = global::RecommendationSystemClient.Resource.Attribute.textAppearanceLargePopupMenu;
-			global::com.refractored.Resource.Attribute.textAppearanceListItem = global::RecommendationSystemClient.Resource.Attribute.textAppearanceListItem;
-			global::com.refractored.Resource.Attribute.textAppearanceListItemSmall = global::RecommendationSystemClient.Resource.Attribute.textAppearanceListItemSmall;
-			global::com.refractored.Resource.Attribute.textAppearanceSearchResultSubtitle = global::RecommendationSystemClient.Resource.Attribute.textAppearanceSearchResultSubtitle;
-			global::com.refractored.Resource.Attribute.textAppearanceSearchResultTitle = global::RecommendationSystemClient.Resource.Attribute.textAppearanceSearchResultTitle;
-			global::com.refractored.Resource.Attribute.textAppearanceSmallPopupMenu = global::RecommendationSystemClient.Resource.Attribute.textAppearanceSmallPopupMenu;
-			global::com.refractored.Resource.Attribute.textColorAlertDialogListItem = global::RecommendationSystemClient.Resource.Attribute.textColorAlertDialogListItem;
-			global::com.refractored.Resource.Attribute.textColorSearchUrl = global::RecommendationSystemClient.Resource.Attribute.textColorSearchUrl;
-			global::com.refractored.Resource.Attribute.theme = global::RecommendationSystemClient.Resource.Attribute.theme;
-			global::com.refractored.Resource.Attribute.thickness = global::RecommendationSystemClient.Resource.Attribute.thickness;
-			global::com.refractored.Resource.Attribute.thumbTextPadding = global::RecommendationSystemClient.Resource.Attribute.thumbTextPadding;
-			global::com.refractored.Resource.Attribute.title = global::RecommendationSystemClient.Resource.Attribute.title;
-			global::com.refractored.Resource.Attribute.titleMarginBottom = global::RecommendationSystemClient.Resource.Attribute.titleMarginBottom;
-			global::com.refractored.Resource.Attribute.titleMarginEnd = global::RecommendationSystemClient.Resource.Attribute.titleMarginEnd;
-			global::com.refractored.Resource.Attribute.titleMarginStart = global::RecommendationSystemClient.Resource.Attribute.titleMarginStart;
-			global::com.refractored.Resource.Attribute.titleMarginTop = global::RecommendationSystemClient.Resource.Attribute.titleMarginTop;
-			global::com.refractored.Resource.Attribute.titleMargins = global::RecommendationSystemClient.Resource.Attribute.titleMargins;
-			global::com.refractored.Resource.Attribute.titleTextAppearance = global::RecommendationSystemClient.Resource.Attribute.titleTextAppearance;
-			global::com.refractored.Resource.Attribute.titleTextColor = global::RecommendationSystemClient.Resource.Attribute.titleTextColor;
-			global::com.refractored.Resource.Attribute.titleTextStyle = global::RecommendationSystemClient.Resource.Attribute.titleTextStyle;
-			global::com.refractored.Resource.Attribute.toolbarNavigationButtonStyle = global::RecommendationSystemClient.Resource.Attribute.toolbarNavigationButtonStyle;
-			global::com.refractored.Resource.Attribute.toolbarStyle = global::RecommendationSystemClient.Resource.Attribute.toolbarStyle;
-			global::com.refractored.Resource.Attribute.track = global::RecommendationSystemClient.Resource.Attribute.track;
-			global::com.refractored.Resource.Attribute.voiceIcon = global::RecommendationSystemClient.Resource.Attribute.voiceIcon;
-			global::com.refractored.Resource.Attribute.windowActionBar = global::RecommendationSystemClient.Resource.Attribute.windowActionBar;
-			global::com.refractored.Resource.Attribute.windowActionBarOverlay = global::RecommendationSystemClient.Resource.Attribute.windowActionBarOverlay;
-			global::com.refractored.Resource.Attribute.windowActionModeOverlay = global::RecommendationSystemClient.Resource.Attribute.windowActionModeOverlay;
-			global::com.refractored.Resource.Attribute.windowFixedHeightMajor = global::RecommendationSystemClient.Resource.Attribute.windowFixedHeightMajor;
-			global::com.refractored.Resource.Attribute.windowFixedHeightMinor = global::RecommendationSystemClient.Resource.Attribute.windowFixedHeightMinor;
-			global::com.refractored.Resource.Attribute.windowFixedWidthMajor = global::RecommendationSystemClient.Resource.Attribute.windowFixedWidthMajor;
-			global::com.refractored.Resource.Attribute.windowFixedWidthMinor = global::RecommendationSystemClient.Resource.Attribute.windowFixedWidthMinor;
-			global::com.refractored.Resource.Attribute.windowMinWidthMajor = global::RecommendationSystemClient.Resource.Attribute.windowMinWidthMajor;
-			global::com.refractored.Resource.Attribute.windowMinWidthMinor = global::RecommendationSystemClient.Resource.Attribute.windowMinWidthMinor;
-			global::com.refractored.Resource.Attribute.windowNoTitle = global::RecommendationSystemClient.Resource.Attribute.windowNoTitle;
-			global::com.refractored.Resource.Boolean.abc_action_bar_embed_tabs = global::RecommendationSystemClient.Resource.Boolean.abc_action_bar_embed_tabs;
-			global::com.refractored.Resource.Boolean.abc_allow_stacked_button_bar = global::RecommendationSystemClient.Resource.Boolean.abc_allow_stacked_button_bar;
-			global::com.refractored.Resource.Boolean.abc_config_actionMenuItemAllCaps = global::RecommendationSystemClient.Resource.Boolean.abc_config_actionMenuItemAllCaps;
-			global::com.refractored.Resource.Boolean.abc_config_closeDialogWhenTouchOutside = global::RecommendationSystemClient.Resource.Boolean.abc_config_closeDialogWhenTouchOutside;
-			global::com.refractored.Resource.Boolean.abc_config_showMenuShortcutsWhenKeyboardPresent = global::RecommendationSystemClient.Resource.Boolean.abc_config_showMenuShortcutsWhenKeyboardPresent;
-			global::com.refractored.Resource.Color.abc_background_cache_hint_selector_material_dark = global::RecommendationSystemClient.Resource.Color.abc_background_cache_hint_selector_material_dark;
-			global::com.refractored.Resource.Color.abc_background_cache_hint_selector_material_light = global::RecommendationSystemClient.Resource.Color.abc_background_cache_hint_selector_material_light;
-			global::com.refractored.Resource.Color.abc_color_highlight_material = global::RecommendationSystemClient.Resource.Color.abc_color_highlight_material;
-			global::com.refractored.Resource.Color.abc_input_method_navigation_guard = global::RecommendationSystemClient.Resource.Color.abc_input_method_navigation_guard;
-			global::com.refractored.Resource.Color.abc_primary_text_disable_only_material_dark = global::RecommendationSystemClient.Resource.Color.abc_primary_text_disable_only_material_dark;
-			global::com.refractored.Resource.Color.abc_primary_text_disable_only_material_light = global::RecommendationSystemClient.Resource.Color.abc_primary_text_disable_only_material_light;
-			global::com.refractored.Resource.Color.abc_primary_text_material_dark = global::RecommendationSystemClient.Resource.Color.abc_primary_text_material_dark;
-			global::com.refractored.Resource.Color.abc_primary_text_material_light = global::RecommendationSystemClient.Resource.Color.abc_primary_text_material_light;
-			global::com.refractored.Resource.Color.abc_search_url_text = global::RecommendationSystemClient.Resource.Color.abc_search_url_text;
-			global::com.refractored.Resource.Color.abc_search_url_text_normal = global::RecommendationSystemClient.Resource.Color.abc_search_url_text_normal;
-			global::com.refractored.Resource.Color.abc_search_url_text_pressed = global::RecommendationSystemClient.Resource.Color.abc_search_url_text_pressed;
-			global::com.refractored.Resource.Color.abc_search_url_text_selected = global::RecommendationSystemClient.Resource.Color.abc_search_url_text_selected;
-			global::com.refractored.Resource.Color.abc_secondary_text_material_dark = global::RecommendationSystemClient.Resource.Color.abc_secondary_text_material_dark;
-			global::com.refractored.Resource.Color.abc_secondary_text_material_light = global::RecommendationSystemClient.Resource.Color.abc_secondary_text_material_light;
-			global::com.refractored.Resource.Color.accent_material_dark = global::RecommendationSystemClient.Resource.Color.accent_material_dark;
-			global::com.refractored.Resource.Color.accent_material_light = global::RecommendationSystemClient.Resource.Color.accent_material_light;
-			global::com.refractored.Resource.Color.background_floating_material_dark = global::RecommendationSystemClient.Resource.Color.background_floating_material_dark;
-			global::com.refractored.Resource.Color.background_floating_material_light = global::RecommendationSystemClient.Resource.Color.background_floating_material_light;
-			global::com.refractored.Resource.Color.background_material_dark = global::RecommendationSystemClient.Resource.Color.background_material_dark;
-			global::com.refractored.Resource.Color.background_material_light = global::RecommendationSystemClient.Resource.Color.background_material_light;
-			global::com.refractored.Resource.Color.bright_foreground_disabled_material_dark = global::RecommendationSystemClient.Resource.Color.bright_foreground_disabled_material_dark;
-			global::com.refractored.Resource.Color.bright_foreground_disabled_material_light = global::RecommendationSystemClient.Resource.Color.bright_foreground_disabled_material_light;
-			global::com.refractored.Resource.Color.bright_foreground_inverse_material_dark = global::RecommendationSystemClient.Resource.Color.bright_foreground_inverse_material_dark;
-			global::com.refractored.Resource.Color.bright_foreground_inverse_material_light = global::RecommendationSystemClient.Resource.Color.bright_foreground_inverse_material_light;
-			global::com.refractored.Resource.Color.bright_foreground_material_dark = global::RecommendationSystemClient.Resource.Color.bright_foreground_material_dark;
-			global::com.refractored.Resource.Color.bright_foreground_material_light = global::RecommendationSystemClient.Resource.Color.bright_foreground_material_light;
-			global::com.refractored.Resource.Color.button_material_dark = global::RecommendationSystemClient.Resource.Color.button_material_dark;
-			global::com.refractored.Resource.Color.button_material_light = global::RecommendationSystemClient.Resource.Color.button_material_light;
-			global::com.refractored.Resource.Color.dim_foreground_disabled_material_dark = global::RecommendationSystemClient.Resource.Color.dim_foreground_disabled_material_dark;
-			global::com.refractored.Resource.Color.dim_foreground_disabled_material_light = global::RecommendationSystemClient.Resource.Color.dim_foreground_disabled_material_light;
-			global::com.refractored.Resource.Color.dim_foreground_material_dark = global::RecommendationSystemClient.Resource.Color.dim_foreground_material_dark;
-			global::com.refractored.Resource.Color.dim_foreground_material_light = global::RecommendationSystemClient.Resource.Color.dim_foreground_material_light;
-			global::com.refractored.Resource.Color.foreground_material_dark = global::RecommendationSystemClient.Resource.Color.foreground_material_dark;
-			global::com.refractored.Resource.Color.foreground_material_light = global::RecommendationSystemClient.Resource.Color.foreground_material_light;
-			global::com.refractored.Resource.Color.highlighted_text_material_dark = global::RecommendationSystemClient.Resource.Color.highlighted_text_material_dark;
-			global::com.refractored.Resource.Color.highlighted_text_material_light = global::RecommendationSystemClient.Resource.Color.highlighted_text_material_light;
-			global::com.refractored.Resource.Color.material_blue_grey_800 = global::RecommendationSystemClient.Resource.Color.material_blue_grey_800;
-			global::com.refractored.Resource.Color.material_blue_grey_900 = global::RecommendationSystemClient.Resource.Color.material_blue_grey_900;
-			global::com.refractored.Resource.Color.material_blue_grey_950 = global::RecommendationSystemClient.Resource.Color.material_blue_grey_950;
-			global::com.refractored.Resource.Color.material_deep_teal_200 = global::RecommendationSystemClient.Resource.Color.material_deep_teal_200;
-			global::com.refractored.Resource.Color.material_deep_teal_500 = global::RecommendationSystemClient.Resource.Color.material_deep_teal_500;
-			global::com.refractored.Resource.Color.material_grey_100 = global::RecommendationSystemClient.Resource.Color.material_grey_100;
-			global::com.refractored.Resource.Color.material_grey_300 = global::RecommendationSystemClient.Resource.Color.material_grey_300;
-			global::com.refractored.Resource.Color.material_grey_50 = global::RecommendationSystemClient.Resource.Color.material_grey_50;
-			global::com.refractored.Resource.Color.material_grey_600 = global::RecommendationSystemClient.Resource.Color.material_grey_600;
-			global::com.refractored.Resource.Color.material_grey_800 = global::RecommendationSystemClient.Resource.Color.material_grey_800;
-			global::com.refractored.Resource.Color.material_grey_850 = global::RecommendationSystemClient.Resource.Color.material_grey_850;
-			global::com.refractored.Resource.Color.material_grey_900 = global::RecommendationSystemClient.Resource.Color.material_grey_900;
-			global::com.refractored.Resource.Color.primary_dark_material_dark = global::RecommendationSystemClient.Resource.Color.primary_dark_material_dark;
-			global::com.refractored.Resource.Color.primary_dark_material_light = global::RecommendationSystemClient.Resource.Color.primary_dark_material_light;
-			global::com.refractored.Resource.Color.primary_material_dark = global::RecommendationSystemClient.Resource.Color.primary_material_dark;
-			global::com.refractored.Resource.Color.primary_material_light = global::RecommendationSystemClient.Resource.Color.primary_material_light;
-			global::com.refractored.Resource.Color.primary_text_default_material_dark = global::RecommendationSystemClient.Resource.Color.primary_text_default_material_dark;
-			global::com.refractored.Resource.Color.primary_text_default_material_light = global::RecommendationSystemClient.Resource.Color.primary_text_default_material_light;
-			global::com.refractored.Resource.Color.primary_text_disabled_material_dark = global::RecommendationSystemClient.Resource.Color.primary_text_disabled_material_dark;
-			global::com.refractored.Resource.Color.primary_text_disabled_material_light = global::RecommendationSystemClient.Resource.Color.primary_text_disabled_material_light;
-			global::com.refractored.Resource.Color.psts_background_tab_pressed = global::RecommendationSystemClient.Resource.Color.psts_background_tab_pressed;
-			global::com.refractored.Resource.Color.ripple_material_dark = global::RecommendationSystemClient.Resource.Color.ripple_material_dark;
-			global::com.refractored.Resource.Color.ripple_material_light = global::RecommendationSystemClient.Resource.Color.ripple_material_light;
-			global::com.refractored.Resource.Color.secondary_text_default_material_dark = global::RecommendationSystemClient.Resource.Color.secondary_text_default_material_dark;
-			global::com.refractored.Resource.Color.secondary_text_default_material_light = global::RecommendationSystemClient.Resource.Color.secondary_text_default_material_light;
-			global::com.refractored.Resource.Color.secondary_text_disabled_material_dark = global::RecommendationSystemClient.Resource.Color.secondary_text_disabled_material_dark;
-			global::com.refractored.Resource.Color.secondary_text_disabled_material_light = global::RecommendationSystemClient.Resource.Color.secondary_text_disabled_material_light;
-			global::com.refractored.Resource.Color.switch_thumb_disabled_material_dark = global::RecommendationSystemClient.Resource.Color.switch_thumb_disabled_material_dark;
-			global::com.refractored.Resource.Color.switch_thumb_disabled_material_light = global::RecommendationSystemClient.Resource.Color.switch_thumb_disabled_material_light;
-			global::com.refractored.Resource.Color.switch_thumb_material_dark = global::RecommendationSystemClient.Resource.Color.switch_thumb_material_dark;
-			global::com.refractored.Resource.Color.switch_thumb_material_light = global::RecommendationSystemClient.Resource.Color.switch_thumb_material_light;
-			global::com.refractored.Resource.Color.switch_thumb_normal_material_dark = global::RecommendationSystemClient.Resource.Color.switch_thumb_normal_material_dark;
-			global::com.refractored.Resource.Color.switch_thumb_normal_material_light = global::RecommendationSystemClient.Resource.Color.switch_thumb_normal_material_light;
-			global::com.refractored.Resource.Dimension.abc_action_bar_content_inset_material = global::RecommendationSystemClient.Resource.Dimension.abc_action_bar_content_inset_material;
-			global::com.refractored.Resource.Dimension.abc_action_bar_default_height_material = global::RecommendationSystemClient.Resource.Dimension.abc_action_bar_default_height_material;
-			global::com.refractored.Resource.Dimension.abc_action_bar_default_padding_end_material = global::RecommendationSystemClient.Resource.Dimension.abc_action_bar_default_padding_end_material;
-			global::com.refractored.Resource.Dimension.abc_action_bar_default_padding_start_material = global::RecommendationSystemClient.Resource.Dimension.abc_action_bar_default_padding_start_material;
-			global::com.refractored.Resource.Dimension.abc_action_bar_icon_vertical_padding_material = global::RecommendationSystemClient.Resource.Dimension.abc_action_bar_icon_vertical_padding_material;
-			global::com.refractored.Resource.Dimension.abc_action_bar_overflow_padding_end_material = global::RecommendationSystemClient.Resource.Dimension.abc_action_bar_overflow_padding_end_material;
-			global::com.refractored.Resource.Dimension.abc_action_bar_overflow_padding_start_material = global::RecommendationSystemClient.Resource.Dimension.abc_action_bar_overflow_padding_start_material;
-			global::com.refractored.Resource.Dimension.abc_action_bar_progress_bar_size = global::RecommendationSystemClient.Resource.Dimension.abc_action_bar_progress_bar_size;
-			global::com.refractored.Resource.Dimension.abc_action_bar_stacked_max_height = global::RecommendationSystemClient.Resource.Dimension.abc_action_bar_stacked_max_height;
-			global::com.refractored.Resource.Dimension.abc_action_bar_stacked_tab_max_width = global::RecommendationSystemClient.Resource.Dimension.abc_action_bar_stacked_tab_max_width;
-			global::com.refractored.Resource.Dimension.abc_action_bar_subtitle_bottom_margin_material = global::RecommendationSystemClient.Resource.Dimension.abc_action_bar_subtitle_bottom_margin_material;
-			global::com.refractored.Resource.Dimension.abc_action_bar_subtitle_top_margin_material = global::RecommendationSystemClient.Resource.Dimension.abc_action_bar_subtitle_top_margin_material;
-			global::com.refractored.Resource.Dimension.abc_action_button_min_height_material = global::RecommendationSystemClient.Resource.Dimension.abc_action_button_min_height_material;
-			global::com.refractored.Resource.Dimension.abc_action_button_min_width_material = global::RecommendationSystemClient.Resource.Dimension.abc_action_button_min_width_material;
-			global::com.refractored.Resource.Dimension.abc_action_button_min_width_overflow_material = global::RecommendationSystemClient.Resource.Dimension.abc_action_button_min_width_overflow_material;
-			global::com.refractored.Resource.Dimension.abc_alert_dialog_button_bar_height = global::RecommendationSystemClient.Resource.Dimension.abc_alert_dialog_button_bar_height;
-			global::com.refractored.Resource.Dimension.abc_button_inset_horizontal_material = global::RecommendationSystemClient.Resource.Dimension.abc_button_inset_horizontal_material;
-			global::com.refractored.Resource.Dimension.abc_button_inset_vertical_material = global::RecommendationSystemClient.Resource.Dimension.abc_button_inset_vertical_material;
-			global::com.refractored.Resource.Dimension.abc_button_padding_horizontal_material = global::RecommendationSystemClient.Resource.Dimension.abc_button_padding_horizontal_material;
-			global::com.refractored.Resource.Dimension.abc_button_padding_vertical_material = global::RecommendationSystemClient.Resource.Dimension.abc_button_padding_vertical_material;
-			global::com.refractored.Resource.Dimension.abc_config_prefDialogWidth = global::RecommendationSystemClient.Resource.Dimension.abc_config_prefDialogWidth;
-			global::com.refractored.Resource.Dimension.abc_control_corner_material = global::RecommendationSystemClient.Resource.Dimension.abc_control_corner_material;
-			global::com.refractored.Resource.Dimension.abc_control_inset_material = global::RecommendationSystemClient.Resource.Dimension.abc_control_inset_material;
-			global::com.refractored.Resource.Dimension.abc_control_padding_material = global::RecommendationSystemClient.Resource.Dimension.abc_control_padding_material;
-			global::com.refractored.Resource.Dimension.abc_dialog_fixed_height_major = global::RecommendationSystemClient.Resource.Dimension.abc_dialog_fixed_height_major;
-			global::com.refractored.Resource.Dimension.abc_dialog_fixed_height_minor = global::RecommendationSystemClient.Resource.Dimension.abc_dialog_fixed_height_minor;
-			global::com.refractored.Resource.Dimension.abc_dialog_fixed_width_major = global::RecommendationSystemClient.Resource.Dimension.abc_dialog_fixed_width_major;
-			global::com.refractored.Resource.Dimension.abc_dialog_fixed_width_minor = global::RecommendationSystemClient.Resource.Dimension.abc_dialog_fixed_width_minor;
-			global::com.refractored.Resource.Dimension.abc_dialog_min_width_major = global::RecommendationSystemClient.Resource.Dimension.abc_dialog_min_width_major;
-			global::com.refractored.Resource.Dimension.abc_dialog_min_width_minor = global::RecommendationSystemClient.Resource.Dimension.abc_dialog_min_width_minor;
-			global::com.refractored.Resource.Dimension.abc_dialog_padding_material = global::RecommendationSystemClient.Resource.Dimension.abc_dialog_padding_material;
-			global::com.refractored.Resource.Dimension.abc_dialog_padding_top_material = global::RecommendationSystemClient.Resource.Dimension.abc_dialog_padding_top_material;
-			global::com.refractored.Resource.Dimension.abc_disabled_alpha_material_dark = global::RecommendationSystemClient.Resource.Dimension.abc_disabled_alpha_material_dark;
-			global::com.refractored.Resource.Dimension.abc_disabled_alpha_material_light = global::RecommendationSystemClient.Resource.Dimension.abc_disabled_alpha_material_light;
-			global::com.refractored.Resource.Dimension.abc_dropdownitem_icon_width = global::RecommendationSystemClient.Resource.Dimension.abc_dropdownitem_icon_width;
-			global::com.refractored.Resource.Dimension.abc_dropdownitem_text_padding_left = global::RecommendationSystemClient.Resource.Dimension.abc_dropdownitem_text_padding_left;
-			global::com.refractored.Resource.Dimension.abc_dropdownitem_text_padding_right = global::RecommendationSystemClient.Resource.Dimension.abc_dropdownitem_text_padding_right;
-			global::com.refractored.Resource.Dimension.abc_edit_text_inset_bottom_material = global::RecommendationSystemClient.Resource.Dimension.abc_edit_text_inset_bottom_material;
-			global::com.refractored.Resource.Dimension.abc_edit_text_inset_horizontal_material = global::RecommendationSystemClient.Resource.Dimension.abc_edit_text_inset_horizontal_material;
-			global::com.refractored.Resource.Dimension.abc_edit_text_inset_top_material = global::RecommendationSystemClient.Resource.Dimension.abc_edit_text_inset_top_material;
-			global::com.refractored.Resource.Dimension.abc_floating_window_z = global::RecommendationSystemClient.Resource.Dimension.abc_floating_window_z;
-			global::com.refractored.Resource.Dimension.abc_list_item_padding_horizontal_material = global::RecommendationSystemClient.Resource.Dimension.abc_list_item_padding_horizontal_material;
-			global::com.refractored.Resource.Dimension.abc_panel_menu_list_width = global::RecommendationSystemClient.Resource.Dimension.abc_panel_menu_list_width;
-			global::com.refractored.Resource.Dimension.abc_search_view_preferred_width = global::RecommendationSystemClient.Resource.Dimension.abc_search_view_preferred_width;
-			global::com.refractored.Resource.Dimension.abc_seekbar_track_background_height_material = global::RecommendationSystemClient.Resource.Dimension.abc_seekbar_track_background_height_material;
-			global::com.refractored.Resource.Dimension.abc_seekbar_track_progress_height_material = global::RecommendationSystemClient.Resource.Dimension.abc_seekbar_track_progress_height_material;
-			global::com.refractored.Resource.Dimension.abc_select_dialog_padding_start_material = global::RecommendationSystemClient.Resource.Dimension.abc_select_dialog_padding_start_material;
-			global::com.refractored.Resource.Dimension.abc_switch_padding = global::RecommendationSystemClient.Resource.Dimension.abc_switch_padding;
-			global::com.refractored.Resource.Dimension.abc_text_size_body_1_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_body_1_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_body_2_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_body_2_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_button_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_button_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_caption_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_caption_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_display_1_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_display_1_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_display_2_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_display_2_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_display_3_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_display_3_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_display_4_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_display_4_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_headline_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_headline_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_large_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_large_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_medium_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_medium_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_menu_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_menu_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_small_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_small_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_subhead_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_subhead_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_subtitle_material_toolbar = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_subtitle_material_toolbar;
-			global::com.refractored.Resource.Dimension.abc_text_size_title_material = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_title_material;
-			global::com.refractored.Resource.Dimension.abc_text_size_title_material_toolbar = global::RecommendationSystemClient.Resource.Dimension.abc_text_size_title_material_toolbar;
-			global::com.refractored.Resource.Dimension.disabled_alpha_material_dark = global::RecommendationSystemClient.Resource.Dimension.disabled_alpha_material_dark;
-			global::com.refractored.Resource.Dimension.disabled_alpha_material_light = global::RecommendationSystemClient.Resource.Dimension.disabled_alpha_material_light;
-			global::com.refractored.Resource.Dimension.highlight_alpha_material_colored = global::RecommendationSystemClient.Resource.Dimension.highlight_alpha_material_colored;
-			global::com.refractored.Resource.Dimension.highlight_alpha_material_dark = global::RecommendationSystemClient.Resource.Dimension.highlight_alpha_material_dark;
-			global::com.refractored.Resource.Dimension.highlight_alpha_material_light = global::RecommendationSystemClient.Resource.Dimension.highlight_alpha_material_light;
-			global::com.refractored.Resource.Dimension.notification_large_icon_height = global::RecommendationSystemClient.Resource.Dimension.notification_large_icon_height;
-			global::com.refractored.Resource.Dimension.notification_large_icon_width = global::RecommendationSystemClient.Resource.Dimension.notification_large_icon_width;
-			global::com.refractored.Resource.Dimension.notification_subtext_size = global::RecommendationSystemClient.Resource.Dimension.notification_subtext_size;
-			global::com.refractored.Resource.Drawable.abc_ab_share_pack_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_ab_share_pack_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_action_bar_item_background_material = global::RecommendationSystemClient.Resource.Drawable.abc_action_bar_item_background_material;
-			global::com.refractored.Resource.Drawable.abc_btn_borderless_material = global::RecommendationSystemClient.Resource.Drawable.abc_btn_borderless_material;
-			global::com.refractored.Resource.Drawable.abc_btn_check_material = global::RecommendationSystemClient.Resource.Drawable.abc_btn_check_material;
-			global::com.refractored.Resource.Drawable.abc_btn_check_to_on_mtrl_000 = global::RecommendationSystemClient.Resource.Drawable.abc_btn_check_to_on_mtrl_000;
-			global::com.refractored.Resource.Drawable.abc_btn_check_to_on_mtrl_015 = global::RecommendationSystemClient.Resource.Drawable.abc_btn_check_to_on_mtrl_015;
-			global::com.refractored.Resource.Drawable.abc_btn_colored_material = global::RecommendationSystemClient.Resource.Drawable.abc_btn_colored_material;
-			global::com.refractored.Resource.Drawable.abc_btn_default_mtrl_shape = global::RecommendationSystemClient.Resource.Drawable.abc_btn_default_mtrl_shape;
-			global::com.refractored.Resource.Drawable.abc_btn_radio_material = global::RecommendationSystemClient.Resource.Drawable.abc_btn_radio_material;
-			global::com.refractored.Resource.Drawable.abc_btn_radio_to_on_mtrl_000 = global::RecommendationSystemClient.Resource.Drawable.abc_btn_radio_to_on_mtrl_000;
-			global::com.refractored.Resource.Drawable.abc_btn_radio_to_on_mtrl_015 = global::RecommendationSystemClient.Resource.Drawable.abc_btn_radio_to_on_mtrl_015;
-			global::com.refractored.Resource.Drawable.abc_btn_switch_to_on_mtrl_00001 = global::RecommendationSystemClient.Resource.Drawable.abc_btn_switch_to_on_mtrl_00001;
-			global::com.refractored.Resource.Drawable.abc_btn_switch_to_on_mtrl_00012 = global::RecommendationSystemClient.Resource.Drawable.abc_btn_switch_to_on_mtrl_00012;
-			global::com.refractored.Resource.Drawable.abc_cab_background_internal_bg = global::RecommendationSystemClient.Resource.Drawable.abc_cab_background_internal_bg;
-			global::com.refractored.Resource.Drawable.abc_cab_background_top_material = global::RecommendationSystemClient.Resource.Drawable.abc_cab_background_top_material;
-			global::com.refractored.Resource.Drawable.abc_cab_background_top_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_cab_background_top_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_control_background_material = global::RecommendationSystemClient.Resource.Drawable.abc_control_background_material;
-			global::com.refractored.Resource.Drawable.abc_edit_text_material = global::RecommendationSystemClient.Resource.Drawable.abc_edit_text_material;
-			global::com.refractored.Resource.Drawable.abc_ic_commit_search_api_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_ic_commit_search_api_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_ic_menu_copy_mtrl_am_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_ic_menu_copy_mtrl_am_alpha;
-			global::com.refractored.Resource.Drawable.abc_ic_menu_cut_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_ic_menu_cut_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_ic_menu_paste_mtrl_am_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_ic_menu_paste_mtrl_am_alpha;
-			global::com.refractored.Resource.Drawable.abc_ic_menu_selectall_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_ic_menu_selectall_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_ic_menu_share_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_ic_menu_share_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_ic_star_black_16dp = global::RecommendationSystemClient.Resource.Drawable.abc_ic_star_black_16dp;
-			global::com.refractored.Resource.Drawable.abc_ic_star_black_36dp = global::RecommendationSystemClient.Resource.Drawable.abc_ic_star_black_36dp;
-			global::com.refractored.Resource.Drawable.abc_ic_star_half_black_16dp = global::RecommendationSystemClient.Resource.Drawable.abc_ic_star_half_black_16dp;
-			global::com.refractored.Resource.Drawable.abc_ic_star_half_black_36dp = global::RecommendationSystemClient.Resource.Drawable.abc_ic_star_half_black_36dp;
-			global::com.refractored.Resource.Drawable.abc_item_background_holo_dark = global::RecommendationSystemClient.Resource.Drawable.abc_item_background_holo_dark;
-			global::com.refractored.Resource.Drawable.abc_item_background_holo_light = global::RecommendationSystemClient.Resource.Drawable.abc_item_background_holo_light;
-			global::com.refractored.Resource.Drawable.abc_list_divider_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_list_divider_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_list_focused_holo = global::RecommendationSystemClient.Resource.Drawable.abc_list_focused_holo;
-			global::com.refractored.Resource.Drawable.abc_list_longpressed_holo = global::RecommendationSystemClient.Resource.Drawable.abc_list_longpressed_holo;
-			global::com.refractored.Resource.Drawable.abc_list_pressed_holo_dark = global::RecommendationSystemClient.Resource.Drawable.abc_list_pressed_holo_dark;
-			global::com.refractored.Resource.Drawable.abc_list_pressed_holo_light = global::RecommendationSystemClient.Resource.Drawable.abc_list_pressed_holo_light;
-			global::com.refractored.Resource.Drawable.abc_list_selector_background_transition_holo_dark = global::RecommendationSystemClient.Resource.Drawable.abc_list_selector_background_transition_holo_dark;
-			global::com.refractored.Resource.Drawable.abc_list_selector_background_transition_holo_light = global::RecommendationSystemClient.Resource.Drawable.abc_list_selector_background_transition_holo_light;
-			global::com.refractored.Resource.Drawable.abc_list_selector_disabled_holo_dark = global::RecommendationSystemClient.Resource.Drawable.abc_list_selector_disabled_holo_dark;
-			global::com.refractored.Resource.Drawable.abc_list_selector_disabled_holo_light = global::RecommendationSystemClient.Resource.Drawable.abc_list_selector_disabled_holo_light;
-			global::com.refractored.Resource.Drawable.abc_list_selector_holo_dark = global::RecommendationSystemClient.Resource.Drawable.abc_list_selector_holo_dark;
-			global::com.refractored.Resource.Drawable.abc_list_selector_holo_light = global::RecommendationSystemClient.Resource.Drawable.abc_list_selector_holo_light;
-			global::com.refractored.Resource.Drawable.abc_menu_hardkey_panel_mtrl_mult = global::RecommendationSystemClient.Resource.Drawable.abc_menu_hardkey_panel_mtrl_mult;
-			global::com.refractored.Resource.Drawable.abc_popup_background_mtrl_mult = global::RecommendationSystemClient.Resource.Drawable.abc_popup_background_mtrl_mult;
-			global::com.refractored.Resource.Drawable.abc_ratingbar_indicator_material = global::RecommendationSystemClient.Resource.Drawable.abc_ratingbar_indicator_material;
-			global::com.refractored.Resource.Drawable.abc_ratingbar_small_material = global::RecommendationSystemClient.Resource.Drawable.abc_ratingbar_small_material;
-			global::com.refractored.Resource.Drawable.abc_scrubber_control_off_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_scrubber_control_off_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_000 = global::RecommendationSystemClient.Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_000;
-			global::com.refractored.Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_005 = global::RecommendationSystemClient.Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_005;
-			global::com.refractored.Resource.Drawable.abc_scrubber_primary_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_scrubber_primary_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_scrubber_track_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_scrubber_track_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_seekbar_thumb_material = global::RecommendationSystemClient.Resource.Drawable.abc_seekbar_thumb_material;
-			global::com.refractored.Resource.Drawable.abc_seekbar_track_material = global::RecommendationSystemClient.Resource.Drawable.abc_seekbar_track_material;
-			global::com.refractored.Resource.Drawable.abc_spinner_mtrl_am_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_spinner_mtrl_am_alpha;
-			global::com.refractored.Resource.Drawable.abc_spinner_textfield_background_material = global::RecommendationSystemClient.Resource.Drawable.abc_spinner_textfield_background_material;
-			global::com.refractored.Resource.Drawable.abc_switch_thumb_material = global::RecommendationSystemClient.Resource.Drawable.abc_switch_thumb_material;
-			global::com.refractored.Resource.Drawable.abc_switch_track_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_switch_track_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_tab_indicator_material = global::RecommendationSystemClient.Resource.Drawable.abc_tab_indicator_material;
-			global::com.refractored.Resource.Drawable.abc_tab_indicator_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_tab_indicator_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_text_cursor_material = global::RecommendationSystemClient.Resource.Drawable.abc_text_cursor_material;
-			global::com.refractored.Resource.Drawable.abc_textfield_activated_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_textfield_activated_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_textfield_default_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_textfield_default_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_textfield_search_activated_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_textfield_search_activated_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_textfield_search_default_mtrl_alpha = global::RecommendationSystemClient.Resource.Drawable.abc_textfield_search_default_mtrl_alpha;
-			global::com.refractored.Resource.Drawable.abc_textfield_search_material = global::RecommendationSystemClient.Resource.Drawable.abc_textfield_search_material;
-			global::com.refractored.Resource.Drawable.notification_template_icon_bg = global::RecommendationSystemClient.Resource.Drawable.notification_template_icon_bg;
-			global::com.refractored.Resource.Drawable.psts_background_tab = global::RecommendationSystemClient.Resource.Drawable.psts_background_tab;
-			global::com.refractored.Resource.Id.action0 = global::RecommendationSystemClient.Resource.Id.action0;
-			global::com.refractored.Resource.Id.action_bar = global::RecommendationSystemClient.Resource.Id.action_bar;
-			global::com.refractored.Resource.Id.action_bar_activity_content = global::RecommendationSystemClient.Resource.Id.action_bar_activity_content;
-			global::com.refractored.Resource.Id.action_bar_container = global::RecommendationSystemClient.Resource.Id.action_bar_container;
-			global::com.refractored.Resource.Id.action_bar_root = global::RecommendationSystemClient.Resource.Id.action_bar_root;
-			global::com.refractored.Resource.Id.action_bar_spinner = global::RecommendationSystemClient.Resource.Id.action_bar_spinner;
-			global::com.refractored.Resource.Id.action_bar_subtitle = global::RecommendationSystemClient.Resource.Id.action_bar_subtitle;
-			global::com.refractored.Resource.Id.action_bar_title = global::RecommendationSystemClient.Resource.Id.action_bar_title;
-			global::com.refractored.Resource.Id.action_context_bar = global::RecommendationSystemClient.Resource.Id.action_context_bar;
-			global::com.refractored.Resource.Id.action_divider = global::RecommendationSystemClient.Resource.Id.action_divider;
-			global::com.refractored.Resource.Id.action_menu_divider = global::RecommendationSystemClient.Resource.Id.action_menu_divider;
-			global::com.refractored.Resource.Id.action_menu_presenter = global::RecommendationSystemClient.Resource.Id.action_menu_presenter;
-			global::com.refractored.Resource.Id.action_mode_bar = global::RecommendationSystemClient.Resource.Id.action_mode_bar;
-			global::com.refractored.Resource.Id.action_mode_bar_stub = global::RecommendationSystemClient.Resource.Id.action_mode_bar_stub;
-			global::com.refractored.Resource.Id.action_mode_close_button = global::RecommendationSystemClient.Resource.Id.action_mode_close_button;
-			global::com.refractored.Resource.Id.activity_chooser_view_content = global::RecommendationSystemClient.Resource.Id.activity_chooser_view_content;
-			global::com.refractored.Resource.Id.alertTitle = global::RecommendationSystemClient.Resource.Id.alertTitle;
-			global::com.refractored.Resource.Id.always = global::RecommendationSystemClient.Resource.Id.always;
-			global::com.refractored.Resource.Id.beginning = global::RecommendationSystemClient.Resource.Id.beginning;
-			global::com.refractored.Resource.Id.bold = global::RecommendationSystemClient.Resource.Id.bold;
-			global::com.refractored.Resource.Id.buttonPanel = global::RecommendationSystemClient.Resource.Id.buttonPanel;
-			global::com.refractored.Resource.Id.cancel_action = global::RecommendationSystemClient.Resource.Id.cancel_action;
-			global::com.refractored.Resource.Id.checkbox = global::RecommendationSystemClient.Resource.Id.checkbox;
-			global::com.refractored.Resource.Id.chronometer = global::RecommendationSystemClient.Resource.Id.chronometer;
-			global::com.refractored.Resource.Id.collapseActionView = global::RecommendationSystemClient.Resource.Id.collapseActionView;
-			global::com.refractored.Resource.Id.contentPanel = global::RecommendationSystemClient.Resource.Id.contentPanel;
-			global::com.refractored.Resource.Id.custom = global::RecommendationSystemClient.Resource.Id.custom;
-			global::com.refractored.Resource.Id.customPanel = global::RecommendationSystemClient.Resource.Id.customPanel;
-			global::com.refractored.Resource.Id.decor_content_parent = global::RecommendationSystemClient.Resource.Id.decor_content_parent;
-			global::com.refractored.Resource.Id.default_activity_button = global::RecommendationSystemClient.Resource.Id.default_activity_button;
-			global::com.refractored.Resource.Id.disableHome = global::RecommendationSystemClient.Resource.Id.disableHome;
-			global::com.refractored.Resource.Id.edit_query = global::RecommendationSystemClient.Resource.Id.edit_query;
-			global::com.refractored.Resource.Id.end = global::RecommendationSystemClient.Resource.Id.end;
-			global::com.refractored.Resource.Id.end_padder = global::RecommendationSystemClient.Resource.Id.end_padder;
-			global::com.refractored.Resource.Id.expand_activities_button = global::RecommendationSystemClient.Resource.Id.expand_activities_button;
-			global::com.refractored.Resource.Id.expanded_menu = global::RecommendationSystemClient.Resource.Id.expanded_menu;
-			global::com.refractored.Resource.Id.home = global::RecommendationSystemClient.Resource.Id.home;
-			global::com.refractored.Resource.Id.homeAsUp = global::RecommendationSystemClient.Resource.Id.homeAsUp;
-			global::com.refractored.Resource.Id.icon = global::RecommendationSystemClient.Resource.Id.icon;
-			global::com.refractored.Resource.Id.ifRoom = global::RecommendationSystemClient.Resource.Id.ifRoom;
-			global::com.refractored.Resource.Id.image = global::RecommendationSystemClient.Resource.Id.image;
-			global::com.refractored.Resource.Id.info = global::RecommendationSystemClient.Resource.Id.info;
-			global::com.refractored.Resource.Id.italic = global::RecommendationSystemClient.Resource.Id.italic;
-			global::com.refractored.Resource.Id.line1 = global::RecommendationSystemClient.Resource.Id.line1;
-			global::com.refractored.Resource.Id.line3 = global::RecommendationSystemClient.Resource.Id.line3;
-			global::com.refractored.Resource.Id.listMode = global::RecommendationSystemClient.Resource.Id.listMode;
-			global::com.refractored.Resource.Id.list_item = global::RecommendationSystemClient.Resource.Id.list_item;
-			global::com.refractored.Resource.Id.media_actions = global::RecommendationSystemClient.Resource.Id.media_actions;
-			global::com.refractored.Resource.Id.middle = global::RecommendationSystemClient.Resource.Id.middle;
-			global::com.refractored.Resource.Id.multiply = global::RecommendationSystemClient.Resource.Id.multiply;
-			global::com.refractored.Resource.Id.never = global::RecommendationSystemClient.Resource.Id.never;
-			global::com.refractored.Resource.Id.none = global::RecommendationSystemClient.Resource.Id.none;
-			global::com.refractored.Resource.Id.normal = global::RecommendationSystemClient.Resource.Id.normal;
-			global::com.refractored.Resource.Id.parentPanel = global::RecommendationSystemClient.Resource.Id.parentPanel;
-			global::com.refractored.Resource.Id.progress_circular = global::RecommendationSystemClient.Resource.Id.progress_circular;
-			global::com.refractored.Resource.Id.progress_horizontal = global::RecommendationSystemClient.Resource.Id.progress_horizontal;
-			global::com.refractored.Resource.Id.psts_tab_title = global::RecommendationSystemClient.Resource.Id.psts_tab_title;
-			global::com.refractored.Resource.Id.radio = global::RecommendationSystemClient.Resource.Id.radio;
-			global::com.refractored.Resource.Id.screen = global::RecommendationSystemClient.Resource.Id.screen;
-			global::com.refractored.Resource.Id.scrollIndicatorDown = global::RecommendationSystemClient.Resource.Id.scrollIndicatorDown;
-			global::com.refractored.Resource.Id.scrollIndicatorUp = global::RecommendationSystemClient.Resource.Id.scrollIndicatorUp;
-			global::com.refractored.Resource.Id.scrollView = global::RecommendationSystemClient.Resource.Id.scrollView;
-			global::com.refractored.Resource.Id.search_badge = global::RecommendationSystemClient.Resource.Id.search_badge;
-			global::com.refractored.Resource.Id.search_bar = global::RecommendationSystemClient.Resource.Id.search_bar;
-			global::com.refractored.Resource.Id.search_button = global::RecommendationSystemClient.Resource.Id.search_button;
-			global::com.refractored.Resource.Id.search_close_btn = global::RecommendationSystemClient.Resource.Id.search_close_btn;
-			global::com.refractored.Resource.Id.search_edit_frame = global::RecommendationSystemClient.Resource.Id.search_edit_frame;
-			global::com.refractored.Resource.Id.search_go_btn = global::RecommendationSystemClient.Resource.Id.search_go_btn;
-			global::com.refractored.Resource.Id.search_mag_icon = global::RecommendationSystemClient.Resource.Id.search_mag_icon;
-			global::com.refractored.Resource.Id.search_plate = global::RecommendationSystemClient.Resource.Id.search_plate;
-			global::com.refractored.Resource.Id.search_src_text = global::RecommendationSystemClient.Resource.Id.search_src_text;
-			global::com.refractored.Resource.Id.search_voice_btn = global::RecommendationSystemClient.Resource.Id.search_voice_btn;
-			global::com.refractored.Resource.Id.select_dialog_listview = global::RecommendationSystemClient.Resource.Id.select_dialog_listview;
-			global::com.refractored.Resource.Id.shortcut = global::RecommendationSystemClient.Resource.Id.shortcut;
-			global::com.refractored.Resource.Id.showCustom = global::RecommendationSystemClient.Resource.Id.showCustom;
-			global::com.refractored.Resource.Id.showHome = global::RecommendationSystemClient.Resource.Id.showHome;
-			global::com.refractored.Resource.Id.showTitle = global::RecommendationSystemClient.Resource.Id.showTitle;
-			global::com.refractored.Resource.Id.spacer = global::RecommendationSystemClient.Resource.Id.spacer;
-			global::com.refractored.Resource.Id.split_action_bar = global::RecommendationSystemClient.Resource.Id.split_action_bar;
-			global::com.refractored.Resource.Id.src_atop = global::RecommendationSystemClient.Resource.Id.src_atop;
-			global::com.refractored.Resource.Id.src_in = global::RecommendationSystemClient.Resource.Id.src_in;
-			global::com.refractored.Resource.Id.src_over = global::RecommendationSystemClient.Resource.Id.src_over;
-			global::com.refractored.Resource.Id.status_bar_latest_event_content = global::RecommendationSystemClient.Resource.Id.status_bar_latest_event_content;
-			global::com.refractored.Resource.Id.submit_area = global::RecommendationSystemClient.Resource.Id.submit_area;
-			global::com.refractored.Resource.Id.tabMode = global::RecommendationSystemClient.Resource.Id.tabMode;
-			global::com.refractored.Resource.Id.text = global::RecommendationSystemClient.Resource.Id.text;
-			global::com.refractored.Resource.Id.text2 = global::RecommendationSystemClient.Resource.Id.text2;
-			global::com.refractored.Resource.Id.textSpacerNoButtons = global::RecommendationSystemClient.Resource.Id.textSpacerNoButtons;
-			global::com.refractored.Resource.Id.time = global::RecommendationSystemClient.Resource.Id.time;
-			global::com.refractored.Resource.Id.title = global::RecommendationSystemClient.Resource.Id.title;
-			global::com.refractored.Resource.Id.title_template = global::RecommendationSystemClient.Resource.Id.title_template;
-			global::com.refractored.Resource.Id.topPanel = global::RecommendationSystemClient.Resource.Id.topPanel;
-			global::com.refractored.Resource.Id.up = global::RecommendationSystemClient.Resource.Id.up;
-			global::com.refractored.Resource.Id.useLogo = global::RecommendationSystemClient.Resource.Id.useLogo;
-			global::com.refractored.Resource.Id.withText = global::RecommendationSystemClient.Resource.Id.withText;
-			global::com.refractored.Resource.Id.wrap_content = global::RecommendationSystemClient.Resource.Id.wrap_content;
-			global::com.refractored.Resource.Integer.abc_config_activityDefaultDur = global::RecommendationSystemClient.Resource.Integer.abc_config_activityDefaultDur;
-			global::com.refractored.Resource.Integer.abc_config_activityShortDur = global::RecommendationSystemClient.Resource.Integer.abc_config_activityShortDur;
-			global::com.refractored.Resource.Integer.cancel_button_image_alpha = global::RecommendationSystemClient.Resource.Integer.cancel_button_image_alpha;
-			global::com.refractored.Resource.Integer.status_bar_notification_info_maxnum = global::RecommendationSystemClient.Resource.Integer.status_bar_notification_info_maxnum;
-			global::com.refractored.Resource.Layout.abc_action_bar_title_item = global::RecommendationSystemClient.Resource.Layout.abc_action_bar_title_item;
-			global::com.refractored.Resource.Layout.abc_action_bar_up_container = global::RecommendationSystemClient.Resource.Layout.abc_action_bar_up_container;
-			global::com.refractored.Resource.Layout.abc_action_menu_item_layout = global::RecommendationSystemClient.Resource.Layout.abc_action_menu_item_layout;
-			global::com.refractored.Resource.Layout.abc_action_menu_layout = global::RecommendationSystemClient.Resource.Layout.abc_action_menu_layout;
-			global::com.refractored.Resource.Layout.abc_action_mode_bar = global::RecommendationSystemClient.Resource.Layout.abc_action_mode_bar;
-			global::com.refractored.Resource.Layout.abc_action_mode_close_item_material = global::RecommendationSystemClient.Resource.Layout.abc_action_mode_close_item_material;
-			global::com.refractored.Resource.Layout.abc_activity_chooser_view = global::RecommendationSystemClient.Resource.Layout.abc_activity_chooser_view;
-			global::com.refractored.Resource.Layout.abc_activity_chooser_view_list_item = global::RecommendationSystemClient.Resource.Layout.abc_activity_chooser_view_list_item;
-			global::com.refractored.Resource.Layout.abc_alert_dialog_button_bar_material = global::RecommendationSystemClient.Resource.Layout.abc_alert_dialog_button_bar_material;
-			global::com.refractored.Resource.Layout.abc_alert_dialog_material = global::RecommendationSystemClient.Resource.Layout.abc_alert_dialog_material;
-			global::com.refractored.Resource.Layout.abc_dialog_title_material = global::RecommendationSystemClient.Resource.Layout.abc_dialog_title_material;
-			global::com.refractored.Resource.Layout.abc_expanded_menu_layout = global::RecommendationSystemClient.Resource.Layout.abc_expanded_menu_layout;
-			global::com.refractored.Resource.Layout.abc_list_menu_item_checkbox = global::RecommendationSystemClient.Resource.Layout.abc_list_menu_item_checkbox;
-			global::com.refractored.Resource.Layout.abc_list_menu_item_icon = global::RecommendationSystemClient.Resource.Layout.abc_list_menu_item_icon;
-			global::com.refractored.Resource.Layout.abc_list_menu_item_layout = global::RecommendationSystemClient.Resource.Layout.abc_list_menu_item_layout;
-			global::com.refractored.Resource.Layout.abc_list_menu_item_radio = global::RecommendationSystemClient.Resource.Layout.abc_list_menu_item_radio;
-			global::com.refractored.Resource.Layout.abc_popup_menu_item_layout = global::RecommendationSystemClient.Resource.Layout.abc_popup_menu_item_layout;
-			global::com.refractored.Resource.Layout.abc_screen_content_include = global::RecommendationSystemClient.Resource.Layout.abc_screen_content_include;
-			global::com.refractored.Resource.Layout.abc_screen_simple = global::RecommendationSystemClient.Resource.Layout.abc_screen_simple;
-			global::com.refractored.Resource.Layout.abc_screen_simple_overlay_action_mode = global::RecommendationSystemClient.Resource.Layout.abc_screen_simple_overlay_action_mode;
-			global::com.refractored.Resource.Layout.abc_screen_toolbar = global::RecommendationSystemClient.Resource.Layout.abc_screen_toolbar;
-			global::com.refractored.Resource.Layout.abc_search_dropdown_item_icons_2line = global::RecommendationSystemClient.Resource.Layout.abc_search_dropdown_item_icons_2line;
-			global::com.refractored.Resource.Layout.abc_search_view = global::RecommendationSystemClient.Resource.Layout.abc_search_view;
-			global::com.refractored.Resource.Layout.abc_select_dialog_material = global::RecommendationSystemClient.Resource.Layout.abc_select_dialog_material;
-			global::com.refractored.Resource.Layout.notification_media_action = global::RecommendationSystemClient.Resource.Layout.notification_media_action;
-			global::com.refractored.Resource.Layout.notification_media_cancel_action = global::RecommendationSystemClient.Resource.Layout.notification_media_cancel_action;
-			global::com.refractored.Resource.Layout.notification_template_big_media = global::RecommendationSystemClient.Resource.Layout.notification_template_big_media;
-			global::com.refractored.Resource.Layout.notification_template_big_media_narrow = global::RecommendationSystemClient.Resource.Layout.notification_template_big_media_narrow;
-			global::com.refractored.Resource.Layout.notification_template_media = global::RecommendationSystemClient.Resource.Layout.notification_template_media;
-			global::com.refractored.Resource.Layout.notification_template_part_chronometer = global::RecommendationSystemClient.Resource.Layout.notification_template_part_chronometer;
-			global::com.refractored.Resource.Layout.notification_template_part_time = global::RecommendationSystemClient.Resource.Layout.notification_template_part_time;
-			global::com.refractored.Resource.Layout.psts_tab = global::RecommendationSystemClient.Resource.Layout.psts_tab;
-			global::com.refractored.Resource.Layout.select_dialog_item_material = global::RecommendationSystemClient.Resource.Layout.select_dialog_item_material;
-			global::com.refractored.Resource.Layout.select_dialog_multichoice_material = global::RecommendationSystemClient.Resource.Layout.select_dialog_multichoice_material;
-			global::com.refractored.Resource.Layout.select_dialog_singlechoice_material = global::RecommendationSystemClient.Resource.Layout.select_dialog_singlechoice_material;
-			global::com.refractored.Resource.Layout.support_simple_spinner_dropdown_item = global::RecommendationSystemClient.Resource.Layout.support_simple_spinner_dropdown_item;
-			global::com.refractored.Resource.String.abc_action_bar_home_description = global::RecommendationSystemClient.Resource.String.abc_action_bar_home_description;
-			global::com.refractored.Resource.String.abc_action_bar_up_description = global::RecommendationSystemClient.Resource.String.abc_action_bar_up_description;
-			global::com.refractored.Resource.String.abc_action_menu_overflow_description = global::RecommendationSystemClient.Resource.String.abc_action_menu_overflow_description;
-			global::com.refractored.Resource.String.abc_action_mode_done = global::RecommendationSystemClient.Resource.String.abc_action_mode_done;
-			global::com.refractored.Resource.String.abc_activity_chooser_view_see_all = global::RecommendationSystemClient.Resource.String.abc_activity_chooser_view_see_all;
-			global::com.refractored.Resource.String.abc_activitychooserview_choose_application = global::RecommendationSystemClient.Resource.String.abc_activitychooserview_choose_application;
-			global::com.refractored.Resource.String.abc_capital_off = global::RecommendationSystemClient.Resource.String.abc_capital_off;
-			global::com.refractored.Resource.String.abc_capital_on = global::RecommendationSystemClient.Resource.String.abc_capital_on;
-			global::com.refractored.Resource.String.abc_search_hint = global::RecommendationSystemClient.Resource.String.abc_search_hint;
-			global::com.refractored.Resource.String.abc_searchview_description_clear = global::RecommendationSystemClient.Resource.String.abc_searchview_description_clear;
-			global::com.refractored.Resource.String.abc_searchview_description_query = global::RecommendationSystemClient.Resource.String.abc_searchview_description_query;
-			global::com.refractored.Resource.String.abc_searchview_description_search = global::RecommendationSystemClient.Resource.String.abc_searchview_description_search;
-			global::com.refractored.Resource.String.abc_searchview_description_submit = global::RecommendationSystemClient.Resource.String.abc_searchview_description_submit;
-			global::com.refractored.Resource.String.abc_searchview_description_voice = global::RecommendationSystemClient.Resource.String.abc_searchview_description_voice;
-			global::com.refractored.Resource.String.abc_shareactionprovider_share_with = global::RecommendationSystemClient.Resource.String.abc_shareactionprovider_share_with;
-			global::com.refractored.Resource.String.abc_shareactionprovider_share_with_application = global::RecommendationSystemClient.Resource.String.abc_shareactionprovider_share_with_application;
-			global::com.refractored.Resource.String.abc_toolbar_collapse_description = global::RecommendationSystemClient.Resource.String.abc_toolbar_collapse_description;
-			global::com.refractored.Resource.String.status_bar_notification_info_overflow = global::RecommendationSystemClient.Resource.String.status_bar_notification_info_overflow;
-			global::com.refractored.Resource.Style.AlertDialog_AppCompat = global::RecommendationSystemClient.Resource.Style.AlertDialog_AppCompat;
-			global::com.refractored.Resource.Style.AlertDialog_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.AlertDialog_AppCompat_Light;
-			global::com.refractored.Resource.Style.Animation_AppCompat_Dialog = global::RecommendationSystemClient.Resource.Style.Animation_AppCompat_Dialog;
-			global::com.refractored.Resource.Style.Animation_AppCompat_DropDownUp = global::RecommendationSystemClient.Resource.Style.Animation_AppCompat_DropDownUp;
-			global::com.refractored.Resource.Style.Base_AlertDialog_AppCompat = global::RecommendationSystemClient.Resource.Style.Base_AlertDialog_AppCompat;
-			global::com.refractored.Resource.Style.Base_AlertDialog_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.Base_AlertDialog_AppCompat_Light;
-			global::com.refractored.Resource.Style.Base_Animation_AppCompat_Dialog = global::RecommendationSystemClient.Resource.Style.Base_Animation_AppCompat_Dialog;
-			global::com.refractored.Resource.Style.Base_Animation_AppCompat_DropDownUp = global::RecommendationSystemClient.Resource.Style.Base_Animation_AppCompat_DropDownUp;
-			global::com.refractored.Resource.Style.Base_DialogWindowTitle_AppCompat = global::RecommendationSystemClient.Resource.Style.Base_DialogWindowTitle_AppCompat;
-			global::com.refractored.Resource.Style.Base_DialogWindowTitleBackground_AppCompat = global::RecommendationSystemClient.Resource.Style.Base_DialogWindowTitleBackground_AppCompat;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Body1 = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Body1;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Body2 = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Body2;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Button = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Button;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Caption = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Caption;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Display1 = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Display1;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Display2 = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Display2;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Display3 = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Display3;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Display4 = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Display4;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Headline = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Headline;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Inverse = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Inverse;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Large = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Large;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Large_Inverse = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Large_Inverse;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Large = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Large;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Small = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Small;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Medium = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Medium;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Medium_Inverse = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Medium_Inverse;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Menu = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Menu;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_SearchResult = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_SearchResult;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_SearchResult_Subtitle = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_SearchResult_Subtitle;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_SearchResult_Title = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_SearchResult_Title;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Small = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Small;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Small_Inverse = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Small_Inverse;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Subhead = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Subhead;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Subhead_Inverse = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Subhead_Inverse;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Title = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Title;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Title_Inverse = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Title_Inverse;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Menu = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Menu;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Title = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Title;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionMode_Subtitle = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionMode_Subtitle;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionMode_Title = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionMode_Title;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Inverse = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Inverse;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_DropDownItem = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_DropDownItem;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Large = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Large;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Small = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Small;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_Switch = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_Switch;
-			global::com.refractored.Resource.Style.Base_TextAppearance_AppCompat_Widget_TextView_SpinnerItem = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_AppCompat_Widget_TextView_SpinnerItem;
-			global::com.refractored.Resource.Style.Base_TextAppearance_Widget_AppCompat_ExpandedMenu_Item = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_Widget_AppCompat_ExpandedMenu_Item;
-			global::com.refractored.Resource.Style.Base_TextAppearance_Widget_AppCompat_Toolbar_Subtitle = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_Widget_AppCompat_Toolbar_Subtitle;
-			global::com.refractored.Resource.Style.Base_TextAppearance_Widget_AppCompat_Toolbar_Title = global::RecommendationSystemClient.Resource.Style.Base_TextAppearance_Widget_AppCompat_Toolbar_Title;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_CompactMenu = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_CompactMenu;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_Dialog = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_Dialog;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_Dialog_Alert = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_Dialog_Alert;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_Dialog_FixedSize = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_Dialog_FixedSize;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_Dialog_MinWidth = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_Dialog_MinWidth;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_DialogWhenLarge = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_DialogWhenLarge;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_Light;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_Light_DarkActionBar = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_Light_DarkActionBar;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_Light_Dialog = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_Light_Dialog;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_Light_Dialog_Alert = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_Light_Dialog_Alert;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_Light_Dialog_FixedSize = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_Light_Dialog_FixedSize;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_Light_Dialog_MinWidth = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_Light_Dialog_MinWidth;
-			global::com.refractored.Resource.Style.Base_Theme_AppCompat_Light_DialogWhenLarge = global::RecommendationSystemClient.Resource.Style.Base_Theme_AppCompat_Light_DialogWhenLarge;
-			global::com.refractored.Resource.Style.Base_ThemeOverlay_AppCompat = global::RecommendationSystemClient.Resource.Style.Base_ThemeOverlay_AppCompat;
-			global::com.refractored.Resource.Style.Base_ThemeOverlay_AppCompat_ActionBar = global::RecommendationSystemClient.Resource.Style.Base_ThemeOverlay_AppCompat_ActionBar;
-			global::com.refractored.Resource.Style.Base_ThemeOverlay_AppCompat_Dark = global::RecommendationSystemClient.Resource.Style.Base_ThemeOverlay_AppCompat_Dark;
-			global::com.refractored.Resource.Style.Base_ThemeOverlay_AppCompat_Dark_ActionBar = global::RecommendationSystemClient.Resource.Style.Base_ThemeOverlay_AppCompat_Dark_ActionBar;
-			global::com.refractored.Resource.Style.Base_ThemeOverlay_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.Base_ThemeOverlay_AppCompat_Light;
-			global::com.refractored.Resource.Style.Base_V11_Theme_AppCompat_Dialog = global::RecommendationSystemClient.Resource.Style.Base_V11_Theme_AppCompat_Dialog;
-			global::com.refractored.Resource.Style.Base_V11_Theme_AppCompat_Light_Dialog = global::RecommendationSystemClient.Resource.Style.Base_V11_Theme_AppCompat_Light_Dialog;
-			global::com.refractored.Resource.Style.Base_V12_Widget_AppCompat_AutoCompleteTextView = global::RecommendationSystemClient.Resource.Style.Base_V12_Widget_AppCompat_AutoCompleteTextView;
-			global::com.refractored.Resource.Style.Base_V12_Widget_AppCompat_EditText = global::RecommendationSystemClient.Resource.Style.Base_V12_Widget_AppCompat_EditText;
-			global::com.refractored.Resource.Style.Base_V21_Theme_AppCompat = global::RecommendationSystemClient.Resource.Style.Base_V21_Theme_AppCompat;
-			global::com.refractored.Resource.Style.Base_V21_Theme_AppCompat_Dialog = global::RecommendationSystemClient.Resource.Style.Base_V21_Theme_AppCompat_Dialog;
-			global::com.refractored.Resource.Style.Base_V21_Theme_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.Base_V21_Theme_AppCompat_Light;
-			global::com.refractored.Resource.Style.Base_V21_Theme_AppCompat_Light_Dialog = global::RecommendationSystemClient.Resource.Style.Base_V21_Theme_AppCompat_Light_Dialog;
-			global::com.refractored.Resource.Style.Base_V22_Theme_AppCompat = global::RecommendationSystemClient.Resource.Style.Base_V22_Theme_AppCompat;
-			global::com.refractored.Resource.Style.Base_V22_Theme_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.Base_V22_Theme_AppCompat_Light;
-			global::com.refractored.Resource.Style.Base_V23_Theme_AppCompat = global::RecommendationSystemClient.Resource.Style.Base_V23_Theme_AppCompat;
-			global::com.refractored.Resource.Style.Base_V23_Theme_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.Base_V23_Theme_AppCompat_Light;
-			global::com.refractored.Resource.Style.Base_V7_Theme_AppCompat = global::RecommendationSystemClient.Resource.Style.Base_V7_Theme_AppCompat;
-			global::com.refractored.Resource.Style.Base_V7_Theme_AppCompat_Dialog = global::RecommendationSystemClient.Resource.Style.Base_V7_Theme_AppCompat_Dialog;
-			global::com.refractored.Resource.Style.Base_V7_Theme_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.Base_V7_Theme_AppCompat_Light;
-			global::com.refractored.Resource.Style.Base_V7_Theme_AppCompat_Light_Dialog = global::RecommendationSystemClient.Resource.Style.Base_V7_Theme_AppCompat_Light_Dialog;
-			global::com.refractored.Resource.Style.Base_V7_Widget_AppCompat_AutoCompleteTextView = global::RecommendationSystemClient.Resource.Style.Base_V7_Widget_AppCompat_AutoCompleteTextView;
-			global::com.refractored.Resource.Style.Base_V7_Widget_AppCompat_EditText = global::RecommendationSystemClient.Resource.Style.Base_V7_Widget_AppCompat_EditText;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ActionBar = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ActionBar;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ActionBar_Solid = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ActionBar_Solid;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ActionBar_TabBar = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ActionBar_TabBar;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ActionBar_TabText = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ActionBar_TabText;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ActionBar_TabView = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ActionBar_TabView;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ActionButton = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ActionButton;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ActionButton_CloseMode = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ActionButton_CloseMode;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ActionButton_Overflow = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ActionButton_Overflow;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ActionMode = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ActionMode;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ActivityChooserView = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ActivityChooserView;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_AutoCompleteTextView = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_AutoCompleteTextView;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Button = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Button;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Button_Borderless = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Button_Borderless;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Button_Borderless_Colored = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Button_Borderless_Colored;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Button_ButtonBar_AlertDialog = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Button_ButtonBar_AlertDialog;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Button_Colored = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Button_Colored;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Button_Small = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Button_Small;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ButtonBar = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ButtonBar;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ButtonBar_AlertDialog = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ButtonBar_AlertDialog;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_CompoundButton_CheckBox = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_CompoundButton_CheckBox;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_CompoundButton_RadioButton = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_CompoundButton_RadioButton;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_CompoundButton_Switch = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_CompoundButton_Switch;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_DrawerArrowToggle = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_DrawerArrowToggle;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_DrawerArrowToggle_Common = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_DrawerArrowToggle_Common;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_DropDownItem_Spinner = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_DropDownItem_Spinner;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_EditText = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_EditText;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ImageButton = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ImageButton;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Light_ActionBar = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Light_ActionBar;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_Solid = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_Solid;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabBar = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabBar;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabText = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabText;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabText_Inverse = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabText_Inverse;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabView = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabView;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Light_PopupMenu = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Light_PopupMenu;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Light_PopupMenu_Overflow = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Light_PopupMenu_Overflow;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ListPopupWindow = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ListPopupWindow;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ListView = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ListView;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ListView_DropDown = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ListView_DropDown;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ListView_Menu = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ListView_Menu;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_PopupMenu = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_PopupMenu;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_PopupMenu_Overflow = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_PopupMenu_Overflow;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_PopupWindow = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_PopupWindow;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ProgressBar = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ProgressBar;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_ProgressBar_Horizontal = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_ProgressBar_Horizontal;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_RatingBar = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_RatingBar;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_RatingBar_Indicator = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_RatingBar_Indicator;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_RatingBar_Small = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_RatingBar_Small;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_SearchView = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_SearchView;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_SearchView_ActionBar = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_SearchView_ActionBar;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_SeekBar = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_SeekBar;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Spinner = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Spinner;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Spinner_Underlined = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Spinner_Underlined;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_TextView_SpinnerItem = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_TextView_SpinnerItem;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Toolbar = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Toolbar;
-			global::com.refractored.Resource.Style.Base_Widget_AppCompat_Toolbar_Button_Navigation = global::RecommendationSystemClient.Resource.Style.Base_Widget_AppCompat_Toolbar_Button_Navigation;
-			global::com.refractored.Resource.Style.Platform_AppCompat = global::RecommendationSystemClient.Resource.Style.Platform_AppCompat;
-			global::com.refractored.Resource.Style.Platform_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.Platform_AppCompat_Light;
-			global::com.refractored.Resource.Style.Platform_ThemeOverlay_AppCompat = global::RecommendationSystemClient.Resource.Style.Platform_ThemeOverlay_AppCompat;
-			global::com.refractored.Resource.Style.Platform_ThemeOverlay_AppCompat_Dark = global::RecommendationSystemClient.Resource.Style.Platform_ThemeOverlay_AppCompat_Dark;
-			global::com.refractored.Resource.Style.Platform_ThemeOverlay_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.Platform_ThemeOverlay_AppCompat_Light;
-			global::com.refractored.Resource.Style.Platform_V11_AppCompat = global::RecommendationSystemClient.Resource.Style.Platform_V11_AppCompat;
-			global::com.refractored.Resource.Style.Platform_V11_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.Platform_V11_AppCompat_Light;
-			global::com.refractored.Resource.Style.Platform_V14_AppCompat = global::RecommendationSystemClient.Resource.Style.Platform_V14_AppCompat;
-			global::com.refractored.Resource.Style.Platform_V14_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.Platform_V14_AppCompat_Light;
-			global::com.refractored.Resource.Style.Platform_Widget_AppCompat_Spinner = global::RecommendationSystemClient.Resource.Style.Platform_Widget_AppCompat_Spinner;
-			global::com.refractored.Resource.Style.RtlOverlay_DialogWindowTitle_AppCompat = global::RecommendationSystemClient.Resource.Style.RtlOverlay_DialogWindowTitle_AppCompat;
-			global::com.refractored.Resource.Style.RtlOverlay_Widget_AppCompat_ActionBar_TitleItem = global::RecommendationSystemClient.Resource.Style.RtlOverlay_Widget_AppCompat_ActionBar_TitleItem;
-			global::com.refractored.Resource.Style.RtlOverlay_Widget_AppCompat_DialogTitle_Icon = global::RecommendationSystemClient.Resource.Style.RtlOverlay_Widget_AppCompat_DialogTitle_Icon;
-			global::com.refractored.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem = global::RecommendationSystemClient.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem;
-			global::com.refractored.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_InternalGroup = global::RecommendationSystemClient.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_InternalGroup;
-			global::com.refractored.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Text = global::RecommendationSystemClient.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Text;
-			global::com.refractored.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown = global::RecommendationSystemClient.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown;
-			global::com.refractored.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon1 = global::RecommendationSystemClient.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon1;
-			global::com.refractored.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon2 = global::RecommendationSystemClient.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon2;
-			global::com.refractored.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Query = global::RecommendationSystemClient.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Query;
-			global::com.refractored.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text = global::RecommendationSystemClient.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text;
-			global::com.refractored.Resource.Style.RtlOverlay_Widget_AppCompat_SearchView_MagIcon = global::RecommendationSystemClient.Resource.Style.RtlOverlay_Widget_AppCompat_SearchView_MagIcon;
-			global::com.refractored.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton = global::RecommendationSystemClient.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton;
-			global::com.refractored.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = global::RecommendationSystemClient.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Body1 = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Body1;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Body2 = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Body2;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Button = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Button;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Caption = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Caption;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Display1 = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Display1;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Display2 = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Display2;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Display3 = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Display3;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Display4 = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Display4;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Headline = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Headline;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Inverse = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Inverse;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Large = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Large;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Large_Inverse = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Large_Inverse;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Light_SearchResult_Subtitle = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Light_SearchResult_Subtitle;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Light_SearchResult_Title = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Light_SearchResult_Title;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Light_Widget_PopupMenu_Large = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Light_Widget_PopupMenu_Large;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Light_Widget_PopupMenu_Small = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Light_Widget_PopupMenu_Small;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Medium = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Medium;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Medium_Inverse = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Medium_Inverse;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Menu = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Menu;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_SearchResult_Subtitle = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_SearchResult_Subtitle;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_SearchResult_Title = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_SearchResult_Title;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Small = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Small;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Small_Inverse = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Small_Inverse;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Subhead = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Subhead;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Subhead_Inverse = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Subhead_Inverse;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Title = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Title;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Title_Inverse = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Title_Inverse;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Menu = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Menu;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Title = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Title;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Subtitle = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Subtitle;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Subtitle_Inverse = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Subtitle_Inverse;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Title = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Title;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Title_Inverse = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Title_Inverse;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_Button = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_Button;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_Button_Inverse = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_Button_Inverse;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_DropDownItem = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_DropDownItem;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Large = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Large;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Small = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Small;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_Switch = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_Switch;
-			global::com.refractored.Resource.Style.TextAppearance_AppCompat_Widget_TextView_SpinnerItem = global::RecommendationSystemClient.Resource.Style.TextAppearance_AppCompat_Widget_TextView_SpinnerItem;
-			global::com.refractored.Resource.Style.TextAppearance_Widget_AppCompat_ExpandedMenu_Item = global::RecommendationSystemClient.Resource.Style.TextAppearance_Widget_AppCompat_ExpandedMenu_Item;
-			global::com.refractored.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Subtitle = global::RecommendationSystemClient.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Subtitle;
-			global::com.refractored.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Title = global::RecommendationSystemClient.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Title;
-			global::com.refractored.Resource.Style.Theme_AppCompat = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat;
-			global::com.refractored.Resource.Style.Theme_AppCompat_CompactMenu = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_CompactMenu;
-			global::com.refractored.Resource.Style.Theme_AppCompat_DayNight = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_DayNight;
-			global::com.refractored.Resource.Style.Theme_AppCompat_DayNight_DarkActionBar = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_DayNight_DarkActionBar;
-			global::com.refractored.Resource.Style.Theme_AppCompat_DayNight_Dialog = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_DayNight_Dialog;
-			global::com.refractored.Resource.Style.Theme_AppCompat_DayNight_Dialog_Alert = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_DayNight_Dialog_Alert;
-			global::com.refractored.Resource.Style.Theme_AppCompat_DayNight_Dialog_MinWidth = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_DayNight_Dialog_MinWidth;
-			global::com.refractored.Resource.Style.Theme_AppCompat_DayNight_DialogWhenLarge = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_DayNight_DialogWhenLarge;
-			global::com.refractored.Resource.Style.Theme_AppCompat_DayNight_NoActionBar = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_DayNight_NoActionBar;
-			global::com.refractored.Resource.Style.Theme_AppCompat_Dialog = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_Dialog;
-			global::com.refractored.Resource.Style.Theme_AppCompat_Dialog_Alert = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_Dialog_Alert;
-			global::com.refractored.Resource.Style.Theme_AppCompat_Dialog_MinWidth = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_Dialog_MinWidth;
-			global::com.refractored.Resource.Style.Theme_AppCompat_DialogWhenLarge = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_DialogWhenLarge;
-			global::com.refractored.Resource.Style.Theme_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_Light;
-			global::com.refractored.Resource.Style.Theme_AppCompat_Light_DarkActionBar = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_Light_DarkActionBar;
-			global::com.refractored.Resource.Style.Theme_AppCompat_Light_Dialog = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_Light_Dialog;
-			global::com.refractored.Resource.Style.Theme_AppCompat_Light_Dialog_Alert = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_Light_Dialog_Alert;
-			global::com.refractored.Resource.Style.Theme_AppCompat_Light_Dialog_MinWidth = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_Light_Dialog_MinWidth;
-			global::com.refractored.Resource.Style.Theme_AppCompat_Light_DialogWhenLarge = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_Light_DialogWhenLarge;
-			global::com.refractored.Resource.Style.Theme_AppCompat_Light_NoActionBar = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_Light_NoActionBar;
-			global::com.refractored.Resource.Style.Theme_AppCompat_NoActionBar = global::RecommendationSystemClient.Resource.Style.Theme_AppCompat_NoActionBar;
-			global::com.refractored.Resource.Style.ThemeOverlay_AppCompat = global::RecommendationSystemClient.Resource.Style.ThemeOverlay_AppCompat;
-			global::com.refractored.Resource.Style.ThemeOverlay_AppCompat_ActionBar = global::RecommendationSystemClient.Resource.Style.ThemeOverlay_AppCompat_ActionBar;
-			global::com.refractored.Resource.Style.ThemeOverlay_AppCompat_Dark = global::RecommendationSystemClient.Resource.Style.ThemeOverlay_AppCompat_Dark;
-			global::com.refractored.Resource.Style.ThemeOverlay_AppCompat_Dark_ActionBar = global::RecommendationSystemClient.Resource.Style.ThemeOverlay_AppCompat_Dark_ActionBar;
-			global::com.refractored.Resource.Style.ThemeOverlay_AppCompat_Light = global::RecommendationSystemClient.Resource.Style.ThemeOverlay_AppCompat_Light;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ActionBar = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ActionBar;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ActionBar_Solid = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ActionBar_Solid;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ActionBar_TabBar = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ActionBar_TabBar;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ActionBar_TabText = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ActionBar_TabText;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ActionBar_TabView = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ActionBar_TabView;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ActionButton = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ActionButton;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ActionButton_CloseMode = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ActionButton_CloseMode;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ActionButton_Overflow = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ActionButton_Overflow;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ActionMode = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ActionMode;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ActivityChooserView = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ActivityChooserView;
-			global::com.refractored.Resource.Style.Widget_AppCompat_AutoCompleteTextView = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_AutoCompleteTextView;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Button = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Button;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Button_Borderless = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Button_Borderless;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Button_Borderless_Colored = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Button_Borderless_Colored;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Button_ButtonBar_AlertDialog = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Button_ButtonBar_AlertDialog;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Button_Colored = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Button_Colored;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Button_Small = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Button_Small;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ButtonBar = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ButtonBar;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ButtonBar_AlertDialog = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ButtonBar_AlertDialog;
-			global::com.refractored.Resource.Style.Widget_AppCompat_CompoundButton_CheckBox = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_CompoundButton_CheckBox;
-			global::com.refractored.Resource.Style.Widget_AppCompat_CompoundButton_RadioButton = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_CompoundButton_RadioButton;
-			global::com.refractored.Resource.Style.Widget_AppCompat_CompoundButton_Switch = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_CompoundButton_Switch;
-			global::com.refractored.Resource.Style.Widget_AppCompat_DrawerArrowToggle = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_DrawerArrowToggle;
-			global::com.refractored.Resource.Style.Widget_AppCompat_DropDownItem_Spinner = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_DropDownItem_Spinner;
-			global::com.refractored.Resource.Style.Widget_AppCompat_EditText = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_EditText;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ImageButton = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ImageButton;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionBar = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionBar;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionBar_Solid = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionBar_Solid;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionBar_Solid_Inverse = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionBar_Solid_Inverse;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionBar_TabBar = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionBar_TabBar;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionBar_TabBar_Inverse = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionBar_TabBar_Inverse;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionBar_TabText = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionBar_TabText;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionBar_TabText_Inverse = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionBar_TabText_Inverse;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionBar_TabView = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionBar_TabView;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionBar_TabView_Inverse = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionBar_TabView_Inverse;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionButton = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionButton;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionButton_CloseMode = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionButton_CloseMode;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionButton_Overflow = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionButton_Overflow;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActionMode_Inverse = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActionMode_Inverse;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ActivityChooserView = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ActivityChooserView;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_AutoCompleteTextView = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_AutoCompleteTextView;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_DropDownItem_Spinner = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_DropDownItem_Spinner;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ListPopupWindow = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ListPopupWindow;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_ListView_DropDown = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_ListView_DropDown;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_PopupMenu = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_PopupMenu;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_PopupMenu_Overflow = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_PopupMenu_Overflow;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_SearchView = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_SearchView;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Light_Spinner_DropDown_ActionBar = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Light_Spinner_DropDown_ActionBar;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ListPopupWindow = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ListPopupWindow;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ListView = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ListView;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ListView_DropDown = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ListView_DropDown;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ListView_Menu = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ListView_Menu;
-			global::com.refractored.Resource.Style.Widget_AppCompat_PopupMenu = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_PopupMenu;
-			global::com.refractored.Resource.Style.Widget_AppCompat_PopupMenu_Overflow = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_PopupMenu_Overflow;
-			global::com.refractored.Resource.Style.Widget_AppCompat_PopupWindow = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_PopupWindow;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ProgressBar = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ProgressBar;
-			global::com.refractored.Resource.Style.Widget_AppCompat_ProgressBar_Horizontal = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_ProgressBar_Horizontal;
-			global::com.refractored.Resource.Style.Widget_AppCompat_RatingBar = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_RatingBar;
-			global::com.refractored.Resource.Style.Widget_AppCompat_RatingBar_Indicator = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_RatingBar_Indicator;
-			global::com.refractored.Resource.Style.Widget_AppCompat_RatingBar_Small = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_RatingBar_Small;
-			global::com.refractored.Resource.Style.Widget_AppCompat_SearchView = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_SearchView;
-			global::com.refractored.Resource.Style.Widget_AppCompat_SearchView_ActionBar = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_SearchView_ActionBar;
-			global::com.refractored.Resource.Style.Widget_AppCompat_SeekBar = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_SeekBar;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Spinner = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Spinner;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Spinner_DropDown = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Spinner_DropDown;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Spinner_DropDown_ActionBar = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Spinner_DropDown_ActionBar;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Spinner_Underlined = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Spinner_Underlined;
-			global::com.refractored.Resource.Style.Widget_AppCompat_TextView_SpinnerItem = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_TextView_SpinnerItem;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Toolbar = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Toolbar;
-			global::com.refractored.Resource.Style.Widget_AppCompat_Toolbar_Button_Navigation = global::RecommendationSystemClient.Resource.Style.Widget_AppCompat_Toolbar_Button_Navigation;
-			global::com.refractored.Resource.Styleable.ActionBar = global::RecommendationSystemClient.Resource.Styleable.ActionBar;
-			global::com.refractored.Resource.Styleable.ActionBar_background = global::RecommendationSystemClient.Resource.Styleable.ActionBar_background;
-			global::com.refractored.Resource.Styleable.ActionBar_backgroundSplit = global::RecommendationSystemClient.Resource.Styleable.ActionBar_backgroundSplit;
-			global::com.refractored.Resource.Styleable.ActionBar_backgroundStacked = global::RecommendationSystemClient.Resource.Styleable.ActionBar_backgroundStacked;
-			global::com.refractored.Resource.Styleable.ActionBar_contentInsetEnd = global::RecommendationSystemClient.Resource.Styleable.ActionBar_contentInsetEnd;
-			global::com.refractored.Resource.Styleable.ActionBar_contentInsetLeft = global::RecommendationSystemClient.Resource.Styleable.ActionBar_contentInsetLeft;
-			global::com.refractored.Resource.Styleable.ActionBar_contentInsetRight = global::RecommendationSystemClient.Resource.Styleable.ActionBar_contentInsetRight;
-			global::com.refractored.Resource.Styleable.ActionBar_contentInsetStart = global::RecommendationSystemClient.Resource.Styleable.ActionBar_contentInsetStart;
-			global::com.refractored.Resource.Styleable.ActionBar_customNavigationLayout = global::RecommendationSystemClient.Resource.Styleable.ActionBar_customNavigationLayout;
-			global::com.refractored.Resource.Styleable.ActionBar_displayOptions = global::RecommendationSystemClient.Resource.Styleable.ActionBar_displayOptions;
-			global::com.refractored.Resource.Styleable.ActionBar_divider = global::RecommendationSystemClient.Resource.Styleable.ActionBar_divider;
-			global::com.refractored.Resource.Styleable.ActionBar_elevation = global::RecommendationSystemClient.Resource.Styleable.ActionBar_elevation;
-			global::com.refractored.Resource.Styleable.ActionBar_height = global::RecommendationSystemClient.Resource.Styleable.ActionBar_height;
-			global::com.refractored.Resource.Styleable.ActionBar_hideOnContentScroll = global::RecommendationSystemClient.Resource.Styleable.ActionBar_hideOnContentScroll;
-			global::com.refractored.Resource.Styleable.ActionBar_homeAsUpIndicator = global::RecommendationSystemClient.Resource.Styleable.ActionBar_homeAsUpIndicator;
-			global::com.refractored.Resource.Styleable.ActionBar_homeLayout = global::RecommendationSystemClient.Resource.Styleable.ActionBar_homeLayout;
-			global::com.refractored.Resource.Styleable.ActionBar_icon = global::RecommendationSystemClient.Resource.Styleable.ActionBar_icon;
-			global::com.refractored.Resource.Styleable.ActionBar_indeterminateProgressStyle = global::RecommendationSystemClient.Resource.Styleable.ActionBar_indeterminateProgressStyle;
-			global::com.refractored.Resource.Styleable.ActionBar_itemPadding = global::RecommendationSystemClient.Resource.Styleable.ActionBar_itemPadding;
-			global::com.refractored.Resource.Styleable.ActionBar_logo = global::RecommendationSystemClient.Resource.Styleable.ActionBar_logo;
-			global::com.refractored.Resource.Styleable.ActionBar_navigationMode = global::RecommendationSystemClient.Resource.Styleable.ActionBar_navigationMode;
-			global::com.refractored.Resource.Styleable.ActionBar_popupTheme = global::RecommendationSystemClient.Resource.Styleable.ActionBar_popupTheme;
-			global::com.refractored.Resource.Styleable.ActionBar_progressBarPadding = global::RecommendationSystemClient.Resource.Styleable.ActionBar_progressBarPadding;
-			global::com.refractored.Resource.Styleable.ActionBar_progressBarStyle = global::RecommendationSystemClient.Resource.Styleable.ActionBar_progressBarStyle;
-			global::com.refractored.Resource.Styleable.ActionBar_subtitle = global::RecommendationSystemClient.Resource.Styleable.ActionBar_subtitle;
-			global::com.refractored.Resource.Styleable.ActionBar_subtitleTextStyle = global::RecommendationSystemClient.Resource.Styleable.ActionBar_subtitleTextStyle;
-			global::com.refractored.Resource.Styleable.ActionBar_title = global::RecommendationSystemClient.Resource.Styleable.ActionBar_title;
-			global::com.refractored.Resource.Styleable.ActionBar_titleTextStyle = global::RecommendationSystemClient.Resource.Styleable.ActionBar_titleTextStyle;
-			global::com.refractored.Resource.Styleable.ActionBarLayout = global::RecommendationSystemClient.Resource.Styleable.ActionBarLayout;
-			global::com.refractored.Resource.Styleable.ActionBarLayout_android_layout_gravity = global::RecommendationSystemClient.Resource.Styleable.ActionBarLayout_android_layout_gravity;
-			global::com.refractored.Resource.Styleable.ActionMenuItemView = global::RecommendationSystemClient.Resource.Styleable.ActionMenuItemView;
-			global::com.refractored.Resource.Styleable.ActionMenuItemView_android_minWidth = global::RecommendationSystemClient.Resource.Styleable.ActionMenuItemView_android_minWidth;
-			global::com.refractored.Resource.Styleable.ActionMenuView = global::RecommendationSystemClient.Resource.Styleable.ActionMenuView;
-			global::com.refractored.Resource.Styleable.ActionMode = global::RecommendationSystemClient.Resource.Styleable.ActionMode;
-			global::com.refractored.Resource.Styleable.ActionMode_background = global::RecommendationSystemClient.Resource.Styleable.ActionMode_background;
-			global::com.refractored.Resource.Styleable.ActionMode_backgroundSplit = global::RecommendationSystemClient.Resource.Styleable.ActionMode_backgroundSplit;
-			global::com.refractored.Resource.Styleable.ActionMode_closeItemLayout = global::RecommendationSystemClient.Resource.Styleable.ActionMode_closeItemLayout;
-			global::com.refractored.Resource.Styleable.ActionMode_height = global::RecommendationSystemClient.Resource.Styleable.ActionMode_height;
-			global::com.refractored.Resource.Styleable.ActionMode_subtitleTextStyle = global::RecommendationSystemClient.Resource.Styleable.ActionMode_subtitleTextStyle;
-			global::com.refractored.Resource.Styleable.ActionMode_titleTextStyle = global::RecommendationSystemClient.Resource.Styleable.ActionMode_titleTextStyle;
-			global::com.refractored.Resource.Styleable.ActivityChooserView = global::RecommendationSystemClient.Resource.Styleable.ActivityChooserView;
-			global::com.refractored.Resource.Styleable.ActivityChooserView_expandActivityOverflowButtonDrawable = global::RecommendationSystemClient.Resource.Styleable.ActivityChooserView_expandActivityOverflowButtonDrawable;
-			global::com.refractored.Resource.Styleable.ActivityChooserView_initialActivityCount = global::RecommendationSystemClient.Resource.Styleable.ActivityChooserView_initialActivityCount;
-			global::com.refractored.Resource.Styleable.AlertDialog = global::RecommendationSystemClient.Resource.Styleable.AlertDialog;
-			global::com.refractored.Resource.Styleable.AlertDialog_android_layout = global::RecommendationSystemClient.Resource.Styleable.AlertDialog_android_layout;
-			global::com.refractored.Resource.Styleable.AlertDialog_buttonPanelSideLayout = global::RecommendationSystemClient.Resource.Styleable.AlertDialog_buttonPanelSideLayout;
-			global::com.refractored.Resource.Styleable.AlertDialog_listItemLayout = global::RecommendationSystemClient.Resource.Styleable.AlertDialog_listItemLayout;
-			global::com.refractored.Resource.Styleable.AlertDialog_listLayout = global::RecommendationSystemClient.Resource.Styleable.AlertDialog_listLayout;
-			global::com.refractored.Resource.Styleable.AlertDialog_multiChoiceItemLayout = global::RecommendationSystemClient.Resource.Styleable.AlertDialog_multiChoiceItemLayout;
-			global::com.refractored.Resource.Styleable.AlertDialog_singleChoiceItemLayout = global::RecommendationSystemClient.Resource.Styleable.AlertDialog_singleChoiceItemLayout;
-			global::com.refractored.Resource.Styleable.AppCompatImageView = global::RecommendationSystemClient.Resource.Styleable.AppCompatImageView;
-			global::com.refractored.Resource.Styleable.AppCompatImageView_android_src = global::RecommendationSystemClient.Resource.Styleable.AppCompatImageView_android_src;
-			global::com.refractored.Resource.Styleable.AppCompatImageView_srcCompat = global::RecommendationSystemClient.Resource.Styleable.AppCompatImageView_srcCompat;
-			global::com.refractored.Resource.Styleable.AppCompatTextView = global::RecommendationSystemClient.Resource.Styleable.AppCompatTextView;
-			global::com.refractored.Resource.Styleable.AppCompatTextView_android_textAppearance = global::RecommendationSystemClient.Resource.Styleable.AppCompatTextView_android_textAppearance;
-			global::com.refractored.Resource.Styleable.AppCompatTextView_textAllCaps = global::RecommendationSystemClient.Resource.Styleable.AppCompatTextView_textAllCaps;
-			global::com.refractored.Resource.Styleable.AppCompatTheme = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionBarDivider = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionBarDivider;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionBarItemBackground = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionBarItemBackground;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionBarPopupTheme = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionBarPopupTheme;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionBarSize = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionBarSize;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionBarSplitStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionBarSplitStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionBarStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionBarStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionBarTabBarStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionBarTabBarStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionBarTabStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionBarTabStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionBarTabTextStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionBarTabTextStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionBarTheme = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionBarTheme;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionBarWidgetTheme = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionBarWidgetTheme;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionButtonStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionButtonStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionDropDownStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionDropDownStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionMenuTextAppearance = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionMenuTextAppearance;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionMenuTextColor = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionMenuTextColor;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModeBackground = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModeBackground;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModeCloseButtonStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModeCloseButtonStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModeCloseDrawable = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModeCloseDrawable;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModeCopyDrawable = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModeCopyDrawable;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModeCutDrawable = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModeCutDrawable;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModeFindDrawable = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModeFindDrawable;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModePasteDrawable = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModePasteDrawable;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModePopupWindowStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModePopupWindowStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModeSelectAllDrawable = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModeSelectAllDrawable;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModeShareDrawable = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModeShareDrawable;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModeSplitBackground = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModeSplitBackground;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModeStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModeStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionModeWebSearchDrawable = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionModeWebSearchDrawable;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionOverflowButtonStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionOverflowButtonStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_actionOverflowMenuStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_actionOverflowMenuStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_activityChooserViewStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_activityChooserViewStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_alertDialogButtonGroupStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_alertDialogButtonGroupStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_alertDialogCenterButtons = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_alertDialogCenterButtons;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_alertDialogStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_alertDialogStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_alertDialogTheme = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_alertDialogTheme;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_android_windowAnimationStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_android_windowAnimationStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_android_windowIsFloating = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_android_windowIsFloating;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_autoCompleteTextViewStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_autoCompleteTextViewStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_borderlessButtonStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_borderlessButtonStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_buttonBarButtonStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_buttonBarButtonStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_buttonBarNegativeButtonStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_buttonBarNegativeButtonStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_buttonBarNeutralButtonStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_buttonBarNeutralButtonStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_buttonBarPositiveButtonStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_buttonBarPositiveButtonStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_buttonBarStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_buttonBarStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_buttonStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_buttonStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_buttonStyleSmall = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_buttonStyleSmall;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_checkboxStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_checkboxStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_checkedTextViewStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_checkedTextViewStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_colorAccent = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_colorAccent;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_colorButtonNormal = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_colorButtonNormal;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_colorControlActivated = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_colorControlActivated;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_colorControlHighlight = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_colorControlHighlight;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_colorControlNormal = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_colorControlNormal;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_colorPrimary = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_colorPrimary;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_colorPrimaryDark = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_colorPrimaryDark;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_colorSwitchThumbNormal = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_colorSwitchThumbNormal;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_controlBackground = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_controlBackground;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_dialogPreferredPadding = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_dialogPreferredPadding;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_dialogTheme = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_dialogTheme;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_dividerHorizontal = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_dividerHorizontal;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_dividerVertical = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_dividerVertical;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_dropDownListViewStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_dropDownListViewStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_dropdownListPreferredItemHeight = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_dropdownListPreferredItemHeight;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_editTextBackground = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_editTextBackground;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_editTextColor = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_editTextColor;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_editTextStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_editTextStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_homeAsUpIndicator = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_homeAsUpIndicator;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_imageButtonStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_imageButtonStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_listChoiceBackgroundIndicator = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_listChoiceBackgroundIndicator;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_listDividerAlertDialog = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_listDividerAlertDialog;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_listPopupWindowStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_listPopupWindowStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_listPreferredItemHeight = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_listPreferredItemHeight;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_listPreferredItemHeightLarge = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_listPreferredItemHeightLarge;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_listPreferredItemHeightSmall = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_listPreferredItemHeightSmall;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingLeft = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingLeft;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingRight = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingRight;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_panelBackground = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_panelBackground;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_panelMenuListTheme = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_panelMenuListTheme;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_panelMenuListWidth = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_panelMenuListWidth;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_popupMenuStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_popupMenuStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_popupWindowStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_popupWindowStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_radioButtonStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_radioButtonStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_ratingBarStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_ratingBarStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_ratingBarStyleIndicator = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_ratingBarStyleIndicator;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_ratingBarStyleSmall = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_ratingBarStyleSmall;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_searchViewStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_searchViewStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_seekBarStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_seekBarStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_selectableItemBackground = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_selectableItemBackground;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_selectableItemBackgroundBorderless = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_selectableItemBackgroundBorderless;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_spinnerDropDownItemStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_spinnerDropDownItemStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_spinnerStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_spinnerStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_switchStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_switchStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_textAppearanceLargePopupMenu = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_textAppearanceLargePopupMenu;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_textAppearanceListItem = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_textAppearanceListItem;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_textAppearanceListItemSmall = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_textAppearanceListItemSmall;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_textAppearanceSearchResultSubtitle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_textAppearanceSearchResultSubtitle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_textAppearanceSearchResultTitle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_textAppearanceSearchResultTitle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_textAppearanceSmallPopupMenu = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_textAppearanceSmallPopupMenu;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_textColorAlertDialogListItem = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_textColorAlertDialogListItem;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_textColorSearchUrl = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_textColorSearchUrl;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_toolbarNavigationButtonStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_toolbarNavigationButtonStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_toolbarStyle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_toolbarStyle;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_windowActionBar = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_windowActionBar;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_windowActionBarOverlay = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_windowActionBarOverlay;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_windowActionModeOverlay = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_windowActionModeOverlay;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_windowFixedHeightMajor = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_windowFixedHeightMajor;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_windowFixedHeightMinor = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_windowFixedHeightMinor;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_windowFixedWidthMajor = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_windowFixedWidthMajor;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_windowFixedWidthMinor = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_windowFixedWidthMinor;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_windowMinWidthMajor = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_windowMinWidthMajor;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_windowMinWidthMinor = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_windowMinWidthMinor;
-			global::com.refractored.Resource.Styleable.AppCompatTheme_windowNoTitle = global::RecommendationSystemClient.Resource.Styleable.AppCompatTheme_windowNoTitle;
-			global::com.refractored.Resource.Styleable.ButtonBarLayout = global::RecommendationSystemClient.Resource.Styleable.ButtonBarLayout;
-			global::com.refractored.Resource.Styleable.ButtonBarLayout_allowStacking = global::RecommendationSystemClient.Resource.Styleable.ButtonBarLayout_allowStacking;
-			global::com.refractored.Resource.Styleable.CompoundButton = global::RecommendationSystemClient.Resource.Styleable.CompoundButton;
-			global::com.refractored.Resource.Styleable.CompoundButton_android_button = global::RecommendationSystemClient.Resource.Styleable.CompoundButton_android_button;
-			global::com.refractored.Resource.Styleable.CompoundButton_buttonTint = global::RecommendationSystemClient.Resource.Styleable.CompoundButton_buttonTint;
-			global::com.refractored.Resource.Styleable.CompoundButton_buttonTintMode = global::RecommendationSystemClient.Resource.Styleable.CompoundButton_buttonTintMode;
-			global::com.refractored.Resource.Styleable.DrawerArrowToggle = global::RecommendationSystemClient.Resource.Styleable.DrawerArrowToggle;
-			global::com.refractored.Resource.Styleable.DrawerArrowToggle_arrowHeadLength = global::RecommendationSystemClient.Resource.Styleable.DrawerArrowToggle_arrowHeadLength;
-			global::com.refractored.Resource.Styleable.DrawerArrowToggle_arrowShaftLength = global::RecommendationSystemClient.Resource.Styleable.DrawerArrowToggle_arrowShaftLength;
-			global::com.refractored.Resource.Styleable.DrawerArrowToggle_barLength = global::RecommendationSystemClient.Resource.Styleable.DrawerArrowToggle_barLength;
-			global::com.refractored.Resource.Styleable.DrawerArrowToggle_color = global::RecommendationSystemClient.Resource.Styleable.DrawerArrowToggle_color;
-			global::com.refractored.Resource.Styleable.DrawerArrowToggle_drawableSize = global::RecommendationSystemClient.Resource.Styleable.DrawerArrowToggle_drawableSize;
-			global::com.refractored.Resource.Styleable.DrawerArrowToggle_gapBetweenBars = global::RecommendationSystemClient.Resource.Styleable.DrawerArrowToggle_gapBetweenBars;
-			global::com.refractored.Resource.Styleable.DrawerArrowToggle_spinBars = global::RecommendationSystemClient.Resource.Styleable.DrawerArrowToggle_spinBars;
-			global::com.refractored.Resource.Styleable.DrawerArrowToggle_thickness = global::RecommendationSystemClient.Resource.Styleable.DrawerArrowToggle_thickness;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_android_baselineAligned = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_android_baselineAligned;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_android_gravity = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_android_gravity;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_android_orientation = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_android_orientation;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_android_weightSum = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_android_weightSum;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_divider = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_divider;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_dividerPadding = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_dividerPadding;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_measureWithLargestChild = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_measureWithLargestChild;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_showDividers = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_showDividers;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_Layout = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_Layout;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_gravity = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_gravity;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_height = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_height;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_weight = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_weight;
-			global::com.refractored.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_width = global::RecommendationSystemClient.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_width;
-			global::com.refractored.Resource.Styleable.ListPopupWindow = global::RecommendationSystemClient.Resource.Styleable.ListPopupWindow;
-			global::com.refractored.Resource.Styleable.ListPopupWindow_android_dropDownHorizontalOffset = global::RecommendationSystemClient.Resource.Styleable.ListPopupWindow_android_dropDownHorizontalOffset;
-			global::com.refractored.Resource.Styleable.ListPopupWindow_android_dropDownVerticalOffset = global::RecommendationSystemClient.Resource.Styleable.ListPopupWindow_android_dropDownVerticalOffset;
-			global::com.refractored.Resource.Styleable.MenuGroup = global::RecommendationSystemClient.Resource.Styleable.MenuGroup;
-			global::com.refractored.Resource.Styleable.MenuGroup_android_checkableBehavior = global::RecommendationSystemClient.Resource.Styleable.MenuGroup_android_checkableBehavior;
-			global::com.refractored.Resource.Styleable.MenuGroup_android_enabled = global::RecommendationSystemClient.Resource.Styleable.MenuGroup_android_enabled;
-			global::com.refractored.Resource.Styleable.MenuGroup_android_id = global::RecommendationSystemClient.Resource.Styleable.MenuGroup_android_id;
-			global::com.refractored.Resource.Styleable.MenuGroup_android_menuCategory = global::RecommendationSystemClient.Resource.Styleable.MenuGroup_android_menuCategory;
-			global::com.refractored.Resource.Styleable.MenuGroup_android_orderInCategory = global::RecommendationSystemClient.Resource.Styleable.MenuGroup_android_orderInCategory;
-			global::com.refractored.Resource.Styleable.MenuGroup_android_visible = global::RecommendationSystemClient.Resource.Styleable.MenuGroup_android_visible;
-			global::com.refractored.Resource.Styleable.MenuItem = global::RecommendationSystemClient.Resource.Styleable.MenuItem;
-			global::com.refractored.Resource.Styleable.MenuItem_actionLayout = global::RecommendationSystemClient.Resource.Styleable.MenuItem_actionLayout;
-			global::com.refractored.Resource.Styleable.MenuItem_actionProviderClass = global::RecommendationSystemClient.Resource.Styleable.MenuItem_actionProviderClass;
-			global::com.refractored.Resource.Styleable.MenuItem_actionViewClass = global::RecommendationSystemClient.Resource.Styleable.MenuItem_actionViewClass;
-			global::com.refractored.Resource.Styleable.MenuItem_android_alphabeticShortcut = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_alphabeticShortcut;
-			global::com.refractored.Resource.Styleable.MenuItem_android_checkable = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_checkable;
-			global::com.refractored.Resource.Styleable.MenuItem_android_checked = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_checked;
-			global::com.refractored.Resource.Styleable.MenuItem_android_enabled = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_enabled;
-			global::com.refractored.Resource.Styleable.MenuItem_android_icon = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_icon;
-			global::com.refractored.Resource.Styleable.MenuItem_android_id = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_id;
-			global::com.refractored.Resource.Styleable.MenuItem_android_menuCategory = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_menuCategory;
-			global::com.refractored.Resource.Styleable.MenuItem_android_numericShortcut = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_numericShortcut;
-			global::com.refractored.Resource.Styleable.MenuItem_android_onClick = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_onClick;
-			global::com.refractored.Resource.Styleable.MenuItem_android_orderInCategory = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_orderInCategory;
-			global::com.refractored.Resource.Styleable.MenuItem_android_title = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_title;
-			global::com.refractored.Resource.Styleable.MenuItem_android_titleCondensed = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_titleCondensed;
-			global::com.refractored.Resource.Styleable.MenuItem_android_visible = global::RecommendationSystemClient.Resource.Styleable.MenuItem_android_visible;
-			global::com.refractored.Resource.Styleable.MenuItem_showAsAction = global::RecommendationSystemClient.Resource.Styleable.MenuItem_showAsAction;
-			global::com.refractored.Resource.Styleable.MenuView = global::RecommendationSystemClient.Resource.Styleable.MenuView;
-			global::com.refractored.Resource.Styleable.MenuView_android_headerBackground = global::RecommendationSystemClient.Resource.Styleable.MenuView_android_headerBackground;
-			global::com.refractored.Resource.Styleable.MenuView_android_horizontalDivider = global::RecommendationSystemClient.Resource.Styleable.MenuView_android_horizontalDivider;
-			global::com.refractored.Resource.Styleable.MenuView_android_itemBackground = global::RecommendationSystemClient.Resource.Styleable.MenuView_android_itemBackground;
-			global::com.refractored.Resource.Styleable.MenuView_android_itemIconDisabledAlpha = global::RecommendationSystemClient.Resource.Styleable.MenuView_android_itemIconDisabledAlpha;
-			global::com.refractored.Resource.Styleable.MenuView_android_itemTextAppearance = global::RecommendationSystemClient.Resource.Styleable.MenuView_android_itemTextAppearance;
-			global::com.refractored.Resource.Styleable.MenuView_android_verticalDivider = global::RecommendationSystemClient.Resource.Styleable.MenuView_android_verticalDivider;
-			global::com.refractored.Resource.Styleable.MenuView_android_windowAnimationStyle = global::RecommendationSystemClient.Resource.Styleable.MenuView_android_windowAnimationStyle;
-			global::com.refractored.Resource.Styleable.MenuView_preserveIconSpacing = global::RecommendationSystemClient.Resource.Styleable.MenuView_preserveIconSpacing;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsDividerColor = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsDividerColor;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsDividerPadding = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsDividerPadding;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsDividerWidth = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsDividerWidth;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsIndicatorColor = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsIndicatorColor;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsIndicatorHeight = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsIndicatorHeight;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsPaddingMiddle = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsPaddingMiddle;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsScrollOffset = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsScrollOffset;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsShouldExpand = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsShouldExpand;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsTabBackground = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsTabBackground;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsTabPaddingLeftRight = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsTabPaddingLeftRight;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsTextAllCaps = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsTextAllCaps;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsTextAlpha = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsTextAlpha;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsTextColorSelected = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsTextColorSelected;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsTextSelectedStyle = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsTextSelectedStyle;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsTextStyle = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsTextStyle;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsUnderlineColor = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsUnderlineColor;
-			global::com.refractored.Resource.Styleable.PagerSlidingTabStrip_pstsUnderlineHeight = global::RecommendationSystemClient.Resource.Styleable.PagerSlidingTabStrip_pstsUnderlineHeight;
-			global::com.refractored.Resource.Styleable.PopupWindow = global::RecommendationSystemClient.Resource.Styleable.PopupWindow;
-			global::com.refractored.Resource.Styleable.PopupWindow_android_popupBackground = global::RecommendationSystemClient.Resource.Styleable.PopupWindow_android_popupBackground;
-			global::com.refractored.Resource.Styleable.PopupWindow_overlapAnchor = global::RecommendationSystemClient.Resource.Styleable.PopupWindow_overlapAnchor;
-			global::com.refractored.Resource.Styleable.PopupWindowBackgroundState = global::RecommendationSystemClient.Resource.Styleable.PopupWindowBackgroundState;
-			global::com.refractored.Resource.Styleable.PopupWindowBackgroundState_state_above_anchor = global::RecommendationSystemClient.Resource.Styleable.PopupWindowBackgroundState_state_above_anchor;
-			global::com.refractored.Resource.Styleable.SearchView = global::RecommendationSystemClient.Resource.Styleable.SearchView;
-			global::com.refractored.Resource.Styleable.SearchView_android_focusable = global::RecommendationSystemClient.Resource.Styleable.SearchView_android_focusable;
-			global::com.refractored.Resource.Styleable.SearchView_android_imeOptions = global::RecommendationSystemClient.Resource.Styleable.SearchView_android_imeOptions;
-			global::com.refractored.Resource.Styleable.SearchView_android_inputType = global::RecommendationSystemClient.Resource.Styleable.SearchView_android_inputType;
-			global::com.refractored.Resource.Styleable.SearchView_android_maxWidth = global::RecommendationSystemClient.Resource.Styleable.SearchView_android_maxWidth;
-			global::com.refractored.Resource.Styleable.SearchView_closeIcon = global::RecommendationSystemClient.Resource.Styleable.SearchView_closeIcon;
-			global::com.refractored.Resource.Styleable.SearchView_commitIcon = global::RecommendationSystemClient.Resource.Styleable.SearchView_commitIcon;
-			global::com.refractored.Resource.Styleable.SearchView_defaultQueryHint = global::RecommendationSystemClient.Resource.Styleable.SearchView_defaultQueryHint;
-			global::com.refractored.Resource.Styleable.SearchView_goIcon = global::RecommendationSystemClient.Resource.Styleable.SearchView_goIcon;
-			global::com.refractored.Resource.Styleable.SearchView_iconifiedByDefault = global::RecommendationSystemClient.Resource.Styleable.SearchView_iconifiedByDefault;
-			global::com.refractored.Resource.Styleable.SearchView_layout = global::RecommendationSystemClient.Resource.Styleable.SearchView_layout;
-			global::com.refractored.Resource.Styleable.SearchView_queryBackground = global::RecommendationSystemClient.Resource.Styleable.SearchView_queryBackground;
-			global::com.refractored.Resource.Styleable.SearchView_queryHint = global::RecommendationSystemClient.Resource.Styleable.SearchView_queryHint;
-			global::com.refractored.Resource.Styleable.SearchView_searchHintIcon = global::RecommendationSystemClient.Resource.Styleable.SearchView_searchHintIcon;
-			global::com.refractored.Resource.Styleable.SearchView_searchIcon = global::RecommendationSystemClient.Resource.Styleable.SearchView_searchIcon;
-			global::com.refractored.Resource.Styleable.SearchView_submitBackground = global::RecommendationSystemClient.Resource.Styleable.SearchView_submitBackground;
-			global::com.refractored.Resource.Styleable.SearchView_suggestionRowLayout = global::RecommendationSystemClient.Resource.Styleable.SearchView_suggestionRowLayout;
-			global::com.refractored.Resource.Styleable.SearchView_voiceIcon = global::RecommendationSystemClient.Resource.Styleable.SearchView_voiceIcon;
-			global::com.refractored.Resource.Styleable.Spinner = global::RecommendationSystemClient.Resource.Styleable.Spinner;
-			global::com.refractored.Resource.Styleable.Spinner_android_dropDownWidth = global::RecommendationSystemClient.Resource.Styleable.Spinner_android_dropDownWidth;
-			global::com.refractored.Resource.Styleable.Spinner_android_entries = global::RecommendationSystemClient.Resource.Styleable.Spinner_android_entries;
-			global::com.refractored.Resource.Styleable.Spinner_android_popupBackground = global::RecommendationSystemClient.Resource.Styleable.Spinner_android_popupBackground;
-			global::com.refractored.Resource.Styleable.Spinner_android_prompt = global::RecommendationSystemClient.Resource.Styleable.Spinner_android_prompt;
-			global::com.refractored.Resource.Styleable.Spinner_popupTheme = global::RecommendationSystemClient.Resource.Styleable.Spinner_popupTheme;
-			global::com.refractored.Resource.Styleable.SwitchCompat = global::RecommendationSystemClient.Resource.Styleable.SwitchCompat;
-			global::com.refractored.Resource.Styleable.SwitchCompat_android_textOff = global::RecommendationSystemClient.Resource.Styleable.SwitchCompat_android_textOff;
-			global::com.refractored.Resource.Styleable.SwitchCompat_android_textOn = global::RecommendationSystemClient.Resource.Styleable.SwitchCompat_android_textOn;
-			global::com.refractored.Resource.Styleable.SwitchCompat_android_thumb = global::RecommendationSystemClient.Resource.Styleable.SwitchCompat_android_thumb;
-			global::com.refractored.Resource.Styleable.SwitchCompat_showText = global::RecommendationSystemClient.Resource.Styleable.SwitchCompat_showText;
-			global::com.refractored.Resource.Styleable.SwitchCompat_splitTrack = global::RecommendationSystemClient.Resource.Styleable.SwitchCompat_splitTrack;
-			global::com.refractored.Resource.Styleable.SwitchCompat_switchMinWidth = global::RecommendationSystemClient.Resource.Styleable.SwitchCompat_switchMinWidth;
-			global::com.refractored.Resource.Styleable.SwitchCompat_switchPadding = global::RecommendationSystemClient.Resource.Styleable.SwitchCompat_switchPadding;
-			global::com.refractored.Resource.Styleable.SwitchCompat_switchTextAppearance = global::RecommendationSystemClient.Resource.Styleable.SwitchCompat_switchTextAppearance;
-			global::com.refractored.Resource.Styleable.SwitchCompat_thumbTextPadding = global::RecommendationSystemClient.Resource.Styleable.SwitchCompat_thumbTextPadding;
-			global::com.refractored.Resource.Styleable.SwitchCompat_track = global::RecommendationSystemClient.Resource.Styleable.SwitchCompat_track;
-			global::com.refractored.Resource.Styleable.TextAppearance = global::RecommendationSystemClient.Resource.Styleable.TextAppearance;
-			global::com.refractored.Resource.Styleable.TextAppearance_android_shadowColor = global::RecommendationSystemClient.Resource.Styleable.TextAppearance_android_shadowColor;
-			global::com.refractored.Resource.Styleable.TextAppearance_android_shadowDx = global::RecommendationSystemClient.Resource.Styleable.TextAppearance_android_shadowDx;
-			global::com.refractored.Resource.Styleable.TextAppearance_android_shadowDy = global::RecommendationSystemClient.Resource.Styleable.TextAppearance_android_shadowDy;
-			global::com.refractored.Resource.Styleable.TextAppearance_android_shadowRadius = global::RecommendationSystemClient.Resource.Styleable.TextAppearance_android_shadowRadius;
-			global::com.refractored.Resource.Styleable.TextAppearance_android_textColor = global::RecommendationSystemClient.Resource.Styleable.TextAppearance_android_textColor;
-			global::com.refractored.Resource.Styleable.TextAppearance_android_textSize = global::RecommendationSystemClient.Resource.Styleable.TextAppearance_android_textSize;
-			global::com.refractored.Resource.Styleable.TextAppearance_android_textStyle = global::RecommendationSystemClient.Resource.Styleable.TextAppearance_android_textStyle;
-			global::com.refractored.Resource.Styleable.TextAppearance_android_typeface = global::RecommendationSystemClient.Resource.Styleable.TextAppearance_android_typeface;
-			global::com.refractored.Resource.Styleable.TextAppearance_textAllCaps = global::RecommendationSystemClient.Resource.Styleable.TextAppearance_textAllCaps;
-			global::com.refractored.Resource.Styleable.Toolbar = global::RecommendationSystemClient.Resource.Styleable.Toolbar;
-			global::com.refractored.Resource.Styleable.Toolbar_android_gravity = global::RecommendationSystemClient.Resource.Styleable.Toolbar_android_gravity;
-			global::com.refractored.Resource.Styleable.Toolbar_android_minHeight = global::RecommendationSystemClient.Resource.Styleable.Toolbar_android_minHeight;
-			global::com.refractored.Resource.Styleable.Toolbar_collapseContentDescription = global::RecommendationSystemClient.Resource.Styleable.Toolbar_collapseContentDescription;
-			global::com.refractored.Resource.Styleable.Toolbar_collapseIcon = global::RecommendationSystemClient.Resource.Styleable.Toolbar_collapseIcon;
-			global::com.refractored.Resource.Styleable.Toolbar_contentInsetEnd = global::RecommendationSystemClient.Resource.Styleable.Toolbar_contentInsetEnd;
-			global::com.refractored.Resource.Styleable.Toolbar_contentInsetLeft = global::RecommendationSystemClient.Resource.Styleable.Toolbar_contentInsetLeft;
-			global::com.refractored.Resource.Styleable.Toolbar_contentInsetRight = global::RecommendationSystemClient.Resource.Styleable.Toolbar_contentInsetRight;
-			global::com.refractored.Resource.Styleable.Toolbar_contentInsetStart = global::RecommendationSystemClient.Resource.Styleable.Toolbar_contentInsetStart;
-			global::com.refractored.Resource.Styleable.Toolbar_logo = global::RecommendationSystemClient.Resource.Styleable.Toolbar_logo;
-			global::com.refractored.Resource.Styleable.Toolbar_logoDescription = global::RecommendationSystemClient.Resource.Styleable.Toolbar_logoDescription;
-			global::com.refractored.Resource.Styleable.Toolbar_maxButtonHeight = global::RecommendationSystemClient.Resource.Styleable.Toolbar_maxButtonHeight;
-			global::com.refractored.Resource.Styleable.Toolbar_navigationContentDescription = global::RecommendationSystemClient.Resource.Styleable.Toolbar_navigationContentDescription;
-			global::com.refractored.Resource.Styleable.Toolbar_navigationIcon = global::RecommendationSystemClient.Resource.Styleable.Toolbar_navigationIcon;
-			global::com.refractored.Resource.Styleable.Toolbar_popupTheme = global::RecommendationSystemClient.Resource.Styleable.Toolbar_popupTheme;
-			global::com.refractored.Resource.Styleable.Toolbar_subtitle = global::RecommendationSystemClient.Resource.Styleable.Toolbar_subtitle;
-			global::com.refractored.Resource.Styleable.Toolbar_subtitleTextAppearance = global::RecommendationSystemClient.Resource.Styleable.Toolbar_subtitleTextAppearance;
-			global::com.refractored.Resource.Styleable.Toolbar_subtitleTextColor = global::RecommendationSystemClient.Resource.Styleable.Toolbar_subtitleTextColor;
-			global::com.refractored.Resource.Styleable.Toolbar_title = global::RecommendationSystemClient.Resource.Styleable.Toolbar_title;
-			global::com.refractored.Resource.Styleable.Toolbar_titleMarginBottom = global::RecommendationSystemClient.Resource.Styleable.Toolbar_titleMarginBottom;
-			global::com.refractored.Resource.Styleable.Toolbar_titleMarginEnd = global::RecommendationSystemClient.Resource.Styleable.Toolbar_titleMarginEnd;
-			global::com.refractored.Resource.Styleable.Toolbar_titleMarginStart = global::RecommendationSystemClient.Resource.Styleable.Toolbar_titleMarginStart;
-			global::com.refractored.Resource.Styleable.Toolbar_titleMarginTop = global::RecommendationSystemClient.Resource.Styleable.Toolbar_titleMarginTop;
-			global::com.refractored.Resource.Styleable.Toolbar_titleMargins = global::RecommendationSystemClient.Resource.Styleable.Toolbar_titleMargins;
-			global::com.refractored.Resource.Styleable.Toolbar_titleTextAppearance = global::RecommendationSystemClient.Resource.Styleable.Toolbar_titleTextAppearance;
-			global::com.refractored.Resource.Styleable.Toolbar_titleTextColor = global::RecommendationSystemClient.Resource.Styleable.Toolbar_titleTextColor;
-			global::com.refractored.Resource.Styleable.View = global::RecommendationSystemClient.Resource.Styleable.View;
-			global::com.refractored.Resource.Styleable.View_android_focusable = global::RecommendationSystemClient.Resource.Styleable.View_android_focusable;
-			global::com.refractored.Resource.Styleable.View_android_theme = global::RecommendationSystemClient.Resource.Styleable.View_android_theme;
-			global::com.refractored.Resource.Styleable.View_paddingEnd = global::RecommendationSystemClient.Resource.Styleable.View_paddingEnd;
-			global::com.refractored.Resource.Styleable.View_paddingStart = global::RecommendationSystemClient.Resource.Styleable.View_paddingStart;
-			global::com.refractored.Resource.Styleable.View_theme = global::RecommendationSystemClient.Resource.Styleable.View_theme;
-			global::com.refractored.Resource.Styleable.ViewBackgroundHelper = global::RecommendationSystemClient.Resource.Styleable.ViewBackgroundHelper;
-			global::com.refractored.Resource.Styleable.ViewBackgroundHelper_android_background = global::RecommendationSystemClient.Resource.Styleable.ViewBackgroundHelper_android_background;
-			global::com.refractored.Resource.Styleable.ViewBackgroundHelper_backgroundTint = global::RecommendationSystemClient.Resource.Styleable.ViewBackgroundHelper_backgroundTint;
-			global::com.refractored.Resource.Styleable.ViewBackgroundHelper_backgroundTintMode = global::RecommendationSystemClient.Resource.Styleable.ViewBackgroundHelper_backgroundTintMode;
-			global::com.refractored.Resource.Styleable.ViewStubCompat = global::RecommendationSystemClient.Resource.Styleable.ViewStubCompat;
-			global::com.refractored.Resource.Styleable.ViewStubCompat_android_id = global::RecommendationSystemClient.Resource.Styleable.ViewStubCompat_android_id;
-			global::com.refractored.Resource.Styleable.ViewStubCompat_android_inflatedId = global::RecommendationSystemClient.Resource.Styleable.ViewStubCompat_android_inflatedId;
-			global::com.refractored.Resource.Styleable.ViewStubCompat_android_layout = global::RecommendationSystemClient.Resource.Styleable.ViewStubCompat_android_layout;
 		}
 		
 		public partial class Animation
@@ -1494,14 +234,14 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0100c1
 			public const int alphabeticModifiers = 2130772161;
 			
-			// aapt resource value: 0x7f010174
-			public const int arc_cropDirection = 2130772340;
+			// aapt resource value: 0x7f010163
+			public const int arc_cropDirection = 2130772323;
 			
-			// aapt resource value: 0x7f010172
-			public const int arc_height = 2130772338;
+			// aapt resource value: 0x7f010161
+			public const int arc_height = 2130772321;
 			
-			// aapt resource value: 0x7f010173
-			public const int arc_position = 2130772339;
+			// aapt resource value: 0x7f010162
+			public const int arc_position = 2130772322;
 			
 			// aapt resource value: 0x7f0100ba
 			public const int arrowHeadLength = 2130772154;
@@ -2022,6 +762,57 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0100cd
 			public const int overlapAnchor = 2130772173;
 			
+			// aapt resource value: 0x7f010166
+			public const int pDividerColor = 2130772326;
+			
+			// aapt resource value: 0x7f01016a
+			public const int pDividerPadding = 2130772330;
+			
+			// aapt resource value: 0x7f010167
+			public const int pDividerWidth = 2130772327;
+			
+			// aapt resource value: 0x7f010164
+			public const int pIndicatorColor = 2130772324;
+			
+			// aapt resource value: 0x7f010168
+			public const int pIndicatorHeight = 2130772328;
+			
+			// aapt resource value: 0x7f010170
+			public const int pPaddingMiddle = 2130772336;
+			
+			// aapt resource value: 0x7f01016c
+			public const int pScrollOffset = 2130772332;
+			
+			// aapt resource value: 0x7f01016e
+			public const int pShouldExpand = 2130772334;
+			
+			// aapt resource value: 0x7f01016d
+			public const int pTabBackground = 2130772333;
+			
+			// aapt resource value: 0x7f01016b
+			public const int pTabPaddingLeftRight = 2130772331;
+			
+			// aapt resource value: 0x7f01016f
+			public const int pTextAllCaps = 2130772335;
+			
+			// aapt resource value: 0x7f010172
+			public const int pTextAlpha = 2130772338;
+			
+			// aapt resource value: 0x7f010171
+			public const int pTextColorSelected = 2130772337;
+			
+			// aapt resource value: 0x7f010174
+			public const int pTextSelectedStyle = 2130772340;
+			
+			// aapt resource value: 0x7f010173
+			public const int pTextStyle = 2130772339;
+			
+			// aapt resource value: 0x7f010165
+			public const int pUnderlineColor = 2130772325;
+			
+			// aapt resource value: 0x7f010169
+			public const int pUnderlineHeight = 2130772329;
+			
 			// aapt resource value: 0x7f0100cf
 			public const int paddingBottomNoButtons = 2130772175;
 			
@@ -2081,57 +872,6 @@ namespace RecommendationSystemClient
 			
 			// aapt resource value: 0x7f01001a
 			public const int progressBarStyle = 2130771994;
-			
-			// aapt resource value: 0x7f010163
-			public const int pstsDividerColor = 2130772323;
-			
-			// aapt resource value: 0x7f010167
-			public const int pstsDividerPadding = 2130772327;
-			
-			// aapt resource value: 0x7f010164
-			public const int pstsDividerWidth = 2130772324;
-			
-			// aapt resource value: 0x7f010161
-			public const int pstsIndicatorColor = 2130772321;
-			
-			// aapt resource value: 0x7f010165
-			public const int pstsIndicatorHeight = 2130772325;
-			
-			// aapt resource value: 0x7f01016d
-			public const int pstsPaddingMiddle = 2130772333;
-			
-			// aapt resource value: 0x7f010169
-			public const int pstsScrollOffset = 2130772329;
-			
-			// aapt resource value: 0x7f01016b
-			public const int pstsShouldExpand = 2130772331;
-			
-			// aapt resource value: 0x7f01016a
-			public const int pstsTabBackground = 2130772330;
-			
-			// aapt resource value: 0x7f010168
-			public const int pstsTabPaddingLeftRight = 2130772328;
-			
-			// aapt resource value: 0x7f01016c
-			public const int pstsTextAllCaps = 2130772332;
-			
-			// aapt resource value: 0x7f01016f
-			public const int pstsTextAlpha = 2130772335;
-			
-			// aapt resource value: 0x7f01016e
-			public const int pstsTextColorSelected = 2130772334;
-			
-			// aapt resource value: 0x7f010171
-			public const int pstsTextSelectedStyle = 2130772337;
-			
-			// aapt resource value: 0x7f010170
-			public const int pstsTextStyle = 2130772336;
-			
-			// aapt resource value: 0x7f010162
-			public const int pstsUnderlineColor = 2130772322;
-			
-			// aapt resource value: 0x7f010166
-			public const int pstsUnderlineHeight = 2130772326;
 			
 			// aapt resource value: 0x7f0100dc
 			public const int queryBackground = 2130772188;
@@ -2600,8 +1340,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0c006b
 			public const int abc_tint_switch_track = 2131492971;
 			
-			// aapt resource value: 0x7f0c004b
-			public const int accent = 2131492939;
+			// aapt resource value: 0x7f0c004a
+			public const int accent = 2131492938;
 			
 			// aapt resource value: 0x7f0c0004
 			public const int accent_material_dark = 2131492868;
@@ -2620,6 +1360,9 @@ namespace RecommendationSystemClient
 			
 			// aapt resource value: 0x7f0c0009
 			public const int background_material_light = 2131492873;
+			
+			// aapt resource value: 0x7f0c0057
+			public const int background_tab_pressed = 2131492951;
 			
 			// aapt resource value: 0x7f0c000a
 			public const int bright_foreground_disabled_material_dark = 2131492874;
@@ -2645,11 +1388,11 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0c0011
 			public const int button_material_light = 2131492881;
 			
-			// aapt resource value: 0x7f0c0052
-			public const int cv_background_dark = 2131492946;
+			// aapt resource value: 0x7f0c0051
+			public const int cv_background_dark = 2131492945;
 			
-			// aapt resource value: 0x7f0c0053
-			public const int cv_background_light = 2131492947;
+			// aapt resource value: 0x7f0c0052
+			public const int cv_background_light = 2131492946;
 			
 			// aapt resource value: 0x7f0c003c
 			public const int design_bottom_navigation_shadow_color = 2131492924;
@@ -2696,8 +1439,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0c0015
 			public const int dim_foreground_material_light = 2131492885;
 			
-			// aapt resource value: 0x7f0c004f
-			public const int divider = 2131492943;
+			// aapt resource value: 0x7f0c004e
+			public const int divider = 2131492942;
 			
 			// aapt resource value: 0x7f0c0016
 			public const int error_color_material = 2131492886;
@@ -2714,14 +1457,14 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0c001a
 			public const int highlighted_text_material_light = 2131492890;
 			
-			// aapt resource value: 0x7f0c004e
-			public const int icons = 2131492942;
+			// aapt resource value: 0x7f0c004d
+			public const int icons = 2131492941;
 			
-			// aapt resource value: 0x7f0c0054
-			public const int light_blue_gray = 2131492948;
+			// aapt resource value: 0x7f0c0053
+			public const int light_blue_gray = 2131492947;
 			
-			// aapt resource value: 0x7f0c0051
-			public const int light_gray_opacity = 2131492945;
+			// aapt resource value: 0x7f0c0050
+			public const int light_gray_opacity = 2131492944;
 			
 			// aapt resource value: 0x7f0c001b
 			public const int material_blue_grey_800 = 2131492891;
@@ -2768,14 +1511,14 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0c003b
 			public const int notification_material_background_media_default_color = 2131492923;
 			
-			// aapt resource value: 0x7f0c0057
-			public const int pressed_button_light = 2131492951;
+			// aapt resource value: 0x7f0c0056
+			public const int pressed_button_light = 2131492950;
+			
+			// aapt resource value: 0x7f0c0047
+			public const int primary = 2131492935;
 			
 			// aapt resource value: 0x7f0c0048
-			public const int primary = 2131492936;
-			
-			// aapt resource value: 0x7f0c0049
-			public const int primary_dark = 2131492937;
+			public const int primary_dark = 2131492936;
 			
 			// aapt resource value: 0x7f0c0027
 			public const int primary_dark_material_dark = 2131492903;
@@ -2783,11 +1526,11 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0c0028
 			public const int primary_dark_material_light = 2131492904;
 			
-			// aapt resource value: 0x7f0c0050
-			public const int primary_dark_opacity = 2131492944;
+			// aapt resource value: 0x7f0c004f
+			public const int primary_dark_opacity = 2131492943;
 			
-			// aapt resource value: 0x7f0c004a
-			public const int primary_light = 2131492938;
+			// aapt resource value: 0x7f0c0049
+			public const int primary_light = 2131492937;
 			
 			// aapt resource value: 0x7f0c0029
 			public const int primary_material_dark = 2131492905;
@@ -2795,8 +1538,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0c002a
 			public const int primary_material_light = 2131492906;
 			
-			// aapt resource value: 0x7f0c004c
-			public const int primary_text = 2131492940;
+			// aapt resource value: 0x7f0c004b
+			public const int primary_text = 2131492939;
 			
 			// aapt resource value: 0x7f0c002b
 			public const int primary_text_default_material_dark = 2131492907;
@@ -2810,17 +1553,14 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0c002e
 			public const int primary_text_disabled_material_light = 2131492910;
 			
-			// aapt resource value: 0x7f0c0047
-			public const int psts_background_tab_pressed = 2131492935;
-			
 			// aapt resource value: 0x7f0c002f
 			public const int ripple_material_dark = 2131492911;
 			
 			// aapt resource value: 0x7f0c0030
 			public const int ripple_material_light = 2131492912;
 			
-			// aapt resource value: 0x7f0c004d
-			public const int secondary_text = 2131492941;
+			// aapt resource value: 0x7f0c004c
+			public const int secondary_text = 2131492940;
 			
 			// aapt resource value: 0x7f0c0031
 			public const int secondary_text_default_material_dark = 2131492913;
@@ -2858,11 +1598,11 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0c003a
 			public const int tooltip_background_light = 2131492922;
 			
-			// aapt resource value: 0x7f0c0055
-			public const int unpressed_button_dark = 2131492949;
+			// aapt resource value: 0x7f0c0054
+			public const int unpressed_button_dark = 2131492948;
 			
-			// aapt resource value: 0x7f0c0056
-			public const int unpressed_button_light = 2131492950;
+			// aapt resource value: 0x7f0c0055
+			public const int unpressed_button_light = 2131492949;
 			
 			static Color()
 			{
@@ -3616,26 +2356,26 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
+			// aapt resource value: 0x7f020072
+			public const int avd_hide_password_1 = 2130837618;
+			
 			// aapt resource value: 0x7f020073
-			public const int avd_hide_password_1 = 2130837619;
+			public const int avd_hide_password_2 = 2130837619;
 			
 			// aapt resource value: 0x7f020074
-			public const int avd_hide_password_2 = 2130837620;
-			
-			// aapt resource value: 0x7f020075
-			public const int avd_hide_password_3 = 2130837621;
+			public const int avd_hide_password_3 = 2130837620;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
+			// aapt resource value: 0x7f020075
+			public const int avd_show_password_1 = 2130837621;
+			
 			// aapt resource value: 0x7f020076
-			public const int avd_show_password_1 = 2130837622;
+			public const int avd_show_password_2 = 2130837622;
 			
 			// aapt resource value: 0x7f020077
-			public const int avd_show_password_2 = 2130837623;
-			
-			// aapt resource value: 0x7f020078
-			public const int avd_show_password_3 = 2130837624;
+			public const int avd_show_password_3 = 2130837623;
 			
 			// aapt resource value: 0x7f020055
 			public const int background = 2130837589;
@@ -3703,11 +2443,11 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f02006a
 			public const int notification_icon_background = 2130837610;
 			
-			// aapt resource value: 0x7f020071
-			public const int notification_template_icon_bg = 2130837617;
+			// aapt resource value: 0x7f020070
+			public const int notification_template_icon_bg = 2130837616;
 			
-			// aapt resource value: 0x7f020072
-			public const int notification_template_icon_low_bg = 2130837618;
+			// aapt resource value: 0x7f020071
+			public const int notification_template_icon_low_bg = 2130837617;
 			
 			// aapt resource value: 0x7f02006b
 			public const int notification_tile_bg = 2130837611;
@@ -3716,16 +2456,13 @@ namespace RecommendationSystemClient
 			public const int notify_panel_notification_icon_bg = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int psts_background_tab = 2130837613;
+			public const int tabBackground = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int textEditCard = 2130837614;
+			public const int tooltip_frame_dark = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int tooltip_frame_dark = 2130837615;
-			
-			// aapt resource value: 0x7f020070
-			public const int tooltip_frame_light = 2130837616;
+			public const int tooltip_frame_light = 2130837615;
 			
 			static Drawable()
 			{
@@ -3758,8 +2495,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080037
 			public const int SYM = 2131230775;
 			
-			// aapt resource value: 0x7f0800ae
-			public const int action0 = 2131230894;
+			// aapt resource value: 0x7f0800aa
+			public const int action0 = 2131230890;
 			
 			// aapt resource value: 0x7f080083
 			public const int action_bar = 2131230851;
@@ -3782,17 +2519,17 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080061
 			public const int action_bar_title = 2131230817;
 			
-			// aapt resource value: 0x7f0800ab
-			public const int action_container = 2131230891;
+			// aapt resource value: 0x7f0800a7
+			public const int action_container = 2131230887;
 			
 			// aapt resource value: 0x7f080084
 			public const int action_context_bar = 2131230852;
 			
-			// aapt resource value: 0x7f0800b2
-			public const int action_divider = 2131230898;
+			// aapt resource value: 0x7f0800ae
+			public const int action_divider = 2131230894;
 			
-			// aapt resource value: 0x7f0800ac
-			public const int action_image = 2131230892;
+			// aapt resource value: 0x7f0800a8
+			public const int action_image = 2131230888;
 			
 			// aapt resource value: 0x7f080003
 			public const int action_menu_divider = 2131230723;
@@ -3809,17 +2546,17 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080063
 			public const int action_mode_close_button = 2131230819;
 			
-			// aapt resource value: 0x7f0800ad
-			public const int action_text = 2131230893;
+			// aapt resource value: 0x7f0800a9
+			public const int action_text = 2131230889;
 			
-			// aapt resource value: 0x7f0800bb
-			public const int actions = 2131230907;
+			// aapt resource value: 0x7f0800b7
+			public const int actions = 2131230903;
 			
 			// aapt resource value: 0x7f080064
 			public const int activity_chooser_view_content = 2131230820;
 			
-			// aapt resource value: 0x7f0800c1
-			public const int activity_main = 2131230913;
+			// aapt resource value: 0x7f0800bc
+			public const int activity_main = 2131230908;
 			
 			// aapt resource value: 0x7f080027
 			public const int add = 2131230759;
@@ -3848,8 +2585,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080057
 			public const int blocking = 2131230807;
 			
-			// aapt resource value: 0x7f08005e
-			public const int bold = 2131230814;
+			// aapt resource value: 0x7f080060
+			public const int bold = 2131230816;
 			
 			// aapt resource value: 0x7f08003d
 			public const int bottom = 2131230781;
@@ -3857,8 +2594,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f08006a
 			public const int buttonPanel = 2131230826;
 			
-			// aapt resource value: 0x7f0800af
-			public const int cancel_action = 2131230895;
+			// aapt resource value: 0x7f0800ab
+			public const int cancel_action = 2131230891;
 			
 			// aapt resource value: 0x7f080045
 			public const int center = 2131230789;
@@ -3872,8 +2609,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f08007a
 			public const int checkbox = 2131230842;
 			
-			// aapt resource value: 0x7f0800b7
-			public const int chronometer = 2131230903;
+			// aapt resource value: 0x7f0800b3
+			public const int chronometer = 2131230899;
 			
 			// aapt resource value: 0x7f08004e
 			public const int clip_horizontal = 2131230798;
@@ -3899,11 +2636,11 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0800a1
 			public const int coordinatorLayout = 2131230881;
 			
-			// aapt resource value: 0x7f08005f
-			public const int cropInside = 2131230815;
+			// aapt resource value: 0x7f08005e
+			public const int cropInside = 2131230814;
 			
-			// aapt resource value: 0x7f080060
-			public const int cropOutside = 2131230816;
+			// aapt resource value: 0x7f08005f
+			public const int cropOutside = 2131230815;
 			
 			// aapt resource value: 0x7f080074
 			public const int custom = 2131230836;
@@ -3944,8 +2681,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080030
 			public const int end = 2131230768;
 			
-			// aapt resource value: 0x7f0800bd
-			public const int end_padder = 2131230909;
+			// aapt resource value: 0x7f0800b9
+			public const int end_padder = 2131230905;
 			
 			// aapt resource value: 0x7f08003f
 			public const int enterAlways = 2131230783;
@@ -3995,8 +2732,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080069
 			public const int icon = 2131230825;
 			
-			// aapt resource value: 0x7f0800bc
-			public const int icon_group = 2131230908;
+			// aapt resource value: 0x7f0800b8
+			public const int icon_group = 2131230904;
 			
 			// aapt resource value: 0x7f08003a
 			public const int ifRoom = 2131230778;
@@ -4004,8 +2741,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080066
 			public const int image = 2131230822;
 			
-			// aapt resource value: 0x7f0800b8
-			public const int info = 2131230904;
+			// aapt resource value: 0x7f0800b4
+			public const int info = 2131230900;
 			
 			// aapt resource value: 0x7f080059
 			public const int italic = 2131230809;
@@ -4037,35 +2774,23 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f08005b
 			public const int little = 2131230811;
 			
-			// aapt resource value: 0x7f0800ca
-			public const int masked = 2131230922;
+			// aapt resource value: 0x7f0800c6
+			public const int masked = 2131230918;
 			
-			// aapt resource value: 0x7f0800c2
-			public const int masterIp = 2131230914;
+			// aapt resource value: 0x7f0800bd
+			public const int masterIp = 2131230909;
 			
-			// aapt resource value: 0x7f0800b1
-			public const int media_actions = 2131230897;
+			// aapt resource value: 0x7f0800ad
+			public const int media_actions = 2131230893;
 			
-			// aapt resource value: 0x7f0800c8
-			public const int message = 2131230920;
+			// aapt resource value: 0x7f0800c4
+			public const int message = 2131230916;
 			
 			// aapt resource value: 0x7f080031
 			public const int middle = 2131230769;
 			
 			// aapt resource value: 0x7f080053
 			public const int mini = 2131230803;
-			
-			// aapt resource value: 0x7f0800a8
-			public const int mtf_card = 2131230888;
-			
-			// aapt resource value: 0x7f0800aa
-			public const int mtf_editTextLayout = 2131230890;
-			
-			// aapt resource value: 0x7f0800a9
-			public const int mtf_image = 2131230889;
-			
-			// aapt resource value: 0x7f0800a7
-			public const int mtf_label = 2131230887;
 			
 			// aapt resource value: 0x7f080028
 			public const int multiply = 2131230760;
@@ -4085,20 +2810,20 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f08001e
 			public const int normal = 2131230750;
 			
-			// aapt resource value: 0x7f0800ba
-			public const int notification_background = 2131230906;
+			// aapt resource value: 0x7f0800b6
+			public const int notification_background = 2131230902;
 			
-			// aapt resource value: 0x7f0800b4
-			public const int notification_main_column = 2131230900;
+			// aapt resource value: 0x7f0800b0
+			public const int notification_main_column = 2131230896;
 			
-			// aapt resource value: 0x7f0800b3
-			public const int notification_main_column_container = 2131230899;
+			// aapt resource value: 0x7f0800af
+			public const int notification_main_column_container = 2131230895;
 			
-			// aapt resource value: 0x7f0800c4
-			public const int numberOfPois = 2131230916;
+			// aapt resource value: 0x7f0800bf
+			public const int numberOfPois = 2131230911;
 			
-			// aapt resource value: 0x7f0800c0
-			public const int pager = 2131230912;
+			// aapt resource value: 0x7f0800bb
+			public const int pager = 2131230907;
 			
 			// aapt resource value: 0x7f08004c
 			public const int parallax = 2131230796;
@@ -4112,8 +2837,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f08004d
 			public const int pin = 2131230797;
 			
-			// aapt resource value: 0x7f0800c6
-			public const int progressBarLayout = 2131230918;
+			// aapt resource value: 0x7f0800c1
+			public const int progressBarLayout = 2131230913;
 			
 			// aapt resource value: 0x7f080006
 			public const int progress_circular = 2131230726;
@@ -4121,23 +2846,23 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080007
 			public const int progress_horizontal = 2131230727;
 			
-			// aapt resource value: 0x7f0800be
-			public const int psts_tab_title = 2131230910;
+			// aapt resource value: 0x7f0800c3
+			public const int psts_tab_title = 2131230915;
 			
 			// aapt resource value: 0x7f08007c
 			public const int radio = 2131230844;
 			
-			// aapt resource value: 0x7f0800cb
-			public const int recommendations = 2131230923;
+			// aapt resource value: 0x7f0800c7
+			public const int recommendations = 2131230919;
 			
 			// aapt resource value: 0x7f08004a
 			public const int right = 2131230794;
 			
-			// aapt resource value: 0x7f0800b9
-			public const int right_icon = 2131230905;
-			
 			// aapt resource value: 0x7f0800b5
-			public const int right_side = 2131230901;
+			public const int right_icon = 2131230901;
+			
+			// aapt resource value: 0x7f0800b1
+			public const int right_side = 2131230897;
 			
 			// aapt resource value: 0x7f08000c
 			public const int save_image_matrix = 2131230732;
@@ -4166,8 +2891,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080055
 			public const int scrollable = 2131230805;
 			
-			// aapt resource value: 0x7f0800c5
-			public const int searchUserButton = 2131230917;
+			// aapt resource value: 0x7f0800c0
+			public const int searchUserButton = 2131230912;
 			
 			// aapt resource value: 0x7f080087
 			public const int search_badge = 2131230855;
@@ -4199,8 +2924,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080090
 			public const int search_voice_btn = 2131230864;
 			
-			// aapt resource value: 0x7f0800cc
-			public const int secondItem = 2131230924;
+			// aapt resource value: 0x7f0800c8
+			public const int secondItem = 2131230920;
 			
 			// aapt resource value: 0x7f080091
 			public const int select_dialog_listview = 2131230865;
@@ -4250,8 +2975,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f08004b
 			public const int start = 2131230795;
 			
-			// aapt resource value: 0x7f0800b0
-			public const int status_bar_latest_event_content = 2131230896;
+			// aapt resource value: 0x7f0800ac
+			public const int status_bar_latest_event_content = 2131230892;
 			
 			// aapt resource value: 0x7f08007d
 			public const int submenuarrow = 2131230845;
@@ -4262,8 +2987,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f08001f
 			public const int tabMode = 2131230751;
 			
-			// aapt resource value: 0x7f0800bf
-			public const int tabs = 2131230911;
+			// aapt resource value: 0x7f0800ba
+			public const int tabs = 2131230906;
 			
 			// aapt resource value: 0x7f080019
 			public const int tag_transition_group = 2131230745;
@@ -4289,8 +3014,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080015
 			public const int textinput_error = 2131230741;
 			
-			// aapt resource value: 0x7f0800b6
-			public const int time = 2131230902;
+			// aapt resource value: 0x7f0800b2
+			public const int time = 2131230898;
 			
 			// aapt resource value: 0x7f08001c
 			public const int title = 2131230748;
@@ -4337,17 +3062,17 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080026
 			public const int useLogo = 2131230758;
 			
-			// aapt resource value: 0x7f0800c3
-			public const int userId = 2131230915;
+			// aapt resource value: 0x7f0800be
+			public const int userId = 2131230910;
 			
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800c9
-			public const int visible = 2131230921;
+			// aapt resource value: 0x7f0800c5
+			public const int visible = 2131230917;
 			
-			// aapt resource value: 0x7f0800c7
-			public const int waveView = 2131230919;
+			// aapt resource value: 0x7f0800c2
+			public const int waveView = 2131230914;
 			
 			// aapt resource value: 0x7f08003c
 			public const int withText = 2131230780;
@@ -4535,79 +3260,76 @@ namespace RecommendationSystemClient
 			public const int Main = 2130968616;
 			
 			// aapt resource value: 0x7f040029
-			public const int MaterialEditText = 2130968617;
+			public const int notification_action = 2130968617;
 			
 			// aapt resource value: 0x7f04002a
-			public const int notification_action = 2130968618;
+			public const int notification_action_tombstone = 2130968618;
 			
 			// aapt resource value: 0x7f04002b
-			public const int notification_action_tombstone = 2130968619;
+			public const int notification_media_action = 2130968619;
 			
 			// aapt resource value: 0x7f04002c
-			public const int notification_media_action = 2130968620;
+			public const int notification_media_cancel_action = 2130968620;
 			
 			// aapt resource value: 0x7f04002d
-			public const int notification_media_cancel_action = 2130968621;
+			public const int notification_template_big_media = 2130968621;
 			
 			// aapt resource value: 0x7f04002e
-			public const int notification_template_big_media = 2130968622;
+			public const int notification_template_big_media_custom = 2130968622;
 			
 			// aapt resource value: 0x7f04002f
-			public const int notification_template_big_media_custom = 2130968623;
+			public const int notification_template_big_media_narrow = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int notification_template_big_media_narrow = 2130968624;
+			public const int notification_template_big_media_narrow_custom = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int notification_template_big_media_narrow_custom = 2130968625;
+			public const int notification_template_custom_big = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int notification_template_custom_big = 2130968626;
+			public const int notification_template_icon_group = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int notification_template_icon_group = 2130968627;
+			public const int notification_template_lines_media = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int notification_template_lines_media = 2130968628;
+			public const int notification_template_media = 2130968628;
 			
 			// aapt resource value: 0x7f040035
-			public const int notification_template_media = 2130968629;
+			public const int notification_template_media_custom = 2130968629;
 			
 			// aapt resource value: 0x7f040036
-			public const int notification_template_media_custom = 2130968630;
+			public const int notification_template_part_chronometer = 2130968630;
 			
 			// aapt resource value: 0x7f040037
-			public const int notification_template_part_chronometer = 2130968631;
+			public const int notification_template_part_time = 2130968631;
 			
 			// aapt resource value: 0x7f040038
-			public const int notification_template_part_time = 2130968632;
+			public const int ResultsTabFragment = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int psts_tab = 2130968633;
+			public const int SearchUserFragment = 2130968633;
 			
 			// aapt resource value: 0x7f04003a
-			public const int ResultsTabFragment = 2130968634;
+			public const int select_dialog_item_material = 2130968634;
 			
 			// aapt resource value: 0x7f04003b
-			public const int SearchUserFragment = 2130968635;
+			public const int select_dialog_multichoice_material = 2130968635;
 			
 			// aapt resource value: 0x7f04003c
-			public const int select_dialog_item_material = 2130968636;
+			public const int select_dialog_singlechoice_material = 2130968636;
 			
 			// aapt resource value: 0x7f04003d
-			public const int select_dialog_multichoice_material = 2130968637;
+			public const int SplashActivity = 2130968637;
 			
 			// aapt resource value: 0x7f04003e
-			public const int select_dialog_singlechoice_material = 2130968638;
+			public const int support_simple_spinner_dropdown_item = 2130968638;
 			
 			// aapt resource value: 0x7f04003f
-			public const int SplashActivity = 2130968639;
+			public const int Tab = 2130968639;
 			
 			// aapt resource value: 0x7f040040
-			public const int support_simple_spinner_dropdown_item = 2130968640;
-			
-			// aapt resource value: 0x7f040041
-			public const int tooltip = 2130968641;
+			public const int tooltip = 2130968640;
 			
 			static Layout()
 			{
@@ -6807,9 +5529,9 @@ namespace RecommendationSystemClient
 			public const int AppCompatTheme_windowNoTitle = 3;
 			
 			public static int[] ArcLayout = new int[] {
-					2130772338,
-					2130772339,
-					2130772340};
+					2130772321,
+					2130772322,
+					2130772323};
 			
 			// aapt resource value: 2
 			public const int ArcLayout_arc_cropDirection = 2;
@@ -7226,6 +5948,76 @@ namespace RecommendationSystemClient
 			// aapt resource value: 1
 			public const int ListPopupWindow_android_dropDownVerticalOffset = 1;
 			
+			public static int[] MaterialPager = new int[] {
+					2130772324,
+					2130772325,
+					2130772326,
+					2130772327,
+					2130772328,
+					2130772329,
+					2130772330,
+					2130772331,
+					2130772332,
+					2130772333,
+					2130772334,
+					2130772335,
+					2130772336,
+					2130772337,
+					2130772338,
+					2130772339,
+					2130772340};
+			
+			// aapt resource value: 2
+			public const int MaterialPager_pDividerColor = 2;
+			
+			// aapt resource value: 6
+			public const int MaterialPager_pDividerPadding = 6;
+			
+			// aapt resource value: 3
+			public const int MaterialPager_pDividerWidth = 3;
+			
+			// aapt resource value: 0
+			public const int MaterialPager_pIndicatorColor = 0;
+			
+			// aapt resource value: 4
+			public const int MaterialPager_pIndicatorHeight = 4;
+			
+			// aapt resource value: 12
+			public const int MaterialPager_pPaddingMiddle = 12;
+			
+			// aapt resource value: 8
+			public const int MaterialPager_pScrollOffset = 8;
+			
+			// aapt resource value: 10
+			public const int MaterialPager_pShouldExpand = 10;
+			
+			// aapt resource value: 9
+			public const int MaterialPager_pTabBackground = 9;
+			
+			// aapt resource value: 7
+			public const int MaterialPager_pTabPaddingLeftRight = 7;
+			
+			// aapt resource value: 11
+			public const int MaterialPager_pTextAllCaps = 11;
+			
+			// aapt resource value: 14
+			public const int MaterialPager_pTextAlpha = 14;
+			
+			// aapt resource value: 13
+			public const int MaterialPager_pTextColorSelected = 13;
+			
+			// aapt resource value: 16
+			public const int MaterialPager_pTextSelectedStyle = 16;
+			
+			// aapt resource value: 15
+			public const int MaterialPager_pTextStyle = 15;
+			
+			// aapt resource value: 1
+			public const int MaterialPager_pUnderlineColor = 1;
+			
+			// aapt resource value: 5
+			public const int MaterialPager_pUnderlineHeight = 5;
+			
 			public static int[] MenuGroup = new int[] {
 					16842766,
 					16842960,
@@ -7425,76 +6217,6 @@ namespace RecommendationSystemClient
 			
 			// aapt resource value: 4
 			public const int NavigationView_menu = 4;
-			
-			public static int[] PagerSlidingTabStrip = new int[] {
-					2130772321,
-					2130772322,
-					2130772323,
-					2130772324,
-					2130772325,
-					2130772326,
-					2130772327,
-					2130772328,
-					2130772329,
-					2130772330,
-					2130772331,
-					2130772332,
-					2130772333,
-					2130772334,
-					2130772335,
-					2130772336,
-					2130772337};
-			
-			// aapt resource value: 2
-			public const int PagerSlidingTabStrip_pstsDividerColor = 2;
-			
-			// aapt resource value: 6
-			public const int PagerSlidingTabStrip_pstsDividerPadding = 6;
-			
-			// aapt resource value: 3
-			public const int PagerSlidingTabStrip_pstsDividerWidth = 3;
-			
-			// aapt resource value: 0
-			public const int PagerSlidingTabStrip_pstsIndicatorColor = 0;
-			
-			// aapt resource value: 4
-			public const int PagerSlidingTabStrip_pstsIndicatorHeight = 4;
-			
-			// aapt resource value: 12
-			public const int PagerSlidingTabStrip_pstsPaddingMiddle = 12;
-			
-			// aapt resource value: 8
-			public const int PagerSlidingTabStrip_pstsScrollOffset = 8;
-			
-			// aapt resource value: 10
-			public const int PagerSlidingTabStrip_pstsShouldExpand = 10;
-			
-			// aapt resource value: 9
-			public const int PagerSlidingTabStrip_pstsTabBackground = 9;
-			
-			// aapt resource value: 7
-			public const int PagerSlidingTabStrip_pstsTabPaddingLeftRight = 7;
-			
-			// aapt resource value: 11
-			public const int PagerSlidingTabStrip_pstsTextAllCaps = 11;
-			
-			// aapt resource value: 14
-			public const int PagerSlidingTabStrip_pstsTextAlpha = 14;
-			
-			// aapt resource value: 13
-			public const int PagerSlidingTabStrip_pstsTextColorSelected = 13;
-			
-			// aapt resource value: 16
-			public const int PagerSlidingTabStrip_pstsTextSelectedStyle = 16;
-			
-			// aapt resource value: 15
-			public const int PagerSlidingTabStrip_pstsTextStyle = 15;
-			
-			// aapt resource value: 1
-			public const int PagerSlidingTabStrip_pstsUnderlineColor = 1;
-			
-			// aapt resource value: 5
-			public const int PagerSlidingTabStrip_pstsUnderlineHeight = 5;
 			
 			public static int[] PopupWindow = new int[] {
 					16843126,
