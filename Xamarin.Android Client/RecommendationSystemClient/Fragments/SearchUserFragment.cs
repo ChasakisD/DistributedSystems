@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Android.App;
+using Android.OS;
+using Android.Support.V4.Content;
 using Android.Views;
 using Android.Widget;
 using CheeseBind;
@@ -25,8 +27,20 @@ namespace RecommendationSystemClient.Fragments
         [BindView(Resource.Id.progressBarLayout)]
         private LinearLayout _progressBarLayout;
 
+        [BindView(Resource.Id.progressBar)]
+        private ProgressBar _progressBar;
+
         protected override int LayoutResource => Resource.Layout.SearchUserFragment;
         protected override string Title => "Recommendations";
+
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            var root = base.OnCreateView(inflater, container, savedInstanceState);
+
+            _progressBar.IndeterminateDrawable = ContextCompat.GetDrawable(Context, Resource.Drawable.multiColorProgressBar);
+
+            return root;
+        }
 
         [OnClick(Resource.Id.searchUserButton)]
         public async void SearchUserClick(object sender, EventArgs args)

@@ -2774,8 +2774,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f08005b
 			public const int little = 2131230811;
 			
-			// aapt resource value: 0x7f0800c6
-			public const int masked = 2131230918;
+			// aapt resource value: 0x7f0800c7
+			public const int masked = 2131230919;
 			
 			// aapt resource value: 0x7f0800bd
 			public const int masterIp = 2131230909;
@@ -2783,8 +2783,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f0800ad
 			public const int media_actions = 2131230893;
 			
-			// aapt resource value: 0x7f0800c4
-			public const int message = 2131230916;
+			// aapt resource value: 0x7f0800c5
+			public const int message = 2131230917;
 			
 			// aapt resource value: 0x7f080031
 			public const int middle = 2131230769;
@@ -2837,6 +2837,9 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f08004d
 			public const int pin = 2131230797;
 			
+			// aapt resource value: 0x7f0800c2
+			public const int progressBar = 2131230914;
+			
 			// aapt resource value: 0x7f0800c1
 			public const int progressBarLayout = 2131230913;
 			
@@ -2846,14 +2849,14 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080007
 			public const int progress_horizontal = 2131230727;
 			
-			// aapt resource value: 0x7f0800c3
-			public const int psts_tab_title = 2131230915;
+			// aapt resource value: 0x7f0800c4
+			public const int psts_tab_title = 2131230916;
 			
 			// aapt resource value: 0x7f08007c
 			public const int radio = 2131230844;
 			
-			// aapt resource value: 0x7f0800c7
-			public const int recommendations = 2131230919;
+			// aapt resource value: 0x7f0800c8
+			public const int recommendations = 2131230920;
 			
 			// aapt resource value: 0x7f08004a
 			public const int right = 2131230794;
@@ -2924,8 +2927,8 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080090
 			public const int search_voice_btn = 2131230864;
 			
-			// aapt resource value: 0x7f0800c8
-			public const int secondItem = 2131230920;
+			// aapt resource value: 0x7f0800c9
+			public const int secondItem = 2131230921;
 			
 			// aapt resource value: 0x7f080091
 			public const int select_dialog_listview = 2131230865;
@@ -3068,11 +3071,11 @@ namespace RecommendationSystemClient
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800c5
-			public const int visible = 2131230917;
+			// aapt resource value: 0x7f0800c6
+			public const int visible = 2131230918;
 			
-			// aapt resource value: 0x7f0800c2
-			public const int waveView = 2131230914;
+			// aapt resource value: 0x7f0800c3
+			public const int waveView = 2131230915;
 			
 			// aapt resource value: 0x7f08003c
 			public const int withText = 2131230780;
