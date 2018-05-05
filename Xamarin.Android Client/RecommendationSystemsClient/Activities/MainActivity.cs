@@ -15,10 +15,7 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace RecommendationSystemsClient.Activities
 {
-    [Activity(
-        Label = "RecommendationSystemsClient", 
-        Icon = "@mipmap/ic_launcher",
-        MainLauncher = true)]
+    [Activity(Label = "RecommendationSystemsClient")]
     public class MainActivity : AppCompatActivity
     {
         private Toolbar _toolbar;
@@ -65,7 +62,7 @@ namespace RecommendationSystemsClient.Activities
                         selectedFragment = new SearchUserFragment();
                         break;
                     default:
-                        selectedFragment = new SecondFragment();
+                        selectedFragment = new ResultsTabFragment();
                         break;
                 }
 

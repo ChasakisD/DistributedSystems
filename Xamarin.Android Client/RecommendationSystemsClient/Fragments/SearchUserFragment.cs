@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Android;
 using Android.App;
 using Android.OS;
 using Android.Views;
@@ -12,14 +13,11 @@ using RecommendationSystemsClient.Services;
 
 namespace RecommendationSystemsClient.Fragments
 {
-    public class SearchUserFragment : Android.Support.V4.App.Fragment
+    public class SearchUserFragment : BaseFragment
     {
         [BindView(Resource.Id.masterIp)]
         private TextView _masterIpTextView;
-
-        [BindView(Resource.Id.masterPort)]
-        private TextView _masterPortTextView;
-
+        
         [BindView(Resource.Id.userId)]
         private TextView _userIdTextView;
 
@@ -29,15 +27,7 @@ namespace RecommendationSystemsClient.Fragments
         [BindView(Resource.Id.progressBarLayout)]
         private LinearLayout _progressBarLayout;
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            var root = inflater.Inflate(Resource.Layout.SearchUserFragment, container, false);
-
-            /* Bind CheeseKnife */
-            Cheeseknife.Bind(this, root);
-
-            return root;
-        }
+        protected override int LayoutResource => Resource.Layout.SearchUserFragment;
 
         [OnClick(Resource.Id.searchUserButton)]
         public async void SearchUserClick(object sender, EventArgs args)
@@ -46,10 +36,19 @@ namespace RecommendationSystemsClient.Fragments
 
             if (!ValidationService.ValidateIpAddress(_masterIpTextView.Text)) return;
 
-            var pois = await Task.Run(async () => 
-                await new NetworkService(_masterIpTextView.Text, int.Parse(_masterPortTextView.Text))
-                .GetPois(int.Parse(_userIdTextView.Text), int.Parse(_numberOfPoisTextView.Text)));
+            var pois = await Task.Run(async () =>
+            {
+                /* Get the IP and the Port */
+                var tokens = _masterIpTextView.Text.Split(':');
+                if (tokens.Length != 2) return null;
 
+                var isPortValid = int.TryParse(tokens[1], out var port);
+                if (!isPortValid) return null;
+
+                return await new NetworkService(tokens[0], port)
+                    .GetPois(int.Parse(_userIdTextView.Text), int.Parse(_numberOfPoisTextView.Text));
+            });
+            
             string resultPois;
             if (pois == null)
             {

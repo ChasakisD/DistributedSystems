@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="ArcLayout">
+    <attr name="arc_height" format="dimension" />
+    <attr name="arc_position">
+      <enum name="bottom" value="0"/>
+      <enum name="top" value="1"/>
+      <enum name="left" value="2"/>
+      <enum name="right" value="3"/>
+    </attr>
+    <attr name="arc_cropDirection" format="enum">
+      <enum name="cropInside" value="0" />
+      <enum name="cropOutside" value="1"/>
+    </attr>
+  </declare-styleable>
+  <declare-styleable name="MaterialEditText">
+    <attr name="met_cardCollapsedHeight" format="dimension"/>
+    <attr name="met_labelColor" format="color"/>
+    <attr name="met_image" format="reference"/>
+    <attr name="met_hasFocus" format="boolean"/>
+    <attr name="met_animationDuration" format="integer"/>
+    <attr name="met_openKeyboardOnFocus" format="boolean"/>
+    <attr name="met_backgroundColor" format="color"/>
+  </declare-styleable>
+</resources>

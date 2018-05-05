@@ -53,6 +53,11 @@
     <Reference Include="Cheeseknife, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MisterJimson.Cheeseknife.1.1.0\lib\MonoAndroid10\Cheeseknife.dll</HintPath>
     </Reference>
+    <Reference Include="Java.Interop" />
+    <Reference Include="KenBurnsView, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Karamunting.Android.FlavioarFaria.KenBurnsView.1.0.7\lib\monoandroid51\KenBurnsView.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Android.Export" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -65,10 +70,17 @@
     <Reference Include="Plugin.Iconize.Material.Droid, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xam.Plugin.Iconize.Material.1.0.10\lib\MonoAndroid10\Plugin.Iconize.Material.Droid.dll</HintPath>
     </Reference>
+    <Reference Include="Refractored.PagerSlidingTabStrip, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Refractored.PagerSlidingTabStrip.1.1.6\lib\MonoAndroid10\Refractored.PagerSlidingTabStrip.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Runtime" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="WaveView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WaveView.2.0.0\lib\WaveView.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Android.Arch.Core.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Arch.Core.Common.1.0.0\lib\MonoAndroid80\Xamarin.Android.Arch.Core.Common.dll</HintPath>
     </Reference>
@@ -120,12 +132,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Activities\SplashAcivity.cs" />
+    <Compile Include="Fragments\BaseFragment.cs" />
     <Compile Include="Fragments\SearchUserFragment.cs" />
+    <Compile Include="Layouts\ArcLayout\ArcLayout.cs" />
+    <Compile Include="Layouts\ArcLayout\ArcLayoutPosition.cs" />
+    <Compile Include="Layouts\ArcLayout\ArcLayoutSettings.cs" />
+    <Compile Include="Layouts\MaterialEditText.cs" />
     <Compile Include="Models\CommunicationMessage.cs" />
     <Compile Include="Models\Poi.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Fragments\SecondFragment.cs" />
+    <Compile Include="Fragments\ResultsTabFragment.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\NetworkService.cs" />
     <Compile Include="Services\ValidationService.cs" />
@@ -135,13 +153,19 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\SecondFragment.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\Toolbar.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\SearchUserFragment.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SplashActivity.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ResultsTabFragment.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\MaterialEditText.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -192,7 +216,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\Colors.xml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\buttonBackground.xml">
       <SubType>Designer</SubType>
@@ -257,6 +280,20 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_wifi_tethering.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Attrs.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\multiColorProgressBar.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Dimens.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\textEditCard.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets')" />

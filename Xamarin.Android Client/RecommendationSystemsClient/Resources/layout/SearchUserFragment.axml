@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -28,42 +29,63 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center">
+
+      <RecommendationSystemsClient.Layouts.MaterialEditText
+          android:layout_width="290dp"
+          android:layout_height="wrap_content"
+          app:met_cardCollapsedHeight="4dp"
+          app:met_image="@drawable/ic_wifi_tethering"
+          app:met_backgroundColor="@color/primary_dark"
+          app:met_openKeyboardOnFocus="true">
         <EditText
-            android:id="@+id/masterIp"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:hint="Master Ip..."
-            android:text="192.168.2.2"
-            android:drawableLeft="@drawable/ic_wifi_tethering"
-            android:drawablePadding="8dp" />
-        <EditText
-            android:id="@+id/masterPort"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Master Port..."
-            android:text="21633"
-            android:drawableLeft="@drawable/ic_vpn_key"
-            android:drawablePadding="8dp" />
-        <EditText
+          android:id="@+id/masterIp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Master Ip"
+          android:text="192.168.2.2:25563" />
+      </RecommendationSystemsClient.Layouts.MaterialEditText>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <RecommendationSystemsClient.Layouts.MaterialEditText
+          android:layout_width="137dp"
+          android:layout_height="wrap_content"
+          app:met_cardCollapsedHeight="4dp"
+          app:met_image="@drawable/ic_account_circle"
+          app:met_backgroundColor="@color/primary_dark"
+          app:met_openKeyboardOnFocus="true">
+          <EditText
             android:id="@+id/userId"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="User id..."
-            android:text="1"
-            android:drawableLeft="@drawable/ic_account_circle"
-            android:drawablePadding="8dp" />
-        <EditText
+            android:hint="User id"
+            android:text="1" />
+        </RecommendationSystemsClient.Layouts.MaterialEditText>
+
+        <RecommendationSystemsClient.Layouts.MaterialEditText
+          android:layout_width="137dp"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="16dp"
+          app:met_cardCollapsedHeight="4dp"
+          app:met_image="@drawable/ic_playlist_play"
+          app:met_backgroundColor="@color/primary_dark"
+          app:met_openKeyboardOnFocus="true">
+          <EditText
             android:id="@+id/numberOfPois"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Number of POIs..."
-            android:text="5"
-            android:drawableLeft="@drawable/ic_playlist_play"
-            android:drawablePadding="8dp" />
-        <Button
+            android:hint="Number of POIs"
+            android:text="5" />
+        </RecommendationSystemsClient.Layouts.MaterialEditText>
+      </LinearLayout>
+
+      <Button
             android:id="@+id/searchUserButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,11 +99,11 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:orientation="horizontal">
             <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:indeterminateDrawable="@drawable/multiColorProgressBar" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
