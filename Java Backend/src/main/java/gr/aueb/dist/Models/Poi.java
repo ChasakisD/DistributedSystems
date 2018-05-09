@@ -1,22 +1,65 @@
 package gr.aueb.dist.Models;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.IOException;
 import java.io.Serializable;
 
 public class Poi implements Serializable {
-    private int id;
+    @SerializedName("POI")
+    private String id;
+
+    @SerializedName("POI_name")
     private String name;
+
+    @SerializedName("latidude")
     private double latitude;
+
     private double longitude;
-    private String category;
+
+    @SerializedName("POI_category_id")
+    private POICategoryID category;
+
+    private String photos;
+
+    public enum POICategoryID {
+        @SerializedName("Arts & Entertainment")
+        ARTS_ENTERTAINMENT,
+
+        @SerializedName("Bars")
+        BARS,
+
+        @SerializedName("Food")
+        FOOD;
+
+        public String toValue() {
+            switch (this) {
+                case ARTS_ENTERTAINMENT:
+                    return "Arts & Entertainment";
+                case BARS:
+                    return "Bars";
+                case FOOD:
+                    return "Food";
+            }
+            return null;
+        }
+
+        public static POICategoryID forValue(String value) throws IOException {
+            if (value.equals("Arts & Entertainment")) return ARTS_ENTERTAINMENT;
+            if (value.equals("Bars")) return BARS;
+            if (value.equals("Food")) return FOOD;
+            throw new IOException("Cannot deserialize POICategoryID");
+        }
+    }
 
     public Poi() {
     }
 
-    public Poi(int id){
+    public Poi(String id){
         this.id = id;
     }
 
-    public Poi(int id, String name, double latitude, double longitude, String category) {
+    public Poi(String id, String name, double latitude, double longitude, POICategoryID category) {
         this.id = id;
         this.name = name;
         this.latitude = latitude;
@@ -24,11 +67,11 @@ public class Poi implements Serializable {
         this.category = category;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -56,11 +99,11 @@ public class Poi implements Serializable {
         this.longitude = longitude;
     }
 
-    public String getCategory() {
+    public POICategoryID getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(POICategoryID category) {
         this.category = category;
     }
 
