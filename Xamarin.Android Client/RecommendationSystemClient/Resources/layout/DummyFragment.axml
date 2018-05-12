@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="HELLO"
-        android:textColor="?attr/colorAccent"
-        android:textSize="20sp" />
+    android:layout_height="match_parent"
+    android:background="@color/primary_dark_material_dark">
+    <com.diegodobelo.expandingview.ExpandingList
+        android:id="@+id/expanding_list_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

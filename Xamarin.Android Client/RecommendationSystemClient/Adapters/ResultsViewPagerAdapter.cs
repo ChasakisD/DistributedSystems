@@ -25,7 +25,7 @@ namespace RecommendationSystemClient.Adapters
             switch (position)
             {
                 case 0:
-                    return new DummyFragment { No = 1 };
+                    return new PoisStepperViewFragment();
                 default:
                     return new DummyFragment { No = 2 };
             }
