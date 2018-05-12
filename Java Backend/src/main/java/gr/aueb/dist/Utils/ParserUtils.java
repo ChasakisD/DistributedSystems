@@ -1,12 +1,17 @@
 package gr.aueb.dist.Utils;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import gr.aueb.dist.Models.Poi;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.StringTokenizer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class ParserUtils {
 
@@ -58,6 +63,18 @@ public class ParserUtils {
         }
 
         return matrix;
+    }
+
+    public static Map<String, Poi> loadPoisFromJson() {
+        try{
+            return new Gson().fromJson(
+                    new String(Files.readAllBytes(Paths.get("POIs.json"))),
+                    new TypeToken<Map<String, Poi>>(){}.getType());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private static void CloseReaders(BufferedReader bufferedReader, FileReader fileReader) {
