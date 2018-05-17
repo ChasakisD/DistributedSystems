@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <View
+        android:layout_width="@dimen/regular_icon_size"
+        android:layout_height="@dimen/border_box"
+        android:background="@color/primary"/>
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/poi_photo"
+        android:layout_width="@dimen/poi_photo_size"
+        android:layout_height="@dimen/poi_photo_size"
+        android:layout_margin="@dimen/small_padding"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/background"
+        app:riv_border_width="1dp"
+        app:riv_corner_radius="@dimen/poi_photo_radius"
+        app:riv_border_color="@color/primary_dark" />
+
+    <TextView
+        android:textColor="@color/primary_text"
+        android:id="@+id/poi_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/small_padding"
+        android:textAllCaps="true"
+        android:textSize="@dimen/title_font_size"
+        app:layout_constraintLeft_toRightOf="@+id/poi_photo"
+        app:layout_constraintTop_toTopOf="@id/poi_photo"
+        tools:text="VILLAGE" />
+
+    <ImageView
+        android:id="@+id/poi_location_icon"
+        android:layout_width="@dimen/regular_icon_size"
+        android:layout_height="@dimen/regular_icon_size"
+        android:layout_gravity="right"
+        android:src="@drawable/ic_location"
+        android:tint="@color/accent"
+        app:layout_constraintBottom_toTopOf="@id/poi_name"
+        app:layout_constraintLeft_toRightOf="@id/poi_name"
+        app:layout_constraintTop_toBottomOf="@id/poi_name" />
+
+    <TextView
+        android:textColor="@color/secondary_text"
+        android:id="@+id/poi_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/small_padding"
+        app:layout_constraintLeft_toRightOf="@id/poi_photo"
+        app:layout_constraintTop_toBottomOf="@id/poi_name"
+        tools:text="Entertainment" />
+
+</android.support.constraint.ConstraintLayout>
