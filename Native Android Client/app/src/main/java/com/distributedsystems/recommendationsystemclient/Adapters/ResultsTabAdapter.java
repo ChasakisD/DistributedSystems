@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.distributedsystems.recommendationsystemclient.Fragments.DummyFragment;
+import com.distributedsystems.recommendationsystemclient.Fragments.ResultsListFragment;
 
 public class ResultsTabAdapter extends FragmentPagerAdapter {
     private String[] mTitles = new String[]{
@@ -25,7 +26,7 @@ public class ResultsTabAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch(position){
-            case 0: return new DummyFragment();
+            case 0: return new ResultsListFragment();
             default: return new DummyFragment();
         }
     }

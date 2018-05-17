@@ -27,13 +27,14 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
-    implementation 'com.android.support:appcompat-v7:27.0.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation "com.mikepenz:iconics-core:3.0.3@aar"
     implementation 'com.mikepenz:google-material-typeface:3.0.1.2.original@aar'
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {

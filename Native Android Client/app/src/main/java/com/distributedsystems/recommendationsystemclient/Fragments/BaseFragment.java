@@ -15,22 +15,17 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends Fragment{
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
         View root = inflater.inflate(getResourceLayout(), container, false);
 
         /* Bind ButterKnife */
         ButterKnife.bind(this, root);
 
-        MainActivity activity = (MainActivity) getActivity();
-        if(activity == null) return root;
-        if(activity.mCollapsingToolbar == null) return root;
-
-        /* Set the Title */
-        activity.mCollapsingToolbar.setTitle(getTitle());
-
         return root;
     }
 
     public abstract int getResourceLayout();
-    public abstract String getTitle();
 }

@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Poi implements Serializable {
     @SerializedName("POI")
@@ -52,6 +53,11 @@ public class Poi implements Serializable {
             if (value.equals("Food")) return FOOD;
             throw new IOException("Cannot deserialize POICategoryID");
         }
+    }
+
+    // todo
+    public static String[] getNames(Class<? extends Enum<?>> e) {
+        return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
     }
 
     public Poi() {
@@ -107,6 +113,14 @@ public class Poi implements Serializable {
 
     public void setCategory(POICategoryID category) {
         this.category = category;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     @Override

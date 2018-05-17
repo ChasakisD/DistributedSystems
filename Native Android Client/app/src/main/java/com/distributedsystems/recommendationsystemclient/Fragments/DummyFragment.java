@@ -9,8 +9,4 @@ public class DummyFragment extends BaseFragment {
         return R.layout.fragment_dummy;
     }
 
-    @Override
-    public String getTitle() {
-        return "Dummy";
-    }
 }

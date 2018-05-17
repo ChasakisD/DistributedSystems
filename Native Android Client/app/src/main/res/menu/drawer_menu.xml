@@ -5,9 +5,9 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/recommendations"
-            android:title="Recommendations" />
+            android:title="@string/recommendations" />
         <item
             android:id="@+id/secondItem"
-            android:title="Second Item" />
+            android:title="@string/second_item" />
     </group>
 </menu>

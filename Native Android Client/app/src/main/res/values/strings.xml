@@ -12,4 +12,12 @@
     <string name="base_number_of_pois">5</string>
     <string name="search">Search</string>
     <string name="please_wait">Please wait...</string>
+
+    <!-- Drawer menu -->
+    <string name="recommendations">Recommendations</string>
+    <string name="second_item">Second Item</string>
+
+    <!-- Shared Pref -->
+    <string name="drawer_item_key">DrawerItemSelected</string>
+    <string name="results_key">resultedPois</string>
 </resources>

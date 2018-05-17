@@ -1,6 +1,7 @@
 package com.distributedsystems.recommendationsystemclient.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -43,11 +44,6 @@ public class SearchUserFragment extends BaseFragment {
         return R.layout.fragment_search_user;
     }
 
-    @Override
-    public String getTitle() {
-        return "Recommendations";
-    }
-
     @OnClick(R.id.searchUserButton)
     public void searchButtonClick(View view){
         if(getActivity() == null) return;
@@ -76,7 +72,11 @@ public class SearchUserFragment extends BaseFragment {
             @Override
             public void onLoadFinished(@NonNull Loader<ArrayList<Poi>> loader, ArrayList<Poi> data) {
                 mProgressBarLayout.setVisibility(View.GONE);
+                onResultsFetchedCallback.onResultsFetched(data);
 
+//Intent intent = new Intent(this, DisplayMessageActivity.class);
+
+                /*
                 String resultPois;
                 if(data == null) resultPois = "Unable to fetch pois. Please check your connectivity!";
                 else {
@@ -88,6 +88,7 @@ public class SearchUserFragment extends BaseFragment {
                 Log.e("Result:", resultPois);
 
                 if(getContext() == null) return;
+
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 TextView text = new TextView(getContext());
@@ -102,6 +103,7 @@ public class SearchUserFragment extends BaseFragment {
                 });
 
                 builder.show();
+                */
             }
 
             @Override
@@ -152,6 +154,32 @@ public class SearchUserFragment extends BaseFragment {
         public void deliverResult(@Nullable ArrayList<Poi> data) {
             pois = data;
             super.deliverResult(data);
+        }
+    }
+
+    /* Establish communication between this fragment and the wrapper activity
+     * In order to inform when the results have been calculated
+     * and let activity handle fragment transactions
+     */
+    OnResultsFetchedListener onResultsFetchedCallback;
+
+    public interface OnResultsFetchedListener {
+        void onResultsFetched(ArrayList<Poi> pois);
+    }
+    // --------------------------------------------------------------------
+
+    // Override onAttach to make sure that the container activity has implemented the callback
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // This makes sure that the host activity has implemented the callback interface
+        // If not, it throws an exception
+        try {
+            onResultsFetchedCallback = (OnResultsFetchedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnResultsFetchedListener");
         }
     }
 }
