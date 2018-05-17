@@ -260,6 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /src/CoordinatorWorkaround/nuget.exe
-/Java Backend/target/classes/gr/aueb/dist
-/Java Backend
 /Xamarin.Android Client/RecommendationSystemClient.Bindings
