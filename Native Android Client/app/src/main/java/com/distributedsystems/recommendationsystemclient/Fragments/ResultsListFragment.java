@@ -74,10 +74,10 @@ public class ResultsListFragment extends BaseFragment{
             }
         });
 
-        data.put(categoriesAvailable[0], artsAndEnterntaimentCategory);
-        data.put(categoriesAvailable[1], barstCategory);
-        data.put(categoriesAvailable[2], foodCategory);
-        data.put(categoriesAvailable[3], unknownCategory);
+        if(artsAndEnterntaimentCategory.size() != 0) data.put(categoriesAvailable[0], artsAndEnterntaimentCategory);
+        if(barstCategory.size() != 0) data.put(categoriesAvailable[1], barstCategory);
+        if(foodCategory.size() != 0) data.put(categoriesAvailable[2], foodCategory);
+        if(unknownCategory.size() != 0) data.put(categoriesAvailable[3], unknownCategory);
 
         adapter = new ResultsGroupAdapter(getContext(), data);
         categoriesRv.setAdapter(adapter);
