@@ -18,7 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.IntStream;
-
+import uk.org;
 public class Master extends Server implements IMaster {
     private int currentIteration;
     private int howManyWorkersToWait;
@@ -608,5 +608,17 @@ public class Master extends Server implements IMaster {
 
     public void setHowManyWorkersToWait(int howManyWorkersToWait) {
         this.howManyWorkersToWait = howManyWorkersToWait;
+    }
+
+    public double getDistance(long userLat, long userLon, long latitude, long longitude){
+        GeodeticCalculator geoCalc = new GeodeticCalculator();
+
+        Ellipsoid reference = Ellipsoid.WGS84;
+
+        GlobalPosition pointA = new GlobalPosition(latitude, longitude, 0.0); // Point A
+
+        GlobalPosition userPos = new GlobalPosition(userLat, userLon, 0.0); // Point B
+
+        return geoCalc.calculateGeodeticCurve(reference, userPos, pointA).getEllipsoidalDistance(); // Distance between Point A and Point B
     }
 }
