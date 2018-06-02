@@ -1,8 +1,13 @@
 package com.distributedsystems.recommendationsystemclient.Fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.distributedsystems.recommendationsystemclient.Adapters.ResultsGroupAdapter;
@@ -19,22 +24,26 @@ public class ResultsListFragment extends BaseFragment{
     @BindView(R.id.results_list)
     RecyclerView categoriesRv;
 
-    private ResultsGroupAdapter adapter;
-
     @Override
     public int getResourceLayout() {
         return R.layout.fragment_results_list;
     }
 
+    @Nullable
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @SuppressWarnings("unchecked")
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View root = super.onCreateView(inflater, container, savedInstanceState);
 
         Bundle argumentsBundle = getArguments();
         if(argumentsBundle == null
                 || !argumentsBundle.containsKey(getString(R.string.results_key))) {
-            Toast.makeText(getContext(), "An error occurred while opening pois results", Toast.LENGTH_LONG).show();
-            return;
+            Toast.makeText(
+                    getContext(),
+                    "An error occurred while opening pois results",
+                    Toast.LENGTH_LONG)
+                .show();
+            return root;
         }
 
         // lets create the HashMap used to populate rv
@@ -45,24 +54,27 @@ public class ResultsListFragment extends BaseFragment{
         categoriesAvailable[2] = "Food";
         categoriesAvailable[3] = "Unknown Category";
 
-        ArrayList<Poi> artsAndEnterntaimentCategory = new ArrayList<>();
-        ArrayList<Poi> barstCategory = new ArrayList<>();
+        ArrayList<Poi> artsAndEntertainmentCategory = new ArrayList<>();
+        ArrayList<Poi> barsCategory = new ArrayList<>();
         ArrayList<Poi> foodCategory = new ArrayList<>();
         ArrayList<Poi> unknownCategory = new ArrayList<>();
 
-        ArrayList<Poi> allPois = (ArrayList<Poi>)argumentsBundle.get(getString(R.string.results_key));
+        ArrayList<Poi> allPois = (ArrayList<Poi>) argumentsBundle.get(getString(R.string.results_key));
+        if(allPois == null) return root;
+
         allPois.forEach((p) -> {
+            if(p == null) return;
             if(p.getCategory() == null
-                    || p.getCategory().equals("")) {
+                    || p.getCategory().toValue().equals("")) {
                 unknownCategory.add(p);
             }
             else {
                 switch(p.getCategory().toValue()){
                     case "Arts & Entertainment":
-                        artsAndEnterntaimentCategory.add(p);
+                        artsAndEntertainmentCategory.add(p);
                         break;
                     case "Bars":
-                        barstCategory.add(p);
+                        barsCategory.add(p);
                         break;
                     case "Food":
                         foodCategory.add(p);
@@ -74,12 +86,14 @@ public class ResultsListFragment extends BaseFragment{
             }
         });
 
-        if(artsAndEnterntaimentCategory.size() != 0) data.put(categoriesAvailable[0], artsAndEnterntaimentCategory);
-        if(barstCategory.size() != 0) data.put(categoriesAvailable[1], barstCategory);
+        if(artsAndEntertainmentCategory.size() != 0) data.put(categoriesAvailable[0], artsAndEntertainmentCategory);
+        if(barsCategory.size() != 0) data.put(categoriesAvailable[1], barsCategory);
         if(foodCategory.size() != 0) data.put(categoriesAvailable[2], foodCategory);
         if(unknownCategory.size() != 0) data.put(categoriesAvailable[3], unknownCategory);
 
-        adapter = new ResultsGroupAdapter(getContext(), data);
-        categoriesRv.setAdapter(adapter);
+        categoriesRv.setAdapter(new ResultsGroupAdapter(getContext(), data));
+        categoriesRv.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        return root;
     }
 }

@@ -31,7 +31,7 @@ public class ResultsTabPanelFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = super.onCreateView(inflater, container, savedInstanceState);
 
-        mPager.setAdapter(new ResultsTabAdapter(getChildFragmentManager()));
+        mPager.setAdapter(new ResultsTabAdapter(getChildFragmentManager(), getArguments()));
         mTabLayout.setupWithViewPager(mPager);
 
         return root;

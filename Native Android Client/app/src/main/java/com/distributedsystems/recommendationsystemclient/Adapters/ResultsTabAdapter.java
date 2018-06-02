@@ -1,5 +1,6 @@
 package com.distributedsystems.recommendationsystemclient.Adapters;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,12 +10,15 @@ import com.distributedsystems.recommendationsystemclient.Fragments.DummyFragment
 import com.distributedsystems.recommendationsystemclient.Fragments.ResultsListFragment;
 
 public class ResultsTabAdapter extends FragmentPagerAdapter {
+    private Bundle bundle;
+
     private String[] mTitles = new String[]{
             "Poi Results", "Pois in Map"
     };
 
-    public ResultsTabAdapter(FragmentManager fm){
+    public ResultsTabAdapter(FragmentManager fm, Bundle bundle){
         super(fm);
+        this.bundle = bundle;
     }
 
     @Nullable
@@ -25,10 +29,18 @@ public class ResultsTabAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        Fragment fragment;
         switch(position){
-            case 0: return new ResultsListFragment();
-            default: return new DummyFragment();
+            case 0:
+                fragment = new ResultsListFragment();
+                break;
+            default:
+                fragment = new DummyFragment();
+                break;
         }
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 
     @Override

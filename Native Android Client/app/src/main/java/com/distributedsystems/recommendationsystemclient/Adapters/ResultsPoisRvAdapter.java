@@ -2,7 +2,6 @@ package com.distributedsystems.recommendationsystemclient.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,12 +23,14 @@ public class ResultsPoisRvAdapter extends RecyclerView.Adapter<ResultsPoisRvAdap
 
     private ArrayList<Poi> poisList;
     private Context context;
+    private int viewColor;
 
     public class PoiHolder extends RecyclerView.ViewHolder{
         public TextView poiNameTv;
         public TextView poiCategoryTv;
         public ImageView poiPhotoIv;
         public ImageView poiLocationIcon;
+        public View leftView;
 
         public PoiHolder(View view){
             super(view);
@@ -37,14 +38,16 @@ public class ResultsPoisRvAdapter extends RecyclerView.Adapter<ResultsPoisRvAdap
             poiCategoryTv = view.findViewById(R.id.poi_category);
             poiPhotoIv = view.findViewById(R.id.poi_photo);
             poiLocationIcon = view.findViewById(R.id.poi_location_icon);
+            leftView = view.findViewById(R.id.left_view);
         }
     }
 
-    public ResultsPoisRvAdapter(Context context, ArrayList<Poi> poisList){
+    public ResultsPoisRvAdapter(Context context, ArrayList<Poi> poisList, int viewColor){
         if(poisList == null) this.poisList = new ArrayList<>();
         else this.poisList = poisList;
 
         this.context = context;
+        this.viewColor = viewColor;
     }
 
     @NonNull
@@ -70,8 +73,6 @@ public class ResultsPoisRvAdapter extends RecyclerView.Adapter<ResultsPoisRvAdap
         }
         else {
             Transformation transformation = new RoundedTransformationBuilder()
-                    .borderColor(ContextCompat.getColor(context, R.color.primary_dark))
-                    .borderWidthDp(1)
                     .cornerRadiusDp(context.getResources().getDimension(R.dimen.poi_photo_radius))
                     .build();
             try{
@@ -93,6 +94,8 @@ public class ResultsPoisRvAdapter extends RecyclerView.Adapter<ResultsPoisRvAdap
         holder.poiLocationIcon.setOnClickListener(view -> {
             showMap(context, currentPoi.getLatitude(), currentPoi.getLongitude());
         });
+
+        holder.leftView.setBackgroundColor(viewColor);
     }
 
     @Override

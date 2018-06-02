@@ -25,7 +25,7 @@ public class Master extends Server implements IMaster {
     private long loopCalculationStartTime;
 
     /* ArrayList of the POIs info loaded from json file */
-    private Map<String, Poi> pois;
+    private Map<String, Poi> localPois;
 
     /* Available workers to distribute the work */
     private ArrayList<Worker> availableWorkers;
@@ -208,7 +208,6 @@ public class Master extends Server implements IMaster {
                         //When finished, clear it for the next loop
                         yMessages.clear();
                     }
-
                     break;
                 }
                 case ASK_RECOMMENDATION:{
@@ -337,8 +336,7 @@ public class Master extends Server implements IMaster {
             System.out.println("No trained data found to load!. Waiting for master connections...");
         }
 
-        pois = ParserUtils.loadPoisFromJson();
-        System.out.println(pois.values().size());
+        localPois = ParserUtils.loadPoisFromJson();
 
         this.OpenServer();
     }
@@ -426,7 +424,7 @@ public class Master extends Server implements IMaster {
             previousMax = pois.getDouble(0, currentMaxIndex);
 
             /* Creates a new poi with that id */
-            recommendedPOIs.add(new Poi(currentMaxIndex + ""));
+            recommendedPOIs.add(localPois.get(String.valueOf(currentMaxIndex)));
         }
 
         return recommendedPOIs;

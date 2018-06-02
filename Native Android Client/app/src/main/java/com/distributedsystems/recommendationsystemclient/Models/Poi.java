@@ -44,7 +44,7 @@ public class Poi implements Serializable {
                 case FOOD:
                     return "Food";
             }
-            return null;
+            return "";
         }
 
         public static POICategoryID forValue(String value) throws IOException {

@@ -73,37 +73,6 @@ public class SearchUserFragment extends BaseFragment {
             public void onLoadFinished(@NonNull Loader<ArrayList<Poi>> loader, ArrayList<Poi> data) {
                 mProgressBarLayout.setVisibility(View.GONE);
                 onResultsFetchedCallback.onResultsFetched(data);
-
-//Intent intent = new Intent(this, DisplayMessageActivity.class);
-
-                /*
-                String resultPois;
-                if(data == null) resultPois = "Unable to fetch pois. Please check your connectivity!";
-                else {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    data.forEach(poi -> stringBuilder.append(poi.getId()).append("\n"));
-                    resultPois = stringBuilder.toString();
-                }
-
-                Log.e("Result:", resultPois);
-
-                if(getContext() == null) return;
-
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                TextView text = new TextView(getContext());
-                text.setText(resultPois);
-                builder.setView(text);
-
-                builder.setPositiveButton("Ok", (dialog, which) -> {
-                    AlertDialog alertDialog = (AlertDialog) dialog;
-                    if(alertDialog == null) return;
-
-                    alertDialog.cancel();
-                });
-
-                builder.show();
-                */
             }
 
             @Override
