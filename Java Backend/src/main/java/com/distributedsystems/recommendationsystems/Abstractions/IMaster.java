@@ -16,5 +16,6 @@ public interface IMaster {
     void SendBroadcastMessageToWorkers(CommunicationMessage message);
     double CalculateError();
     double CalculateScore(int x, int y);
-    List<Poi> CalculateBestLocalPOIsForUser(int user, int numberOfResults);
+    double CalculateDistance(double userLat, double userLon, double poiLat, double poiLon);
+    List<Poi> CalculateBestLocalPOIsForUser(int user, int radius, double userLat, double userLng);
 }

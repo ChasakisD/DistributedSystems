@@ -7,6 +7,10 @@ import com.distributedsystems.recommendationsystems.Utils.MatrixHelpers;
 import com.distributedsystems.recommendationsystems.Utils.ParserUtils;
 import com.google.gson.Gson;
 import com.distributedsystems.recommendationsystems.Models.Poi;
+import org.gavaghan.geodesy.Ellipsoid;
+import org.gavaghan.geodesy.GeodeticCalculator;
+import org.gavaghan.geodesy.GlobalCoordinates;
+import org.gavaghan.geodesy.GlobalPosition;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.ops.transforms.Transforms;
@@ -16,9 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-
-import java.util.stream.IntStream;
-import uk.org;
+import java.util.stream.Collectors;
 
 public class Master extends Server implements IMaster {
     private int currentIteration;
@@ -45,7 +47,7 @@ public class Master extends Server implements IMaster {
 
     /* Matrices */
     private INDArray RUpdated;
-    private INDArray R, P, C ,X ,Y;
+    private INDArray R, P, C, X, Y;
 
     /* Finals */
     private final static double L = 0.1;
@@ -60,13 +62,13 @@ public class Master extends Server implements IMaster {
     /**
      * Constructors
      */
-    private Master(String name, String ip, int port){
+    private Master(String name, String ip, int port) {
         this.setName(name);
         this.setIp(ip);
         this.setPort(port);
     }
 
-    public Master(String name, String ip, int port, int howManyWorkersToWait){
+    public Master(String name, String ip, int port, int howManyWorkersToWait) {
         this(name, ip, port);
         this.howManyWorkersToWait = howManyWorkersToWait;
     }
@@ -83,7 +85,7 @@ public class Master extends Server implements IMaster {
         DataInputStream dataIn = null;
         PrintWriter printOut = null;
 
-        try{
+        try {
             boolean isJavaConnection;
             boolean isAndroidConnection;
             CommunicationMessage message;
@@ -101,29 +103,29 @@ public class Master extends Server implements IMaster {
              * By doing this way, the DataInputStream will read the message
              * PERFECTLY!!!
              */
-            try{
+            try {
                 isJavaConnection = true;
                 out = new ObjectOutputStream(getSocketConn().getOutputStream());
                 in = new ObjectInputStream(getSocketConn().getInputStream());
-            }catch (Exception e){
+            } catch (Exception e) {
                 isJavaConnection = false;
                 printOut = new PrintWriter(getSocketConn().getOutputStream());
                 dataIn = new DataInputStream(getSocketConn().getInputStream());
             }
 
-            if(isJavaConnection){
+            if (isJavaConnection) {
                 Object receivedObject = in.readObject();
-                if(receivedObject instanceof String){
+                if (receivedObject instanceof String) {
                     message = new Gson()
-                        .fromJson((String) receivedObject, CommunicationMessage.class);
+                            .fromJson((String) receivedObject, CommunicationMessage.class);
                     isAndroidConnection = true;
-                }else{
+                } else {
                     message = (CommunicationMessage) receivedObject;
                     isAndroidConnection = false;
                 }
-            }else{
+            } else {
                 byte[] receivedBytes = new byte[dataIn.available()];
-                for(int i = 0; i < receivedBytes.length; i++){
+                for (int i = 0; i < receivedBytes.length; i++) {
                     receivedBytes[i] = dataIn.readByte();
                 }
 
@@ -132,8 +134,8 @@ public class Master extends Server implements IMaster {
                 isAndroidConnection = false;
             }
 
-            switch(message.getType()){
-                case HELLO_WORLD:{
+            switch (message.getType()) {
+                case HELLO_WORLD: {
                     /* When a worker sends hello world add him to the list */
                     Worker worker = new Worker(message.getServerName(), message.getIp(), message.getPort());
                     worker.setInstanceCpuCores(message.getCpuCores());
@@ -143,16 +145,16 @@ public class Master extends Server implements IMaster {
                     System.out.println(worker.toString());
 
                     /* If we reached our point, start the algorithm */
-                    if(availableWorkers.size() >= howManyWorkersToWait){
+                    if (availableWorkers.size() >= howManyWorkersToWait) {
                         StartMatrixFactorization();
                     }
 
                     break;
                 }
-                case X_CALCULATED:{
+                case X_CALCULATED: {
                     xMessages.add(message);
                     xExecutionTimes.put(message.getServerName(), message.getExecutionTime());
-                    if(xMessages.size() >= availableWorkers.size()){
+                    if (xMessages.size() >= availableWorkers.size()) {
                         LinkedList<INDArray> XDist = new LinkedList<>();
 
                         /* Ascending sort of starting index */
@@ -170,10 +172,10 @@ public class Master extends Server implements IMaster {
 
                     break;
                 }
-                case Y_CALCULATED:{
+                case Y_CALCULATED: {
                     yMessages.add(message);
                     yExecutionTimes.put(message.getServerName(), message.getExecutionTime());
-                    if(yMessages.size() >= availableWorkers.size()){
+                    if (yMessages.size() >= availableWorkers.size()) {
                         LinkedList<INDArray> YDist = new LinkedList<>();
 
                         /* Ascending sort of starting index */
@@ -197,7 +199,7 @@ public class Master extends Server implements IMaster {
                         System.out.println("***********************************************");
 
                         /* If we reached our limit of the difference or the iterations, end the algorithm */
-                        if(difference < MIN_DIFFERENCE || currentIteration >= MAX_ITERATIONS){
+                        if (difference < MIN_DIFFERENCE || currentIteration >= MAX_ITERATIONS) {
                             FinishMatrixFactorization();
                             return;
                         }
@@ -213,41 +215,44 @@ public class Master extends Server implements IMaster {
                     }
                     break;
                 }
-                case ASK_RECOMMENDATION:{
+                case ASK_RECOMMENDATION: {
                     /* Accept only when the R is updated */
-                    if(RUpdated == null) return;
+                    if (RUpdated == null) return;
+
+                    List<Poi> userPois = CalculateBestLocalPOIsForUser(
+                            message.getUserToAsk(),
+                            message.getRadiusInKm(),
+                            message.getUserLat(),
+                            message.getUserLng());
 
                     CommunicationMessage result = new CommunicationMessage();
                     result.setType(MessageType.REPLY_RECOMMENDATION);
-                    result.setPoisToReturn(CalculateBestLocalPOIsForUser(message.getUserToAsk(), message.getHowManyPoisToRecommend()));
+                    result.setPoisToReturn(userPois);
 
-                    if(isJavaConnection){
-                        if(isAndroidConnection){
+                    if (isJavaConnection) {
+                        if (isAndroidConnection) {
                             out.writeObject(new Gson().toJson(result));
                             out.flush();
-                        }
-                        else{
+                        } else {
                             SendCommunicationMessage(result, message.getIp(), message.getPort());
                         }
-                    }else{
+                    } else {
                         printOut.print(new Gson().toJson(result));
                         printOut.flush();
                     }
                 }
-                default:{
+                default: {
                     break;
                 }
             }
-        }
-        catch (ClassNotFoundException | IOException e) {
+        } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             CloseConnections(in, out, dataIn, printOut);
         }
     }
 
-    private void StartMatrixFactorization(){
+    private void StartMatrixFactorization() {
         /* Calculate the number of total cores */
         int totalCores = availableWorkers
                 .stream()
@@ -259,7 +264,7 @@ public class Master extends Server implements IMaster {
 
         /* C and P matrices only need to be calculated once and passed once to the workers */
         C = (R.mul(A)).add(1);
-        P = Transforms.greaterThanOrEqual(R, Nd4j.zeros(R.rows(),R.columns()));
+        P = Transforms.greaterThanOrEqual(R, Nd4j.zeros(R.rows(), R.columns()));
 
         /* let's get the K << max{U,I}
            meaning a number much smaller than the biggest column or dimension */
@@ -277,7 +282,7 @@ public class Master extends Server implements IMaster {
         loopCalculationStartTime = System.nanoTime();
     }
 
-    private void FinishMatrixFactorization(){
+    private void FinishMatrixFactorization() {
         System.out.println("**************************************");
         System.out.println("Writing to " + NEW_X_PATH + ", " + NEW_Y_PATH + "newY.txt");
 
@@ -314,7 +319,7 @@ public class Master extends Server implements IMaster {
 
         /* Read the DataSet */
         R = ParserUtils.LoadDataSet("data/inputMatrix.csv");
-        if(R == null){
+        if (R == null) {
             System.out.println("Wrong DataSet! Please contact with the Developers!");
             return;
         }
@@ -326,7 +331,7 @@ public class Master extends Server implements IMaster {
         /* If the newX and the newY are existing, calculate the new R */
         Path newXFile = Paths.get(NEW_X_PATH);
         Path newYFile = Paths.get(NEW_Y_PATH);
-        if(Files.exists(newXFile) && Files.exists(newYFile)){
+        if (Files.exists(newXFile) && Files.exists(newYFile)) {
             X = Nd4j.readTxt(NEW_X_PATH);
             Y = Nd4j.readTxt(NEW_Y_PATH);
             System.out.println("**************************************");
@@ -335,7 +340,7 @@ public class Master extends Server implements IMaster {
 
             // Create the updated R
             FinishMatrixFactorization();
-        }else{
+        } else {
             System.out.println("No trained data found to load!. Waiting for master connections...");
         }
 
@@ -344,7 +349,7 @@ public class Master extends Server implements IMaster {
         this.OpenServer();
     }
 
-    public void TransferMatricesToWorkers(){
+    public void TransferMatricesToWorkers() {
         CommunicationMessage msg = new CommunicationMessage();
         msg.setType(MessageType.TRANSFER_MATRICES);
         msg.setCArray(C);
@@ -397,7 +402,7 @@ public class Master extends Server implements IMaster {
         temp.muli(C);
 
         /* compute the normalization */
-        INDArray normX = Nd4j.sum(X.mul(X),0);
+        INDArray normX = Nd4j.sum(X.mul(X), 0);
         INDArray normY = Nd4j.sum(Y.mul(Y), 0);
         INDArray norma = normX.add(normY);
         norma.muli(L);
@@ -416,13 +421,13 @@ public class Master extends Server implements IMaster {
         return 0;
     }
 
-    public List<Poi> CalculateBestLocalPOIsForUser(int user, int numberOfResults) {
+    public List<Poi> CalculateBestLocalPOIsForUser(int user, int radius, double userLat, double userLng) {
         List<Poi> recommendedPOIs = new LinkedList<>();
 
         INDArray pois = RUpdated.getRow(user);
 
         double previousMax = Double.MAX_VALUE;
-        for (int poi = 0; poi < numberOfResults; poi++) {
+        for (int poi = 0; poi < pois.columns(); poi++) {
             int currentMaxIndex = getMax(pois, previousMax, user);
             previousMax = pois.getDouble(0, currentMaxIndex);
 
@@ -430,13 +435,45 @@ public class Master extends Server implements IMaster {
             recommendedPOIs.add(localPois.get(String.valueOf(currentMaxIndex)));
         }
 
+        /* Filter null values */
+        recommendedPOIs = recommendedPOIs
+                .parallelStream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+        /* Calculate distances (User -> POI) for each poi */
+        recommendedPOIs
+                .parallelStream()
+                .forEach(p -> p.setDistance((int) CalculateDistance(
+                        userLat,
+                        userLng,
+                        p.getLatitude(),
+                        p.getLongitude())));
+
+        /* Got only pois inside the radius */
+        recommendedPOIs = recommendedPOIs
+                .parallelStream()
+                .filter(p -> p.getDistance()/1000 <= radius)
+                .collect(Collectors.toList());
+
+        /* Sort ascending base on poi's distance from user */
+        recommendedPOIs.sort(Comparator.comparingInt(Poi::getDistance));
+
         return recommendedPOIs;
+    }
+
+    public double CalculateDistance(double userLat, double userLon, double poiLat, double poiLon){
+        GlobalCoordinates poiPos = new GlobalCoordinates(poiLat, poiLon);
+        GlobalCoordinates userPos = new GlobalCoordinates(userLat, userLon);
+
+        return new GeodeticCalculator()
+                .calculateGeodeticCurve(Ellipsoid.WGS84, userPos, poiPos).getEllipsoidalDistance();
     }
 
     /**
      * Helper Methods
      */
-    public HashMap<String, Integer[]> SplitMatrix(INDArray matrix, String matrixName){
+    public HashMap<String, Integer[]> SplitMatrix(INDArray matrix, String matrixName) {
         int totalCores = availableWorkers
                 .stream()
                 .map(Worker::getInstanceCpuCores)
@@ -470,7 +507,7 @@ public class Master extends Server implements IMaster {
          * During the first iteration we distribute only depending on the
          * cores of each worker, so we divide the rows to the cores evenly
          */
-        if(currentIteration == 0) {
+        if (currentIteration == 0) {
             rowsPerCore = matrix.rows() / totalCores;
         }
         /*
@@ -530,7 +567,7 @@ public class Master extends Server implements IMaster {
          * If we do need to distribute, we remove 10% of the rows
          * given to the slowest worker, and share it among the rest workers
          */
-        if(!NoNeedRedistribution) {
+        if (!NoNeedRedistribution) {
             Iterator<String> keyIt = sortedMap.keySet().iterator();
             String lastKey = "";
             while (keyIt.hasNext()) {
@@ -550,7 +587,7 @@ public class Master extends Server implements IMaster {
             }
 
             /* In case there are rows left, we add them to the first worker */
-            if(percentMoved > 0) {
+            if (percentMoved > 0) {
                 Iterator<String> keyIt3 = sortedMap.keySet().iterator();
                 if (keyIt3.hasNext()) {
                     String currentKey = keyIt3.next();
@@ -604,14 +641,14 @@ public class Master extends Server implements IMaster {
         return workerIndexes;
     }
 
-    private int getMax(INDArray pois, double previousMax, int user){
+    private int getMax(INDArray pois, double previousMax, int user) {
         double max = -1;
         int maxIndex = -1;
         for (int i = 0; i < pois.columns(); i++) {
             double element = pois.getDouble(0, i);
             if (previousMax > element &&
                     element > max &&
-                    P.getDouble(user, i) != 1){
+                    P.getDouble(user, i) != 1) {
                 max = element;
                 maxIndex = i;
             }
@@ -620,7 +657,7 @@ public class Master extends Server implements IMaster {
     }
 
     /**
-     *   Getters and Setters
+     * Getters and Setters
      */
     public int getHowManyWorkersToWait() {
         return howManyWorkersToWait;
@@ -630,15 +667,4 @@ public class Master extends Server implements IMaster {
         this.howManyWorkersToWait = howManyWorkersToWait;
     }
 
-    public double getDistance(long userLat, long userLon, long latitude, long longitude){
-        GeodeticCalculator geoCalc = new GeodeticCalculator();
-
-        Ellipsoid reference = Ellipsoid.WGS84;
-
-        GlobalPosition pointA = new GlobalPosition(latitude, longitude, 0.0); // Point A
-
-        GlobalPosition userPos = new GlobalPosition(userLat, userLon, 0.0); // Point B
-
-        return geoCalc.calculateGeodeticCurve(reference, userPos, pointA).getEllipsoidalDistance(); // Distance between Point A and Point B
-    }
 }

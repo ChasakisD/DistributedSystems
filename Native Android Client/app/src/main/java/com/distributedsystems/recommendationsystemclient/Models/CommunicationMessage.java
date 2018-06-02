@@ -7,7 +7,11 @@ public class CommunicationMessage implements Serializable{
     private MessageType type;
 
     private int userToAsk;
-    private int howManyPoisToRecommend;
+    private int radiusInKm;
+
+    private double userLat;
+    private double userLng;
+
     private List<Poi> poisToReturn;
 
     public CommunicationMessage() {}
@@ -28,12 +32,28 @@ public class CommunicationMessage implements Serializable{
         this.userToAsk = userToAsk;
     }
 
-    public int getHowManyPoisToRecommend() {
-        return howManyPoisToRecommend;
+    public int getRadiusInKm() {
+        return radiusInKm;
     }
 
-    public void setHowManyPoisToRecommend(int howManyPoisToRecommend) {
-        this.howManyPoisToRecommend = howManyPoisToRecommend;
+    public void setRadiusInKm(int radiusInKm) {
+        this.radiusInKm = radiusInKm;
+    }
+
+    public double getUserLat() {
+        return userLat;
+    }
+
+    public void setUserLat(double userLat) {
+        this.userLat = userLat;
+    }
+
+    public double getUserLng() {
+        return userLng;
+    }
+
+    public void setUserLng(double userLng) {
+        this.userLng = userLng;
     }
 
     public List<Poi> getPoisToReturn() {

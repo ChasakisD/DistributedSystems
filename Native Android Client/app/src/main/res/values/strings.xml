@@ -5,11 +5,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="master_ip">Master Ip</string>
-    <string name="base_master_ip">192.168.2.2:25563</string>
+    <string name="base_master_ip">192.168.2.57:25563</string>
     <string name="user_id">User id</string>
     <string name="base_user_id">1</string>
-    <string name="number_of_pois">Number of POIs</string>
-    <string name="base_number_of_pois">5</string>
+    <string name="radius">Radius in KM</string>
+    <string name="base_radius">7950</string>
     <string name="search">Search</string>
     <string name="please_wait">Please wait...</string>
 

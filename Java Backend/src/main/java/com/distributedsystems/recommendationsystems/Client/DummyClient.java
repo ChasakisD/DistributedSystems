@@ -47,7 +47,6 @@ public class DummyClient extends Server implements IShowResults {
             message.setIp(ip);
             message.setPort(port);
             message.setUserToAsk(userID);
-            message.setHowManyPoisToRecommend(numOfPoi);
 
             DummyClient client = new DummyClient(name, ip, port);
             client.SendCommunicationMessage(message, masterIP, masterPort);

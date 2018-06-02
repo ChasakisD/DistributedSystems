@@ -58,9 +58,9 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:drawableStart="@drawable/ic_playlist_play"
-                    android:hint="@string/number_of_pois"
+                    android:hint="@string/radius"
                     android:inputType="number"
-                    android:text="@string/base_number_of_pois" />
+                    android:text="@string/base_radius" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
@@ -79,6 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center_horizontal"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <ProgressBar

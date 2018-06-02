@@ -1,28 +1,32 @@
 package com.distributedsystems.recommendationsystemclient.Activities;
 
-import android.content.ActivityNotFoundException;
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.distributedsystems.recommendationsystemclient.Fragments.ResultsTabPanelFragment;
 import com.distributedsystems.recommendationsystemclient.Fragments.SearchUserFragment;
 import com.distributedsystems.recommendationsystemclient.Models.Poi;
 import com.distributedsystems.recommendationsystemclient.R;
+import com.distributedsystems.recommendationsystemclient.Utils.PermissionUtils;
 
 import java.util.ArrayList;
-import java.util.Locale;
-
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity
@@ -110,6 +114,8 @@ public class MainActivity extends BaseActivity
                 e.printStackTrace();
             }
         }
+
+        checkForPermissions();
     }
 
     @Override
@@ -132,6 +138,24 @@ public class MainActivity extends BaseActivity
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void checkForPermissions(){
+        if (!PermissionUtils.ArePermissionsGranted(this)){
+            ActivityCompat.requestPermissions(this, PermissionUtils.NeededPermissions, 111);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode != PermissionUtils.RequestCode) return;
+
+        for(int result : grantResults){
+            if(result != PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, "Cannot continue if permissions are not granted!", Toast.LENGTH_LONG).show();
+                break;
+            }
+        }
     }
 
     // Highlight the corresponding item

@@ -1,9 +1,15 @@
 package com.distributedsystems.recommendationsystemclient.Fragments;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
@@ -17,6 +23,7 @@ import android.widget.TextView;
 import com.distributedsystems.recommendationsystemclient.Models.Poi;
 import com.distributedsystems.recommendationsystemclient.R;
 import com.distributedsystems.recommendationsystemclient.Utils.NetworkUtils;
+import com.distributedsystems.recommendationsystemclient.Utils.PermissionUtils;
 
 import java.util.ArrayList;
 
@@ -45,8 +52,8 @@ public class SearchUserFragment extends BaseFragment {
     }
 
     @OnClick(R.id.searchUserButton)
-    public void searchButtonClick(View view){
-        if(getActivity() == null) return;
+    public void searchButtonClick(View view) {
+        if (getActivity() == null) return;
 
         LoaderManager loaderManager = getActivity().getSupportLoaderManager();
         Loader<ArrayList<Poi>> poisLoader = loaderManager.getLoader(POIS_LOADER_ID);
@@ -58,28 +65,28 @@ public class SearchUserFragment extends BaseFragment {
     }
 
     public LoaderManager.LoaderCallbacks<ArrayList<Poi>> FetchPoisLoader =
-        new LoaderManager.LoaderCallbacks<ArrayList<Poi>>() {
-            @Override
-            public Loader<ArrayList<Poi>> onCreateLoader(int id, Bundle args) {
-                mProgressBarLayout.setVisibility(View.VISIBLE);
-                return new FetchPoisAsyncTaskLoader(
-                        getContext(),
-                        mMasterIpTextView.getText().toString(),
-                        Integer.parseInt(mUserIdTextView.getText().toString()),
-                        Integer.parseInt(mNumberOfPoisTextView.getText().toString()));
-            }
+            new LoaderManager.LoaderCallbacks<ArrayList<Poi>>() {
+                @Override
+                public Loader<ArrayList<Poi>> onCreateLoader(int id, Bundle args) {
+                    mProgressBarLayout.setVisibility(View.VISIBLE);
+                    return new FetchPoisAsyncTaskLoader(
+                            getContext(),
+                            mMasterIpTextView.getText().toString(),
+                            Integer.parseInt(mUserIdTextView.getText().toString()),
+                            Integer.parseInt(mNumberOfPoisTextView.getText().toString()));
+                }
 
-            @Override
-            public void onLoadFinished(@NonNull Loader<ArrayList<Poi>> loader, ArrayList<Poi> data) {
-                mProgressBarLayout.setVisibility(View.GONE);
-                onResultsFetchedCallback.onResultsFetched(data);
-            }
+                @Override
+                public void onLoadFinished(@NonNull Loader<ArrayList<Poi>> loader, ArrayList<Poi> data) {
+                    mProgressBarLayout.setVisibility(View.GONE);
+                    onResultsFetchedCallback.onResultsFetched(data);
+                }
 
-            @Override
-            public void onLoaderReset(@NonNull Loader<ArrayList<Poi>> loader) {
+                @Override
+                public void onLoaderReset(@NonNull Loader<ArrayList<Poi>> loader) {
 
-            }
-        };
+                }
+            };
 
     private static class FetchPoisAsyncTaskLoader extends AsyncTaskLoader<ArrayList<Poi>> {
         private String fullIp;
@@ -88,7 +95,7 @@ public class SearchUserFragment extends BaseFragment {
 
         private ArrayList<Poi> pois;
 
-        FetchPoisAsyncTaskLoader(Context context, String fullIp, int userId, int numberOfPois){
+        FetchPoisAsyncTaskLoader(Context context, String fullIp, int userId, int numberOfPois) {
             super(context);
             this.fullIp = fullIp;
             this.userId = userId;
@@ -97,10 +104,9 @@ public class SearchUserFragment extends BaseFragment {
 
         @Override
         protected void onStartLoading() {
-            if(pois == null) {
+            if (pois == null) {
                 forceLoad();
-            }
-            else {
+            } else {
                 deliverResult(pois);
             }
         }
@@ -109,12 +115,22 @@ public class SearchUserFragment extends BaseFragment {
         @Override
         public ArrayList<Poi> loadInBackground() {
             String[] tokens = fullIp.split(":");
-            if(tokens.length != 2) return null;
+            if (tokens.length != 2) return null;
 
             int port = Integer.parseInt(tokens[1]);
 
-            NetworkUtils networkService = new NetworkUtils(tokens[0], port);
-            pois = networkService.GetRecommendationPois(userId, numberOfPois);
+            LocationManager locationManager = (LocationManager) getContext()
+                    .getSystemService(Context.LOCATION_SERVICE);
+
+            if(locationManager == null) return null;
+            if (!PermissionUtils.ArePermissionsGranted(getContext())) return null;
+
+            @SuppressLint("MissingPermission")
+            /* PermissionUtils just checked for permissions, but compiler does not know it */
+            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            pois = new NetworkUtils(tokens[0], port)
+                    .GetRecommendationPois(userId, numberOfPois, lastKnownLocation);
 
             return pois;
         }

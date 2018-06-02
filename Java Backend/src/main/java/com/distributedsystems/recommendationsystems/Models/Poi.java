@@ -24,6 +24,8 @@ public class Poi implements Serializable {
     @SerializedName("photos")
     private String photo;
 
+    private int distance;
+
     public enum POICategoryID {
         @SerializedName("Arts & Entertainment")
         ARTS_ENTERTAINMENT,
@@ -99,6 +101,14 @@ public class Poi implements Serializable {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
     }
 
     public POICategoryID getCategory() {

@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.mikepenz:iconics-core:3.0.3@aar'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
     implementation 'com.mikepenz:google-material-typeface:3.0.1.2.original@aar'
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true

@@ -1,5 +1,7 @@
 package com.distributedsystems.recommendationsystemclient.Utils;
 
+import android.location.Location;
+
 import com.distributedsystems.recommendationsystemclient.Models.CommunicationMessage;
 import com.distributedsystems.recommendationsystemclient.Models.MessageType;
 import com.distributedsystems.recommendationsystemclient.Models.Poi;
@@ -20,7 +22,7 @@ public class NetworkUtils {
         this.masterPort = masterPort;
     }
 
-    public ArrayList<Poi> GetRecommendationPois(int userToAsk, int poisToReturn){
+    public ArrayList<Poi> GetRecommendationPois(int userToAsk, int radius, Location userLocation){
         ArrayList<Poi> pois = new ArrayList<>();
 
         ObjectInputStream in = null;
@@ -31,7 +33,9 @@ public class NetworkUtils {
             CommunicationMessage message = new CommunicationMessage();
             message.setType(MessageType.ASK_RECOMMENDATION);
             message.setUserToAsk(userToAsk);
-            message.setHowManyPoisToRecommend(poisToReturn);
+            message.setRadiusInKm(radius);
+            message.setUserLat(userLocation.getLatitude());
+            message.setUserLng(userLocation.getLongitude());
 
             String messageString = new Gson().toJson(message);
 
