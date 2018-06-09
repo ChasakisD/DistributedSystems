@@ -48,11 +48,6 @@ public class ResultsListFragment extends BaseFragment{
 
         // lets create the HashMap used to populate rv
         HashMap<String, ArrayList<Poi>> data = new HashMap<>();
-        String[] categoriesAvailable = new String[4];
-        categoriesAvailable[0] = "Arts & Entertainment";
-        categoriesAvailable[1] = "Bars";
-        categoriesAvailable[2] = "Food";
-        categoriesAvailable[3] = "Unknown Category";
 
         ArrayList<Poi> artsAndEntertainmentCategory = new ArrayList<>();
         ArrayList<Poi> barsCategory = new ArrayList<>();
@@ -62,7 +57,7 @@ public class ResultsListFragment extends BaseFragment{
         ArrayList<Poi> allPois = (ArrayList<Poi>) argumentsBundle.get(getString(R.string.results_key));
         if(allPois == null) return root;
 
-        allPois.forEach((p) -> {
+        allPois.forEach(p -> {
             if(p == null) return;
             if(p.getCategory() == null
                     || p.getCategory().toValue().equals("")) {
@@ -86,10 +81,10 @@ public class ResultsListFragment extends BaseFragment{
             }
         });
 
-        if(artsAndEntertainmentCategory.size() != 0) data.put(categoriesAvailable[0], artsAndEntertainmentCategory);
-        if(barsCategory.size() != 0) data.put(categoriesAvailable[1], barsCategory);
-        if(foodCategory.size() != 0) data.put(categoriesAvailable[2], foodCategory);
-        if(unknownCategory.size() != 0) data.put(categoriesAvailable[3], unknownCategory);
+        if(artsAndEntertainmentCategory.size() != 0) data.put(poiCategoriesAvailable[0], artsAndEntertainmentCategory);
+        if(barsCategory.size() != 0) data.put(poiCategoriesAvailable[1], barsCategory);
+        if(foodCategory.size() != 0) data.put(poiCategoriesAvailable[2], foodCategory);
+        if(unknownCategory.size() != 0) data.put(poiCategoriesAvailable[3], unknownCategory);
 
         categoriesRv.setAdapter(new ResultsGroupAdapter(getContext(), data));
         categoriesRv.setLayoutManager(new LinearLayoutManager(getContext()));

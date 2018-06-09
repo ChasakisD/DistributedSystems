@@ -1,29 +1,21 @@
 package com.distributedsystems.recommendationsystemclient.Fragments;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.distributedsystems.recommendationsystemclient.Models.Poi;
 import com.distributedsystems.recommendationsystemclient.R;
+import com.distributedsystems.recommendationsystemclient.Utils.DialogUtils;
+import com.distributedsystems.recommendationsystemclient.Utils.LocationUtils;
 import com.distributedsystems.recommendationsystemclient.Utils.NetworkUtils;
-import com.distributedsystems.recommendationsystemclient.Utils.PermissionUtils;
 
 import java.util.ArrayList;
 
@@ -43,8 +35,7 @@ public class SearchUserFragment extends BaseFragment {
     @BindView(R.id.numberOfPois)
     public TextView mNumberOfPoisTextView;
 
-    @BindView(R.id.progressBarLayout)
-    public LinearLayout mProgressBarLayout;
+    private AlertDialog mLoadingDialog;
 
     @Override
     public int getResourceLayout() {
@@ -68,7 +59,8 @@ public class SearchUserFragment extends BaseFragment {
             new LoaderManager.LoaderCallbacks<ArrayList<Poi>>() {
                 @Override
                 public Loader<ArrayList<Poi>> onCreateLoader(int id, Bundle args) {
-                    mProgressBarLayout.setVisibility(View.VISIBLE);
+                    mLoadingDialog = DialogUtils.ShowLoadingDialog(getActivity());
+
                     return new FetchPoisAsyncTaskLoader(
                             getContext(),
                             mMasterIpTextView.getText().toString(),
@@ -78,14 +70,19 @@ public class SearchUserFragment extends BaseFragment {
 
                 @Override
                 public void onLoadFinished(@NonNull Loader<ArrayList<Poi>> loader, ArrayList<Poi> data) {
-                    mProgressBarLayout.setVisibility(View.GONE);
-                    onResultsFetchedCallback.onResultsFetched(data);
+                    if(mLoadingDialog != null){
+                        mLoadingDialog.cancel();
+                    }
+
+                    if(data == null){
+                        DialogUtils.ShowNetworkErrorDialog(getActivity());
+                    }else{
+                        onResultsFetchedCallback.onResultsFetched(data);
+                    }
                 }
 
                 @Override
-                public void onLoaderReset(@NonNull Loader<ArrayList<Poi>> loader) {
-
-                }
+                public void onLoaderReset(@NonNull Loader<ArrayList<Poi>> loader) {}
             };
 
     private static class FetchPoisAsyncTaskLoader extends AsyncTaskLoader<ArrayList<Poi>> {
@@ -119,18 +116,8 @@ public class SearchUserFragment extends BaseFragment {
 
             int port = Integer.parseInt(tokens[1]);
 
-            LocationManager locationManager = (LocationManager) getContext()
-                    .getSystemService(Context.LOCATION_SERVICE);
-
-            if(locationManager == null) return null;
-            if (!PermissionUtils.ArePermissionsGranted(getContext())) return null;
-
-            @SuppressLint("MissingPermission")
-            /* PermissionUtils just checked for permissions, but compiler does not know it */
-            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-            pois = new NetworkUtils(tokens[0], port)
-                    .GetRecommendationPois(userId, numberOfPois, lastKnownLocation);
+            pois = new NetworkUtils(tokens[0], port, 5)
+                    .GetRecommendationPois(userId, numberOfPois, LocationUtils.GetLastKnownLocation(getContext()));
 
             return pois;
         }

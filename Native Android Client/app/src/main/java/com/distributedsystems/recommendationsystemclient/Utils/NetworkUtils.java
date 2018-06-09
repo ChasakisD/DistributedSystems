@@ -10,16 +10,20 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 public class NetworkUtils {
     private String masterIp;
     private int masterPort;
+    private int timeout;
 
-    public NetworkUtils(String masterIp, int masterPort) {
+    public NetworkUtils(String masterIp, int masterPort, int timeout) {
         this.masterIp = masterIp;
         this.masterPort = masterPort;
+        this.timeout = timeout;
     }
 
     public ArrayList<Poi> GetRecommendationPois(int userToAsk, int radius, Location userLocation){
@@ -39,7 +43,8 @@ public class NetworkUtils {
 
             String messageString = new Gson().toJson(message);
 
-            socket = new Socket(masterIp, masterPort);
+            socket = new Socket();
+            socket.connect(new InetSocketAddress(masterIp, masterPort), timeout * 1000);
 
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
@@ -56,6 +61,7 @@ public class NetworkUtils {
         }catch(ClassNotFoundException | IOException ex){
             System.out.println("Got exception while sending results to master...");
             ex.printStackTrace();
+            return null;
         }finally {
             CloseConnections(socket, in, out);
         }

@@ -16,45 +16,28 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.distributedsystems.recommendationsystemclient.Activities.BaseActivity;
 import com.distributedsystems.recommendationsystemclient.Models.Poi;
 import com.distributedsystems.recommendationsystemclient.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 public class ResultsGroupAdapter extends RecyclerView.Adapter<ResultsGroupAdapter.CategoryHolder>{
-    private final static List<Integer> boxColors = Arrays.asList(
-            0xfff06292,
-            0xff4db6ac,
-            0xffffd54f,
-            0xffaed581
-    );
-
-    private final static List<Integer> boxColorsOpacity = Arrays.asList(
-            0xaaf06292,
-            0xaa4db6ac,
-            0xaaffd54f,
-            0xaaaed581
-    );
-
-    private final int COUNTDOWN_RUNNING_TIME = 300;
-
     private ArrayList<String> poiCategories;
     private HashMap<String, ArrayList<Poi>> data;
     private int expandedItemIndex = -1;
     private Context context;
 
-    public class CategoryHolder extends RecyclerView.ViewHolder{
-        public RelativeLayout categoryHeaderLayout;
-        public LinearLayout categoryItemExpandedLayout;
-        public TextView categoryTv;
-        public RecyclerView poisOfCategory;
-        public View boxColor;
-        public ImageView isExpandedImageView;
+    class CategoryHolder extends RecyclerView.ViewHolder{
+        RelativeLayout categoryHeaderLayout;
+        LinearLayout categoryItemExpandedLayout;
+        TextView categoryTv;
+        RecyclerView poisOfCategory;
+        View boxColor;
+        ImageView isExpandedImageView;
 
-        public CategoryHolder(View view){
+        CategoryHolder(View view){
             super(view);
             categoryTv = view.findViewById(R.id.poi_category_tv);
             categoryHeaderLayout = view.findViewById(R.id.category_header_layout);
@@ -90,8 +73,8 @@ public class ResultsGroupAdapter extends RecyclerView.Adapter<ResultsGroupAdapte
         String category = poiCategories.get(position).trim();
         holder.categoryTv.setText(category);
 
-        int colorIndex = position % boxColors.size();
-        holder.boxColor.setBackgroundColor(boxColors.get(colorIndex));
+        int colorIndex = position % BaseActivity.categoriesColors.length;
+        holder.boxColor.setBackgroundColor(BaseActivity.categoriesColors[colorIndex]);
 
         holder.categoryHeaderLayout.setOnClickListener(view -> {
             if(expandedItemIndex == holder.getAdapterPosition()) expandedItemIndex = -1;
@@ -111,7 +94,7 @@ public class ResultsGroupAdapter extends RecyclerView.Adapter<ResultsGroupAdapte
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.collapse_item);
             holder.categoryItemExpandedLayout
                     .startAnimation(animation);
-            CountDownTimer countDownTimerStatic = new CountDownTimer(COUNTDOWN_RUNNING_TIME, 16) {
+            CountDownTimer countDownTimerStatic = new CountDownTimer(300, 16) {
                 @Override
                 public void onTick(long millisUntilFinished) {}
                 @Override
@@ -124,7 +107,12 @@ public class ResultsGroupAdapter extends RecyclerView.Adapter<ResultsGroupAdapte
 
         if(data == null || !data.containsKey(category)) return;
 
-        holder.poisOfCategory.setAdapter(new ResultsPoisRvAdapter(context, data.get(category), boxColors.get(colorIndex)));
+        holder.poisOfCategory.setAdapter(
+                new ResultsPoisRvAdapter(
+                        context,
+                        data.get(category),
+                        BaseActivity.categoriesColors[colorIndex]));
+
         holder.poisOfCategory.setLayoutManager(new LinearLayoutManager(context));
     }
 

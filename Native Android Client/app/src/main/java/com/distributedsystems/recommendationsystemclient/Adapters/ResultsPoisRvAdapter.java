@@ -1,7 +1,15 @@
 package com.distributedsystems.recommendationsystemclient.Adapters;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +17,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.distributedsystems.recommendationsystemclient.Activities.MainActivity;
 import com.distributedsystems.recommendationsystemclient.Models.Poi;
 import com.distributedsystems.recommendationsystemclient.R;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import static com.distributedsystems.recommendationsystemclient.Utils.OpenPoiLocation.showMap;
@@ -25,14 +35,16 @@ public class ResultsPoisRvAdapter extends RecyclerView.Adapter<ResultsPoisRvAdap
     private Context context;
     private int viewColor;
 
-    public class PoiHolder extends RecyclerView.ViewHolder{
-        public TextView poiNameTv;
-        public TextView poiCategoryTv;
-        public ImageView poiPhotoIv;
-        public ImageView poiLocationIcon;
-        public View leftView;
+    private Picasso mPicasso;
 
-        public PoiHolder(View view){
+    class PoiHolder extends RecyclerView.ViewHolder{
+        TextView poiNameTv;
+        TextView poiCategoryTv;
+        ImageView poiPhotoIv;
+        ImageView poiLocationIcon;
+        View leftView;
+
+        PoiHolder(View view){
             super(view);
             poiNameTv = view.findViewById(R.id.poi_name);
             poiCategoryTv = view.findViewById(R.id.poi_category);
@@ -42,12 +54,15 @@ public class ResultsPoisRvAdapter extends RecyclerView.Adapter<ResultsPoisRvAdap
         }
     }
 
-    public ResultsPoisRvAdapter(Context context, ArrayList<Poi> poisList, int viewColor){
+    ResultsPoisRvAdapter(Context context, ArrayList<Poi> poisList, int viewColor){
         if(poisList == null) this.poisList = new ArrayList<>();
         else this.poisList = poisList;
 
         this.context = context;
         this.viewColor = viewColor;
+
+        mPicasso = Picasso.with(context);
+        mPicasso.setIndicatorsEnabled(true);
     }
 
     @NonNull
@@ -76,8 +91,7 @@ public class ResultsPoisRvAdapter extends RecyclerView.Adapter<ResultsPoisRvAdap
                     .cornerRadiusDp(context.getResources().getDimension(R.dimen.poi_photo_radius))
                     .build();
             try{
-                Picasso.with(context)
-                        .load(currentPoi.getPhoto())
+                mPicasso.load(currentPoi.getPhoto())
                         .fit()
                         .centerCrop()
                         .error(R.drawable.background)
@@ -85,7 +99,6 @@ public class ResultsPoisRvAdapter extends RecyclerView.Adapter<ResultsPoisRvAdap
                         .transform(transformation)
                         .into(holder.poiPhotoIv);
             } catch (Exception e) {
-                // in any case an error has been made
                 holder.poiPhotoIv.setImageDrawable(context.getResources()
                         .getDrawable(R.drawable.background, context.getTheme()));
             }
@@ -102,6 +115,5 @@ public class ResultsPoisRvAdapter extends RecyclerView.Adapter<ResultsPoisRvAdap
     public int getItemCount() {
         return poisList == null ? 0 : poisList.size();
     }
-
 }
 

@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.distributedsystems.recommendationsystemclient.Fragments.DummyFragment;
+import com.distributedsystems.recommendationsystemclient.Fragments.PoisOnMapFragment;
 import com.distributedsystems.recommendationsystemclient.Fragments.ResultsListFragment;
 
 public class ResultsTabAdapter extends FragmentPagerAdapter {
@@ -35,7 +35,7 @@ public class ResultsTabAdapter extends FragmentPagerAdapter {
                 fragment = new ResultsListFragment();
                 break;
             default:
-                fragment = new DummyFragment();
+                fragment = new PoisOnMapFragment();
                 break;
         }
         fragment.setArguments(bundle);

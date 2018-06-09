@@ -8,11 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.distributedsystems.recommendationsystemclient.Activities.MainActivity;
-
 import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment{
+    public String[] poiCategoriesAvailable = new String[]{
+        "Arts & Entertainment",
+        "Bars",
+        "Food",
+        "Unknown Category"
+    };
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,

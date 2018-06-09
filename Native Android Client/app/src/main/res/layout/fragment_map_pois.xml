@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/map_nested_scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_light"
+            android:textSize="@dimen/regular_font_size"
+            android:text="@string/select_a_category"
+            android:layout_marginStart="@dimen/medium_padding"
+            android:layout_marginEnd="@dimen/medium_padding"
+            android:layout_marginTop="@dimen/medium_padding"
+            android:layout_marginBottom="@dimen/small_padding"/>
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/poi_category_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_padding"
+            android:layout_marginEnd="@dimen/medium_padding"
+            android:layout_marginBottom="@dimen/medium_padding"
+            app:ms_arrow_tint="@color/primary_light"
+            app:ms_background_color="@color/primary_dark"
+            app:ms_hint_color="@color/primary_light"
+            app:ms_text_color="@color/primary_light" />
+
+        <fragment
+            android:id="@+id/pois_map_view"
+            android:name="com.distributedsystems.recommendationsystemclient.Fragments.NestedSupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
