@@ -68,7 +68,7 @@ public class ParserUtils {
     public static Map<String, Poi> loadPoisFromJson() {
         try{
             return new Gson().fromJson(
-                    new String(Files.readAllBytes(Paths.get("POIs.json"))),
+                    new String(Files.readAllBytes(Paths.get("data/POIs.json"))),
                     new TypeToken<Map<String, Poi>>(){}.getType());
         }
         catch (Exception e){
