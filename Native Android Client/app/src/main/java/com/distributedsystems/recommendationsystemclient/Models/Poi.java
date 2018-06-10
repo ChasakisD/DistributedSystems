@@ -47,7 +47,7 @@ public class Poi implements Serializable {
             return "";
         }
 
-        public static POICategoryID forValue(String value) throws IOException {
+        public static POICategoryID fromValue(String value) throws IOException {
             if (value.equals("Arts & Entertainment")) return ARTS_ENTERTAINMENT;
             if (value.equals("Bars")) return BARS;
             if (value.equals("Food")) return FOOD;
@@ -55,7 +55,6 @@ public class Poi implements Serializable {
         }
     }
 
-    // todo
     public static String[] getNames(Class<? extends Enum<?>> e) {
         return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
     }
@@ -67,12 +66,13 @@ public class Poi implements Serializable {
         this.id = id;
     }
 
-    public Poi(String id, String name, double latitude, double longitude, POICategoryID category) {
+    public Poi(String id, String name, double latitude, double longitude, POICategoryID category, String photo) {
         this.id = id;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
         this.category = category;
+        this.photo = photo;
     }
 
     public String getId() {

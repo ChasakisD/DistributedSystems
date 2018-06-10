@@ -184,12 +184,8 @@ public class MainActivity extends BaseActivity implements SearchUserFragment.OnR
 
     @Override
     public void onResultsFetched(ArrayList<Poi> pois) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(getString(R.string.results_key), pois);
-
         Intent intent = new Intent(this, ResultsTabActivity.class);
-        intent.putExtras(bundle);
-
         startActivity(intent);
     }
+
 }

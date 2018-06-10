@@ -10,15 +10,13 @@ import com.distributedsystems.recommendationsystemclient.Fragments.PoisOnMapFrag
 import com.distributedsystems.recommendationsystemclient.Fragments.ResultsListFragment;
 
 public class ResultsTabAdapter extends FragmentPagerAdapter {
-    private Bundle bundle;
 
     private String[] mTitles = new String[]{
             "Poi Results", "Pois in Map"
     };
 
-    public ResultsTabAdapter(FragmentManager fm, Bundle bundle){
+    public ResultsTabAdapter(FragmentManager fm){
         super(fm);
-        this.bundle = bundle;
     }
 
     @Nullable
@@ -38,7 +36,6 @@ public class ResultsTabAdapter extends FragmentPagerAdapter {
                 fragment = new PoisOnMapFragment();
                 break;
         }
-        fragment.setArguments(bundle);
 
         return fragment;
     }

@@ -1,5 +1,6 @@
 package com.distributedsystems.recommendationsystemclient.Fragments;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
 
+import com.distributedsystems.recommendationsystemclient.Data.SuggestedPoisContract;
 import com.distributedsystems.recommendationsystemclient.Models.Poi;
 import com.distributedsystems.recommendationsystemclient.R;
 import com.distributedsystems.recommendationsystemclient.Utils.DialogUtils;
@@ -21,6 +23,13 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.distributedsystems.recommendationsystemclient.Data.SuggestedPoisContract.SuggestedPoisEntry.CATEGORY;
+import static com.distributedsystems.recommendationsystemclient.Data.SuggestedPoisContract.SuggestedPoisEntry.LATITUDE;
+import static com.distributedsystems.recommendationsystemclient.Data.SuggestedPoisContract.SuggestedPoisEntry.LONGITUDE;
+import static com.distributedsystems.recommendationsystemclient.Data.SuggestedPoisContract.SuggestedPoisEntry.NAME;
+import static com.distributedsystems.recommendationsystemclient.Data.SuggestedPoisContract.SuggestedPoisEntry.PHOTO;
+import static com.distributedsystems.recommendationsystemclient.Data.SuggestedPoisContract.SuggestedPoisEntry.POI_ID;
 
 public class SearchUserFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<ArrayList<Poi>> {
 
@@ -169,6 +178,30 @@ public class SearchUserFragment extends BaseFragment implements LoaderManager.Lo
 
             pois = new NetworkUtils(tokens[0], port, 5)
                     .GetRecommendationPois(userId, numberOfPois, LocationUtils.GetLastKnownLocation(getContext()));
+
+            getContext().getContentResolver()
+                    .delete(
+                            SuggestedPoisContract.SuggestedPoisEntry.SUGGESTED_POIS_URI,
+                            null,
+                            null);
+
+            if(pois == null) return null;
+
+            pois.forEach(p -> {
+                ContentValues contentValues = new ContentValues();
+
+                // Put all details except reviews into the ContentValues
+                contentValues.put(POI_ID, p.getId());
+                contentValues.put(NAME, p.getName());
+                contentValues.put(LATITUDE, p.getLatitude());
+                contentValues.put(LONGITUDE, p.getLongitude());
+                contentValues.put(CATEGORY, p.getCategory().toValue());
+                contentValues.put(PHOTO, p.getPhoto());
+
+                // Insert the content values via a ContentResolver
+                getContext().getContentResolver()
+                        .insert(SuggestedPoisContract.SuggestedPoisEntry.SUGGESTED_POIS_URI, contentValues);
+            });
 
             return pois;
         }
