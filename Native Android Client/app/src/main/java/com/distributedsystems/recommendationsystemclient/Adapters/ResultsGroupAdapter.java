@@ -83,14 +83,14 @@ public class ResultsGroupAdapter extends RecyclerView.Adapter<ResultsGroupAdapte
         });
 
         if(expandedItemIndex == position){
-            holder.isExpandedImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_down));
+            holder.isExpandedImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_up));
             holder.categoryItemExpandedLayout.setVisibility(View.VISIBLE);
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.expand_item);
             holder.categoryItemExpandedLayout
                     .startAnimation(animation);
         }
         else {
-            holder.isExpandedImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_up));
+            holder.isExpandedImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_down));
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.collapse_item);
             holder.categoryItemExpandedLayout
                     .startAnimation(animation);

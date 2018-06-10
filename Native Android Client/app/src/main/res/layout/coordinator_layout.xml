@@ -25,6 +25,7 @@
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginTop="72dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
             <com.flaviofaria.kenburnsview.KenBurnsView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -46,7 +47,7 @@
                     android:paddingRight="48dp"
                     android:text="@string/welcome"
                     android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/regular_font_size" />
             </FrameLayout>
 
             <android.support.v7.widget.Toolbar
@@ -62,6 +63,6 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.design.widget.CoordinatorLayout>

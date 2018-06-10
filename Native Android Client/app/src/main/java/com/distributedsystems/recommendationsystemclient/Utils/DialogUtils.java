@@ -31,26 +31,9 @@ public class DialogUtils {
     public static AlertDialog ShowLoadingDialog(Activity activity){
         if(activity == null) return null;
 
-        AlertDialog alertDialog = new AlertDialog.Builder(activity)
+        return new AlertDialog.Builder(activity)
                 .setView(activity.getLayoutInflater().inflate(R.layout.material_loading_view, null))
                 .setCancelable(false)
                 .show();
-
-        if(alertDialog.getWindow() == null) return null;
-
-        /* Force the layout to wrap content and not fill the screen */
-        LinearLayout container = alertDialog.getWindow().findViewById(R.id.loading_linear_layout);
-        container.getViewTreeObserver().addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                alertDialog.getWindow().setLayout(container.getWidth(),
-                        WindowManager.LayoutParams.WRAP_CONTENT);
-                container.getViewTreeObserver()
-                        .removeOnGlobalLayoutListener(this);
-            }
-        });
-
-        return alertDialog;
     }
 }

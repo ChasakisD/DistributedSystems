@@ -2,6 +2,7 @@
 <resources>
     <dimen name="title_font_size">20sp</dimen>
     <dimen name="regular_font_size">16sp</dimen>
+    <dimen name="small_font_size">14sp</dimen>
 
     <dimen name="poi_photo_size">100dp</dimen>
     <dimen name="category_header_height">70dp</dimen>

@@ -48,8 +48,8 @@
       <file leaf-file-name="POIs.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/data/POIs.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="6167" column="23" selection-start-line="6167" selection-start-column="17" selection-end-line="6167" selection-end-column="23" />
+            <state relative-caret-position="272">
+              <caret line="6182" column="30" selection-start-line="6182" selection-start-column="30" selection-end-line="6182" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -170,7 +170,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -259,6 +258,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -358,6 +358,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1273" y="0" width="1294" height="1057" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -729,8 +730,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/POIs.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="6167" column="23" selection-start-line="6167" selection-start-column="17" selection-end-line="6167" selection-end-column="23" />
+        <state relative-caret-position="272">
+          <caret line="6182" column="30" selection-start-line="6182" selection-start-column="30" selection-end-line="6182" selection-end-column="30" />
         </state>
       </provider>
     </entry>

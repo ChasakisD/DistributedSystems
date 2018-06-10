@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding"
+            android:text="@string/app_created"
+            android:textColor="@color/primary_light"
+            android:textSize="@dimen/title_font_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/tiny_padding"
+            android:paddingEnd="@dimen/medium_padding"
+            android:paddingStart="@dimen/medium_padding"
+            android:paddingTop="@dimen/tiny_padding"
+            android:text="@string/info"
+            android:textColor="@color/primary_light"
+            android:textSize="@dimen/small_font_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:minLines="4"
+            android:paddingBottom="@dimen/tiny_padding"
+            android:paddingEnd="@dimen/medium_padding"
+            android:paddingStart="@dimen/medium_padding"
+            android:paddingTop="@dimen/tiny_padding"
+            android:text="@string/team_members"
+            android:textAlignment="center"
+            android:textColor="@color/primary_light"
+            android:textSize="@dimen/small_font_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:paddingBottom="@dimen/tiny_padding"
+            android:paddingEnd="@dimen/medium_padding"
+            android:paddingStart="@dimen/medium_padding"
+            android:paddingTop="@dimen/tiny_padding"
+            android:text="@string/licences"
+            android:textColor="@color/primary_light"
+            android:textSize="@dimen/small_font_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/medium_padding"
+            android:text="@string/copyright"
+            android:textColor="@color/primary_dark"
+            android:textSize="@dimen/regular_font_size" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

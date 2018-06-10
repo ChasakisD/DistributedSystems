@@ -1,6 +1,32 @@
 <resources>
     <string name="app_name">RecommendationSystemClient</string>
-    <string name="welcome">Welcome to Omada 21 Recommendation System Client Xamarin.Android Application!</string>
+    <string name="welcome">Welcome to Team 21 Recommendation System Client Android Application!</string>
+    <string name="info">This app was created as an assignment for the Distributed Systems Course of Athens University of Economics and Business. It was created by:</string>
+    <string name="copyright">Team 21 © 2018</string>
+    <string name="team_members">Vasilopoulou Melina 3140022\nKatopodis Antonios 3140078\nKoutsopoulou Athanasia Maria 3140092\nChasakis Dionysios 3140219</string>
+    <string name="licences">"External Libraries Used (at most Apache 2.0):
+
+Gson
+https://github.com/google/gson/blob/master/LICENSE
+
+ButterKnife
+https://github.com/JakeWharton/butterknife/blob/master/LICENSE.txt
+
+KenBurnsView
+https://github.com/flavioarfaria/KenBurnsView/blob/master/LICENSE
+
+Lottie Animations
+https://github.com/airbnb/lottie-android/blob/master/LICENSE
+
+Picasso
+https://github.com/square/picasso/blob/master/LICENSE.txt
+
+Rounded ImageView
+https://github.com/vinc3m1/RoundedImageView
+
+Material Spinner
+https://github.com/jaredrummler/MaterialSpinner/blob/master/LICENSE"
+    </string>
 
     <!-- Search User -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -13,12 +39,18 @@
     <string name="search">Search</string>
 
     <!-- Drawer menu -->
+    <string name="results">Recommendation Results</string>
     <string name="recommendations">Recommendations</string>
-    <string name="second_item">Second Item</string>
+    <string name="info_item">About</string>
 
     <!-- Shared Pref -->
     <string name="drawer_item_key">DrawerItemSelected</string>
     <string name="results_key">resultedPois</string>
+    <string name="is_searching_key">isSearching</string>
+    <string name="master_ip_key">masterIp</string>
+    <string name="radius_key">radius</string>
+    <string name="user_id_key">userId</string>
+    <string name="loading_dialog_key">loadingDialog</string>
 
     <!-- Dialog Buttons -->
     <string name="dialog_ok">OK</string>
@@ -28,4 +60,5 @@
     <!-- Google API Key, tired to add it to the buildConf -->
     <string name="google_maps_api_key">AIzaSyDIH50sSLN71TFGV2shr55LARRnV-qNU-8</string>
     <string name="select_a_category">Select a category:</string>
+    <string name="app_created">How the app was created</string>
 </resources>

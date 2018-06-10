@@ -1,79 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    android:orientation="horizontal">
-
-    <View
-        android:id="@+id/left_view"
-        android:layout_width="@dimen/border_box_width"
-        android:layout_height="@dimen/border_box"
-        android:background="@color/primary"/>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:background="@android:color/white"
-        android:layout_marginTop="@dimen/small_padding"
-        android:layout_marginBottom="@dimen/small_padding"
-        android:layout_marginEnd="@dimen/small_padding"
-        android:layout_marginStart="-14dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="50dp">
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/poi_photo"
-            android:layout_width="@dimen/poi_photo_size"
-            android:layout_height="@dimen/poi_photo_size"
-            android:scaleType="fitCenter"
-            tools:src="@drawable/background"
-            app:riv_corner_radius="@dimen/poi_photo_radius"/>
-    </android.support.v7.widget.CardView>
-
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_margin="@dimen/small_padding"
+        android:id="@+id/poi_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <View
+            android:id="@+id/left_view"
+            android:layout_width="@dimen/border_box_width"
+            android:layout_height="@dimen/border_box"
+            android:background="@color/primary" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:layout_marginEnd="@dimen/small_padding"
+            android:layout_marginStart="-14dp"
+            android:layout_marginTop="@dimen/small_padding"
+            android:background="@android:color/white"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/poi_photo"
+                android:layout_width="@dimen/poi_photo_size"
+                android:layout_height="@dimen/poi_photo_size"
+                android:scaleType="fitCenter"
+                app:riv_corner_radius="@dimen/poi_photo_radius"
+                tools:src="@drawable/background" />
+        </android.support.v7.widget.CardView>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="4"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_margin="@dimen/small_padding"
+            android:orientation="horizontal">
 
-            <TextView
-                android:textColor="@color/primary_text"
-                android:id="@+id/poi_name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="true"
-                android:textSize="@dimen/title_font_size"
-                tools:text="VILLAGE" />
+                android:layout_weight="4"
+                android:orientation="vertical">
 
-            <TextView
-                android:textColor="@color/secondary_text"
-                android:id="@+id/poi_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toRightOf="@id/poi_photo"
-                app:layout_constraintTop_toBottomOf="@id/poi_name"
-                tools:text="Entertainment" />
+                <TextView
+                    android:id="@+id/poi_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/title_font_size"
+                    tools:text="VILLAGE" />
+
+                <TextView
+                    android:id="@+id/poi_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/secondary_text"
+                    app:layout_constraintLeft_toRightOf="@id/poi_photo"
+                    app:layout_constraintTop_toBottomOf="@id/poi_name"
+                    tools:text="Entertainment" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/poi_location_icon"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/regular_icon_size"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:src="@drawable/ic_location"
+                android:tint="@color/accent" />
+
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/poi_location_icon"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="@dimen/regular_icon_size"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_location"
-            android:tint="@color/accent" />
 
     </LinearLayout>
 
-</LinearLayout>
+    <View
+        android:layout_alignBottom="@id/poi_info"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#33000000"
+        android:layout_marginStart="@dimen/border_box_width" />
+</RelativeLayout>
+

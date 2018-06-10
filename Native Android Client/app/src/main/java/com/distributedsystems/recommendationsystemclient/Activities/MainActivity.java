@@ -1,36 +1,32 @@
 package com.distributedsystems.recommendationsystemclient.Activities;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.distributedsystems.recommendationsystemclient.Fragments.ResultsTabPanelFragment;
+import com.distributedsystems.recommendationsystemclient.Fragments.InfoFragment;
 import com.distributedsystems.recommendationsystemclient.Fragments.SearchUserFragment;
 import com.distributedsystems.recommendationsystemclient.Models.Poi;
 import com.distributedsystems.recommendationsystemclient.R;
 import com.distributedsystems.recommendationsystemclient.Utils.PermissionUtils;
 
 import java.util.ArrayList;
+
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity
-                        implements SearchUserFragment.OnResultsFetchedListener{
+public class MainActivity extends BaseActivity implements SearchUserFragment.OnResultsFetchedListener{
 
     @BindView(R.id.toolbar)
     public Toolbar mToolbar;
@@ -67,7 +63,7 @@ public class MainActivity extends BaseActivity
                     selectedFragment = new SearchUserFragment();
                     break;
                 default:
-                    selectedFragment = new ResultsTabPanelFragment();
+                    selectedFragment = new InfoFragment();
                     break;
             }
 
@@ -97,9 +93,8 @@ public class MainActivity extends BaseActivity
                 setTitle(R.string.recommendations);
                 break;
             default:
-                setTitle(R.string.second_item);
+                setTitle(R.string.info_item);
         }
-
 
         mNavigationView.setCheckedItem(R.id.recommendations);
 
@@ -158,7 +153,6 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    // Highlight the corresponding item
     private void checkItem(Bundle savedInstanceState){
         if(savedInstanceState != null) {
             int indexOfCheckedItem = savedInstanceState.getInt(getString(R.string.drawer_item_key), -1);
@@ -166,7 +160,7 @@ public class MainActivity extends BaseActivity
                 switch (indexOfCheckedItem) {
                     case 0: mNavigationView.setCheckedItem(R.id.recommendations);
                         break;
-                    default: mNavigationView.setCheckedItem(R.id.secondItem);
+                    default: mNavigationView.setCheckedItem(R.id.infoItem);
                         break;
                 }
             }
@@ -190,25 +184,12 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onResultsFetched(ArrayList<Poi> pois) {
-        Menu menu = mNavigationView.getMenu();
-        menu.getItem(1).setChecked(true);
-        mNavigationView.setCheckedItem(R.id.secondItem);
-        setTitle(R.string.second_item);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(getString(R.string.results_key), pois);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        try {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(getString(R.string.results_key), pois);
+        Intent intent = new Intent(this, ResultsTabActivity.class);
+        intent.putExtras(bundle);
 
-            ResultsTabPanelFragment fragment = ResultsTabPanelFragment.class.newInstance();
-            fragment.setArguments(bundle);
-
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        startActivity(intent);
     }
 }

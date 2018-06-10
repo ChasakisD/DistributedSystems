@@ -22,9 +22,11 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class SearchUserFragment extends BaseFragment {
+public class SearchUserFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<ArrayList<Poi>> {
 
     private static final int POIS_LOADER_ID = 100;
+
+    private static boolean onBackPressedFromChild = false;
 
     @BindView(R.id.masterIp)
     public TextView mMasterIpTextView;
@@ -33,9 +35,37 @@ public class SearchUserFragment extends BaseFragment {
     public TextView mUserIdTextView;
 
     @BindView(R.id.numberOfPois)
-    public TextView mNumberOfPoisTextView;
+    public TextView mRadiusTextView;
 
     private AlertDialog mLoadingDialog;
+
+    private boolean isSearching;
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putBoolean(getString(R.string.is_searching_key), isSearching);
+        outState.putString(getString(R.string.master_ip_key), mMasterIpTextView.getText().toString());
+        outState.putString(getString(R.string.user_id_key), mUserIdTextView.getText().toString());
+        outState.putString(getString(R.string.radius_key), mRadiusTextView.getText().toString());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        if(savedInstanceState != null
+            && savedInstanceState.containsKey(getString(R.string.is_searching_key))){
+            isSearching = savedInstanceState.getBoolean(getString(R.string.is_searching_key));
+            mMasterIpTextView.setText(savedInstanceState.getString(getString(R.string.master_ip_key)));
+            mUserIdTextView.setText(savedInstanceState.getString(getString(R.string.user_id_key)));
+            mRadiusTextView.setText(savedInstanceState.getString(getString(R.string.radius_key)));
+        }
+
+        if(isSearching && !onBackPressedFromChild){
+            initLoader();
+        }
+
+        super.onActivityCreated(savedInstanceState);
+    }
 
     @Override
     public int getResourceLayout() {
@@ -44,46 +74,67 @@ public class SearchUserFragment extends BaseFragment {
 
     @OnClick(R.id.searchUserButton)
     public void searchButtonClick(View view) {
+        isSearching = true;
+        initLoader();
+    }
+
+    private void initLoader(){
         if (getActivity() == null) return;
 
         LoaderManager loaderManager = getActivity().getSupportLoaderManager();
         Loader<ArrayList<Poi>> poisLoader = loaderManager.getLoader(POIS_LOADER_ID);
         if (poisLoader == null) {
-            loaderManager.initLoader(POIS_LOADER_ID, null, FetchPoisLoader);
+            loaderManager.initLoader(POIS_LOADER_ID, null, this);
         } else {
-            loaderManager.restartLoader(POIS_LOADER_ID, null, FetchPoisLoader);
+            loaderManager.restartLoader(POIS_LOADER_ID, null, this);
         }
     }
 
-    public LoaderManager.LoaderCallbacks<ArrayList<Poi>> FetchPoisLoader =
-            new LoaderManager.LoaderCallbacks<ArrayList<Poi>>() {
-                @Override
-                public Loader<ArrayList<Poi>> onCreateLoader(int id, Bundle args) {
-                    mLoadingDialog = DialogUtils.ShowLoadingDialog(getActivity());
+    public static void notifyPackPressed(){
+        onBackPressedFromChild = true;
+    }
 
-                    return new FetchPoisAsyncTaskLoader(
-                            getContext(),
-                            mMasterIpTextView.getText().toString(),
-                            Integer.parseInt(mUserIdTextView.getText().toString()),
-                            Integer.parseInt(mNumberOfPoisTextView.getText().toString()));
-                }
+    //region Loader Callback Implementation
 
-                @Override
-                public void onLoadFinished(@NonNull Loader<ArrayList<Poi>> loader, ArrayList<Poi> data) {
-                    if(mLoadingDialog != null){
-                        mLoadingDialog.cancel();
-                    }
+    @NonNull
+    @Override
+    public Loader<ArrayList<Poi>> onCreateLoader(int id, Bundle args) {
+        mLoadingDialog = DialogUtils.ShowLoadingDialog(getActivity());
+        return new FetchPoisAsyncTaskLoader(
+                getContext(),
+                mMasterIpTextView.getText().toString(),
+                Integer.parseInt(mUserIdTextView.getText().toString()),
+                Integer.parseInt(mRadiusTextView.getText().toString()));
+    }
 
-                    if(data == null){
-                        DialogUtils.ShowNetworkErrorDialog(getActivity());
-                    }else{
-                        onResultsFetchedCallback.onResultsFetched(data);
-                    }
-                }
+    @Override
+    public void onLoadFinished(@NonNull Loader<ArrayList<Poi>> loader, ArrayList<Poi> data) {
+        if(getActivity() == null) return;
 
-                @Override
-                public void onLoaderReset(@NonNull Loader<ArrayList<Poi>> loader) {}
-            };
+        if(onBackPressedFromChild){
+            LoaderManager loaderManager = getActivity().getSupportLoaderManager();
+            loaderManager.destroyLoader(POIS_LOADER_ID);
+            onBackPressedFromChild = false;
+            return;
+        }
+
+        if(mLoadingDialog != null){
+            mLoadingDialog.cancel();
+        }
+
+        if(data == null){
+            DialogUtils.ShowNetworkErrorDialog(getActivity());
+        }else{
+            onResultsFetchedCallback.onResultsFetched(data);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<ArrayList<Poi>> loader) {}
+
+    //endregion
+
+    //region Fetch Pois Async Task
 
     private static class FetchPoisAsyncTaskLoader extends AsyncTaskLoader<ArrayList<Poi>> {
         private String fullIp;
@@ -129,6 +180,10 @@ public class SearchUserFragment extends BaseFragment {
         }
     }
 
+    //endregion
+
+    //region Result Callback
+
     /* Establish communication between this fragment and the wrapper activity
      * In order to inform when the results have been calculated
      * and let activity handle fragment transactions
@@ -154,4 +209,6 @@ public class SearchUserFragment extends BaseFragment {
                     + " must implement OnResultsFetchedListener");
         }
     }
+
+    //endregion
 }
