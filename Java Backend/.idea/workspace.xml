@@ -164,7 +164,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="858" />
+    <option name="x" value="737" />
+    <option name="y" value="13" />
     <option name="width" value="1294" />
     <option name="height" value="1057" />
   </component>
@@ -348,7 +349,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/distributedsystems/recommendationsystems/Server/Master.java</url>
+          <url />
           <line>348</line>
           <properties />
           <option name="timeStamp" value="35" />

@@ -122,7 +122,7 @@ public class ResultsListFragment extends BaseFragment implements LoaderManager.L
         ArrayList<Poi> foodCategory = new ArrayList<>();
         ArrayList<Poi> unknownCategory = new ArrayList<>();
 
-        pois.forEach(p -> {
+        for(Poi p : pois){
             if(p == null) return;
             if(p.getCategory() == null
                     || p.getCategory().toValue().equals("")) {
@@ -144,7 +144,7 @@ public class ResultsListFragment extends BaseFragment implements LoaderManager.L
                         break;
                 }
             }
-        });
+        }
 
         if(artsAndEntertainmentCategory.size() != 0) allPoisHashMap.put(poiCategoriesAvailable[0], artsAndEntertainmentCategory);
         if(barsCategory.size() != 0) allPoisHashMap.put(poiCategoriesAvailable[1], barsCategory);

@@ -2,14 +2,7 @@ package com.distributedsystems.recommendationsystemclient.Utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.view.Gravity;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 import com.distributedsystems.recommendationsystemclient.R;
 

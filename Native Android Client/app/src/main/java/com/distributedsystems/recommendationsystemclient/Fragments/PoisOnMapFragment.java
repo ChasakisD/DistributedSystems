@@ -132,19 +132,17 @@ public class PoisOnMapFragment extends BaseFragment implements OnMapReadyCallbac
         HashMap<String, String> markerImages = new HashMap<>();
 
         /* Filter only items for categories */
-        selectedPois
-                .stream()
-                .filter(p -> position == 4
-                        || p.getCategory().toValue().equals(poiCategoriesAvailable[position]))
-                .forEach(p -> {
-                    Marker marker = mGoogleMap.addMarker(new MarkerOptions()
-                            .title(p.getName())
-                            .snippet(p.getCategory().toValue())
-                            .position(new LatLng(p.getLatitude(), p.getLongitude()))
-                            .icon(BitmapDescriptorFactory.defaultMarker(getMarkerColor(p))));
+        for(Poi p : selectedPois){
+            if (position != 4 && !p.getCategory().toValue().equals(poiCategoriesAvailable[position])) continue;
 
-                    markerImages.put(marker.getId(), p.getPhoto());
-                });
+            Marker marker = mGoogleMap.addMarker(new MarkerOptions()
+                    .title(p.getName())
+                    .snippet(p.getCategory().toValue())
+                    .position(new LatLng(p.getLatitude(), p.getLongitude()))
+                    .icon(BitmapDescriptorFactory.defaultMarker(getMarkerColor(p))));
+
+            markerImages.put(marker.getId(), p.getPhoto());
+        }
 
         mGoogleMap.setInfoWindowAdapter(new PoiMapAdapter(getContext(), getLayoutInflater(), markerImages));
     }

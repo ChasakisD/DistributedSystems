@@ -187,7 +187,7 @@ public class SearchUserFragment extends BaseFragment implements LoaderManager.Lo
 
             if(pois == null) return null;
 
-            pois.forEach(p -> {
+            for(Poi p : pois){
                 ContentValues contentValues = new ContentValues();
 
                 // Put all details except reviews into the ContentValues
@@ -201,7 +201,7 @@ public class SearchUserFragment extends BaseFragment implements LoaderManager.Lo
                 // Insert the content values via a ContentResolver
                 getContext().getContentResolver()
                         .insert(SuggestedPoisContract.SuggestedPoisEntry.SUGGESTED_POIS_URI, contentValues);
-            });
+            }
 
             return pois;
         }
