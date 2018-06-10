@@ -37,7 +37,7 @@ public class PoiContentProvider extends ContentProvider{
     }
 
     @Override
-    public String getType(Uri uri){
+    public String getType(@NonNull Uri uri){
         final int match = uriMatcher.match(uri);
 
         switch (match){
@@ -50,9 +50,8 @@ public class PoiContentProvider extends ContentProvider{
         }
     }
 
-
     /*
-        Called when adding a movie to favorites
+        Called when adding a poi to the Database
      */
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
@@ -156,5 +155,4 @@ public class PoiContentProvider extends ContentProvider{
     public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
-
 }

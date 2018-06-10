@@ -5,6 +5,7 @@
     <dimen name="small_font_size">14sp</dimen>
 
     <dimen name="poi_photo_size">100dp</dimen>
+    <dimen name="map_photo_size">70dp</dimen>
     <dimen name="category_header_height">70dp</dimen>
     <dimen name="regular_icon_size">30dp</dimen>
     <dimen name="border_box_width">28dp</dimen>
@@ -16,6 +17,7 @@
 
     <dimen name="cv_radius">5dp</dimen>
     <dimen name="poi_photo_radius">50dp</dimen>
+    <dimen name="map_poi_photo_radius">35dp</dimen>
     <dimen name="big_padding">48dp</dimen>
     <dimen name="huge_padding">32dp</dimen>
     <dimen name="loading_size">70dp</dimen>

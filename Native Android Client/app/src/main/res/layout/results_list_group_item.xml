@@ -9,7 +9,6 @@
         android:id="@+id/poi_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
         android:orientation="horizontal"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
@@ -58,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAllCaps="true"
-                    android:textColor="@color/primary_text"
+                    android:textColor="@color/primary_light"
                     android:textSize="@dimen/title_font_size"
                     tools:text="VILLAGE" />
 

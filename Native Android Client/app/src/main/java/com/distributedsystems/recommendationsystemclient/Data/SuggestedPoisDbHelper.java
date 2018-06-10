@@ -9,7 +9,7 @@ public class SuggestedPoisDbHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "FavoriteMovie.db";
         private static final int DATABASE_VERSION = 1;
 
-        public SuggestedPoisDbHelper(Context context){
+        SuggestedPoisDbHelper(Context context){
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 

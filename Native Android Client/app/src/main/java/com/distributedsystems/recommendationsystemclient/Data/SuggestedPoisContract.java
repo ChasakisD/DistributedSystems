@@ -8,8 +8,9 @@ import static com.distributedsystems.recommendationsystemclient.Data.SuggestedPo
 
 public class SuggestedPoisContract {
     public static final String CONTENT_AUTHORITY = "com.distributedsystems.recommendationsystemclient";
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String PATH_TASKS = "pois_suggested";
+
+    private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     public static final class SuggestedPoisEntry implements BaseColumns {
 

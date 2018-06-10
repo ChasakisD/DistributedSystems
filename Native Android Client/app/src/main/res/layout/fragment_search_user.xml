@@ -71,6 +71,6 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/button_background"
             android:text="@string/search"
-            android:textColor="#FFFFFF" />
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

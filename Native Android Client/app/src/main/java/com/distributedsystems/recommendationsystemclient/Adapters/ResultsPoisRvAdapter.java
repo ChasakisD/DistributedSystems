@@ -1,15 +1,7 @@
 package com.distributedsystems.recommendationsystemclient.Adapters;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,14 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.distributedsystems.recommendationsystemclient.Activities.MainActivity;
 import com.distributedsystems.recommendationsystemclient.Models.Poi;
 import com.distributedsystems.recommendationsystemclient.R;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import static com.distributedsystems.recommendationsystemclient.Utils.OpenPoiLocation.showMap;
@@ -104,9 +94,7 @@ public class ResultsPoisRvAdapter extends RecyclerView.Adapter<ResultsPoisRvAdap
             }
         }
 
-        holder.poiLocationIcon.setOnClickListener(view -> {
-            showMap(context, currentPoi.getLatitude(), currentPoi.getLongitude());
-        });
+        holder.poiLocationIcon.setOnClickListener(view -> showMap(context, currentPoi.getLatitude(), currentPoi.getLongitude()));
 
         holder.leftView.setBackgroundColor(viewColor);
     }

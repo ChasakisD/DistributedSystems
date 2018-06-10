@@ -10,14 +10,17 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.distributedsystems.recommendationsystemclient.Activities.BaseActivity;
+import com.distributedsystems.recommendationsystemclient.Adapters.PoiMapAdapter;
 import com.distributedsystems.recommendationsystemclient.Data.SuggestedPoisContract;
 import com.distributedsystems.recommendationsystemclient.Models.Poi;
 import com.distributedsystems.recommendationsystemclient.R;
+import com.distributedsystems.recommendationsystemclient.Utils.DialogUtils;
 import com.distributedsystems.recommendationsystemclient.Utils.LocationUtils;
 import com.distributedsystems.recommendationsystemclient.Utils.PermissionUtils;
 import com.google.android.gms.common.util.ArrayUtils;
@@ -26,15 +29,19 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 import butterknife.BindView;
 
-public class PoisOnMapFragment extends BaseFragment implements OnMapReadyCallback{
+public class PoisOnMapFragment extends BaseFragment implements OnMapReadyCallback,
+        LoaderManager.LoaderCallbacks<Cursor>{
 
     @BindView(R.id.map_nested_scroll_view)
     public NestedScrollView mMapNestedScrollView;
@@ -45,6 +52,7 @@ public class PoisOnMapFragment extends BaseFragment implements OnMapReadyCallbac
     public ArrayList<Poi> selectedPois;
 
     private GoogleMap mGoogleMap;
+    private AlertDialog mLoadingDialog;
 
     private final static int FETCH_DB_LOADER_ID = 200;
 
@@ -53,14 +61,6 @@ public class PoisOnMapFragment extends BaseFragment implements OnMapReadyCallbac
     @SuppressWarnings("unchecked")
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = super.onCreateView(inflater, container, savedInstanceState);
-
-        LoaderManager loaderManager = getActivity().getSupportLoaderManager();
-        Loader<ArrayList<Poi>> poisLoader = loaderManager.getLoader(FETCH_DB_LOADER_ID);
-        if (poisLoader == null) {
-            loaderManager.initLoader(FETCH_DB_LOADER_ID, null, FavoriteMoviesLoader);
-        } else {
-            loaderManager.restartLoader(FETCH_DB_LOADER_ID, null, FavoriteMoviesLoader);
-        }
 
         mPoiCategorySpinner.setItems((String[]) ArrayUtils.appendToArray(poiCategoriesAvailable, "All categories"));
         mPoiCategorySpinner.setOnItemSelectedListener((view, position, id, item) -> placeMarkersOnMap(position));
@@ -75,6 +75,21 @@ public class PoisOnMapFragment extends BaseFragment implements OnMapReadyCallbac
         mSupportMapFragment.setListener(() -> mMapNestedScrollView.requestDisallowInterceptTouchEvent(true));
 
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getActivity() == null) return;
+
+        LoaderManager loaderManager = getActivity().getSupportLoaderManager();
+        Loader<ArrayList<Poi>> poisLoader = loaderManager.getLoader(FETCH_DB_LOADER_ID);
+        if (poisLoader == null) {
+            loaderManager.initLoader(FETCH_DB_LOADER_ID, null, this);
+        } else {
+            loaderManager.restartLoader(FETCH_DB_LOADER_ID, null, this);
+        }
     }
 
     @Override
@@ -110,20 +125,28 @@ public class PoisOnMapFragment extends BaseFragment implements OnMapReadyCallbac
     private void placeMarkersOnMap(int position){
         if(mGoogleMap == null) return;
         if(selectedPois == null) return;
+        if(getContext() == null) return;
 
         mGoogleMap.clear();
+
+        HashMap<String, String> markerImages = new HashMap<>();
 
         /* Filter only items for categories */
         selectedPois
                 .stream()
                 .filter(p -> position == 4
                         || p.getCategory().toValue().equals(poiCategoriesAvailable[position]))
-                .forEach(p ->
-                        mGoogleMap.addMarker(new MarkerOptions()
-                                .title(p.getName())
-                                .snippet(p.getCategory().toValue())
-                                .position(new LatLng(p.getLatitude(), p.getLongitude()))
-                                .icon(BitmapDescriptorFactory.defaultMarker(getMarkerColor(p)))));
+                .forEach(p -> {
+                    Marker marker = mGoogleMap.addMarker(new MarkerOptions()
+                            .title(p.getName())
+                            .snippet(p.getCategory().toValue())
+                            .position(new LatLng(p.getLatitude(), p.getLongitude()))
+                            .icon(BitmapDescriptorFactory.defaultMarker(getMarkerColor(p))));
+
+                    markerImages.put(marker.getId(), p.getPhoto());
+                });
+
+        mGoogleMap.setInfoWindowAdapter(new PoiMapAdapter(getContext(), getLayoutInflater(), markerImages));
     }
 
     private float getMarkerColor(Poi poi){
@@ -135,77 +158,75 @@ public class PoisOnMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     }
 
+    //region Fetch Pois from SQLite via CursorLoader
 
-    public LoaderManager.LoaderCallbacks<Cursor> FavoriteMoviesLoader
-            = new LoaderManager.LoaderCallbacks<Cursor>() {
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        mLoadingDialog = DialogUtils.ShowLoadingDialog(getActivity());
+        return new CursorLoader(Objects.requireNonNull(getContext()),
+                SuggestedPoisContract.SuggestedPoisEntry.SUGGESTED_POIS_URI,
+                new String[] {SuggestedPoisContract.SuggestedPoisEntry.POI_ID,
+                        SuggestedPoisContract.SuggestedPoisEntry.NAME,
+                        SuggestedPoisContract.SuggestedPoisEntry.LATITUDE,
+                        SuggestedPoisContract.SuggestedPoisEntry.LONGITUDE,
+                        SuggestedPoisContract.SuggestedPoisEntry.CATEGORY,
+                        SuggestedPoisContract.SuggestedPoisEntry.PHOTO},
+                null, null, null);
+    }
 
-        @NonNull
-        @Override
-        public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-            return new CursorLoader(getContext(),
-                    SuggestedPoisContract.SuggestedPoisEntry.SUGGESTED_POIS_URI,
-                    new String[] {SuggestedPoisContract.SuggestedPoisEntry.POI_ID,
-                            SuggestedPoisContract.SuggestedPoisEntry.NAME,
-                            SuggestedPoisContract.SuggestedPoisEntry.LATITUDE,
-                            SuggestedPoisContract.SuggestedPoisEntry.LONGITUDE,
-                            SuggestedPoisContract.SuggestedPoisEntry.CATEGORY,
-                            SuggestedPoisContract.SuggestedPoisEntry.PHOTO},
-                    null, null, null);
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+        if(mLoadingDialog != null){
+            mLoadingDialog.cancel();
         }
 
-        @Override
-        public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-            if(data == null) {
-                return;
-            }
+        if(data == null) return;
 
-            ArrayList<Poi> newData = new ArrayList<>();
-            while (data.moveToNext()) {
-                String poiId = data.getString(data
-                        .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.POI_ID));
+        ArrayList<Poi> newData = new ArrayList<>();
+        while (data.moveToNext()) {
+            String poiId = data.getString(data
+                    .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.POI_ID));
 
-                String name = data.getString(data
-                        .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.NAME));
+            String name = data.getString(data
+                    .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.NAME));
 
-                String latitude = data.getString(data
-                        .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.LATITUDE));
+            String latitude = data.getString(data
+                    .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.LATITUDE));
 
-                String longitude = data.getString(data
-                        .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.LONGITUDE));
+            String longitude = data.getString(data
+                    .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.LONGITUDE));
 
-                String category = data.getString(data
-                        .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.CATEGORY));
+            String category = data.getString(data
+                    .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.CATEGORY));
 
-                String photo = data.getString(data
-                        .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.PHOTO));
+            String photo = data.getString(data
+                    .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.PHOTO));
 
 
-                Poi poi = null;
-
-                try {
-                    poi = new Poi(poiId,
-                            name,
-                            Double.parseDouble(latitude),
-                            Double.parseDouble(longitude),
-                            Poi.POICategoryID.fromValue(category),
-                            photo);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                if(poi == null) continue;
+            try {
+                Poi poi = new Poi(poiId,
+                        name,
+                        Double.parseDouble(latitude),
+                        Double.parseDouble(longitude),
+                        Poi.POICategoryID.fromValue(category),
+                        photo);
                 newData.add(poi);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            data.close();
-            selectedPois = newData;
-
-            placeMarkersOnMap(mPoiCategorySpinner.getSelectedIndex());
         }
 
-        // ignore
-        @Override
-        public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-        }
-    };
+        data.close();
+        selectedPois = newData;
+
+        placeMarkersOnMap(mPoiCategorySpinner.getSelectedIndex());
+    }
+
+    // ignore
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+    }
+
+    //endregion
 }

@@ -12,7 +12,6 @@
         android:minHeight="@dimen/category_header_height"
         android:layout_margin="@dimen/tiny_padding"
         app:cardCornerRadius="@dimen/cv_radius"
-        app:cardBackgroundColor="@android:color/white"
         android:background="?selectableItemBackground">
 
         <LinearLayout
@@ -37,13 +36,14 @@
                     android:layout_centerInParent="true"
                     tools:text="Restaurants"
                     android:textSize="@dimen/title_font_size"
-                    android:textColor="@color/primary_text"/>
+                    android:textColor="@color/primary_light"/>
 
                 <ImageView
                     android:id="@+id/is_expanded_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_keyboard_arrow_down"
+                    android:tint="@color/primary_light"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/medium_padding" />

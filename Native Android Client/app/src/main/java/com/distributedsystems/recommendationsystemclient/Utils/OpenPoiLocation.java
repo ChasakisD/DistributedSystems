@@ -8,8 +8,6 @@ import android.net.Uri;
 import java.util.Locale;
 
 public class OpenPoiLocation {
-    //todo as interface onclickitem listenr and pass uri of location we want to open
-
     private static final String BASE_URL = "https://www.google.com";
     private static final String MAPS_PATH = "maps";
     private static final String KEY_PARAM = "q";
@@ -25,9 +23,11 @@ public class OpenPoiLocation {
          * Again, we create an Intent with the action, ACTION_VIEW because we want to VIEW the
          * contents of this Uri.
          */
-        String openAppUri = String.format(Locale.ENGLISH, "geo:%f,%f", latitude, longitude);
+        String openAppUri = String.format(Locale.ENGLISH,
+                "geo:%f,%f?q=%f,%f",
+                latitude, longitude,
+                latitude, longitude);
 
-        // example https://www.google.com/maps/?q=-15.623037%2C18.388672
         Uri webBrowserUri = Uri.parse(BASE_URL).buildUpon()
                 .appendPath(MAPS_PATH)
                 .appendQueryParameter(KEY_PARAM, latitude + "%" + longitude)
@@ -35,6 +35,7 @@ public class OpenPoiLocation {
 
         Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(openAppUri));
         Intent webIntent = new Intent(Intent.ACTION_VIEW, webBrowserUri);
+
         try {
             context.startActivity(appIntent);
         }
