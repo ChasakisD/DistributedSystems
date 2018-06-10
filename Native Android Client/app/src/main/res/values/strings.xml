@@ -3,7 +3,7 @@
     <string name="welcome">Welcome to Team 21 Recommendation System Client Android Application!</string>
     <string name="info">This app was created as an assignment for the Distributed Systems Course of Athens University of Economics and Business. It was created by:</string>
     <string name="copyright">Team 21 © 2018</string>
-    <string name="team_members">Vasilopoulou Melina 3140022\nKatopodis Antonios 3140078\nKoutsopoulou Athanasia Maria 3140092\nChasakis Dionysios 3140219</string>
+    <string name="team_members">Vasilopoulou Melina 3140022\nKatopodis Antonios 3140076\nKoutsopoulou Athanasia Maria 3140092\nChasakis Dionysios 3140219</string>
     <string name="licences">"External Libraries Used (at most Apache 2.0):
 
 Gson
