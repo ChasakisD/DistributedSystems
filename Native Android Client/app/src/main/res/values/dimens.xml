@@ -9,6 +9,8 @@
     <dimen name="category_header_height">70dp</dimen>
     <dimen name="regular_icon_size">30dp</dimen>
     <dimen name="border_box_width">28dp</dimen>
+    <dimen name="border_box_width_with_margin">32dp</dimen>
+    <dimen name="border_box_radius">12dp</dimen>
     <dimen name="border_box">116dp</dimen>
 
     <dimen name="tiny_padding">4dp</dimen>

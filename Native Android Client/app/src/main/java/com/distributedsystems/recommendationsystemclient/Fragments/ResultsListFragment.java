@@ -8,18 +8,18 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.distributedsystems.recommendationsystemclient.Adapters.ResultsGroupAdapter;
+import com.distributedsystems.recommendationsystemclient.Adapters.PoiCategoryGroupAdapter;
 import com.distributedsystems.recommendationsystemclient.Data.SuggestedPoisContract;
 import com.distributedsystems.recommendationsystemclient.Models.Poi;
+import com.distributedsystems.recommendationsystemclient.Models.PoiCategory;
 import com.distributedsystems.recommendationsystemclient.R;
 import com.distributedsystems.recommendationsystemclient.Utils.DialogUtils;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -99,23 +99,14 @@ public class ResultsListFragment extends BaseFragment implements LoaderManager.L
             String photo = data.getString(data
                     .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.PHOTO));
 
-
-            try {
-                Poi poi = new Poi(poiId,
-                        name,
-                        Double.parseDouble(latitude),
-                        Double.parseDouble(longitude),
-                        Poi.POICategoryID.fromValue(category),
-                        photo);
-                pois.add(poi);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            pois.add(new Poi(poiId, name,
+                    Double.parseDouble(latitude), Double.parseDouble(longitude),
+                    Poi.POICategoryID.fromValue(category), photo));
         }
 
         data.close();
 
-        HashMap<String, ArrayList<Poi>> allPoisHashMap = new HashMap<>();
+        ArrayList<PoiCategory> categoriesGroup = new ArrayList<>();
 
         ArrayList<Poi> artsAndEntertainmentCategory = new ArrayList<>();
         ArrayList<Poi> barsCategory = new ArrayList<>();
@@ -146,19 +137,24 @@ public class ResultsListFragment extends BaseFragment implements LoaderManager.L
             }
         }
 
-        if(artsAndEntertainmentCategory.size() != 0) allPoisHashMap.put(poiCategoriesAvailable[0], artsAndEntertainmentCategory);
-        if(barsCategory.size() != 0) allPoisHashMap.put(poiCategoriesAvailable[1], barsCategory);
-        if(foodCategory.size() != 0) allPoisHashMap.put(poiCategoriesAvailable[2], foodCategory);
-        if(unknownCategory.size() != 0) allPoisHashMap.put(poiCategoriesAvailable[3], unknownCategory);
+        if(artsAndEntertainmentCategory.size() != 0)
+            categoriesGroup.add(new PoiCategory(Poi.POICategoryID.ARTS_ENTERTAINMENT, poiCategoriesAvailable[0], artsAndEntertainmentCategory));
+        if(barsCategory.size() != 0)
+            categoriesGroup.add(new PoiCategory(Poi.POICategoryID.BARS, poiCategoriesAvailable[1], barsCategory));
+        if(foodCategory.size() != 0)
+            categoriesGroup.add(new PoiCategory(Poi.POICategoryID.FOOD, poiCategoriesAvailable[2], foodCategory));
+        if(unknownCategory.size() != 0)
+            categoriesGroup.add(new PoiCategory(Poi.POICategoryID.UNKNOWN, poiCategoriesAvailable[3], unknownCategory));
 
-        categoriesRv.setAdapter(new ResultsGroupAdapter(getContext(), allPoisHashMap));
+        categoriesRv.setAdapter(new PoiCategoryGroupAdapter(getContext(), categoriesGroup));
         categoriesRv.setLayoutManager(new LinearLayoutManager(getContext()));
+        if (!(categoriesRv.getItemAnimator() instanceof DefaultItemAnimator)) return;
+        ((DefaultItemAnimator) categoriesRv.getItemAnimator()).setSupportsChangeAnimations(false);
     }
 
     // ignore
     @Override
-    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-    }
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) { }
 
     //endregion
 }

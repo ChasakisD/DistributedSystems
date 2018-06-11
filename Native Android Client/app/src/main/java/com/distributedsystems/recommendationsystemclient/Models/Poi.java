@@ -1,12 +1,13 @@
 package com.distributedsystems.recommendationsystemclient.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.Arrays;
 
-public class Poi implements Serializable {
+public class Poi implements Serializable, Parcelable{
     @SerializedName("POI")
     private String id;
 
@@ -33,7 +34,10 @@ public class Poi implements Serializable {
         BARS,
 
         @SerializedName("Food")
-        FOOD;
+        FOOD,
+
+        @SerializedName("Unknown")
+        UNKNOWN;
 
         public String toValue() {
             switch (this) {
@@ -43,20 +47,17 @@ public class Poi implements Serializable {
                     return "Bars";
                 case FOOD:
                     return "Food";
+                default:
+                    return "";
             }
-            return "";
         }
 
-        public static POICategoryID fromValue(String value) throws IOException {
+        public static POICategoryID fromValue(String value) {
             if (value.equals("Arts & Entertainment")) return ARTS_ENTERTAINMENT;
             if (value.equals("Bars")) return BARS;
             if (value.equals("Food")) return FOOD;
-            throw new IOException("Cannot deserialize POICategoryID");
+            else return UNKNOWN;
         }
-    }
-
-    public static String[] getNames(Class<? extends Enum<?>> e) {
-        return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
     }
 
     public Poi() {
@@ -73,6 +74,14 @@ public class Poi implements Serializable {
         this.longitude = longitude;
         this.category = category;
         this.photo = photo;
+    }
+
+    protected Poi(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        photo = in.readString();
     }
 
     public String getId() {
@@ -127,4 +136,31 @@ public class Poi implements Serializable {
     public String toString() {
         return "POI Id: " + getId();
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+        dest.writeString(category.toValue());
+        dest.writeString(photo);
+    }
+
+    public static final Creator<Poi> CREATOR = new Creator<Poi>() {
+        @Override
+        public Poi createFromParcel(Parcel in) {
+            return new Poi(in);
+        }
+
+        @Override
+        public Poi[] newArray(int size) {
+            return new Poi[size];
+        }
+    };
 }

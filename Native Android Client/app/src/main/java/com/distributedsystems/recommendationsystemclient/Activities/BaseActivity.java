@@ -4,16 +4,22 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.distributedsystems.recommendationsystemclient.Models.Poi;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+
+import java.util.HashMap;
 
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
-    public final static Integer[] categoriesColors = new Integer[]{
-            0xff9a57af,
-            0xff20a8cd,
-            0xffffd54f,
-            0xff87d063
+    public final static HashMap<Poi.POICategoryID, String> categoriesColors =
+            new HashMap<Poi.POICategoryID, String>(){
+        {
+            put(Poi.POICategoryID.ARTS_ENTERTAINMENT, "#ff9a57af");
+            put(Poi.POICategoryID.BARS, "#ff20a8cd");
+            put(Poi.POICategoryID.FOOD, "#ffffd54f");
+            put(Poi.POICategoryID.UNKNOWN, "#ff87d063");
+        }
     };
 
     public final static Float[] categoriesHues = new Float[]{

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.distributedsystems.recommendationsystemclient"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -64,6 +64,9 @@ dependencies {
 
     /** Material Spinner, because we love nice UI/UX */
     implementation 'com.jaredrummler:material-spinner:1.2.5'
+
+    /** Expandable RecyclerView, because we love nice UI/UX */
+    implementation 'com.thoughtbot:expandablerecyclerview:1.4'
 
     /**
      * Who cares about unit testing...

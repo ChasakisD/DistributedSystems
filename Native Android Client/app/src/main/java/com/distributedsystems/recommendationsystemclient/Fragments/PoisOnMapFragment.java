@@ -33,7 +33,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -201,18 +200,9 @@ public class PoisOnMapFragment extends BaseFragment implements OnMapReadyCallbac
             String photo = data.getString(data
                     .getColumnIndex(SuggestedPoisContract.SuggestedPoisEntry.PHOTO));
 
-
-            try {
-                Poi poi = new Poi(poiId,
-                        name,
-                        Double.parseDouble(latitude),
-                        Double.parseDouble(longitude),
-                        Poi.POICategoryID.fromValue(category),
-                        photo);
-                newData.add(poi);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            newData.add(new Poi(poiId, name,
+                Double.parseDouble(latitude), Double.parseDouble(longitude),
+                Poi.POICategoryID.fromValue(category), photo));
         }
 
         data.close();
