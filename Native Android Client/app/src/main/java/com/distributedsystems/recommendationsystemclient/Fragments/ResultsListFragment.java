@@ -32,6 +32,7 @@ public class ResultsListFragment extends BaseFragment implements LoaderManager.L
     public RecyclerView categoriesRv;
 
     private AlertDialog mLoadingDialog;
+    private PoiCategoryGroupAdapter mPoiAdapter;
 
     @Override
     public int getResourceLayout() {
@@ -51,6 +52,20 @@ public class ResultsListFragment extends BaseFragment implements LoaderManager.L
             loaderManager.initLoader(FETCH_DB_LOADER2_ID, null, this);
         } else {
             loaderManager.restartLoader(FETCH_DB_LOADER2_ID, null, this);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mPoiAdapter.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if(mPoiAdapter != null) {
+            mPoiAdapter.onRestoreInstanceState(savedInstanceState);
         }
     }
 
@@ -146,7 +161,8 @@ public class ResultsListFragment extends BaseFragment implements LoaderManager.L
         if(unknownCategory.size() != 0)
             categoriesGroup.add(new PoiCategory(Poi.POICategoryID.UNKNOWN, poiCategoriesAvailable[3], unknownCategory));
 
-        categoriesRv.setAdapter(new PoiCategoryGroupAdapter(getContext(), categoriesGroup));
+        mPoiAdapter = new PoiCategoryGroupAdapter(getContext(), categoriesGroup);
+        categoriesRv.setAdapter(mPoiAdapter);
         categoriesRv.setLayoutManager(new LinearLayoutManager(getContext()));
         if (!(categoriesRv.getItemAnimator() instanceof DefaultItemAnimator)) return;
         ((DefaultItemAnimator) categoriesRv.getItemAnimator()).setSupportsChangeAnimations(false);
